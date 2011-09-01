@@ -3,6 +3,6 @@
   <div class="span1 columns"><%= pluralize question.answers_count, "answer" %></div>
   <div class="span<%= width %> columns">
     <h3><%= link_to question.title, question %></h3>
-    <p><%= render :partial => 'tags', :locals => { :tags => question.tags } %></p>
+    <p><%= render :partial => 'questions/tags', :locals => { :tags => question.tags } %></p>
   </div>
 </div>
