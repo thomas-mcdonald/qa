@@ -9,6 +9,8 @@ gem 'nokogiri'
 gem 'paper_trail', '2.2.4'
 gem 'permanent_records', '2.1.2'
 gem 'redcarpet', '2.0.0b3'
+
+gem 'mysql'
 gem 'sqlite3'
 
 group :development do
