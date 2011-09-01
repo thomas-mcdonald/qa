@@ -1,0 +1,3 @@
+# Documents the needed reputation to be able to do stuff
+can_upvote: 50
+can_downvote: 100
