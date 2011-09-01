@@ -6,7 +6,7 @@
       <h3>Recent Tags</h3>
       <ul id="recent-tags">
         <% @recent_tags.each do |tag| %>
-          <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> x<%= tag.count %></li>
+          <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.count %></span></li>
         <% end %>
       </ul>
     </div>

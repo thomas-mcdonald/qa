@@ -89,6 +89,6 @@ a {
   margin-top: 10px;
   width: 180px;
 }
-#tag-listing ul li span {
+span.tag-count {
   font-size: 11px;
 }

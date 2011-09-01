@@ -7,7 +7,7 @@
 <section id="tag-listing">
   <ul>
     <% @tags.each do |tag| %>
-      <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span>x<%= tag.taggings_count %></span></li>
+      <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.taggings_count %></span></li>
     <% end %>
   </ul>
 </section>
