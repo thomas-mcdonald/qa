@@ -4,6 +4,7 @@ gem 'rails', '3.1.0'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'bootstrap-sass', '1.3.2'
+gem 'cancan'
 gem 'differ'
 gem 'foreman'
 gem 'jquery-rails'
