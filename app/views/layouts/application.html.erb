@@ -20,7 +20,7 @@
         <ul class="nav secondary-nav">
           <% if logged_in? %>
             <li class="menu">
-              <a href="#" class="menu">Thomas McDonald</a>
+              <a href="#" class="menu"><%= current_user.display_name %></a>
               <ul class="menu-dropdown">
                 <li><%= link_to "Your Profile", user_url(current_user) %></li>
                 <li><%= link_to "Edit your details", edit_current_user_url %></li>
