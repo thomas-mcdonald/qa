@@ -3,7 +3,7 @@ Qa::Application.routes.draw do
 
   resources :questions do
     collection do
-#      resources :tags, :only => [:show], :path => "tagged"
+      get 'tagged/:tag', :action => :tagged, :as => :tagged
     end
     member do
       get 'revisions'
@@ -21,7 +21,6 @@ Qa::Application.routes.draw do
   match 'signup' => 'users#new', :as => :signup
   match 'logout' => 'sessions#destroy', :as => :logout
   match 'login' => 'sessions#new', :as => :login
-  match 'tag/autocomplete' => 'questions#tag_autocomplete'
 
   resources :sessions, :only => [:create]
   resources :users, :except => [:destroy, :edit]

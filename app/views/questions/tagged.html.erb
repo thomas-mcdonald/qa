@@ -1,0 +1,13 @@
+<% title "Questions tagged #{params[:tag]}" %>
+
+<section id="questions">
+  <div class="row">
+    <div class="span3 columns">
+      <!-- would be a good idea to stick something in here at some point -->
+    </div>
+    <div class="span13 columns">
+      <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
+      <%= paginate @questions %>
+    </div>
+  </div>
+</section>
