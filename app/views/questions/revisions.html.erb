@@ -1,0 +1,10 @@
+<% title "Revisions for question" %>
+
+<%= Differ.diff_by_word(@question.body, @revisions.last.reify.body).to_s.html_safe %>
+
+<% @revisions.each do |revision| %>
+  <%= revision.reify.body if revision.reify %>
+  <%= revision.reify %>
+<% end %>
+
+

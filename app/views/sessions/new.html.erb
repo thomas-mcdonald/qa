@@ -1,0 +1,29 @@
+<% title "Log in" %>
+
+<div class="page-header">
+  <h1>Log in</h1>
+</div>
+<div class="row">
+  <div class="span4 columns">
+    <p>Don't have an account? <%= link_to "Sign up!", signup_path %></p>
+  </div>
+  <div class="span12 columns">
+    <%= form_tag sessions_path do %>
+      <div class="clearfix">
+        <%= label_tag :login, "Username or Email" %>
+        <div class="input">
+          <%= text_field_tag :login, params[:login] %>
+        </div>
+      </div>
+      <div class="clearfix">
+        <%= label_tag :password %>
+        <div class="input">
+          <%= password_field_tag :password %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= submit_tag "Log in", :class => "btn primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

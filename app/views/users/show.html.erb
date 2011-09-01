@@ -1,0 +1,35 @@
+<% title @user.username %>
+
+<div class="page-header">
+  <h1><%= @user.username %></h1>
+</div>
+
+<div class="row">
+  <div class="span3 columns">
+    <%= gravatar(@user.email, 160) %>
+    <p><%= @user.reputation %> reputation</p>
+  </div>
+  <div class="span6 columns">
+    <%= @user.about_me.markdown %>
+  </div>
+  <div class="span7 columns">
+    <%= @user.twitter %>
+  </div>
+</div>
+
+<section id="questions">
+  <div class="page-header">
+    <h3><%= pluralize(@total_questions.count, "Question") %></h3>
+  </div>
+  <%= render :partial => "questions/question", :collection => @questions, :locals => { :width => 12 } %>
+</section>
+
+<section id="answers">
+  <div class="page-header">
+    <h3><%= pluralize(@total_answers.count, "Answer") %></h3>
+  </div>
+</section>
+
+<%= @votes.to_yaml %>
+<%= @answers.to_yaml %>
+<%= @questions.to_yaml %>

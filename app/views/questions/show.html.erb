@@ -1,0 +1,67 @@
+<% title "Question" %>
+
+<section id="question">
+  <div class="page-header">
+    <h1><%= @question.title %></h1>
+  </div>
+
+  <div class="row">
+    <div class="span2 columns">
+      <%= vote_controls(@question) %>
+    </div>
+    <div class="span14 columns">
+      <%= @question.body.markdown %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6 columns offset2">
+      <p>Tagged <%= @question.tag_list %></p>
+    </div>
+    <div class="span5 columns offset3">
+      <p><strong>Asked by</strong> <%= link_to @question.user.username, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span1 colums offset2"><%= link_to "edit", edit_question_path(@question) %></div>
+  </div>
+</section>
+
+<section id="answers">
+  <div class="page-header">
+    <h3><%= pluralize @answers.size, "Answer" %></h3>
+  </div>
+  <% @answers.each do |answer| %>
+    <div id="answer-<%= answer.id %>" class="answer">
+      <div class="row">
+        <div class="span2 columns">
+          <%= vote_controls(answer) %>
+        </div>
+        <div class="span14 columns">
+          <p><%= answer.body.markdown %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span6 columns offset10">
+          <p><strong>Answered by</strong> <%= link_to answer.user.username, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<div id="answer-form">
+  <div class="page-header">
+    <h3>Answer this question</h3>
+  </div>
+  <%= form_for [@question, @answer] do |f| %>
+    <%= f.text_area :body %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
+
+<p>
+  <%= link_to "Edit", edit_question_path(@question) %> |
+  <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", questions_path %>
+</p>

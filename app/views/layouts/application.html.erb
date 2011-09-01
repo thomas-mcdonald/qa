@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <%= stylesheet_link_tag "bootstrap", "application" %>
+    <%= javascript_include_tag "jquery", "jquery_rails", "bootstrap", "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <h3><%= link_to "QA", root_url %></h3>
+        <ul>
+          <li><%= link_to "Questions", root_url %></li>
+          <li><%= link_to "Tags", tags_url %></li>
+          <li><%= link_to "Users", users_url %></li>
+          <li><%= link_to "Ask Question", new_question_url %></li>
+        </ul>
+        <ul class="nav secondary-nav">
+          <% if logged_in? %>
+            <li class="menu">
+              <a href="#" class="menu">Thomas McDonald</a>
+              <ul class="menu-dropdown">
+                <li><%= link_to "Your Profile", user_url(current_user) %></li>
+                <li><%= link_to "Edit your details", edit_current_user_url %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Log out", logout_url %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Register", signup_url %></li>
+            <li><%= link_to "Log in", login_url %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :class => "alert-message #{name}" %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

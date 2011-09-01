@@ -1,0 +1,5 @@
+.bundle
+db/*.sqlite3
+lib/importdata/*
+log/*.log
+tmp/
