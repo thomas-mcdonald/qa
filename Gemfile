@@ -25,6 +25,10 @@ group :assets do
 end
 
 group :development do
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'autotest-fsevent'
+  gem 'autotest-growl'
   gem 'nifty-generators'
   gem 'rspec-rails'
 end
