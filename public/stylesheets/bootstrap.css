@@ -419,6 +419,10 @@ a:hover {
   padding-left: 9px;
   font-size: 11px;
 }
+.btn.tag {
+  padding: 2px 6px;
+  font-size: 11px;
+}
 .btn:disabled, .btn.disabled {
   background-image: none;
   filter: alpha(opacity=65);

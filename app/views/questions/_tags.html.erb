@@ -1,1 +1,1 @@
-<%= tags.collect { |t| link_to t.name, tagged_questions_url(t.name) }.join(", ").html_safe %>
+<%= tags.collect { |t| link_to t.name, tagged_questions_url(t.name), :class => "btn tag" }.join(" ").html_safe %>
