@@ -5,6 +5,7 @@ class VotesController < ApplicationController
     @vote = Vote.new(params[:vote])
     @vote.value = params[:value]
     @vote.user = current_user
+    authorize! :create, @vote
     if @vote.save
       Resque.enqueue(Async.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
       Rails.logger.info("Queued #{@vote.voteable_type} vote for processing")
