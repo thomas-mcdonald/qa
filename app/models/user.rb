@@ -64,6 +64,14 @@ class User < ActiveRecord::Base
     display_name || username
   end
 
+  def can_upvote?
+    return true if self.reputation > PERMISSIONS['can_upvote']
+  end
+
+  def can_downvote?
+    return true if self.reputation > PERMISSIONS['can_downvote']
+  end
+
   private
 
   def prepare_password

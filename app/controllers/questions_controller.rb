@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:tags, :user).find(params[:id])
+    authorize! :read, @question
     @question.viewed_by(request.remote_ip)
     @answers = @question.answers.includes(:votes).page(params[:page])
     @answer = Answer.new
@@ -28,10 +29,12 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    authorize! :create, @question
   end
 
   def create
     @question = Question.new(params[:question])
+    authorize! :create, @question
     @question.user = current_user
     @question.update_last_activity(current_user)
     if @question.save
@@ -43,10 +46,12 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    authorize! :update, @question
   end
 
   def update
     @question = Question.find(params[:id])
+    authorize! :update, @question
     @question.attributes = params[:question]
     @question.update_last_activity(current_user)
     if @question.save
@@ -58,6 +63,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
+    authorize! :destroy, @question
     @question.destroy
     redirect_to questions_url, :notice => "Successfully destroyed question."
   end
