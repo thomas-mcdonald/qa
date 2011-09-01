@@ -14,15 +14,15 @@ gem 'mysql'
 gem 'sqlite3'
 
 group :development do
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'autotest-fsevent'
+  gem 'autotest-growl'
   gem 'nifty-generators'
   gem 'rspec-rails'
 end
 
 group :test do
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'mocha'
