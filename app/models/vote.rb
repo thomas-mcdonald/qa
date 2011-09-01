@@ -3,7 +3,7 @@ class Vote < ActiveRecord::Base
   belongs_to :voteable, :polymorphic => true
   has_one :reputation_event, :as => "reputable", :class_name => "ReputationEvent"
 
-  attr_accessible :user, :value
+  attr_accessible :user, :value, :voteable_id, :voteable_type
 
   validate :one_vote
   validate :not_on_self_post
