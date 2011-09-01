@@ -74,3 +74,9 @@ a {
 .vote-inactive {
   display:none;
 }
+
+#recent-tags {
+  list-style-type: none;
+  margin-left: -1px;
+}
+#recent-tags li { margin-bottom: 3px }

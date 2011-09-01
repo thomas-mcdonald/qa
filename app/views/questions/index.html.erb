@@ -4,9 +4,9 @@
   <div class="row">
     <div class="span3 columns">
       <h3>Recent Tags</h3>
-      <ul>
+      <ul id="recent-tags">
         <% @recent_tags.each do |tag| %>
-          <li><%= tag.name %> x<%= tag.count %></li>
+          <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> x<%= tag.count %></li>
         <% end %>
       </ul>
     </div>
