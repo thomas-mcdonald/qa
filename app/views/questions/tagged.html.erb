@@ -2,10 +2,11 @@
 
 <section id="questions">
   <div class="row">
-    <div class="span3 columns">
+    <div class="span4 columns">
+      <h4><%= pluralize @question_count, "question" %> tagged <span class="btn tag"><%= @tag.name %></span></h4>
       <!-- would be a good idea to stick something in here at some point -->
     </div>
-    <div class="span13 columns">
+    <div class="span12 columns">
       <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
       <%= paginate @questions %>
     </div>

@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def tagged
+    @tag = Tag.where('name = ?', params[:tag]).first
+    @question_count = Question.joins(:tags).where('tags.name = ?', params[:tag]).count
     @questions = Question.joins(:tags).where('tags.name = ?', params[:tag]).page(params[:page])
   end
 
