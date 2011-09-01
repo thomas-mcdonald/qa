@@ -15,7 +15,7 @@
   </div>
   <div class="row">
     <div class="span6 columns offset2">
-      <p>Tagged <%= @question.tag_list %></p>
+      <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
     </div>
     <div class="span5 columns offset3">
       <p><strong>Asked by</strong> <%= link_to @question.user.username, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
