@@ -80,3 +80,15 @@ a {
   margin-left: -1px;
 }
 #recent-tags li { margin-bottom: 3px }
+
+#tag-listing ul {
+  list-style-type: none;
+}
+#tag-listing ul li {
+  float: left;
+  margin-top: 10px;
+  width: 180px;
+}
+#tag-listing ul li span {
+  font-size: 11px;
+}
