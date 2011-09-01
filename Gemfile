@@ -4,6 +4,7 @@ gem 'rails', '3.0.7'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'differ'
+gem 'foreman'
 gem 'kaminari', '0.12.4'
 gem 'nokogiri'
 gem 'paper_trail', '2.2.4'
