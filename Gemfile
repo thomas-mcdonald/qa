@@ -16,10 +16,13 @@ gem 'sqlite3'
 group :development do
   gem 'nifty-generators'
   gem 'rspec-rails'
-  gem 'ruby-prof'
 end
 
 group :test do
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  gem 'autotest-fsevent'
+  gem 'autotest-growl'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'mocha'
@@ -29,10 +32,6 @@ group :test do
 end
 
 group :development, :test do
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
   gem 'capybara'
   gem 'cucumber-rails'
 end
