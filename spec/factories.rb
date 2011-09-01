@@ -18,6 +18,27 @@ Factory.define(:answer) do |a|
   a.association :question
 end
 
+Factory.define(:reputation_event) do |r|
+  r.reputable { Factory(:vote) }
+  r.user { Factory(:user) }
+  r.value 1
+end
+
+Factory.define(:vote) do |v|
+  v.user { Factory(:user) }
+  v.voteable { Factory(:question) }
+  v.value 1
+end
+
+Factory.define(:tag) do |t|
+  t.name "Example"
+end
+
+Factory.define(:tagging) do |t|
+  t.question { Factory(:question) }
+  t.tag { Factory(:tag) }
+end
+
 Factory.sequence(:username) do |n|
   "tom-#{n}"
 end

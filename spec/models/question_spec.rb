@@ -47,7 +47,6 @@ describe Question do
       3.times do |i|
         @questions << Factory(:question)
       end
-      puts @questions[1].tag_list
       @questions[1].destroy # Delete the middle item
     end
 

@@ -15,6 +15,11 @@ class ReputationEvent < ActiveRecord::Base
     { :name => :answer_downvote, :value => -1 }
   ]
 
+  validates_presence_of :reputable
+  validates_presence_of :user
+  validates_presence_of :value
+  validates_numericality_of :value
+
   def refresh_reputation
     self.user.refresh_reputation
   end
