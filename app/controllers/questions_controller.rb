@@ -3,6 +3,8 @@ class QuestionsController < ApplicationController
   
   def index
     @questions = Question.order('updated_at DESC').includes(:tags, :user, :votes).page(params[:page])
+
+    @recent_tags = Tag.select('tags.*, count(taggings.tag_id) as count').joins(:taggings).where('taggings.created_at > ?', 7.days.ago).group('taggings.tag_id').order('count(taggings.tag_id) DESC').limit(10).all
   end
 
   def show
