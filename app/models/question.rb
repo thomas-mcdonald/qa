@@ -22,6 +22,10 @@ class Question < ActiveRecord::Base
     self.unscoped.where('deleted_at IS NOT NULL')
   end
 
+  def self.tagged(tag)
+    joins(:tags).where('tags.name = ?', tag)
+  end
+
   def tag_list=(tag_list)
     @tag_list = tag_list
   end
