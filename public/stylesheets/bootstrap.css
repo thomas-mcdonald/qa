@@ -1502,11 +1502,11 @@ ul.pills li.active a {
   color: #fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
-div.pagination {
+nav.pagination {
   height: 36px;
   margin: 18px 0;
 }
-div.pagination ul {
+nav.pagination ul {
   float: left;
   margin: 0;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -1517,24 +1517,24 @@ div.pagination ul {
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
 }
-div.pagination ul li {
+nav.pagination ul li {
   display: inline;
 }
-div.pagination ul li a {
+nav.pagination ul li a {
   float: left;
   padding: 0 14px;
   line-height: 34px;
   border-right: 1px solid rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
-div.pagination ul li a:hover, div.pagination ul li.active a {
+nav.pagination ul li a:hover, nav.pagination ul li.active a {
   background-color: #c7eefe;
 }
-div.pagination ul li.disabled a, div.pagination ul li.disabled a:hover {
-  background-color: none;
+nav.pagination ul li.disabled a, nav.pagination ul li.disabled a:hover {
+  background-color: transparent;
   color: #bfbfbf;
 }
-div.pagination ul li.next a, div.pagination ul li:last-child a {
+nav.pagination ul li.next a, nav.pagination ul li:last-child a {
   border: 0;
 }
 .well {
