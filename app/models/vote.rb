@@ -7,7 +7,8 @@ class Vote < ActiveRecord::Base
 
   validate :one_vote
   validate :not_on_self_post
-  validates_presence_of :value
+  validates_numericality_of :value
+  validates_presence_of :user_id
 
   after_save :add_reputation_event
 

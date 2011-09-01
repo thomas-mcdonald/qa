@@ -26,7 +26,7 @@ describe ReputationEvent do
       it "requires presence" do
         event = Factory.build(:reputation_event)
         event.value = nil
-        event.should have(2).errors_on(:value)
+        event.should have(1).errors_on(:value)
       end
 
       it "requires numericality" do

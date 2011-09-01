@@ -17,7 +17,6 @@ class ReputationEvent < ActiveRecord::Base
 
   validates_presence_of :reputable
   validates_presence_of :user
-  validates_presence_of :value
   validates_numericality_of :value
 
   def refresh_reputation
