@@ -103,7 +103,62 @@ describe QuestionsController do
         @question = Factory(:question)
       end
 
-      it "should " do
+      describe "with enough reputation to make global edits" do
+        before(:each) do
+          User.any_instance.stubs(:reputation).returns(1000)
+          get :edit, :id => @question.id
+        end
+
+        it "should respond successfully" do
+          response.status.should == 200
+        end
+
+        it "should assign @question" do
+          assigns[:question].should_not be_nil
+        end
+      end
+
+      describe "without enough reputation to make global edits" do
+        before(:each) do
+          User.any_instance.stubs(:reputation).returns(100)
+          get :edit, :id => @question.id
+        end
+
+        it "should respond with unauthorized" do
+          response.status.should == 403
+        end
+      end
+
+      describe "as the original owner of the question" do
+        before(:each) do
+          User.any_instance.stubs(:reputation).returns(100)
+          logout
+          login_as(@question.user)
+          get :edit, :id => @question.id
+        end
+
+        it "should respond successfully" do
+          response.status.should == 200
+        end
+      end
+    end
+
+    describe 'PUT update' do
+      before(:each) do
+        @question = Factory(:question)
+      end
+
+      describe "with enough reputation to make global edits" do
+        before(:each) do
+          User.any_instance.stubs(:reputation).returns(1000)
+          question = Factory.attributes_for(:question)
+          question[:title] = "Changed title"
+          put :update, :id => @question.id, :question => question
+        end
+
+        it "should redirect to the question" do
+          response.should redirect_to(@question)
+        end
       end
     end
   end
