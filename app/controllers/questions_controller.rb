@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :revisions, :tagged]
   
   def index
-    @questions = Question.order('updated_at DESC').includes(:tags, :user, :votes).page(params[:page])
+    @questions = Question.order('last_activity_at DESC').includes(:tags, :user, :votes, :last_active_user).page(params[:page])
     @recent_tags = Tag.select('tags.*, count(taggings.tag_id) as count').joins(:taggings).where('taggings.created_at > ?', 7.days.ago).group('taggings.tag_id').order('count(taggings.tag_id) DESC').limit(10).all
   end
 
@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(params[:question])
     @question.user = current_user
+    @question.update_last_activity(current_user)
     if @question.save
       redirect_to @question, :notice => "Successfully created question."
     else
@@ -44,6 +45,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     @question.attributes = params[:question]
+    @question.update_last_activity(current_user)
     if @question.save
       redirect_to @question, :notice  => "Successfully updated question."
     else
