@@ -2,7 +2,7 @@ require "digest/md5"
 
 module ApplicationHelper
   def pluralize_count(count, singular, plural = nil)
-    ("<div>#{count || 0}</div> " + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || singular.pluralize))).html_safe
+    ("<div class='num'>#{count || 0}</div><div>" + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || singular.pluralize)) + "</div>").html_safe
   end
   
   def gravatar(email, size = 80)
