@@ -1,10 +1,11 @@
 class Question < ActiveRecord::Base
   has_paper_trail
-  belongs_to :user
   has_many :answers, :dependent => :destroy
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
+  belongs_to :user
+  belongs_to :last_active_user, :class_name => "User", :foreign_key => "last_active_user_id"
 
   attr_accessor :tag_list
 
@@ -44,6 +45,11 @@ class Question < ActiveRecord::Base
     self
   end
 
+  def update_last_activity(user)
+    self.last_active_user = user
+    self.last_activity_at = DateTime.current
+  end
+
   def vote_count
     votes = self.votes
     i = 0
@@ -52,6 +58,4 @@ class Question < ActiveRecord::Base
     end
     i
   end
-
-  attr_accessible :title, :body, :user_id, :tag_list
 end
