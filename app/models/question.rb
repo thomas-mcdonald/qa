@@ -50,6 +50,11 @@ class Question < ActiveRecord::Base
     self.last_activity_at = DateTime.current
   end
 
+  def update_last_activity!(user)
+    self.update_last_activity(user)
+    self.save
+  end
+
   def vote_count
     votes = self.votes
     i = 0
