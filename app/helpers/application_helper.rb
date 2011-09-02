@@ -1,6 +1,10 @@
 require "digest/md5"
 
 module ApplicationHelper
+  def pluralize_count(count, singular, plural = nil)
+    ("<div>#{count || 0}</div> " + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || singular.pluralize))).html_safe
+  end
+  
   def gravatar(email, size = 80)
     hash = Digest::MD5.hexdigest(email)
     image_tag "http://www.gravatar.com/avatar/#{hash}?s=#{size}"

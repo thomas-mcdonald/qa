@@ -1,6 +1,6 @@
 <div id="question-<%= question.id %>" class="row">
-  <div class="span1 columns"><%= pluralize question.vote_count, "vote" %></div>
-  <div class="span1 columns"><%= pluralize question.answers_count, "answer" %></div>
+  <div class="span1 columns mini-count"><%= pluralize_count question.vote_count, "vote" %></div>
+  <div class="span1 columns mini-count"><%= pluralize_count question.answers_count, "answer" %></div>
   <div class="span<%= width %> columns">
     <h3><%= link_to question.title, question %></h3>
     <p><%= render :partial => 'questions/tags', :locals => { :tags => question.tags } %></p>

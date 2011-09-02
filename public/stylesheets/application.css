@@ -92,3 +92,11 @@ a {
 span.tag-count {
   font-size: 11px;
 }
+
+.mini-count {
+  margin-top: 16px;
+  text-align: center;
+}
+.mini-count div {
+  font-size: 16px;
+}
