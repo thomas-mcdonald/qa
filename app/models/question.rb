@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
 
   attr_accessible :title, :body, :tag_list, :user_id
 
-  default_scope where(:deleted_at => nil)
+  default_scope where(:deleted_at => nil).order('last_activity_at DESC')
 
   before_save :build_tags
 
