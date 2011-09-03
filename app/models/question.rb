@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   has_paper_trail
   has_many :answers, :dependent => :destroy
+  has_many :badges, :as => "source"
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
