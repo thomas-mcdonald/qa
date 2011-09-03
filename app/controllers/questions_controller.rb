@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   def tagged
     @tag = Tag.where('name = ?', params[:tag]).first
     @question_count = Question.tagged(params[:tag]).count
-    @questions = Question.tagged(params[:tag]).page(params[:page])
+    @questions = Question.tagged(params[:tag]).includes(:user, :tags, :votes, :last_active_user).page(params[:page])
   end
 
   def show
