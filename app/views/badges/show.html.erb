@@ -1,0 +1,16 @@
+<% title @badge.name %>
+
+<section>
+  <div class="page-header">
+    <h1><%= @badge.name %> <small><%= @badge.description %></small></h1>
+  </div>
+  <div>
+    <p>This badge has been awarded <%= pluralize @count, "time" %>. Recently awarded to:</p>
+    <ul>
+      <% @badges.each do |badge| %>
+      <!-- TODO: some switchy toggle thing based on the type of source -->
+        <li><%= time_ago_in_words badge.created_at %> - <%= link_to badge.user.display_name, badge.user %></li>
+      <% end %>
+    </ul>
+  </div>
+</section> 
