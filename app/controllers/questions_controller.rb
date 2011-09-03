@@ -2,14 +2,14 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :revisions, :tagged]
   
   def index
-    @questions = Question.includes(:tags, :user, :votes, :last_active_user).page(params[:page])
+    @questions = Question.question_list_includes.page(params[:page])
     @recent_tags = Tag.select('tags.*, count(taggings.tag_id) as count').joins(:taggings).where('taggings.created_at > ?', 7.days.ago).group('taggings.tag_id').order('count(taggings.tag_id) DESC').limit(10).all
   end
 
   def tagged
     @tag = Tag.where('name = ?', params[:tag]).first
     @question_count = Question.tagged(params[:tag]).count
-    @questions = Question.tagged(params[:tag]).includes(:user, :tags, :votes, :last_active_user).page(params[:page])
+    @questions = Question.tagged(params[:tag]).question_list_includes.page(params[:page])
   end
 
   def show
