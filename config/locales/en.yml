@@ -2,4 +2,16 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  badges:
+    good_question:
+      name: Good Question
+      description: Asked a question with at least 25 upvotes
+    great_question:
+      name: Great Question
+      description: Asked a question with at least 100 upvotes
+    nice_question:
+      name: Nice Question
+      description: Asked a question with at least 10 upvotes
+    student:
+      name: Student
+      description: Asked first question with an upvote
