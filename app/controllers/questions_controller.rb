@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.question_list_includes.page(params[:page])
     @recent_tags = Tag.recent.all
+    @recent_badges = Badge.recent.all
   end
 
   def tagged
