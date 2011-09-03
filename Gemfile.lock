@@ -189,7 +189,7 @@ DEPENDENCIES
   rails (= 3.0.7)
   rcov
   redcarpet (= 2.0.0b3)
-  resque
+  resque (= 1.19.0)
   rspec
   rspec-rails
   sqlite3
