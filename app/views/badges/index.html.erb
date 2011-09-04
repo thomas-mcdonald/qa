@@ -19,7 +19,7 @@
     <div class="span13 columns">
       <ul id="badge-list">
         <% @badges.each do |badge| %>
-          <li><div class="badge-wrap"><span class="badge <%= badge.type %>"><%= badge.name %></span></div><%= badge.description %></li>
+          <li><div class="badge-wrap"><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></div><%= badge.description %></li>
         <% end %>
       </ul>
     </div>
