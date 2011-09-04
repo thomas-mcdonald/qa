@@ -2,7 +2,7 @@ class Badge < ActiveRecord::Base
   TYPES = %w[gold silver bronze]
   GOLD = %w[great_answer great_question]
   SILVER = %w[good_answer good_question]
-  BRONZE = %w[nice_answer nice_question student]
+  BRONZE = %w[nice_answer nice_question student teacher]
 
   belongs_to :source, :polymorphic => true
   belongs_to :user

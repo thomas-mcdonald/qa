@@ -24,3 +24,6 @@ en:
     student:
       name: Student
       description: Asked first question with an upvote
+    teacher:
+      name: Teacher
+      description: First answer with an upvote
