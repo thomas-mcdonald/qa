@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def reputation
-    refresh_reputation if self.updated_at > 5.minutes.ago
     self.reputation_cache
   end
 
