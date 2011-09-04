@@ -5,13 +5,9 @@ class VotesController < ApplicationController
     @vote = Vote.new(params[:vote])
     @vote.value = params[:value]
     @vote.user = current_user
-    @vote.save
-    if @vote.voteable_type == "Question"
-      Resque.enqueue(Badges::CreateQuestionVote, @vote.voteable_id)
-      Rails.logger.info("Queued question vote for processing")
-    elsif @vote.voteable_type == "Answer"
-      Resque.enqueue(Badges::CreateAnswerVote, @vote.voteable_id)
-      Rails.logger.info("Queued answer vote for processing")
+    if @vote.save
+      Resque.enqueue(Async::Badges.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
+      Rails.logger.info("Queued #{@vote.voteable_type} vote for processing")
     end
     render :json => {
       :errors => @vote.errors,

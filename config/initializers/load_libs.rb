@@ -1,1 +1,1 @@
-Dir[File.join(Rails.root, "lib/badges/*.rb")].each { |file| require file }
+Dir[File.join(Rails.root, "lib/async/**/*.rb")].each { |file| require file }
