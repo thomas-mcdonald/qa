@@ -9,6 +9,12 @@
           <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.count %></span></li>
         <% end %>
       </ul>
+      <h3>Recent Badges</h3>
+      <ul id="recent-badges">
+        <% @recent_badges.each do |badge| %>
+          <li><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></li>
+        <% end %>
+      </ul>
     </div>
     <div class="span13 columns">
       <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>

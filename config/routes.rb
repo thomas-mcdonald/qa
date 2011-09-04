@@ -14,6 +14,8 @@ Qa::Application.routes.draw do
       end
     end
   end
+
+  resources :badges, :only => [:index, :show]
   resources :tags, :only => [:index]
   resources :votes, :only => [:create, :destroy]
 

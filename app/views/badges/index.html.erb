@@ -1,0 +1,27 @@
+<% title "Badges" %>
+
+<section>
+  <div class="page-header">
+    <h1>Badges <small>Provide knowledge, get badges</small></h1>
+  </div>
+  <div class="row">
+    <div class="span3 columns">
+      <h3>Badge Types</h3>
+      <div>
+        <p><span class="badge gold">Gold Badge</span></p>
+        <p>Gold badges are difficult to obtain, and recognise great achievements.</p>
+        <p><span class="badge silver">Silver Badge</span></p>
+        <p>Silver badges are somewhat easier to obtain than gold badges, but still represent an acomplishment.</p>
+        <p><span class="badge bronze">Bronze Badge</span></p>
+        <p>Bronze badges are the easiest badges to get, often awarded for using advanced parts of QA for the first time.</p>
+      </div>
+    </div>
+    <div class="span13 columns">
+      <ul id="badge-list">
+        <% @badges.each do |badge| %>
+          <li><div class="badge-wrap"><span class="badge <%= badge.type %>"><%= badge.name %></span></div><%= badge.description %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>
