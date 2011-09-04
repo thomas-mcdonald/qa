@@ -5,7 +5,7 @@ class Notification < ActiveRecord::Base
 
   def self.dismiss!(id)
     n = Notification.find(id)
-    n.dismiss = true
+    n.dismissed = true
     n.save
   end
 end
