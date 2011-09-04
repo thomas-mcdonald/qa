@@ -6,7 +6,10 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(params[:answer])
     @answer.user = current_user
     @question.update_last_activity!(current_user)
-    @answer.save
+    if @answer.save
+      Resque.enqueue(Async::Badges::CreateAnswer, @answer.id)
+      Rails.logger.info("Queued answer for processing")
+    end
     redirect_to @question
   end
 end
