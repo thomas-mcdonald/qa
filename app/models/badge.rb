@@ -1,8 +1,8 @@
 class Badge < ActiveRecord::Base
   TYPES = %w[gold silver bronze]
-  GOLD = %w[great_question]
-  SILVER = %w[good_question]
-  BRONZE = %w[nice_question student]
+  GOLD = %w[great_answer great_question]
+  SILVER = %w[good_answer good_question]
+  BRONZE = %w[nice_answer nice_question student]
 
   belongs_to :source, :polymorphic => true
   belongs_to :user
@@ -27,6 +27,10 @@ class Badge < ActiveRecord::Base
 
   def self.param_token(param)
     where('token = ?', Badge.inverse_param(param))
+  end
+
+  def self.user(user)
+    where("user_id = #{user.id}")
   end
 
   def to_param

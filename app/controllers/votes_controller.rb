@@ -9,6 +9,9 @@ class VotesController < ApplicationController
     if @vote.voteable_type == "Question"
       Resque.enqueue(Badges::CreateQuestionVote, @vote.voteable_id)
       Rails.logger.info("Queued question vote for processing")
+    elsif @vote.voteable_type == "Answer"
+      Resque.enqueue(Badges::CreateAnswerVote, @vote.voteable_id)
+      Rails.logger.info("Queued answer vote for processing")
     end
     render :json => {
       :errors => @vote.errors,

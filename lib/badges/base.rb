@@ -1,6 +1,6 @@
 module Badges
   class Base
-    def create_badge(token, user, source)
+    def self.create_badge(token, user, source)
       badge = Badge.new
       badge.token = token
       badge.user = user

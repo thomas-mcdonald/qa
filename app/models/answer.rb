@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   has_paper_trail
+  has_many :badges, :as => "source"
   belongs_to :question, :counter_cache => true
   belongs_to :user
   has_many :votes, :as => "voteable"
@@ -14,5 +15,14 @@ class Answer < ActiveRecord::Base
 
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')
+  end
+
+  def vote_count
+    votes = self.votes
+    i = 0
+    votes.each do |v|
+      i += v.value
+    end
+    i
   end
 end
