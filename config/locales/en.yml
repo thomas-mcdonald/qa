@@ -27,3 +27,5 @@ en:
     teacher:
       name: Teacher
       description: First answer with an upvote
+  notifications:
+    new_answer: New answer posted on %{link}
