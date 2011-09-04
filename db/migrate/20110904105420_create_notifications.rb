@@ -4,7 +4,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.string :token
       t.string :parameters
       t.integer :user_id
-      t.boolean :dismissed
+      t.boolean :dismissed, :default => false
 
       t.timestamps
     end

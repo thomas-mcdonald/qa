@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20110904105420) do
     t.string   "token"
     t.string   "parameters"
     t.integer  "user_id"
-    t.boolean  "dismissed"
+    t.boolean  "dismissed",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
