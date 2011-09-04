@@ -1,7 +1,7 @@
 module NotificationHelper  
   def notibox(notification, klass = 'info', &block)
     content = capture(&block)
-    "<div class='alert-message #{klass}' id='notification-#{notification.id}'><p>#{content}</p></div>".html_safe
+    "<div class='alert-message #{klass}' id='notification-#{notification.id}'>#{ link_to "x", dismiss_notification_url(notification), :remote => true, :class => :close }<p>#{content}</p></div>".html_safe
   end
   
   def new_answer(notification)
