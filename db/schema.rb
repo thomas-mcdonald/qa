@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110903181751) do
+ActiveRecord::Schema.define(:version => 20110904105420) do
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(:version => 20110903181751) do
     t.integer  "user_id"
     t.string   "source_type"
     t.integer  "source_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "token"
+    t.string   "parameters"
+    t.integer  "user_id"
+    t.boolean  "dismissed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
