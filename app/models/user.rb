@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :answers
+  has_many :notifications
   has_many :questions
   has_many :reputation_events
   has_many :votes
@@ -41,6 +42,10 @@ class User < ActiveRecord::Base
     self.reputation_cache = counter
     self.save
     self
+  end
+
+  def active_notifications
+    self.notifications.active
   end
 
   private
