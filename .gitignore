@@ -1,6 +1,7 @@
 .bundle
 config/database.yml
 db/*.sqlite3
+dump.rdb
 lib/importdata/*
 log/*.log
 tmp/
