@@ -28,4 +28,6 @@ en:
       name: Teacher
       description: First answer with an upvote
   notifications:
+    new_badge_with_question_as_source: You earned the %{badge_link} badge for the question %{source_link}
+    new_badge_without_source: You earned the %{badge_link} badge. See %{link}.
     new_answer: New answer posted on %{link}
