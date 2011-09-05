@@ -12,6 +12,7 @@ module Async
             :id => question.id,
             :title => question.title
           },
+          :redirect => question,
           :user => question.user
         })
       end

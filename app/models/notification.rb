@@ -1,4 +1,5 @@
 class Notification < ActiveRecord::Base
+  belongs_to :redirect, :polymorphic => true
   belongs_to :user
   serialize :parameters
   scope :active, where('dismissed = ?', false)
