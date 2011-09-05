@@ -4,8 +4,9 @@ class Notification < ActiveRecord::Base
   serialize :parameters
   scope :active, where('dismissed = ?', false)
 
-  def self.dismiss!(id)
-    n = Notification.find(id)
+  def self.dismiss!(id, current_user)
+    n = current_user.notifications.find(id)
+    return false unless n
     n.dismissed = true
     n.save
   end
