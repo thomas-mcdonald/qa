@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :load_notifications
 
   def load_notifications
-    @notifications = current_user.active_notifications
+    @notifications = []
+    @notifications = current_user.active_notifications if logged_in?
   end
 
   def admin_required
