@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110903181751) do
+ActiveRecord::Schema.define(:version => 20110904134827) do
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(:version => 20110903181751) do
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.string   "token"
+    t.string   "parameters"
+    t.integer  "user_id"
+    t.boolean  "dismissed",     :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "redirect_type"
+    t.integer  "redirect_id"
   end
 
   create_table "questions", :force => true do |t|

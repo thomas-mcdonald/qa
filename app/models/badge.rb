@@ -25,6 +25,10 @@ class Badge < ActiveRecord::Base
     Badge.new(:token => Badge.inverse_param(param))
   end
 
+  def self.new_from_token(token)
+    Badge.new(:token => token)
+  end
+
   def self.param_token(param)
     where('token = ?', Badge.inverse_param(param))
   end
