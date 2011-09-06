@@ -5,6 +5,7 @@ gem 'rails', '3.1.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'differ'
 gem 'foreman'
+gem 'jquery-rails'
 gem 'kaminari', '0.12.4'
 gem 'nokogiri'
 gem 'paper_trail', '2.2.4'
@@ -14,6 +15,12 @@ gem 'resque', '1.19.0'
 
 gem 'mysql'
 gem 'sqlite3'
+
+group :assets do
+  gem 'sass-rails', '~>3.1.0'
+  gem 'coffee-rails', '~>3.1.0'
+  gem 'uglifier'
+end
 
 group :development do
   gem 'autotest'

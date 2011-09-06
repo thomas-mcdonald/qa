@@ -2,8 +2,8 @@
 <html>
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-    <%= stylesheet_link_tag "bootstrap", "application" %>
-    <%= javascript_include_tag "jquery", "jquery_rails", "bootstrap", "application" %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
   </head>

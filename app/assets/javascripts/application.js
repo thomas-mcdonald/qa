@@ -1,3 +1,8 @@
+//= require jquery
+//= require jquery_ujs
+//= require_self
+//= require_tree .
+
 $(function() {
   // Needs to be bound to all calls wanting a JSON response
   $(".alert-message a").bind("ajax:beforeSend", function(xhr, settings) {
