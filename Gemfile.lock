@@ -39,6 +39,8 @@ GEM
     autotest-growl (0.2.9)
     autotest-rails-pure (4.1.2)
     bcrypt-ruby (3.0.0)
+    bootstrap-sass (1.2.0)
+      sass-rails
     builder (3.0.0)
     capybara (1.1.1)
       mime-types (>= 1.16)
@@ -207,6 +209,7 @@ DEPENDENCIES
   autotest-growl
   autotest-rails-pure
   bcrypt-ruby
+  bootstrap-sass
   capybara
   coffee-rails (~> 3.1.0)
   cucumber-rails
