@@ -22,8 +22,6 @@ class QuestionsController < ApplicationController
   def revisions
     @question = Question.find(params[:id])
     @revisions = @question.versions.reverse
-    @revision = @question
-    @oldrev = @revisions.last.reify
   end
 
   def new
