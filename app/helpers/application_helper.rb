@@ -9,6 +9,14 @@ module ApplicationHelper
     hash = Digest::MD5.hexdigest(email)
     image_tag "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
   end
+
+  def diff_tag_link(hash)
+    tlink = link_to hash[:tag], tagged_questions_url(hash[:tag]), :class => "btn tag"
+    tlink = %Q[<del class="differ">#{tlink.html_safe}</del>] if hash[:remove]
+    tlink = %Q[<ins class="differ">#{tlink.html_safe}</ins>] if hash[:insert]
+    tlink.html_safe
+  end
+
 end
 
 class String

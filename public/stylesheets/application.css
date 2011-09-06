@@ -207,3 +207,11 @@ span.tag-count {
   display: inline-block;
   width: 120px;
 }
+
+ins .btn.tag {
+  border: 1px solid rgba(0, 255, 0, 0.5);
+}
+del .btn.tag {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+

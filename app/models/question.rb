@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :ignore => [:answer_count, :last_activity_at, :last_active_user_id]
   has_many :answers, :dependent => :destroy
   has_many :badges, :as => "source"
   has_many :taggings
@@ -7,8 +7,6 @@ class Question < ActiveRecord::Base
   has_many :votes, :as => "voteable"
   belongs_to :user
   belongs_to :last_active_user, :class_name => "User", :foreign_key => "last_active_user_id"
-
-  attr_accessor :tag_list
 
   attr_accessible :title, :body, :tag_list, :user_id
 
@@ -30,11 +28,11 @@ class Question < ActiveRecord::Base
   end
 
   def tag_list=(tag_list)
-    @tag_list = tag_list
+    self[:tag_list] = tag_list
   end
 
   def tag_list
-    @tag_list ||= self.tags.collect { |tag| tag.name }.join(", ")
+    self[:tag_list] # ||= self.tags.collect { |tag| tag.name }.join(", ")
   end
 
   def build_tags

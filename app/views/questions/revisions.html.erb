@@ -1,10 +1,27 @@
 <% title "Revisions for question" %>
 
-<%= Differ.diff_by_word(@question.body, @revisions.last.reify.body).to_s.html_safe %>
+<div class="page-header">
+  <h1>Revisions <small>for <%= link_to @question.title, question_url(@question) %></small></h1>
+</div>
 
 <% @revisions.each do |revision| %>
-  <%= revision.reify.body if revision.reify %>
-  <%= revision.reify %>
+  <div class="revison">
+    <% if revision.index == 0 %>
+      <div class="page-header">
+        <h2>#1</h2>
+      </div>
+      <h3><%= revision.next.reify.title %></h3>
+      <%= revision.next.reify.body %>
+      <%= revision.next.reify.tag_list %>
+    <% else %>
+      <div class="page-header">
+        <h2>#<%= revision.index+1 %></h2>
+      </div>
+      <% @next = revision.next ? revision.next.reify : @question %>
+      <h3><%= Differ.diff_by_word(@next.title, revision.reify.title).to_s.html_safe %></h3>
+      <%= Differ.diff_by_word(@next.body, revision.reify.body).to_s.html_safe %>
+      <p><%= TagDiffer.diff(@next.tag_list, revision.reify.tag_list).collect { |t| diff_tag_link(t) }.join(" ").html_safe %></p>
+    <% end %>
+  </div>
 <% end %>
-
 
