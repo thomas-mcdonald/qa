@@ -38,7 +38,7 @@ class Question < ActiveRecord::Base
   def build_tags
     return false if self.tag_list.blank?
     self.tags.clear
-    self.tag_list.split(",").each do |tag|
+    self.tag_list.gsub(" ", "").split(",").each do |tag|
       t = Tag.find_or_create_by_name(tag.strip)
       self.tags << t if !self.tags.include?(t)
     end
