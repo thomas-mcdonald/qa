@@ -15,7 +15,7 @@ class Vote < ActiveRecord::Base
   def one_vote
     vote = Vote.where('voteable_type = ? AND voteable_id = ? AND user_id = ?', self.voteable_type, self.voteable_id, self.user_id).first
     if !(vote.nil? || vote.id == self.id)
-      self.errors.add(:voteable, "You have already voted")
+      self.errors.add(:voteable, "You have already voted on this post")
     end
   end
 

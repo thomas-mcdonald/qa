@@ -5,13 +5,13 @@ module VotesHelper
         #{ hidden_field_tag "vote[voteable_id]", vote_item.id }
         #{ hidden_field_tag "vote[voteable_type]", vote_item.class }
         <button type="submit" name="value" value="1" class="arrow upvote">
-          #{ image_tag 'vote-up-off.png', :class => "vote-active" }
-          #{ image_tag 'vote-up-on.png', :class => "vote-inactive" }
+          #{ image_tag 'vote-up-off.png', :class => active_class(vote_item, 1, false) }
+          #{ image_tag 'vote-up-on.png', :class => active_class(vote_item, 1, true) }
         </button>
-        #{ vote_average(vote_item) }
+        <p class="vote-count">#{ vote_average(vote_item) }</p>
         <button type="submit" name="value" value="-1" class="arrow downvote">
-          #{ image_tag 'vote-down-off.png', :class => "vote-active" }
-          #{ image_tag 'vote-down-on.png', :class => "vote-inactive" }
+          #{ image_tag 'vote-down-off.png', :class => active_class(vote_item, -1, false) }
+          #{ image_tag 'vote-down-on.png', :class => active_class(vote_item, -1, true) }
         </button>
 
       </form>
@@ -24,5 +24,13 @@ module VotesHelper
       i += vote.value
     end
     i
+  end
+
+  def active_class(vote_item, value, want)
+    flag = !current_user.votes.where(:voteable_id => vote_item.id, :voteable_type => vote_item.class, :value => value).first.blank?
+    type = "upvote" if value == 1
+    type = "downvote" if value == -1
+    return "vote-active #{type}" if flag == want
+    "vote-inactive #{type}" unless flag == want
   end
 end
