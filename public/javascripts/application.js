@@ -33,7 +33,6 @@ $.fn.popover = function(string) {
     .click(function(e) { $(this).fadeOutAndRemove() })
     .find("p").text(string).end();
     $("body").append(popover);
-    console.log(string);
   });
 };
 
