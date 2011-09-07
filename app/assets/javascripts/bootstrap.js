@@ -1,18 +1,9 @@
 $(function() {
-  $("a.menu").click(function(e) {
-    var $target = $(this);
-    var $parent = $target.parent("li");
-    var $siblings = $target.siblings("ul.menu-dropdown");
-    var $parentSiblings = $parent.siblings("li");
-    if ($parent.hasClass("open")) {
-      $parent.removeClass("open");
-      $siblings.hide();
-    } else {
-      $parent.addClass("open");
-      $siblings.show();
-    }
-    $parentSiblings.children("ul.menu-dropdown").hide();
-    $parentSiblings.removeClass("open");
+  $("body").bind("click", function (e) {
+    $('.dropdown-toggle, .menu').parent("li").removeClass("open");
+  });
+  $(".dropdown-toggle, .menu").click(function (e) {
+    var $li = $(this).parent("li").toggleClass('open');
     return false;
   });
 });
