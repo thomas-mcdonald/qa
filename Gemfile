@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.0' 
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '1.3.0'
 gem 'differ'
 gem 'foreman'
 gem 'jquery-rails'
