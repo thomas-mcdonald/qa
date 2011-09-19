@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   has_paper_trail :ignore => [:answer_count, :last_activity_at, :last_active_user_id]
   has_many :answers, :dependent => :destroy
   has_many :badges, :as => "source"
+  has_many :flags, :as => "flaggable"
   has_many :taggings
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
