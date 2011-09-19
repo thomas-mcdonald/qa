@@ -4,6 +4,7 @@
 //= require_self
 
 $ ->
+  $(".topbar").dropdown()
   # Needs to be bound to all calls wanting a JSON response
   $(".alert-message a").bind "ajax:beforeSend", (xhr, settings) ->
     settings.setRequestHeader 'Accept', 'application/json'
