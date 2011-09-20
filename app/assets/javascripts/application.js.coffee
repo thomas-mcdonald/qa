@@ -21,18 +21,10 @@ $ ->
   $("#new_flag").live "ajax:success", (xhr, data, status) ->
     if data.status is "ok"
       $(".modal").modal('hide')
-      pop = $(".flag-link").attr("title", "Thanks").attr("data-content", data.message).popover(
-        trigger: 'manual'
-      ).popover('show').data('popover').$tip
-      pop.click ->
-        $(".flag-link").popover('hide')
+      pop = $(".flag-link").attr("title", "Thanks").attr("data-content", data.message).qaPopover()
     else
       $(".modal").modal('hide')
-      pop = $(".flag-link").attr("title", "Whoops").attr("data-content", data.errors.flaggable[0]).popover(
-        trigger: 'manual'
-      ).popover('show').data('popover').$tip
-      pop.click ->
-        $(".flag-link").popover('hide')
+      pop = $(".flag-link").attr("title", "Whoops").attr("data-content", data.errors.flaggable[0]).qaPopover()
 
   # /***************/
   $(".vote-form").live "ajax:success", (xhr, data, status) ->
@@ -51,6 +43,14 @@ $ ->
   $(".alert-message a").bind "ajax:success", (xhr, data, status) ->
     $("#notification-" + data.dismiss).fadeOut 'fast', ->
       $(this).remove();
+
+$.fn.qaPopover = (options) ->
+  pop = this.popover(
+    trigger: 'manual'
+  ).popover('show').data('popover').$tip
+  pop.click =>
+    this.popover('hide')
+  this
 
 $.fn.fadeOutAndRemove = (speed) ->
   if speed == undefined
