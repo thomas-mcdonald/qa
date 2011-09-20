@@ -18,6 +18,22 @@ $ ->
       e.preventDefault()
     )
 
+  $("#new_flag").live "ajax:success", (xhr, data, status) ->
+    if data.status is "ok"
+      $(".modal").modal('hide')
+      pop = $(".flag-link").attr("title", "Thanks").attr("data-content", data.message).popover(
+        trigger: 'manual'
+      ).popover('show').data('popover').$tip
+      pop.click ->
+        $(".flag-link").popover('hide')
+    else
+      $(".modal").modal('hide')
+      pop = $(".flag-link").attr("title", "Whoops").attr("data-content", data.errors.flaggable[0]).popover(
+        trigger: 'manual'
+      ).popover('show').data('popover').$tip
+      pop.click ->
+        $(".flag-link").popover('hide')
+
   # /***************/
   $(".vote-form").live "ajax:success", (xhr, data, status) ->
     if $.isEmptyObject(data.errors)

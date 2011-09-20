@@ -5,6 +5,8 @@
   </div>
   <%= form_for [@item, Flag.new], :remote => true, :html => { :class => "form-stacked" } do |f| %>
     <div class="modal-body clearfix">
+      <%= f.hidden_field :flaggable_id, :value => @item.id %>
+      <%= f.hidden_field :flaggable_type, :value => @item.class %>
       <div class="input">
         <ul class="inputs-list">
           <li>
