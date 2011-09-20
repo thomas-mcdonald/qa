@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     self.notifications.active
   end
 
+  def moderator?
+    role == 'moderator'  
+  end
+
   private
 
   def prepare_password
