@@ -24,10 +24,6 @@ group :assets do
 end
 
 group :development do
-  gem 'autotest'
-  gem 'autotest-rails-pure'
-  gem 'autotest-fsevent'
-  gem 'autotest-growl'
   gem 'nifty-generators'
   gem 'rspec-rails'
 end
@@ -44,6 +40,10 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
-  gem 'pickle'  
+  gem 'growl_notify'
+  gem 'guard-cucumber'
+  gem 'guard-rspec'
+  gem 'pickle'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i  
 end
 
