@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :answers
+  has_many :flags
   has_many :notifications
   has_many :questions
   has_many :reputation_events
@@ -46,6 +47,10 @@ class User < ActiveRecord::Base
 
   def active_notifications
     self.notifications.active
+  end
+
+  def moderator?
+    role == 'moderator'  
   end
 
   private

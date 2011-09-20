@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110905124337) do
+ActiveRecord::Schema.define(:version => 20110920223412) do
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(:version => 20110905124337) do
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "flags", :force => true do |t|
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
+    t.integer  "user_id"
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "dismissed",      :default => false
   end
 
   create_table "notifications", :force => true do |t|

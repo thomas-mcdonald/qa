@@ -23,6 +23,7 @@
   </div>
   <div class="row">
     <div class="span1 colums offset1"><%= link_to "edit", edit_question_path(@question) %></div>
+    <div class="span1"><%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %></div>
   </div>
 </section>
 

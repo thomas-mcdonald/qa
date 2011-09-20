@@ -2,6 +2,8 @@ Qa::Application.routes.draw do
   root :to => 'questions#index'
 
   resources :questions do
+    resources :flags, :only => [:new, :create]
+
     collection do
       get 'tagged/:tag', :action => :tagged, :as => :tagged
     end
@@ -12,6 +14,16 @@ Qa::Application.routes.draw do
       member do
         get 'revisions'
       end
+    end
+  end
+
+  # Avoid nesting answer routes under question
+  scope "/answers/:answer_id", :as => "answer" do
+    resources :flags, :only => [:new, :create]
+  end
+  resources :flags, :only => [:index] do
+    member do
+      get 'dismiss'
     end
   end
 

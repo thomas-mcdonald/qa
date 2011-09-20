@@ -1,0 +1,12 @@
+<% title "Flags" %>
+
+<div class="page-header">
+  <h1>Flags <small><%= pluralize @flag_count, "flag" %> currently active</small></h1>
+</div>
+
+<section id="flags">
+  <% @flags.each do |flag| %>
+    <%= render :partial => flag.flaggable_type.downcase, :locals => { :flag => flag } %>
+  <% end %>
+</section>
+

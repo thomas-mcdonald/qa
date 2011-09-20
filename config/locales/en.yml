@@ -27,6 +27,11 @@ en:
     teacher:
       name: Teacher
       description: First answer with an upvote
+  flags:
+    reasons:
+      attention: requires moderator attention
+      offensive: contains offensive content
+      spam: contains spam-like content
   notifications:
     new_badge_with_answer_as_source: You earned the %{badge_link} badge for your answer on the question %{source_link}
     new_badge_with_question_as_source: You earned the %{badge_link} badge for the question %{source_link}

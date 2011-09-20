@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include ControllerAuthentication
   protect_from_forgery
 
+  before_filter :load_moderation_info
   before_filter :load_notifications
 
   def load_notifications
@@ -9,16 +10,14 @@ class ApplicationController < ActionController::Base
     @notifications = current_user.active_notifications if logged_in?
   end
 
-  def admin_required
-    if !logged_in? || !current_user.admin?
-      denied
+  def load_moderation_info 
+    if logged_in? && current_user.moderator?
+      @flag_count = Flag.active.count
     end
   end
 
   def moderator_required
-    if !logged_in? || !current_user.moderator?
-      denied
-    end
+    denied if !logged_in? || !current_user.moderator?
   end
 
   def denied

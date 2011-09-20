@@ -5,9 +5,26 @@
 
 $ ->
   $(".topbar").dropdown()
+
   # Needs to be bound to all calls wanting a JSON response
   $(".alert-message a").bind "ajax:beforeSend", (xhr, settings) ->
     settings.setRequestHeader 'Accept', 'application/json'
+
+  $(".flag-link").live "ajax:success", (xhr, data, status) ->
+    $(data).appendTo($("body")).modal(backdrop: true, show: true).bind('hidden', ->
+      $(this).remove()
+    ).find(".btn.secondary").click( (e) ->
+      $(".modal").modal('hide')
+      e.preventDefault()
+    )
+
+  $("#new_flag").live "ajax:success", (xhr, data, status) ->
+    if data.status is "ok"
+      $(".modal").modal('hide')
+      pop = $(".flag-link").attr("title", "Thanks").attr("data-content", data.message).qaPopover()
+    else
+      $(".modal").modal('hide')
+      pop = $(".flag-link").attr("title", "Whoops").attr("data-content", data.errors.flaggable[0]).qaPopover()
 
   # /***************/
   $(".vote-form").live "ajax:success", (xhr, data, status) ->
@@ -26,6 +43,14 @@ $ ->
   $(".alert-message a").bind "ajax:success", (xhr, data, status) ->
     $("#notification-" + data.dismiss).fadeOut 'fast', ->
       $(this).remove();
+
+$.fn.qaPopover = (options) ->
+  pop = this.popover(
+    trigger: 'manual'
+  ).popover('show').data('popover').$tip
+  pop.click =>
+    this.popover('hide')
+  this
 
 $.fn.fadeOutAndRemove = (speed) ->
   if speed == undefined
