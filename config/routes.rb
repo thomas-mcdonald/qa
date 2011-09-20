@@ -2,6 +2,8 @@ Qa::Application.routes.draw do
   root :to => 'questions#index'
 
   resources :questions do
+    resources :flags
+
     collection do
       get 'tagged/:tag', :action => :tagged, :as => :tagged
     end
@@ -13,6 +15,10 @@ Qa::Application.routes.draw do
         get 'revisions'
       end
     end
+  end
+
+  scope "/answers/:answer_id", :as => "answer" do
+    resources :flags
   end
 
   resources :badges, :only => [:index, :show]

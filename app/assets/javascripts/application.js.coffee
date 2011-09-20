@@ -5,9 +5,18 @@
 
 $ ->
   $(".topbar").dropdown()
+
   # Needs to be bound to all calls wanting a JSON response
   $(".alert-message a").bind "ajax:beforeSend", (xhr, settings) ->
     settings.setRequestHeader 'Accept', 'application/json'
+
+  $(".flag-link").live "ajax:success", (xhr, data, status) ->
+    $(data).appendTo($("body")).modal(backdrop: true, show: true).bind('hidden', ->
+      $(this).remove()
+    ).find(".btn.secondary").click( (e) ->
+      $(".modal").modal('hide')
+      e.preventDefault()
+    )
 
   # /***************/
   $(".vote-form").live "ajax:success", (xhr, data, status) ->
