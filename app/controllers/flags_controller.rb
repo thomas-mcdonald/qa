@@ -1,5 +1,10 @@
 class FlagsController < ApplicationController
   before_filter :login_required
+  before_filter :moderator_required, :only => [:index, :dismiss]
+
+  def index
+    @flags = Flag.active.all
+  end
 
   def new
     @item = Question.find(params[:question_id])
@@ -16,6 +21,12 @@ class FlagsController < ApplicationController
     else
       render :json => { :status => :bad, :errors => @flag.errors }
     end
+  end
+
+  def dismiss
+    @flag = Flag.find(params[:id])
+    @flag.dismiss!
+    redirect_to "/flags"
   end
 end
 

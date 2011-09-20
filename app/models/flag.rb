@@ -2,6 +2,8 @@ class Flag < ActiveRecord::Base
   belongs_to :flaggable, :polymorphic => true
   belongs_to :user
 
+  scope :active, where('dismissed = ?', false)
+
   validate :should_be_unique
 
   def should_be_unique
@@ -10,6 +12,11 @@ class Flag < ActiveRecord::Base
     unless v
       self.errors.add(:flaggable, "You have already flagged this #{self.flaggable_type.downcase}")
     end
+  end
+
+  def dismiss!
+    self.dismissed = true
+    self.save
   end
 end
 

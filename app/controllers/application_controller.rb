@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def load_moderation_info 
     if logged_in? && current_user.moderator?
-      @flag_count = Flag.count
+      @flag_count = Flag.active.count
     end
   end
 
