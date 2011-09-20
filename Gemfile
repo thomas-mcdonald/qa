@@ -44,4 +44,6 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
+  gem 'pickle'  
 end
+
