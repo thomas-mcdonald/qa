@@ -6,7 +6,6 @@ module Async
       answer = Answer.find(id)
       question = answer.question
       question.user.notify('new_answer', {
-        :id => question.id,
         :title => question.title
       }, question)
     end
