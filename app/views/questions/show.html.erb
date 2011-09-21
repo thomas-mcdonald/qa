@@ -36,10 +36,10 @@
   <% @answers.each do |answer| %>
     <div id="answer-<%= answer.id %>" class="answer">
       <div class="row">
-        <div class="span2 columns">
+        <div class="span1 columns">
           <%= vote_controls(answer) %>
         </div>
-        <div class="span14 columns">
+        <div class="span15 columns">
           <p><%= answer.body.markdown %></p>
         </div>
       </div>
