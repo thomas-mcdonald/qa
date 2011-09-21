@@ -24,6 +24,7 @@ class AnswersController < ApplicationController
     @question = @answer.question
     @question.update_last_activity!(current_user)
     if @answer.save
+      Resque.enqueue(Async::EditAnswer, @answer.id)
       redirect_to @question, :notice  => "Successfully updated answer."
     else
       render :action => 'edit'

@@ -3,7 +3,14 @@ module NotificationHelper
     content = capture(&block)
     "<div class='alert-message #{klass}' id='notification-#{notification.id}'>#{ link_to "x", dismiss_notification_url(notification), :remote => true, :class => :close }<p>#{content}</p></div>".html_safe
   end
-  
+
+  def edited_answer(n)
+    notibox n do
+      n.parameters[:link] = link_to n.parameters[:title], notification_url(n)
+      I18n.t("notifications.edited_answer", n.parameters).html_safe
+    end
+  end
+
   def new_answer(n)
     notibox n do
       n.parameters[:link] = link_to n.parameters[:title], notification_url(n)
