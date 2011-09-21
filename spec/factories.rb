@@ -30,6 +30,12 @@ Factory.define(:vote) do |v|
   v.value 1
 end
 
+Factory.define(:flag) do |f|
+  f.reason "spam"
+  f.user { Factory(:user) }
+  f.flaggable { Factory(:question) }
+end
+
 Factory.define(:tag) do |t|
   t.name "Example"
 end
