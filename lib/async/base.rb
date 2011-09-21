@@ -7,22 +7,16 @@ module Async
         :user => user
       )
       if badge.source == nil
-        Notification.create(
-          :token => 'new_badge_without_source',
-          :parameters => {
-            :badge_token => badge.token
-          },
-          :redirect => badge,
-          :user => badge.user
-        )
+        badge.user.notify('new_badge_without_source', {
+          :badge_token => badge.token
+        }, badge)
       else
-        n = Notification.new(
+        n = badge.user.notifications.new(
           :parameters => {
             :badge_token => badge.token
           },
           :redirect => badge,
-          :token => "new_badge_with_#{badge.source_type.downcase}_as_source",
-          :user => badge.user
+          :token => "new_badge_with_#{badge.source_type.downcase}_as_source"
         )
         case badge.source_type
         when "Question"
