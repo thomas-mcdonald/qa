@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "routes for Questions" do
-  it "routes to /questions as questions_path" do
+  it "routes /questions as questions_path" do
     { :get => "/questions" }.should route_to("questions#index")
     { :get => questions_path }.should route_to("questions#index")
   end
