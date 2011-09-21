@@ -6,7 +6,7 @@ class VotesController < ApplicationController
     @vote.value = params[:value]
     @vote.user = current_user
     if @vote.save
-      Resque.enqueue(Async::Badges.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
+      Resque.enqueue(Async.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
       Rails.logger.info("Queued #{@vote.voteable_type} vote for processing")
     end
     render :json => {
