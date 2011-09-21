@@ -44,7 +44,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="span6 columns offset10">
+        <div class="span1 columns offset1">
+          <%= link_to "edit", edit_answer_path(answer) %>
+        </div>
+        <div class="span6 columns offset8">
           <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
         </div>
       </div>

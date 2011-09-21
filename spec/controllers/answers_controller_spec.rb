@@ -17,6 +17,17 @@ describe AnswersController do
         response.should redirect_to question_path(@question)
       end
     end
+
+    describe "GET edit" do
+      before(:each) do
+        @answer = Factory(:answer)
+      end
+
+      it "should be successful" do
+        get :edit, :id => @answer.id
+        response.status.should == 200
+      end
+    end
   end
   
   describe "when not logged in," do
@@ -32,3 +43,4 @@ describe AnswersController do
     end
   end
 end
+

@@ -18,9 +18,10 @@ Qa::Application.routes.draw do
   end
 
   # Avoid nesting answer routes under question
-  scope "/answers/:answer_id", :as => "answer" do
+  resources :answers, :only => [:edit, :update] do
     resources :flags, :only => [:new, :create]
   end
+
   resources :flags, :only => [:index] do
     member do
       get 'dismiss'
