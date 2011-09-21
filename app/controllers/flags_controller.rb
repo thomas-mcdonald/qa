@@ -8,7 +8,11 @@ class FlagsController < ApplicationController
 
   def new
     @item = Question.find(params[:question_id])
-    render :new, :layout => false
+    if current_user.flags.where(:flaggable_id => @item.id, :flaggable_type => @item.class).first
+      render :noflag, :layout => false
+    else
+      render :new, :layout => false
+    end
   end
 
   def create

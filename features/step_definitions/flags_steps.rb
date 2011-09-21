@@ -1,14 +1,10 @@
-Given /^the following flags:$/ do |flags|
-  Flags.create!(flags.hashes)
+Given /^I have a flag on a question$/ do
+  Given %q[a question exists with my flag on it]
+  And %q[I go to the question's page]
 end
 
-When /^I delete the (\d+)(?:st|nd|rd|th) flags$/ do |pos|
-  visit flags_path
-  within("table tr:nth-child(#{pos.to_i+1})") do
-    click_link "Destroy"
-  end
+Given /^a question exists with my flag on it$/ do
+  Given %q[a question exists]
+  Flag.create :user => @user, :flaggable => model!("the question")
 end
 
-Then /^I should see the following flags:$/ do |expected_flags_table|
-  expected_flags_table.diff!(tableish('table tr', 'td,th'))
-end

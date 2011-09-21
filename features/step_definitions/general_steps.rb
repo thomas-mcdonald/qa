@@ -7,7 +7,7 @@ Given /^I am logged in$/ do
 end
 
 Given /^I have a user with the username "([^"]*)", email "([^"]*)", and password "([^"]*)"$/ do |username, email, password|
-  User.create(
+  @user = User.create(
     :username => username,
     :email => email,
     :password => password,
@@ -29,5 +29,10 @@ end
 
 Then /^(?:|I )should not see a "([^\"]*)"?$/ do |selector|
   page.has_css?(selector).should be_false
+end
+
+Then /^I should see a modal with the title "([^"]*)"$/ do |title|
+  Then %q[I should see a ".modal"]
+  Then %q[I should see "Whoops" within ".modal h3"]
 end
 
