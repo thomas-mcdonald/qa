@@ -27,9 +27,13 @@ module VotesHelper
   end
 
   def active_class(vote_item, value, want)
-    flag = !current_user.votes.where(:voteable_id => vote_item.id, :voteable_type => vote_item.class, :value => value).first.blank?
     type = "upvote" if value == 1
     type = "downvote" if value == -1
+    if logged_in?
+      flag = !current_user.votes.where(:voteable_id => vote_item.id, :voteable_type => vote_item.class, :value => value).first.blank?
+    else
+      flag = false
+    end
     return "vote-active #{type}" if flag == want
     "vote-inactive #{type}" unless flag == want
   end
