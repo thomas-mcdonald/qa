@@ -2,5 +2,5 @@
   <h1>Editing <small>an answer on "<%= @question.title %>"</small></h1>
 </div>
 
-<%= render :partial => 'posts/editor', :locals => { :source => @answer } %>
+<%= render :partial => 'posts/editor', :locals => { :source => @answer, :returnobj => @question } %>
 
