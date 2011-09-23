@@ -2,18 +2,5 @@
   <h1>Editing <small>an answer on "<%= @question.title %>"</small></h1>
 </div>
 
-<section id="edit-answer">
-  <%= form_for @answer do |f| %>
-    <%= f.error_messages %>
-    <div class="clearfix">
-      <%= f.label :body %>
-      <div class="input">
-        <%= f.text_area :body, :class => :span10 %>
-      </div>
-    </div>
-    <div class="actions">
-      <%= f.submit :class => "btn primary" %>
-    </div>
-  <% end %>
-</section>
+<%= render :partial => 'posts/editor', :locals => { :source => @answer } %>
 
