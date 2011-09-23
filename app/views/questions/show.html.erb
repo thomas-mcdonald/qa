@@ -61,15 +61,6 @@
   <div class="page-header">
     <h3>Answer this question</h3>
   </div>
-  <%= form_for [@question, @answer] do |f| %>
-    <%= f.text_area :body %>
-    <%= f.submit %>
-  <% end %>
+  <%= render :partial => 'posts/editor', :locals => { :source => [@question, @answer] } %>
 </div>
 
-
-<p>
-  <%= link_to "Edit", edit_question_path(@question) %> |
-  <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", questions_path %>
-</p>

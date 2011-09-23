@@ -1,5 +1,6 @@
 <div id="gollum-editor">
   <%= form_for source do |f| %>
+    <% source = source.last if source.class == Array %>
     <fieldset id="gollum-editor-fields">
       <% if source.class == Question %>
         <div id="gollum-editor-title-field" class="singleline">
