@@ -7,6 +7,11 @@ class Badge < ActiveRecord::Base
   belongs_to :source, :polymorphic => true
   belongs_to :user
 
+  validates_presence_of :token
+  validates_numericality_of :user_id
+
+  attr_accessor :shallow
+
   default_scope order('created_at DESC')
 
   def self.recent
@@ -16,17 +21,17 @@ class Badge < ActiveRecord::Base
   def self.all_badges
     badges = []
     (GOLD + SILVER + BRONZE).sort { |a, b| a <=> b }.each do |b|
-      badges << Badge.new(:token => b)
+      badges << Badge.new(:shallow => true, :token => b)
     end
     badges
   end
 
   def self.new_from_param(param)
-    Badge.new(:token => Badge.inverse_param(param))
+    Badge.new(:shallow => true, :token => Badge.inverse_param(param))
   end
 
   def self.new_from_token(token)
-    Badge.new(:token => token)
+    Badge.new(:shallow => true, :token => token)
   end
 
   def self.param_token(param)
@@ -35,6 +40,10 @@ class Badge < ActiveRecord::Base
 
   def self.user(user)
     where("user_id = #{user.id}")
+  end
+
+  def shallow?
+    shallow || false
   end
 
   def to_param

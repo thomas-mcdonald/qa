@@ -45,6 +45,11 @@ Factory.define(:tagging) do |t|
   t.tag { Factory(:tag) }
 end
 
+Factory.define(:badge) do |b|
+  b.token "student"
+  b.user { Factory(:user) }
+end
+
 Factory.sequence(:username) do |n|
   "tom-#{n}"
 end
