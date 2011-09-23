@@ -1,0 +1,67 @@
+<div id="gollum-editor">
+  <%= form_for source do |f| %>
+    <fieldset id="gollum-editor-fields">
+      <% if source.class == Question %>
+        <div id="gollum-editor-title-field" class="singleline">
+          <%= f.label :title, :class => :jaws %>
+          <%= f.text_field :title, :id => "gollum-editor-page-title", :placeholder => "What are you asking?" %>
+        </div>
+      <% end %>
+      <div id="gollum-editor-function-bar">
+        <div id="gollum-editor-function-buttons">
+          <a href="#" id="function-bold" class="function-button"><span>Bold</span></a>
+          <a href="#" id="function-italic" class="function-button"><span>Italic</span></a>
+          <a href="#" id="function-code" class="function-button"><span>Code</span></a>
+          <span class="function-divider">&nbsp;</span>
+          <a href="#" id="function-ul" class="function-button"><span>Unordered List</span></a>
+          <a href="#" id="function-ol" class="function-button"><span>Ordered List</span></a>
+          <a href="#" id="function-blockquote" class="function-button"><span>Blockquote</span></a>
+          <a href="#" id="function-hr" class="function-button"><span>Horizontal Rule</span></a>
+          <span class="function-divider">&nbsp;</span>
+          <a href="#" id="function-h1" class="function-button"><span>h1</span></a>
+          <a href="#" id="function-h2" class="function-button"><span>h2</span></a>
+          <a href="#" id="function-h3" class="function-button"><span>h3</span></a>
+          <span class="function-divider">&nbsp;</span>
+          <a href="#" id="function-link" class="function-button"><span>Link</span></a>
+          <a href="#" id="function-image" class="function-button"><span>Image</span></a>
+          <span class="function-divider">&nbsp;</span>
+          <a href="#" id="function-help" class="function-button"><span>Help</span></a>
+        </div>
+      </div>
+      <div id="gollum-editor-help" class="jaws">
+        <ul id="gollum-editor-help-parent">
+          <li><a href="javascript:void(0);" class="selected">Help 1</a></li>
+          <li><a href="javascript:void(0);">Help 1</a></li>
+          <li><a href="javascript:void(0);">Help 1</a></li>
+        </ul>
+        <ul id="gollum-editor-help-list">
+          <li><a href="javascript:void(0);">Help 2</a></li>
+          <li><a href="javascript:void(0);">Help 3</a></li>
+          <li><a href="javascript:void(0);">Help 4</a></li>
+          <li><a href="javascript:void(0);">Help 5</a></li>
+          <li><a href="javascript:void(0);">Help 6</a></li>
+          <li><a href="javascript:void(0);">Help 7</a></li>
+          <li><a href="javascript:void(0);">Help 8</a></li>
+        </ul>
+        <div id="gollum-editor-help-wrapper">
+          <div id="gollum-editor-help-content"><p></p></div>
+        </div>
+      </div>
+      <%= f.text_area :body, :id => "gollum-editor-body", "data-markup-language" => "markdown" %>
+      <% if source.class == Question %>
+        <div class="singleline">
+          <%= f.text_field :tag_list, :placeholder => "Add a comma separated list of tags for this question" %>
+        </div>
+      <% end %>
+      <% unless source.new_record? %>
+        <div id="gollum-editor-edit-summary" class="singleline">
+          <!-- TODO: edit summary -->
+        </div>
+      <% end %>
+
+      <%= f.submit :class => "btn primary" %>
+      <!-- TODO: <a href="javascript:void(0)" id="gollum-editor-preview" class="btn secondary" title="Preview this Page">Preview</a> -->
+    </fieldset>
+  <% end %>
+</div>
+
