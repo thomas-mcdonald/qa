@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :votes
 
   # new columns need to be added here to be writable through mass assignment
-  attr_accessible :username, :email, :password, :password_confirmation, :about_me, :twitter, :display_name
+  attr_accessible :email, :password, :password_confirmation, :about_me, :twitter, :display_name
 
   attr_accessor :password
   before_save :prepare_password
@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
 
   def moderator?
     role == 'moderator'  
+  end
+
+  def name
+    display_name || username
   end
 
   private

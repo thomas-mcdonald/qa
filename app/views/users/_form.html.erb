@@ -1,11 +1,13 @@
 <%= form_for @user do |f| %>
   <%= f.error_messages %>
-  <div class="clearfix">
-    <%= f.label :username %>
-    <div class="input">
-      <%= f.text_field :username %>
+  <% if @user.new_record? %>
+    <div class="clearfix">
+      <%= f.label :username %>
+      <div class="input">
+        <%= f.text_field :username %>
+      </div>
     </div>
-  </div>
+  <% end %>
   <div class="clearfix">
     <%= f.label :email, "Email Address" %>
     <div class="input">

@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe User do
   def new_user(attributes = {})
-    attributes[:username] ||= 'foo'
     attributes[:email] ||= 'foo@example.com'
     attributes[:password] ||= 'abc123'
     attributes[:password_confirmation] ||= attributes[:password]
-    User.new(attributes)
+    user = User.new(attributes)
+    user.username = attributes[:username] || 'foo'
+    user
   end
 
   it "should be valid" do
