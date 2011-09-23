@@ -121,7 +121,8 @@
               $('#gollum-dialog-dialog').removeClass('active');
             }
           });
-        }
+       }
+       $('#gollum-dialog-dialog').remove();
      },
    
      init: function( argObject ) {
