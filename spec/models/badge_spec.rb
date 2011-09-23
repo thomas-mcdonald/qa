@@ -6,23 +6,25 @@ describe Badge do
   end
 
   describe "validation" do
+    before(:each) do
+      @badge = Factory.build(:badge)
+    end
+
     describe "of token" do
       it "requires presence" do
-        badge = Factory.build(:badge)
-        badge.token = nil
-        badge.should have(1).errors_on(:token)
+        @badge.token = nil
+        @badge.should have(1).errors_on(:token)
       end
     end
 
     describe "of user_id" do
       it "validates numericality" do
-        badge = Factory.build(:badge)
-        badge.user_id = "ab"
-        badge.should have(1).errors_on(:user_id)
-        badge.user_id = nil
-        badge.should have(1).errors_on(:user_id)
-        badge.user_id = 1
-        badge.should have(0).errors_on(:user_id)
+        @badge.user_id = "ab"
+        @badge.should have(1).errors_on(:user_id)
+        @badge.user_id = nil
+        @badge.should have(1).errors_on(:user_id)
+        @badge.user_id = 1
+        @badge.should have(0).errors_on(:user_id)
       end
     end
   end
@@ -52,28 +54,29 @@ describe Badge do
   end
 
   describe ".param_token" do
-    it "should return results with the tokenized token" do
-      badge = Factory.build(:badge)
-      badge.token = 'nice_answer'
-      badge.save
+    before(:each) do
+      @badge = Factory.build(:badge)
+    end
 
-      Badge.param_token('nice-answer').should include(badge)
+    it "should return results with the tokenized token" do
+      @badge.token = 'nice_answer'
+      @badge.save
+
+      Badge.param_token('nice-answer').should include(@badge)
     end
 
     it "should not return results with the parametized token" do
-      badge = Factory.build(:badge)
-      badge.token = 'nice-answer'
-      badge.save(:validate => false)
+      @badge.token = 'nice-answer'
+      @badge.save(:validate => false)
 
-      Badge.param_token('nice-answer').should_not include(badge)
+      Badge.param_token('nice-answer').should_not include(@badge)
     end
 
     it "should not return results with different tokens" do
-      badge = Factory.build(:badge)
-      badge.token = 'great_answer'
-      badge.save
+      @badge.token = 'great_answer'
+      @badge.save
 
-      Badge.param_token('nice-answer').should_not include(badge)
+      Badge.param_token('nice-answer').should_not include(@badge)
     end
   end
 
