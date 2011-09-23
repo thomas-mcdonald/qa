@@ -1,6 +1,6 @@
 <% title "Edit Question" %>
 
-<%= render 'form' %>
+<%= render :partial => 'posts/editor', :locals => { :source => @question, :returnobj => @question } %>
 
 <p>
   <%= link_to "Show", @question %> |

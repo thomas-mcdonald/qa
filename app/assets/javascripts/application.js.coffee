@@ -1,9 +1,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require gollum
 //= require_self
 
 $ ->
+  $.GollumEditor()
   $(".topbar").dropdown()
 
   # Needs to be bound to all calls wanting a JSON response

@@ -10,8 +10,7 @@
     <p>Good questions are answerable</p>
   </div>
   <div class="span12 columns">
-    <%= render 'form' %>
+    <%= render :partial => 'posts/editor', :locals => { :source => Question.new } %>
   </div>
 </div>
 
-<p><%= link_to "Back to List", questions_path %></p>
