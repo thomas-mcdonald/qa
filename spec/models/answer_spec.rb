@@ -39,4 +39,37 @@ describe Answer do
       end
     end
   end
+
+  describe "#deleted" do
+    it "should include deleted answers" do
+      answer = Factory(:answer).destroy
+      Answer.deleted.should include(answer)
+    end
+
+    it "should not include non-deleted answers" do
+      answer = Factory(:answer)
+      Answer.deleted.should_not include(answer)
+    end
+  end
+
+  describe ".vote_count" do
+    it "should be 0 for new posts" do
+      Factory(:answer).vote_count.should == 0
+    end
+
+    it "should be 1 for a post with 2 upvotes and 1 downvote" do
+      answer = Factory(:answer)
+      Factory(:vote, :voteable => answer, :value => 1)
+      Factory(:vote, :voteable => answer, :value => 1)
+      Factory(:vote, :voteable => answer, :value => -1)
+      answer.vote_count.should == 1
+    end
+
+    it "should be -1 for a post with 1 downvote" do
+      answer = Factory(:answer)
+      Factory(:vote, :voteable => answer, :value => -1)
+      answer.vote_count.should == -1
+    end
+  end
 end
+
