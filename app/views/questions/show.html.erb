@@ -29,6 +29,7 @@
   </div>
 </section>
 
+<% unless @answers.blank? %>
 <section id="answers">
   <div class="page-header">
     <h3><%= pluralize @answers.size, "Answer" %></h3>
@@ -54,6 +55,7 @@
     </div>
   <% end %>
 </section>
+<% end %>
 
 <div id="answer-form">
   <div class="page-header">
