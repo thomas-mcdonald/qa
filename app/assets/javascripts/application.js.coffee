@@ -1,10 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require dialogs
-//= require placeholder
-//= require editor
-//= require langs/markdown
+//= require gollum
 //= require_self
 
 $ ->

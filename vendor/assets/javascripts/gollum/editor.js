@@ -233,7 +233,7 @@
       }
 
       // attempt to load the definition for this language
-      var script_uri = '/assets/javascripts/langs/' + markup_name + '.js';
+      var script_uri = '/assets/gollum/langs/' + markup_name + '.js';
       $.ajax({
                 url: script_uri,
                 dataType: 'script',
