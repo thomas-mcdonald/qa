@@ -21,7 +21,7 @@
           </ul>
           <ul class="nav secondary-nav">
             <% if logged_in? %>
-              <% if current_user.moderator? %>
+              <% if current_user.moderator? and @flag_count != 0 %>
                 <li><%= link_to @flag_count, flags_url, :class => "label warning" %></li>
               <% end %>
               <li class="dropdown">
