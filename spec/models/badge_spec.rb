@@ -54,29 +54,23 @@ describe Badge do
   end
 
   describe ".param_token" do
-    before(:each) do
-      @badge = Factory.build(:badge)
-    end
-
     it "should return results with the tokenized token" do
-      @badge.token = 'nice_answer'
-      @badge.save
+      badge = Factory(:badge, :token => 'nice_answer')
 
-      Badge.param_token('nice-answer').should include(@badge)
+      Badge.param_token('nice-answer').should include(badge)
     end
 
     it "should not return results with the parametized token" do
-      @badge.token = 'nice-answer'
-      @badge.save(:validate => false)
+      badge = Factory.build(:badge, :token => "nice-answer")
+      badge.save(:validate => false)
 
-      Badge.param_token('nice-answer').should_not include(@badge)
+      Badge.param_token('nice-answer').should_not include(badge)
     end
 
     it "should not return results with different tokens" do
-      @badge.token = 'great_answer'
-      @badge.save
+      badge = Factory(:badge, :token => 'great_answer')
 
-      Badge.param_token('nice-answer').should_not include(@badge)
+      Badge.param_token('nice-answer').should_not include(badge)
     end
   end
 
