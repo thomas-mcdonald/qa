@@ -15,28 +15,23 @@ describe QuestionsController do
   
   describe 'GET show' do
     before do
-      question = Factory.build(:question)
       @question = Factory(:question)
+      get :show, :id => @question.id
     end
 
     it "should successfully respond" do
-      get :show, :id => 1
       response.status.should == 200
     end
 
     it "should assign @question" do
-      get :show, :id => 1
       assigns(:question).id.should == @question.id
     end
 
     it "should assign @answers" do
-      get :show, :id => 1
       assigns(:answers).should_not be_nil
-      assigns(:answers).class 
     end
 
-    it "should assign @answer" do
-      get :show, :id => 1
+    it "should assign @answer to a new Answer" do
       assigns(:answer).should be_a_new(Answer)
     end
   end
@@ -44,20 +39,18 @@ describe QuestionsController do
   describe 'GET revisions' do
     before(:each) do
       @question = Factory(:question)
+      get :revisions, :id => @question.id
     end
 
     it "should successfully respond" do
-      get :revisions, :id => @question.id
       response.status.should == 200
     end
 
     it "should assign question" do
-      get :revisions, :id => @question.id
       assigns(:question).id.should == @question.id
     end
 
     it "should assign versions" do
-      get :revisions, :id => @question.id
       assigns(:revisions).should_not be_nil
     end
   end
@@ -65,16 +58,15 @@ describe QuestionsController do
   describe 'when logged in as a user,' do
     before(:each) do
       login_as(Factory(:user))
+      get :new
     end
 
     describe 'GET new' do
       it "should successfully respond" do
-        get :new
         response.status.should == 200
       end
 
       it "should assign a new question to @question" do
-        get :new
         assigns(:question).should be_a_new(Question)
       end
     end
