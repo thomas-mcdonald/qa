@@ -50,6 +50,13 @@ Factory.define(:badge) do |b|
   b.user { Factory(:user) }
 end
 
+Factory.define(:notification) do |n|
+  n.token 'new_answer'
+  n.user { Factory(:user) }
+end
+
+# Sequences
+
 Factory.sequence(:username) do |n|
   "tom-#{n}"
 end
