@@ -28,14 +28,6 @@ class Question < ActiveRecord::Base
     joins(:tags).where('tags.name = ?', tag)
   end
 
-  def tag_list=(tag_list)
-    self[:tag_list] = tag_list
-  end
-
-  def tag_list
-    self[:tag_list] # ||= self.tags.collect { |tag| tag.name }.join(", ")
-  end
-
   def build_tags
     return false if self.tag_list.blank?
     self.tags.clear
