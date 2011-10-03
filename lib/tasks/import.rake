@@ -1,4 +1,3 @@
-# Open up application controller for shits and giggles
 namespace :import do
   task :all => :environment do
     Rails.logger.level = Logger::FATAL
@@ -15,11 +14,11 @@ namespace :import do
     usersxml.css('users row').select { |u| u['Id'] != "-1" }.each do |user|
       users_count += 1
       u = User.new(
-        :username => user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + users_count.to_s,
         :display_name => user['DisplayName'],
         :about_me => user['AboutMe'],
         :email => "example-#{users_count}@example.com"
       )
+      u.username = user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + users_count.to_s
       u.created_at = Date.parse(user['CreationDate'])
       u.password_hash = "$2a$10$GNApXWcXPJ2ro5vgwMyo1.yGldKMZJcJnkDPXBoVNNpeF4Z2KBlpW"
       u.password_salt = "$2a$10$GNApXWcXPJ2ro5vgwMyo1."
@@ -102,6 +101,7 @@ namespace :import do
       end
       posts[q['Id'].to_i] = qu
     end
+    puts "inserting answers"
     answers.each do |a|
       an = Answer.new
       edits = groupededits[a['Id']]
@@ -121,72 +121,28 @@ namespace :import do
         an.save
       end
     end
-    # posts = []
-    # n = 0
-    # questions = []
-    # answers = []
-    # doc.css('posts row').each do |post|
-    #   if post['PostTypeId'].to_i == 1
-    #     questions << post
-    #   elsif post['PostTypeId'].to_i == 2
-    #     answers << post
-    #   end
-    # end
-    # questions.each do |post|
-    #   n += 1
-    #   user_id = users[post['OwnerUserId'].to_i] ? users[post['OwnerUserId'].to_i].id : 0
-    #   q = Question.new(
-    #     :title => post['Title'],
-    #     :body => post['Body'],
-    #     :user_id => user_id,
-    #     :tag_list => post['Tags'].split("><").each { |t| t.gsub!(/[<>]/, "") }.join(",") # Elegant solutions ftw
-    #   )
-    #   q.created_at = Date.parse(post['CreationDate'])
-    #   posts[post['Id'].to_i] = q
-    #   q.save
-    #   print "."
-    # end
-    # answers.each do |post|
-    #   n += 1
-    #   if posts[post['ParentId'].to_i] == nil
-    #     puts post['ParentId']
-    #     puts post['Id']
-    #   end
-    #   user_id = users[post['OwnerUserId'].to_i] ? users[post['OwnerUserId'].to_i].id : 0
-    #   a = posts[post['ParentId'].to_i].answers.new(
-    #     :body => post['Body'],
-    #     :user_id => user_id
-    #   )
-    #   a.created_at = Date.parse(post['CreationDate'])
-    #   posts[post['Id'].to_i] = a
-    #   a.save
-    #   print "."
-    # end
-    # puts posts.size
-    # puts "\n-- \n inserted #{n} posts \n --"
-    # 
-    # n = 0
-    # users = User.count
-    # Question.all.each do |q|
-    #   (rand*15).floor.times do
-    #     q.votes.new(
-    #       :user => User.offset((rand*users).ceil).first,
-    #       :value => 1
-    #     ).save
-    #     n += 1
-    #     print "."
-    #   end
-    # end
-    # Answer.all.each do |a|
-    #   (rand*15).floor.times do
-    #     a.votes.new(
-    #       :user => User.offset((rand*users).ceil).first,
-    #       :value => 1
-    #     ).save
-    #     n += 1
-    #     print "."
-    #   end
-    # end
-    # puts "\n -- \n inserted #{n} votes \n --"
+    n = 0
+    puts "Inserting votes"
+    Question.all.each do |q|
+      (rand*11).floor.times do
+        q.votes.new(
+          :user => User.offset((rand*users.length).ceil).first,
+          :value => 1
+        ).save
+        n += 1
+        print "." if n % 10 == 0
+      end
+    end
+    Answer.all.each do |a|
+      (rand*11).floor.times do
+        a.votes.new(
+          :user => User.offset((rand*users.length).ceil).first,
+          :value => 1
+        ).save
+        n += 1
+        print "." if n % 10 == 0
+      end
+    end
+    puts "\n -- \n inserted #{n} votes \n --"
   end
 end
