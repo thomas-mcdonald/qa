@@ -1,9 +1,15 @@
 <div class="row">
-  <div class="span1"><%= flag.flaggable.vote_count %></div>
+  <div class="span15 columns offset1">
+    <h3><%= link_to flag.flaggable.title, flag.flaggable %></h3>
+  </div>
+</div>
+<div class="row">
+  <div class="span1">
+    <p class="vote-count"><%= flag.flaggable.vote_count %></p>
+  </div>
   <div class="span15">
-    <h3><%= flag.flaggable.title %></h3>
     <%= flag.flaggable.body.markdown %>
-    <p><%= flag.user.username %> flagged this <%= time_ago_in_words flag.created_at %> ago because he thinks it <%=t "flags.reasons.#{flag.reason}" %>. <%= link_to "dismiss?", dismiss_flag_url(flag) %></p>
+    <p><%= link_to flag.user.display_name, flag.user %> flagged this <%= time_ago_in_words flag.created_at %> ago because he thinks it <%=t "flags.reasons.#{flag.reason}" %>. <%= link_to "dismiss?", dismiss_flag_url(flag) %></p>
   </div>
 </div>
 
