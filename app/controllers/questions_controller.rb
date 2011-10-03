@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   def tagged
     @tag = Tag.where('name = ?', params[:tag]).first
     @question_count = Question.tagged(params[:tag]).count
-    @questions = Question.tagged(params[:tag]).preload(:last_active_user, :tags, :user, :votes).page(params[:page])
+    @questions = Question.tagged(params[:tag]).preload(:last_active_user, :tags, :votes).page(params[:page])
 
   end
 
