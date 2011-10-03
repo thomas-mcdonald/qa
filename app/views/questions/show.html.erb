@@ -10,7 +10,7 @@
       <%= vote_controls(@question) %>
     </div>
     <div class="span15 columns">
-      <%= @question.body.markdown %>
+      <%= format @question.body %>
     </div>
   </div>
   <div class="row">
@@ -41,7 +41,7 @@
           <%= vote_controls(answer) %>
         </div>
         <div class="span15 columns">
-          <p><%= answer.body.markdown %></p>
+          <p><%= format answer.body %></p>
         </div>
       </div>
       <div class="row">

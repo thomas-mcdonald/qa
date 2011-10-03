@@ -17,10 +17,7 @@ module ApplicationHelper
     tlink.html_safe
   end
 
-end
-
-class String
-  def markdown
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(self).html_safe
+  def format(string)
+    QA::TextParser.new(string).format
   end
 end

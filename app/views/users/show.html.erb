@@ -10,7 +10,7 @@
     <p><%= @user.reputation %> reputation</p>
   </div>
   <div class="span6 columns">
-    <%= @user.about_me.markdown %>
+    <%= format @user.about_me if @user.about_me %>
   </div>
   <div class="span7 columns">
     <%= @user.twitter %>
