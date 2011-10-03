@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   before_save :build_tags
 
   validates_presence_of :user_id
-  validates_length_of :title, :within => 10..100
+  validates_length_of :title, :within => 10..150
   validates_length_of :body, :minimum => 30
 
   def self.deleted

@@ -19,9 +19,11 @@ describe Question do
         question.should have(1).errors_on(:title)
       end
 
-      it "should be shorter than 100 characters" do
+      it "should be shorter than 150 characters" do
         question = Factory.build(:question)
-        question.title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin commodo pretium nisi, ut orci aliquam."
+        question.title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat aliquam nisi eget luctus. In nec massa in libero rhoncus pulvinar viverra fusce."
+        question.should have(0).errors_on(:title)
+        question.title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat aliquam nisi eget luctus. In nec massa in libero rhoncus pulvinar viverra fusce.."
         question.should have(1).errors_on(:title)
       end
     end
