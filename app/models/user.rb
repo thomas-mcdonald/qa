@@ -45,11 +45,10 @@ class User < ActiveRecord::Base
     self
   end
 
-  def notify(token, parameters, redirect)
+  def notify(token, parameters)
     self.notifications.create(
       :token => token,
-      :parameters => parameters,
-      :redirect => redirect
+      :parameters => parameters
     )
   end
 

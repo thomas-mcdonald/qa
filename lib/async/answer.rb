@@ -6,8 +6,9 @@ module Async
       answer = Answer.find(id)
       question = answer.question
       question.user.notify('new_answer', {
-        :title => question.title
-      }, question)
+        :question_id => question.id,
+        :question_title => question.title
+      })
     end
   end
 
@@ -18,8 +19,9 @@ module Async
       answer = Answer.find(id)
       question = answer.question
       answer.user.notify('edited_answer', {
-        :title => question.title
-      }, question)
+        :question_id => question.id,
+        :question_title => question.title
+      })
     end
   end
 end
