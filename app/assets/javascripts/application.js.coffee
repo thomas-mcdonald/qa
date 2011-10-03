@@ -5,8 +5,14 @@
 //= require_self
 
 $ ->
-  $.GollumEditor()
+  # Header elements
   $(".topbar").dropdown()
+  $("#flag-count").twipsy(
+    placement: 'below'
+  )
+
+  # Intialize Gollum
+  $.GollumEditor()
 
   # Needs to be bound to all calls wanting a JSON response
   $(".alert-message a").bind "ajax:beforeSend", (xhr, settings) ->
