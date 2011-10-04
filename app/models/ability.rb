@@ -19,6 +19,12 @@ class Ability
       f = true if @user.reputation > 500
       f
     end
+    can :destroy, Question do |q|
+      f = false
+      next unless logged_in?
+      f = true if @user.moderator?
+      f
+    end
     #
     # Votes
     #

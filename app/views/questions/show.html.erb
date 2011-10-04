@@ -18,9 +18,12 @@
     </div>
   </div>
   <div class="row">
-    <div class="span2 offset1">
+    <div class="span3 offset1">
       <% if can? :update, @question %>
         <%= link_to "edit", [:edit, @question] %> <span>|</span>
+      <% end %>
+      <% if can? :destroy, @question %>
+        <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
       <% end %>
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
