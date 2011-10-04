@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    @user = user
     @user ||= User.new
     #
     # Posts
@@ -11,19 +12,22 @@ class Ability
     end
     can :create, Question
     can :update, Question do |q|
-      false
+      f = false
       next unless logged_in?
-      true if q.user_id == @user.id
-      true if @user.reputation > 500
+      f = true if @user.moderator?
+      f = true if q.user_id == @user.id
+      f = true if @user.reputation > 500
+      f
     end
     #
     # Votes
     #
     can :create, Vote do |vote|
-      false
+      f = false
       next unless logged_in?
-      true if vote.value == 1 && @user.can_upvote?
-      true if vote.value == -1 && @user.can_downvote?
+      f = true if vote.value == 1 && @user.can_upvote?
+      f = true if vote.value == -1 && @user.can_downvote?
+      f
     end
   end
 
