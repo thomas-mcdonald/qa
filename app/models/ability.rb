@@ -7,25 +7,22 @@ class Ability
     # Posts
     #
     can :read, Question do |q|
-      f = false
-      f = true unless q.deleted? && user.reputation < 1000
-      f
+      false
+      true unless q.deleted? && user.reputation < 1000
     end
     can :create, Question
     can :update, Question do |q|
-      f = false
-      f = true if q.user_id == user.id
-      f = true if user.reputation > 500
-      f
+      false
+      true if q.user_id == user.id
+      true if user.reputation > 500
     end
     #
     # Votes
     #
     can :create, Vote do |vote|
-      a = false
-      a = true if vote.value == 1 && user.can_upvote?
-      a = true if vote.value == -1 && user.can_downvote?
-      a
+      false
+      true if vote.value == 1 && user.can_upvote?
+      true if vote.value == -1 && user.can_downvote?
     end
   end
 end
