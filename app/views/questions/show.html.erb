@@ -6,23 +6,19 @@
   </div>
 
   <div class="row">
-    <div class="span1 columns">
-      <%= vote_controls(@question) %>
-    </div>
-    <div class="span15 columns">
-      <%= format @question.body %>
-    </div>
+    <div class="span1"><%= vote_controls(@question) %></div>
+    <div class="span15"><%= format @question.body %></div>
   </div>
   <div class="row">
-    <div class="span6 columns offset1">
+    <div class="span6 offset1">
       <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
     </div>
-    <div class="span5 columns offset4">
+    <div class="span5 offset4">
       <p><strong>Asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
     </div>
   </div>
   <div class="row">
-    <div class="span2 columns offset1">
+    <div class="span2 offset1">
       <%= link_to "edit", edit_question_path(@question) %> <span>|</span>
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
@@ -37,18 +33,14 @@
   <% @answers.each do |answer| %>
     <div id="answer-<%= answer.id %>" class="answer">
       <div class="row">
-        <div class="span1 columns">
-          <%= vote_controls(answer) %>
-        </div>
-        <div class="span15 columns">
-          <p><%= format answer.body %></p>
-        </div>
+        <div class="span1"><%= vote_controls(answer) %></div>
+        <div class="span15"><%= format answer.body %></div>
       </div>
       <div class="row">
-        <div class="span1 columns offset1">
+        <div class="span1 offset1">
           <%= link_to "edit", edit_answer_path(answer) %>
         </div>
-        <div class="span6 columns offset8">
+        <div class="span6 offset8">
           <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
         </div>
       </div>
@@ -64,4 +56,3 @@
   </div>
   <%= render :partial => 'posts/editor', :locals => { :source => [@question, @answer] } %>
 </div>
-

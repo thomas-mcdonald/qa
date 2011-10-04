@@ -2,7 +2,7 @@
 
 <section id="questions">
   <div class="row">
-    <div class="span3 columns">
+    <div class="span3">
       <h3>Recent Tags</h3>
       <ul id="recent-tags">
         <% @recent_tags.each do |tag| %>
@@ -16,7 +16,7 @@
         <% end %>
       </ul>
     </div>
-    <div class="span13 columns">
+    <div class="span13">
       <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
       <%= paginate @questions %>
     </div>

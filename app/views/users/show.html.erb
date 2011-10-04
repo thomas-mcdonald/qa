@@ -5,16 +5,12 @@
 </div>
 
 <div class="row">
-  <div class="span3 columns">
+  <div class="span3">
     <%= gravatar(@user.email, 160) %>
     <p><%= @user.reputation %> reputation</p>
   </div>
-  <div class="span6 columns">
-    <%= format @user.about_me if @user.about_me %>
-  </div>
-  <div class="span7 columns">
-    <%= @user.twitter %>
-  </div>
+  <div class="span6"><%= format @user.about_me if @user.about_me %></div>
+  <div class="span7"><%= @user.twitter %></div>
 </div>
 
 <section id="questions">
