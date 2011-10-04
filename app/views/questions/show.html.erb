@@ -19,7 +19,9 @@
   </div>
   <div class="row">
     <div class="span2 offset1">
-      <%= edit_link "edit", @question %> <span>|</span>
+      <% if can? :update, @question %>
+        <%= link_to "edit", [:edit, @question] %> <span>|</span>
+      <% end %>
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
   </div>
