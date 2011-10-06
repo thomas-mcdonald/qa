@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def reputation
-    self.reputation_cache
+    self.reputation_cache || 0
   end
 
   def refresh_reputation

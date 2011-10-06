@@ -8,7 +8,10 @@ class Ability
     # Posts
     #
     can :read, Question do |q|
-      true unless q.deleted? && logged_in? && @user.reputation < 1000
+      f = true
+      f = false if q.deleted?
+      f = true if @user.moderator?
+      f
     end
     can :create, Question
     can :update, Question do |q|
