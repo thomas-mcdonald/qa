@@ -8,6 +8,7 @@ Qa::Application.routes.draw do
       get 'tagged/:tag', :action => :tagged, :as => :tagged
     end
     member do
+      post 'restore'
       get 'revisions'
     end
     resources :answers, :only => [:create] do

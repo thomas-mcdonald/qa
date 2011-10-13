@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :revisions, :tagged]
   
   def index
-    @questions = Question.question_list_includes.page(params[:page])
+    @questions = Question.unscoped.order('last_activity_at DESC').question_list_includes.page(params[:page])
     @recent_tags = Tag.recent.all
     @recent_badges = Badge.recent.all
   end
@@ -66,5 +66,13 @@ class QuestionsController < ApplicationController
     authorize! :destroy, @question
     @question.destroy
     redirect_to questions_url, :notice => "Successfully destroyed question."
+  end
+
+  def restore
+    @question = Question.unscoped.find(params[:id])
+    authorize! :restore, @question
+    @question.deleted_at = nil
+    @question.save
+    redirect_to @question, :notice => "Restored question"
   end
 end

@@ -33,6 +33,11 @@ describe "routes for Questions" do
     { :delete => "/questions/1" }.should route_to(:controller => "questions", :action => "destroy", :id => "1")
   end
 
+  it "routes post on /questions/:id/restore as restore_question_path" do
+    { :post => "/questions/1/restore" }.should route_to(:controller => "questions", :action => "restore", :id => "1")
+    { :post => restore_question_path(1) }.should route_to(:controller => "questions", :action => "restore", :id => "1") 
+  end
+
   it "routes /questions/:id/revisions as revisions_question_path" do
     { :get => "/questions/1/revisions" }.should route_to(:controller => "questions", :action => "revisions", :id => "1")
     { :get => revisions_question_path(1) }.should route_to(:controller => "questions", :action => "revisions", :id => "1")

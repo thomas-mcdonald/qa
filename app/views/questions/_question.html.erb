@@ -1,4 +1,5 @@
-<div id="question-<%= question.id %>" class="row">
+<% if can? :read, question %>
+<div id="question-<%= question.id %>" class="row <%= "deleted" if question.deleted? %>">
   <div class="span3">
     <div class="mini-count"><%= pluralize_count question.vote_count, "vote" %></div>
     <div class="mini-count"><%= pluralize_count question.answers_count, "answer" %></div>
@@ -10,3 +11,4 @@
     <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.last_activity_at %> ago</span> <%= homepage_user(question.last_active_user) %></p>
   </div>
 </div>
+<% end %>

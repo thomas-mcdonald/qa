@@ -28,8 +28,14 @@
       <% if can? :update, @question %>
         <%= link_to "edit", [:edit, @question] %> <span>|</span>
       <% end %>
-      <% if can? :destroy, @question %>
-        <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+      <% if @question.deleted? %>
+        <% if can? :restore, @question %>
+          <%= link_to("restore", restore_question_path(@question), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+        <% end %>
+      <% else %>
+        <% if can? :destroy, @question %>
+          <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+        <% end %>
       <% end %>
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
