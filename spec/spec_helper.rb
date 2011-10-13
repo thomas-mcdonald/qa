@@ -66,3 +66,9 @@ end
 def logout
   session[:user_id] = nil
 end
+
+def ability_with_reputation(rep = 0)
+  user = Factory(:user)
+  user.stubs(:reputation).returns(rep)
+  Ability.new(user)
+end
