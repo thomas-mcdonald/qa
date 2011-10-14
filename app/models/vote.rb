@@ -27,6 +27,7 @@ class Vote < ActiveRecord::Base
 
   def add_reputation_event
     return if self.voteable.user == nil
+    return unless ["Question", "Answer"].include? self.voteable_type
     r = ReputationEvent.new
     r.reputable = self
     r.user = self.voteable.user
@@ -43,8 +44,6 @@ class Vote < ActiveRecord::Base
       elsif self.value == -1
         r.value = 4
       end
-    else
-      return false
     end
     r.save
   end
