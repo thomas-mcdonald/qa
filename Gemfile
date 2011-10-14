@@ -30,10 +30,10 @@ group :development do
 end
 
 group :test do
+  gem 'cover_me', '>= 1.2.0'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'mocha'
-  gem 'rcov'
   gem 'rspec'
   gem 'webrat'
 end
