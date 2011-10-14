@@ -64,4 +64,24 @@ describe Question do
       questions.should include(@questions[1])
     end
   end
+
+  describe ".vote_count" do
+    it "should be 0 for new posts" do
+      Factory(:question).vote_count.should == 0
+    end
+
+    it "should be 1 for a post with 2 upvotes and 1 downvote" do
+      question = Factory(:question)
+      Factory(:vote, :voteable => question, :value => 1)
+      Factory(:vote, :voteable => question, :value => 1)
+      Factory(:vote, :voteable => question, :value => -1)
+      question.vote_count.should == 1 
+    end
+
+    it "should be -1 for a post with 1 downvote" do
+      question = Factory(:question)
+      Factory(:vote, :voteable => question, :value => -1)
+      question.vote_count.should == -1
+    end
+  end
 end
