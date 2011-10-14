@@ -111,5 +111,25 @@ describe Badge do
       Badge.new(:token => 'double_underscore_test').to_param.should == "double-underscore-test"
     end
   end
+
+  describe "#type" do
+    it "should return the type of a particular badge" do
+      Badge.new(:token => 'nice_answer').type.should == "bronze"
+      Badge.new(:token => 'good_answer').type.should == "silver"
+      Badge.new(:token => 'great_answer').type.should == "gold"
+    end
+  end
+
+  describe "#name" do
+    it "should return the i18n string" do
+      Badge.new(:token => 'nice_answer').name.should == I18n.t("badges.nice_answer.name")
+    end
+  end
+
+  describe "#description" do
+    it "should return the i18n string" do
+      Badge.new(:token => 'nice_answer').description.should == I18n.t("badges.nice_answer.description")
+    end
+  end
 end
 
