@@ -24,5 +24,6 @@
   <div class="page-header">
     <h3><%= pluralize(@total_answers.count, "Answer") %></h3>
   </div>
+  <%= render :partial => "answers/answer_list", :collection => @answers %>
 </section>
 

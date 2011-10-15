@@ -26,4 +26,8 @@ class Answer < ActiveRecord::Base
     end
     i
   end
+
+  def appear_deleted?
+    return true if self.deleted_at or self.question.deleted?
+  end
 end
