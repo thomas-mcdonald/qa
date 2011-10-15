@@ -55,6 +55,30 @@ describe QuestionsController do
     end
   end
 
+  describe 'GET tagged' do
+    before(:each) do
+      @question = Factory(:question)
+      @tag = @question.tags.first
+      get :tagged, :tag => @tag.name
+    end
+
+    it "should successfully respond" do
+      response.status.should == 200
+    end
+
+    it "should assign tag" do
+      assigns(:tag).name.should == @tag.name
+    end
+
+    it "should assign questions" do
+      assigns(:questions).should_not be_nil
+    end
+
+    it "should assign question_count" do
+      assigns(:question_count).should_not be_nil
+    end
+  end
+
   describe 'when logged in as a user,' do
     before(:each) do
       login_as(Factory(:user))

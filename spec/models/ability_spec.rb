@@ -24,5 +24,18 @@ describe Ability do
         Ability.new(@user).should be_able_to(:read, question)
       end
     end
+
+    describe "create" do
+      it "anyone should be able to create questions" do
+        ability_with_reputation(0).should be_able_to(:create, Question.new)
+      end
+    end
+
+    describe "update" do
+      it "should not let john smith edit" do
+        Ability.new(nil).should_not be_able_to(:update, Question.new)
+        ability_with_reputation(0).should_not be_able_to(:update, Question.new)
+      end
+    end
   end
 end

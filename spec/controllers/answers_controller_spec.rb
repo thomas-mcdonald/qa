@@ -6,7 +6,7 @@ describe AnswersController do
     @answer = Factory.attributes_for(:answer)
   end
 
-  describe "as a logged in user," do
+  describe "as a logged in user" do
     before(:each) do
       login_as(Factory(:user))
     end
@@ -28,9 +28,24 @@ describe AnswersController do
         response.status.should == 200
       end
     end
+
+    describe "PUT update" do
+      describe "with a valid update" do
+        it "should redirect to the question" do
+          @answer = Factory(:answer)
+          @answer.user_id = 10
+          put :update, :id => @answer.id, :answer => @answer
+          response.should redirect_to(@answer.question)
+        end
+      end
+
+      describe "with an invalid update" do
+
+      end
+    end
   end
   
-  describe "when not logged in," do
+  describe "when not logged in" do
     before(:each) do
       logout
     end
