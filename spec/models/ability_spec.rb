@@ -34,7 +34,24 @@ describe Ability do
     describe "update" do
       it "should not let john smith edit" do
         Ability.new(nil).should_not be_able_to(:update, Question.new)
+      end
+
+      it "should not let users with less than 500 reputation edit" do
         ability_with_reputation(0).should_not be_able_to(:update, Question.new)
+      end
+
+      it "should let the original creator edit" do
+        question = Factory.build(:question)
+        Ability.new(question.user).should be_able_to(:update, question)
+      end
+
+      it "should let users with more than 500 reputation edit" do
+        ability_with_reputation(1000).should be_able_to(:update, Question.new)
+      end
+
+      it "should let moderators edit" do
+        user = Factory(:user, :role => 'moderator')
+        Ability.new(user).should be_able_to(:update, Question.new)
       end
     end
   end
