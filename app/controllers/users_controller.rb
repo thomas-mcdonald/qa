@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @total_questions = @user.questions
     @total_answers = @user.answers
-    @questions = @total_questions.page(params[:question_page]).includes(:votes, :tags)
-    @answers = @user.answers.all
+    @questions = @total_questions.page(params[:question_page]).includes(:votes, :tags, :last_active_user)
+    @answers = @user.answers.includes(:question).all
     @votes = @user.votes.all
   end
 
