@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe QuestionsController do
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    @controller.stubs(:current_ability).returns(@ability)
+  end
+
   describe 'GET index' do
     it "successfully responds" do
       get :index
@@ -16,23 +22,40 @@ describe QuestionsController do
   describe 'GET show' do
     before do
       @question = Factory(:question)
-      get :show, :id => @question.id
     end
 
-    it "should successfully respond" do
-      response.status.should == 200
+    describe 'with permission' do
+      before do
+        @ability.can :read, Question
+        get :show, :id => @question.id
+      end
+
+      it "should successfully respond" do
+        response.status.should == 200
+      end
+
+      it "should assign @question" do
+        assigns(:question).id.should == @question.id
+      end
+
+      it "should assign @answers" do
+        assigns(:answers).should_not be_nil
+      end
+
+      it "should assign @answer to a new Answer" do
+        assigns(:answer).should be_a_new(Answer)
+      end
     end
 
-    it "should assign @question" do
-      assigns(:question).id.should == @question.id
-    end
+    describe 'without permission' do
+      before do
+        @ability.cannot :read, Question
+        get :show, :id => @question.id
+      end
 
-    it "should assign @answers" do
-      assigns(:answers).should_not be_nil
-    end
-
-    it "should assign @answer to a new Answer" do
-      assigns(:answer).should be_a_new(Answer)
+      it "should return unauthorized" do
+        response.status.should == 403
+      end
     end
   end
 
@@ -82,10 +105,14 @@ describe QuestionsController do
   describe 'when logged in as a user,' do
     before(:each) do
       login_as(Factory(:user))
-      get :new
     end
 
     describe 'GET new' do
+      before do
+        @ability.can :create, Question
+        get :new
+      end
+
       it "should successfully respond" do
         response.status.should == 200
       end
@@ -96,6 +123,10 @@ describe QuestionsController do
     end
 
     describe 'POST create' do
+      before(:each) do
+        @ability.can :create, Question
+      end
+
       describe 'with a valid question' do
         before(:each) do
           post :create, :question => Factory.attributes_for(:question)
@@ -127,9 +158,9 @@ describe QuestionsController do
         @question = Factory(:question)
       end
 
-      describe "with enough reputation to make global edits" do
+      describe "with update permission" do
         before(:each) do
-          User.any_instance.stubs(:reputation).returns(1000)
+          @ability.can :update, Question
           get :edit, :id => @question.id
         end
 
@@ -142,27 +173,14 @@ describe QuestionsController do
         end
       end
 
-      describe "without enough reputation to make global edits" do
+      describe "without update permission" do
         before(:each) do
-          User.any_instance.stubs(:reputation).returns(100)
+          @ability.cannot :update, Question
           get :edit, :id => @question.id
         end
 
         it "should respond with unauthorized" do
           response.status.should == 403
-        end
-      end
-
-      describe "as the original owner of the question" do
-        before(:each) do
-          User.any_instance.stubs(:reputation).returns(100)
-          logout
-          login_as(@question.user)
-          get :edit, :id => @question.id
-        end
-
-        it "should respond successfully" do
-          response.status.should == 200
         end
       end
     end
@@ -172,9 +190,9 @@ describe QuestionsController do
         @question = Factory(:question)
       end
 
-      describe "with enough reputation to make global edits" do
+      describe "with update permission" do
         before(:each) do
-          User.any_instance.stubs(:reputation).returns(1000)
+          @ability.can :update, Question
           question = Factory.attributes_for(:question)
           question[:title] = "Changed title"
           put :update, :id => @question.id, :question => question
@@ -182,6 +200,19 @@ describe QuestionsController do
 
         it "should redirect to the question" do
           response.should redirect_to(@question)
+        end
+      end
+
+      describe "without update permission" do
+        before(:each) do
+          @ability.cannot :update, Question
+          question = Factory.attributes_for(:question)
+          question[:title] = "Changed title"
+          put :update, :id => @question.id, :question => question
+        end
+
+        it "should respond with unauthorized" do
+          response.status.should == 403
         end
       end
     end
