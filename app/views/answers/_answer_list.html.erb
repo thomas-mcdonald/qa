@@ -1,1 +1,3 @@
-<li><%= answer_list.question.title %></li>
+<% unless answer.appear_deleted? %>
+  <li><%= answer.question.title %></li>
+<% end %>

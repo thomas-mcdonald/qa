@@ -52,9 +52,9 @@ describe Question do
       @questions[1].destroy # Delete the middle item
     end
 
-    it "default scope should not return deleted items" do
+    it "default scope should return deleted items" do
       questions = Question.all
-      questions.size.should == 2
+      questions.size.should == 3
       questions.should_not include(@questions[1])
     end
 
