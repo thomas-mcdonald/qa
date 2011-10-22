@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:tags, :user).find(params[:id])
+    @question.viewed_by(request.remote_ip)
     @answers = @question.answers.includes(:votes).page(params[:page])
     @answer = Answer.new
   end

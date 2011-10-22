@@ -56,4 +56,12 @@ class Question < ActiveRecord::Base
     end
     i
   end
+
+  def viewed_by(key)
+    $views.sadd("question-#{self.id}", key)
+  end
+
+  def view_count
+    $views.scard("question-#{self.id}")
+  end
 end
