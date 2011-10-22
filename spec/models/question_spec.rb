@@ -44,6 +44,7 @@ describe Question do
   end
 
   describe "scopes" do
+    # TODO: sort these tests out
     before(:each) do
       @questions = []
       3.times do |i|
@@ -55,7 +56,7 @@ describe Question do
     it "default scope should return deleted items" do
       questions = Question.all
       questions.size.should == 3
-      questions.should_not include(@questions[1])
+      questions.should include(@questions[1])
     end
 
     it "deleted 'scope' should return only deleted items" do
