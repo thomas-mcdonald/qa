@@ -6,8 +6,6 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   has_many :votes, :as => "voteable"
 
-  default_scope where(:deleted_at => nil)
-
   validates_presence_of :question_id
   validates_presence_of :user_id
   validates_length_of :body, :minimum => 30
