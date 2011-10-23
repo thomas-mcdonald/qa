@@ -19,8 +19,12 @@ Qa::Application.routes.draw do
   end
 
   # Avoid nesting answer routes under question
-  resources :answers, :only => [:edit, :update] do
+  resources :answers, :only => [:edit, :update, :destroy] do
     resources :flags, :only => [:new, :create]
+
+    member do
+      post 'restore'
+    end
   end
 
   resources :flags, :only => [:index] do
