@@ -5,38 +5,16 @@ describe Flag do
     Factory.build(:flag).should be_valid
   end
 
+  describe "assocations" do
+    it { should belong_to(:flaggable) }
+    it { should belong_to(:user) }
+  end
+
   describe "validations" do
-    describe "of user_id" do
-      it "should validate numericality" do
-        flag = Factory.build(:flag)
-        flag.user_id = "abc"
-        flag.should have(1).errors_on(:user_id)
-        flag.user_id = nil
-        flag.should have(1).errors_on(:user_id)
-        flag.user_id = 1
-        flag.should have(0).errors_on(:user_id)
-      end
-    end
-
-    describe "of flaggable_id" do
-      it "should validate numericality" do
-        flag = Factory.build(:flag)
-        flag.flaggable_id = "abc"
-        flag.should have(1).errors_on(:flaggable_id)
-        flag.flaggable_id = nil
-        flag.should have(1).errors_on(:flaggable_id)
-        flag.flaggable_id = 1
-        flag.should have(0).errors_on(:flaggable_id)
-      end
-    end
-
-    describe "of flaggable_type" do
-      it "should validate presence" do
-        flag = Factory.build(:flag)
-        flag.flaggable_type = nil
-        flag.should have(1).errors_on(:flaggable_type)
-      end
-    end
+    it { should validate_numericality_of(:user_id) }
+    it { should validate_numericality_of(:flaggable_id) }
+    it { should validate_presence_of(:flaggable_type) }
+    it { should validate_presence_of(:reason) }
   end
 
   describe "#should_be_unique" do

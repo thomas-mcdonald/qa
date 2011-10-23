@@ -7,8 +7,8 @@ class Vote < ActiveRecord::Base
 
   validate :one_vote
   validate :not_on_self_post
-  validates_numericality_of :value
-  validates_presence_of :user_id
+  validates_numericality_of :value, :user_id
+  validates_presence_of :value, :user_id
 
   after_save :add_reputation_event
 
@@ -20,6 +20,7 @@ class Vote < ActiveRecord::Base
   end
 
   def not_on_self_post
+    return false unless self.voteable
     if self.voteable.user_id == self.user_id
       self.errors.add(:voteable, "You cannot vote on your own posts")
     end
@@ -27,6 +28,7 @@ class Vote < ActiveRecord::Base
 
   def add_reputation_event
     return if self.voteable.user == nil
+    return unless ["Question", "Answer"].include? self.voteable_type
     r = ReputationEvent.new
     r.reputable = self
     r.user = self.voteable.user
@@ -43,8 +45,6 @@ class Vote < ActiveRecord::Base
       elsif self.value == -1
         r.value = 4
       end
-    else
-      return false
     end
     r.save
   end

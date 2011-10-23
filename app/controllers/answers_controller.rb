@@ -16,10 +16,12 @@ class AnswersController < ApplicationController
   def edit
     @answer = Answer.find(params[:id])
     @question = @answer.question
+    authorize! :update, Answer
   end
 
   def update
     @answer = Answer.find(params[:id])
+    authorize! :update, Answer
     @answer.attributes = params[:answer]
     @question = @answer.question
     @question.update_last_activity!(current_user)
@@ -29,5 +31,20 @@ class AnswersController < ApplicationController
     else
       render :action => 'edit'
     end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    authorize! :destroy, @answer
+    @answer.destroy
+    redirect_to @answer.question, :notice => "Successfully destroyed answer."
+  end
+
+  def restore
+    @answer = Answer.find(params[:id])
+    authorize! :restore, @answer
+    @answer.deleted_at = nil
+    @answer.save
+    redirect_to @answer.question, :notice => "Restored answer"
   end
 end

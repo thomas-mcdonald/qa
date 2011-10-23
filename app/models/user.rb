@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def reputation
-    self.reputation_cache
+    self.reputation_cache || 0
   end
 
   def refresh_reputation
@@ -62,6 +62,14 @@ class User < ActiveRecord::Base
 
   def name
     display_name || username
+  end
+
+  def can_upvote?
+    return true if self.reputation > PERMISSIONS['can_upvote']
+  end
+
+  def can_downvote?
+    return true if self.reputation > PERMISSIONS['can_downvote']
   end
 
   private

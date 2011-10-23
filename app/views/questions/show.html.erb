@@ -13,13 +13,30 @@
     <div class="span6 offset1">
       <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
     </div>
-    <div class="span5 offset4">
-      <p><strong>Asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
-    </div>
+    <% if @question.deleted? %>
+      <div class="span7 offset2">
+        <p><strong>Deleted</strong> <%= time_ago_in_words @question.deleted_at %> ago, <strong>asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
+      </div>
+    <% else %>
+      <div class="span5 offset4">
+        <p><strong>Asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
+      </div>
+    <% end %>
   </div>
   <div class="row">
-    <div class="span2 offset1">
-      <%= link_to "edit", edit_question_path(@question) %> <span>|</span>
+    <div class="span3 offset1">
+      <% if can? :update, @question %>
+        <%= link_to "edit", [:edit, @question] %> <span>|</span>
+      <% end %>
+      <% if @question.deleted? %>
+        <% if can? :restore, @question %>
+          <%= link_to("restore", restore_question_path(@question), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+        <% end %>
+      <% else %>
+        <% if can? :destroy, @question %>
+          <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+        <% end %>
+      <% end %>
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
   </div>
@@ -37,10 +54,23 @@
         <div class="span15"><%= format answer.body %></div>
       </div>
       <div class="row">
-        <div class="span1 offset1">
-          <%= link_to "edit", edit_answer_path(answer) %>
-        </div>
-        <div class="span6 offset8">
+        <div class="span3 offset1">
+          <% if can? :update, answer %>
+            <%= link_to "edit", [:edit, answer] %> <span>|</span>
+          <% end %>
+          <% if answer.deleted? %>
+            <% if can? :restore, answer %>
+              <%= link_to("restore", restore_answer_path(answer), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+            <% end %>
+          <% else %>
+            <% if can? :destroy, answer %>
+              <%= link_to("delete", answer, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+            <% end %>
+          <% end %>
+          <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
+    </div>
+
+        <div class="span6 offset6">
           <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
         </div>
       </div>

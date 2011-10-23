@@ -5,28 +5,17 @@ describe Vote do
     Factory(:vote).should be_valid
   end
 
+  describe "associations" do
+    it { should belong_to(:user) }
+    it { should belong_to(:voteable) }
+    it { should have_one(:reputation_event) }
+  end
+
   describe "validation" do
-    describe "value" do
-      it "requires presence" do
-        vote = Factory.build(:vote)
-        vote.value = nil
-        vote.should have(1).errors_on(:value)
-      end
-
-      it "requires numericality" do
-        vote = Factory.build(:vote)
-        vote.value = "abd"
-        vote.should have(1).errors_on(:value)
-      end
-    end
-
-    describe "user" do
-      it "requires presence" do
-        vote = Factory.build(:vote)
-        vote.user = nil
-        vote.should have(1).errors_on(:user_id)
-      end
-    end
+    it { should validate_presence_of(:value) }
+    it { should validate_numericality_of(:value) }
+    it { should validate_presence_of(:user_id) }
+    it { should validate_numericality_of(:user_id) }
 
     it "only allow one vote on a particular post by the same user" do
       question = Factory(:question)

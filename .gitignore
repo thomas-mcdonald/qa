@@ -1,5 +1,7 @@
 .bundle
 config/database.yml
+coverage/*
+coverage.data
 db/*.sqlite3
 dump.rdb
 lib/importdata/*

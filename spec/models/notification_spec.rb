@@ -5,24 +5,13 @@ describe Notification do
     Factory.build(:notification).should be_valid
   end
 
-  describe "validations" do
-    describe "of token" do
-      it "should require presence" do
-        Factory.build(:notification, :token => nil).should_not be_valid
-      end
-    end
+  describe "associations" do
+    it { should belong_to(:user) }
+  end
 
-    describe "of user_id" do
-      it "should validate numericality" do
-        n = Factory.build(:notification)
-        n.user_id = "abc"
-        n.should have(1).errors_on(:user_id)
-        n.user_id = nil
-        n.should have(1).errors_on(:user_id)
-        n.user_id = 123
-        n.should have(0).errors_on(:user_id)
-      end
-    end
+  describe "validations" do
+    it { should validate_presence_of(:token) }
+    it { should validate_numericality_of(:user_id) }
   end
 
   describe ".dismiss!" do

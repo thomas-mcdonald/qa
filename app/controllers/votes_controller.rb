@@ -5,6 +5,11 @@ class VotesController < ApplicationController
     @vote = Vote.new(params[:vote])
     @vote.value = params[:value]
     @vote.user = current_user
+    begin
+      authorize! :create, @vote
+    rescue
+      render :json => { :errors => { :message => "You do not have enough reputation to vote"} } and return
+    end
     if @vote.save
       Resque.enqueue(Async.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
       Rails.logger.info("Queued #{@vote.voteable_type} vote for processing")
@@ -29,7 +34,7 @@ class VotesController < ApplicationController
         :errors => {
           :message => "You need to be logged in to vote"
         }
-      }, :status => 403 and return
+      } and return
     end
   end
 end

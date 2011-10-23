@@ -19,9 +19,10 @@ describe VotesController do
     end
 
     describe "POST create" do
-      it "should response with unauthorized" do
+      # TODO: should probably make this return unauthed
+      it "should response with authorized (to stop JS from spitting failure)" do
         post :create
-        response.status.should == 403
+        response.status.should == 200
       end
     end
   end

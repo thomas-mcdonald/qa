@@ -5,11 +5,12 @@ describe Tag do
     Factory(:tag).should be_valid
   end
 
-  describe "validation on name" do
-    it "requires presence" do
-      tag = Factory.build(:tag)
-      tag.name = nil
-      tag.should have(1).errors_on(:name)
-    end
+  describe "associations" do
+    it { should have_many(:taggings) }
+    it { should have_many(:questions).through(:taggings) }
+  end
+
+  describe "validation" do
+    it { should validate_presence_of(:name) }
   end
 end

@@ -8,6 +8,7 @@ Qa::Application.routes.draw do
       get 'tagged/:tag', :action => :tagged, :as => :tagged
     end
     member do
+      post 'restore'
       get 'revisions'
     end
     resources :answers, :only => [:create] do
@@ -18,8 +19,12 @@ Qa::Application.routes.draw do
   end
 
   # Avoid nesting answer routes under question
-  resources :answers, :only => [:edit, :update] do
+  resources :answers, :only => [:edit, :update, :destroy] do
     resources :flags, :only => [:new, :create]
+
+    member do
+      post 'restore'
+    end
   end
 
   resources :flags, :only => [:index] do

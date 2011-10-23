@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# TODO: shoulda-match me
 describe User do
   def new_user(attributes = {})
     attributes[:email] ||= 'foo@example.com'

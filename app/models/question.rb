@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   has_paper_trail :ignore => [:answer_count, :last_activity_at, :last_active_user_id]
-  has_many :answers, :dependent => :destroy
+  has_many :answers
   has_many :badges, :as => "source"
   has_many :flags, :as => "flaggable"
   has_many :taggings
@@ -11,14 +11,15 @@ class Question < ActiveRecord::Base
 
   attr_accessible :title, :body, :tag_list, :user_id
 
-  default_scope where(:deleted_at => nil).order('last_activity_at DESC')
+  default_scope order('last_activity_at DESC')
   scope :question_list_includes, includes(:tags, :votes, :last_active_user)
 
   before_save :build_tags
 
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :title, :body
   validates_length_of :title, :within => 10..150
   validates_length_of :body, :minimum => 30
+  validates_numericality_of :user_id
 
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')
