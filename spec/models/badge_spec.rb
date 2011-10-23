@@ -5,28 +5,14 @@ describe Badge do
     Factory(:badge).should be_valid
   end
 
+  describe "associations" do
+    it { should belong_to(:source) }
+    it { should belong_to(:user) }
+  end
+
   describe "validation" do
-    before(:each) do
-      @badge = Factory.build(:badge)
-    end
-
-    describe "of token" do
-      it "requires presence" do
-        @badge.token = nil
-        @badge.should have(1).errors_on(:token)
-      end
-    end
-
-    describe "of user_id" do
-      it "validates numericality" do
-        @badge.user_id = "ab"
-        @badge.should have(1).errors_on(:user_id)
-        @badge.user_id = nil
-        @badge.should have(1).errors_on(:user_id)
-        @badge.user_id = 1
-        @badge.should have(0).errors_on(:user_id)
-      end
-    end
+    it { should validate_presence_of(:token) }
+    it { should validate_numericality_of(:user_id) }
   end
 
   describe ".all_badges" do

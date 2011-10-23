@@ -6,8 +6,8 @@ class Answer < ActiveRecord::Base
   belongs_to :user
   has_many :votes, :as => "voteable"
 
-  validates_presence_of :question_id
-  validates_presence_of :user_id
+  validates_numericality_of :question_id, :user_id
+  validates_presence_of :body
   validates_length_of :body, :minimum => 30
 
   attr_accessible :body, :question_id, :user_id

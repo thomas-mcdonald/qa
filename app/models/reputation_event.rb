@@ -15,9 +15,8 @@ class ReputationEvent < ActiveRecord::Base
     { :name => :answer_downvote, :value => -1 }
   ]
 
-  validates_presence_of :reputable
-  validates_presence_of :user
-  validates_numericality_of :value
+  validates_presence_of :reputable, :user_id, :value
+  validates_numericality_of :value, :user_id
 
   def refresh_reputation
     Resque.enqueue(Async::ReputationRecalc, self.user.id)

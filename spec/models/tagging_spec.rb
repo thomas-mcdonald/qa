@@ -4,22 +4,16 @@ describe Tagging do
   it "has a valid factory" do
     Factory(:tagging).should be_valid
   end
+  
+  describe "associations" do
+    it { should belong_to(:question) }
+    it { should belong_to(:tag) }
+  end
 
   describe "validation" do
-    describe "question" do
-      it "requires presence" do
-        tagging = Factory.build(:tagging)
-        tagging.question = nil
-        tagging.should have(1).errors_on(:question_id)
-      end
-    end
-
-    describe "tag" do
-      it "requires presence" do
-        tagging = Factory.build(:tagging)
-        tagging.tag = nil
-        tagging.should have(1).errors_on(:tag_id)
-      end
-    end
+    it { should validate_presence_of(:question_id) }
+    it { should validate_numericality_of(:question_id) }
+    it { should validate_presence_of(:tag_id) }
+    it { should validate_numericality_of(:tag_id) }
   end
 end

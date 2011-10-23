@@ -16,9 +16,10 @@ class Question < ActiveRecord::Base
 
   before_save :build_tags
 
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :title, :body
   validates_length_of :title, :within => 10..150
   validates_length_of :body, :minimum => 30
+  validates_numericality_of :user_id
 
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')

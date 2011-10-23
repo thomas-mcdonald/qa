@@ -5,7 +5,7 @@ class Flag < ActiveRecord::Base
   scope :active, where('dismissed = ?', false)
 
   validate :should_be_unique
-  validates_presence_of :flaggable_type
+  validates_presence_of :flaggable_type, :reason
   validates_numericality_of :flaggable_id, :user_id
 
   def should_be_unique

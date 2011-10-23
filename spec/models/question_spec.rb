@@ -5,42 +5,24 @@ describe Question do
     Factory(:question).should be_valid
   end
 
+  describe "associations" do
+    it { should have_many(:answers) }
+    it { should have_many(:badges) }
+    it { should have_many(:flags) }
+    it { should have_many(:taggings) }
+    it { should have_many(:tags).through(:taggings) }
+    it { should have_many(:votes) }
+    it { should belong_to(:user) }
+    it { should belong_to(:last_active_user) }
+  end
+
   describe "validation" do
-    describe "of title" do
-      it "requires presence" do
-        question = Factory.build(:question)
-        question.title = nil
-        question.should have(1).errors_on(:title)
-      end
-
-      it "should at least 10 characters" do
-        question = Factory.build(:question)
-        question.title = "Shorty"
-        question.should have(1).errors_on(:title)
-      end
-
-      it "should be shorter than 150 characters" do
-        question = Factory.build(:question)
-        question.title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat aliquam nisi eget luctus. In nec massa in libero rhoncus pulvinar viverra fusce."
-        question.should have(0).errors_on(:title)
-        question.title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat aliquam nisi eget luctus. In nec massa in libero rhoncus pulvinar viverra fusce.."
-        question.should have(1).errors_on(:title)
-      end
-    end
-
-    describe "of body" do
-      it "requires presence" do
-        question = Factory.build(:question)
-        question.body = nil
-        question.should have(1).errors_on(:body)
-      end
-
-      it "should at least 30 characters" do
-        question = Factory.build(:question)
-        question.body = "Lorem ipsum dolor sit nullam."
-        question.should have(1).errors_on(:body)
-      end
-    end
+    it { should validate_presence_of(:title) }
+    it { should ensure_length_of(:title).is_at_least(10).is_at_most(150) }
+    it { should validate_presence_of(:body) }
+    it { should ensure_length_of(:body).is_at_least(30) }
+    it { should validate_presence_of(:user_id) }
+    it { should validate_numericality_of(:user_id) }
   end
 
   describe "scopes" do
