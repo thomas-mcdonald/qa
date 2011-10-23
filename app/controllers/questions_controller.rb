@@ -11,7 +11,6 @@ class QuestionsController < ApplicationController
     @tag = Tag.where('name = ?', params[:tag]).first
     @question_count = Question.tagged(params[:tag]).count
     @questions = Question.tagged(params[:tag]).preload(:last_active_user, :tags, :votes).page(params[:page])
-
   end
 
   def show
@@ -65,7 +64,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     authorize! :destroy, @question
     @question.destroy
-    redirect_to questions_url, :notice => "Successfully destroyed question."
+    redirect_to @question, :notice => "Successfully destroyed question."
   end
 
   def restore

@@ -8,54 +8,40 @@ describe QuestionsController do
   end
 
   describe 'GET index' do
-    it "successfully responds" do
+    before(:each) do
       get :index
-      response.status.should == 200
     end
 
-    it 'should assign @questions' do
-      get :index
-      assigns[:questions].should_not be_nil
-    end
+    it { should respond_with(:success) }
+    it { should assign_to(:questions) }
+    it { should render_template(:index) }
   end
   
   describe 'GET show' do
-    before do
+    before(:each) do
       @question = Factory(:question)
     end
 
     describe 'with permission' do
-      before do
+      before(:each) do
         @ability.can :read, Question
         get :show, :id => @question.id
       end
 
-      it "should successfully respond" do
-        response.status.should == 200
-      end
-
-      it "should assign @question" do
-        assigns(:question).id.should == @question.id
-      end
-
-      it "should assign @answers" do
-        assigns(:answers).should_not be_nil
-      end
-
-      it "should assign @answer to a new Answer" do
-        assigns(:answer).should be_a_new(Answer)
-      end
+      it { should respond_with(:success) }
+      it { should assign_to(:question).with(@question) }
+      it { should assign_to(:answers) }
+      it { should assign_to(:answer).with_kind_of(Answer) }
+      it { should render_template(:show) }
     end
 
     describe 'without permission' do
-      before do
+      before(:each) do
         @ability.cannot :read, Question
         get :show, :id => @question.id
       end
 
-      it "should return unauthorized" do
-        response.status.should == 403
-      end
+      it { should respond_with(:forbidden) }
     end
   end
 
@@ -65,17 +51,10 @@ describe QuestionsController do
       get :revisions, :id => @question.id
     end
 
-    it "should successfully respond" do
-      response.status.should == 200
-    end
-
-    it "should assign question" do
-      assigns(:question).id.should == @question.id
-    end
-
-    it "should assign versions" do
-      assigns(:revisions).should_not be_nil
-    end
+    it { should respond_with(:success) }
+    it { should assign_to(:question).with(@question) }
+    it { should assign_to(:revisions) }
+    it { should render_template(:revisions) }
   end
 
   describe 'GET tagged' do
@@ -85,21 +64,11 @@ describe QuestionsController do
       get :tagged, :tag => @tag.name
     end
 
-    it "should successfully respond" do
-      response.status.should == 200
-    end
-
-    it "should assign tag" do
-      assigns(:tag).name.should == @tag.name
-    end
-
-    it "should assign questions" do
-      assigns(:questions).should_not be_nil
-    end
-
-    it "should assign question_count" do
-      assigns(:question_count).should_not be_nil
-    end
+    it { should respond_with(:success) }
+    it { should assign_to(:tag).with(@tag) }
+    it { should assign_to(:questions) }
+    it { should assign_to(:question_count) }
+    it { should render_template(:tagged) }
   end
 
   describe 'when logged in as a user,' do
@@ -108,18 +77,14 @@ describe QuestionsController do
     end
 
     describe 'GET new' do
-      before do
+      before(:each) do
         @ability.can :create, Question
         get :new
       end
 
-      it "should successfully respond" do
-        response.status.should == 200
-      end
-
-      it "should assign a new question to @question" do
-        assigns(:question).should be_a_new(Question)
-      end
+      it { should respond_with(:success) }
+      it { should assign_to(:question).with_kind_of(Question) }
+      it { should render_template(:new) }
     end
 
     describe 'POST create' do
@@ -132,14 +97,9 @@ describe QuestionsController do
           post :create, :question => Factory.attributes_for(:question)
         end
 
-        it "should successfully respond" do
-          question = assigns(:question)
-          response.should redirect_to(question_path(question))
-        end
-
-        it "should set the flash" do
-          flash[:notice].should == "Successfully created question."
-        end
+        it { should respond_with(:redirect) }
+        it { should redirect_to(question_path(assigns(:question))) }
+        it { should set_the_flash }
       end
 
       describe 'with a invalid question' do
@@ -147,9 +107,8 @@ describe QuestionsController do
           post :create, :question => {}
         end
 
-        it "should render the new action" do
-          response.should render_template("questions/new")
-        end
+        it { should respond_with(:success) }
+        it { should render_template(:new) }
       end
     end
     
@@ -164,13 +123,9 @@ describe QuestionsController do
           get :edit, :id => @question.id
         end
 
-        it "should respond successfully" do
-          response.status.should == 200
-        end
-
-        it "should assign @question" do
-          assigns[:question].should_not be_nil
-        end
+        it { should respond_with(:success) }
+        it { should assign_to(:question) }
+        it { should render_template(:edit) }
       end
 
       describe "without update permission" do
@@ -179,9 +134,7 @@ describe QuestionsController do
           get :edit, :id => @question.id
         end
 
-        it "should respond with unauthorized" do
-          response.status.should == 403
-        end
+        it { should respond_with(:forbidden) }
       end
     end
 
@@ -198,9 +151,8 @@ describe QuestionsController do
           put :update, :id => @question.id, :question => question
         end
 
-        it "should redirect to the question" do
-          response.should redirect_to(@question)
-        end
+        it { should respond_with(:redirect) }
+        it { should redirect_to(@question) }
       end
 
       describe "without update permission" do
@@ -211,8 +163,70 @@ describe QuestionsController do
           put :update, :id => @question.id, :question => question
         end
 
-        it "should respond with unauthorized" do
-          response.status.should == 403
+        it { should respond_with(:forbidden) }
+      end
+    end
+
+    describe 'DELETE destroy' do
+      before(:each) do
+        @question = Factory(:question)
+      end
+
+      describe 'with delete permissions' do
+        before(:each) do
+          @ability.can :destroy, Question
+          delete :destroy, :id => @question.id
+        end
+
+        it { should respond_with(:redirect) }
+        it { should redirect_to(@question) }
+
+        it "should soft-delete the question" do
+          assigns(:question).deleted_at.should_not be_nil
+        end
+      end
+
+      describe 'without delete permissions' do
+        before(:each) do
+          @ability.cannot :destroy, Question
+          delete :destroy, :id => @question.id
+        end
+
+        it { should respond_with(:forbidden) }
+        it "should not soft-delete the question" do
+          assigns(:question).deleted_at.should be_nil
+        end
+      end
+    end
+
+    describe 'POST restore' do
+      before(:each) do
+        @question = Factory(:question)
+        @question.destroy
+      end
+
+      describe 'with restore permission' do
+        before(:each) do
+          @ability.can :restore, Question
+          post :restore, :id => @question.id
+        end
+
+        it { should respond_with(:redirect) }
+        it { should redirect_to(@question) }
+        it "should remove the soft-delete on the question" do
+          assigns(:question).deleted_at.should be_nil
+        end
+      end
+
+      describe 'without restore permission' do
+        before(:each) do
+          @ability.cannot :restore, Question
+          post :restore, :id => @question.id
+        end
+
+        it { should respond_with(:forbidden) }
+        it "should not change deleted_at" do
+          assigns(:question).deleted_at.should == @question.deleted_at
         end
       end
     end
@@ -224,41 +238,56 @@ describe QuestionsController do
     end
 
     describe 'GET new' do
-      it "should redirect to the login url" do
-        get :new
-        response.should redirect_to(login_path)
-      end
+      before(:each) { get :new }
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
 
     describe 'POST create' do
-      it "should redirect to the login url" do
-        post :create
-        response.should redirect_to(login_path)
-      end
+      before(:each) { post :create }
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
     
     describe 'GET edit' do
-      it "should redirect to the login url" do
+      before(:each) do
         @question = Factory(:question)
         get :edit, :id => @question.id
-        response.should redirect_to(login_path)
       end
+      
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
 
     describe 'PUT update' do
-      it "should redirect to the login url" do
+      before(:each) do
         @question = Factory(:question)
         put :update, :id => @question.id
-        response.should redirect_to(login_path)
       end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
 
     describe 'DELETE destroy' do
-      it "should redirect to the login url" do
+      before(:each) do
         @question = Factory(:question)
         delete :destroy, :id => @question.id
-        response.should redirect_to(login_path)
       end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
+    end
+
+    describe 'POST restore' do
+      before(:each) do
+        @question = Factory(:question)
+        @question.destroy
+        post :restore, :id => @question.id
+      end
+
+      it { should respond_with(:redirect) }
+      it { should redirect_to(login_path) }
     end
   end
 end
