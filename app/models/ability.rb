@@ -5,7 +5,7 @@ class Ability
     @user = user
     @user ||= User.new
     #
-    # Posts
+    # Questions
     #
     can :read, Question do |q|
       f = true
@@ -23,6 +23,24 @@ class Ability
       f
     end
     can [:destroy, :restore], Question do |q|
+      f = false
+      next unless logged_in?
+      f = true if @user.moderator?
+      f
+    end
+    #
+    # Answers
+    #
+    can :create, Answer
+    can :update, Answer do |a|
+      f = false
+      next unless logged_in?
+      f = true if @user.moderator?
+      f = true if a.user_id = @user.id
+      f = true if @user.reputation > 500
+      f
+    end
+    can [:destroy, :restore], Answer do |a|
       f = false
       next unless logged_in?
       f = true if @user.moderator?

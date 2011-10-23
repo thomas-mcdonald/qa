@@ -54,10 +54,23 @@
         <div class="span15"><%= format answer.body %></div>
       </div>
       <div class="row">
-        <div class="span1 offset1">
-          <%= link_to "edit", edit_answer_path(answer) %>
-        </div>
-        <div class="span6 offset8">
+        <div class="span3 offset1">
+          <% if can? :update, answer %>
+            <%= link_to "edit", [:edit, answer] %> <span>|</span>
+          <% end %>
+          <% if answer.deleted? %>
+            <% if can? :restore, answer %>
+              <%= link_to("restore", restore_answer_path(answer), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+            <% end %>
+          <% else %>
+            <% if can? :destroy, answer %>
+              <%= link_to("delete", answer, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+            <% end %>
+          <% end %>
+          <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
+    </div>
+
+        <div class="span6 offset6">
           <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
         </div>
       </div>

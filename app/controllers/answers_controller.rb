@@ -16,10 +16,12 @@ class AnswersController < ApplicationController
   def edit
     @answer = Answer.find(params[:id])
     @question = @answer.question
+    authorize! :update, Answer
   end
 
   def update
     @answer = Answer.find(params[:id])
+    authorize! :update, Answer
     @answer.attributes = params[:answer]
     @question = @answer.question
     @question.update_last_activity!(current_user)
