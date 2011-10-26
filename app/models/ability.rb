@@ -36,7 +36,7 @@ class Ability
       f = false
       next unless logged_in?
       f = true if @user.moderator?
-      f = true if a.user_id = @user.id
+      f = true if a.user_id == @user.id
       f = true if @user.reputation > 500
       f
     end
