@@ -2,8 +2,6 @@ namespace :import do
   task :all => :environment do
     Rails.logger.level = Logger::FATAL
 
-    Rake::Task["db:reset"].invoke
-
     postsxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/posts.xml"))
     posthistoryxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/posthistory.xml"))
     puts "Loaded posts + histories"
