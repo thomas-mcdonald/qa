@@ -38,6 +38,14 @@
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
   </div>
+  <section class="comments">
+    <div class="row">
+      <div class="span13 offset1">
+        <%= render :partial => 'comments/comment', :collection => @question.comments %>
+        <%= link_to "add comment", new_question_comment_path(@question), :remote => true, :class => "comment-link" %>
+      </div>
+    </div>
+  </section>
 </section>
 
 <% unless @answers.blank? %>

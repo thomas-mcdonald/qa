@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20111111192410) do
     t.datetime "updated_at"
   end
 
+  create_table "comments", :force => true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.string   "post_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "flags", :force => true do |t|
     t.string   "flaggable_type"
     t.integer  "flaggable_id"

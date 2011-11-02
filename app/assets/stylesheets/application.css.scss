@@ -272,3 +272,18 @@ del .btn.tag {
     line-height: 27px;
   }
 }
+
+section.comments {
+  .row .row {
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+  }
+  margin-top: 15px;
+}
+
+.new_comment {
+  margin-top: 5px;
+  .btn {
+    display: inline;
+  }
+}
