@@ -5,28 +5,35 @@ namespace :import do
     postsxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/posts.xml"))
     posthistoryxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/posthistory.xml"))
     puts "Loaded posts + histories"
-    usersxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/users.xml"))
-    puts "Loaded users"
+    usersxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/users.xml")).css('users row').select { |u| u['Id'].to_i != -1 }
 
-    users_count, users = 0, []
-    usersxml.css('users row').select { |u| u['Id'] != "-1" }.each do |user|
-      users_count += 1
+    puts "Loaded users"
+    votesxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/votes.xml"))
+
+    users, i = [], 0
+    pbar = ProgressBar.new("adding users", usersxml.length)
+    usersxml.each do |user|
+      i += 1
       u = User.new(
         :display_name => user['DisplayName'],
         :about_me => user['AboutMe'],
-        :email => "example-#{users_count}@example.com"
+        :email => "example-#{i}@example.com"
       )
-      u.username = user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + users_count.to_s
+      u.username = user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + i.to_s
       u.created_at = Date.parse(user['CreationDate'])
       u.password_hash = "$2a$10$GNApXWcXPJ2ro5vgwMyo1.yGldKMZJcJnkDPXBoVNNpeF4Z2KBlpW"
       u.password_salt = "$2a$10$GNApXWcXPJ2ro5vgwMyo1."
       users[user['Id'].to_i] = u
       u.save(:validate => false)
-      print "." if users_count % 10 == 0
+      pbar.inc
     end
-    puts "\n*\n* Inserted #{users_count} users \n*\n"
-    usersxml = nil
 
+    # Tidy up stuff from user loading
+    usersxml = nil
+    i = nil
+    puts "\n"
+
+    # Posts.
     posts_count, questions, answers = 0, [], []
     puts "sorting questions & answers"
     postsxml.css('posts row').each do |post|
@@ -70,8 +77,10 @@ namespace :import do
       end
       groupededits[edit[0]['PostId']] << result
     end
+
     puts "Beginning insertion of questions"
     posts = []
+    pbar = ProgressBar.new("ins. questions", questions.length)
     questions.each do |q|
       qu = Question.new
       edits = groupededits[q['Id']]
@@ -97,8 +106,13 @@ namespace :import do
         qu.updated_at = DateTime.parse(edit[:created_at])
         qu.save
       end
-      posts[q['Id'].to_i] = qu
+      pbar.inc
+      posts[q['Id'].to_i] = qu unless qu.new_record?
     end
+
+    #
+    # Answers.
+    pbar = ProgressBar.new("adding answers", answers.length)
     puts "inserting answers"
     answers.each do |a|
       an = Answer.new
@@ -118,29 +132,26 @@ namespace :import do
         an.updated_at = DateTime.parse(edit[:created_at])
         an.save
       end
+      posts[a['Id'].to_i] = an unless an.new_record?
+      pbar.inc
     end
-    n = 0
-    puts "Inserting votes"
-    Question.all.each do |q|
-      (rand*11).floor.times do
-        q.votes.new(
-          :user => User.offset((rand*users.length).ceil).first,
-          :value => 1
-        ).save
-        n += 1
-        print "." if n % 10 == 0
-      end
+
+    #
+    # Votes.
+    size = User.count
+    voterow = votesxml.css('votes row')
+    pbar = ProgressBar.new("adding votes", voterow.length)
+    voterow.each do |row|
+      next unless [2, 3].include? row['VoteTypeId'].to_i
+      next if posts[row['PostId'].to_i].blank?
+      vote = posts[row['PostId'].to_i].votes.new
+      vote.value = 1 if row['VoteTypeId'].to_i == 2
+      vote.value = -1 if row['VoteTypeId'].to_i == 3
+      vote.user = User.offset((rand*size).ceil).first
+      vote.created_at = DateTime.parse row['CreationDate']
+      vote.updated_at = DateTime.parse row['CreationDate']
+      vote.save
+      pbar.inc
     end
-    Answer.all.each do |a|
-      (rand*11).floor.times do
-        a.votes.new(
-          :user => User.offset((rand*users.length).ceil).first,
-          :value => 1
-        ).save
-        n += 1
-        print "." if n % 10 == 0
-      end
-    end
-    puts "\n -- \n inserted #{n} votes \n --"
   end
 end
