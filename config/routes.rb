@@ -5,7 +5,7 @@ Qa::Application.routes.draw do
     resources :flags, :only => [:new, :create]
 
     collection do
-      get 'tagged/:tag', :action => :tagged, :as => :tagged
+      get 'tagged/:tag', :action => :tagged, :as => :tagged, :constraints => { :tag =>/.*/ }
     end
     member do
       post 'restore'
