@@ -12,6 +12,7 @@ gem 'kaminari', '0.12.4'
 gem 'nokogiri'
 gem 'paper_trail', '2.2.4'
 gem 'permanent_records', '2.1.2'
+gem 'progressbar', '0.9.1'
 gem 'redcarpet', '2.0.0b3'
 gem 'resque', '1.19.0'
 
