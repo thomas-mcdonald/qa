@@ -10,7 +10,7 @@
     <p>Good questions are answerable</p>
   </div>
   <div class="span12">
-    <%= render :partial => 'posts/editor', :locals => { :source => Question.new } %>
+    <%= render :partial => 'posts/editor', :locals => { :source => @question } %>
   </div>
 </div>
 
