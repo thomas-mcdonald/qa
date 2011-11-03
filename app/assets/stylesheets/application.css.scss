@@ -10,6 +10,25 @@ html .topbar {
 }
 body { margin-top:60px; }
 
+.main {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  width: 760px;
+}
+
+.sidebar {
+  display: inline;
+  float: left;
+  margin-left: 20px;
+  width: 170px;
+}
+
+section#questions {
+  @include clearfix();
+  margin-left: -20px;
+}
+
 .btn, .alert-message {
   &.notice {
     color: $white;

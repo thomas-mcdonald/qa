@@ -1,24 +1,22 @@
 <% title "Questions" %>
 
 <section id="questions">
-  <div class="row">
-    <div class="span3">
-      <h3>Recent Tags</h3>
-      <ul id="recent-tags">
-        <% @recent_tags.each do |tag| %>
-          <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.count %></span></li>
-        <% end %>
-      </ul>
-      <h3>Recent Badges</h3>
-      <ul id="recent-badges">
-        <% @recent_badges.each do |badge| %>
-          <li><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="span13">
-      <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
-      <%= paginate @questions %>
-    </div>
+  <div class="sidebar">
+    <h3>Recent Tags</h3>
+    <ul id="recent-tags">
+      <% @recent_tags.each do |tag| %>
+        <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.count %></span></li>
+      <% end %>
+    </ul>
+    <h3>Recent Badges</h3>
+    <ul id="recent-badges">
+      <% @recent_badges.each do |badge| %>
+        <li><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="main">
+    <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
+    <%= paginate @questions %>
   </div>
 </section>
