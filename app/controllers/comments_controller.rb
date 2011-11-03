@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(params[:comment])
     if @comment.save
-      render :partial => 'comments/comment', :locals => { :comment => @comment }
+      render :json => render_to_string(:partial => 'comments/comment', :locals => { :comment => @comment }).to_json
     end
   end
 end
