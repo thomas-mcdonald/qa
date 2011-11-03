@@ -40,9 +40,11 @@
   </div>
   <section class="comments">
     <div class="row">
-      <div class="span13 offset1">
+      <div class="span13 offset1 comment-container">
         <%= render :partial => 'comments/comment', :collection => @question.comments %>
-        <%= link_to "add comment", new_question_comment_path(@question), :remote => true, :class => "comment-link" %>
+        <% if logged_in? %>
+          <%= link_to "add comment", new_question_comment_path(@question), :remote => true, :class => "comment-link" %>
+        <% end %>
       </div>
     </div>
   </section>
