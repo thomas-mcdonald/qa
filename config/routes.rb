@@ -34,7 +34,7 @@ Qa::Application.routes.draw do
   end
 
   resources :badges, :only => [:index, :show]
-  get '/notifications/:id/dismiss' => 'notifications#dismiss'
+  get '/notifications/:id/dismiss' => 'notifications#dismiss', :as => :dismiss_notification
   resources :tags, :only => [:index]
   resources :votes, :only => [:create, :destroy]
 
