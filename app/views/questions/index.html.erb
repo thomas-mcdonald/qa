@@ -11,7 +11,7 @@
     <h3>Recent Badges</h3>
     <ul id="recent-badges">
       <% @recent_badges.each do |badge| %>
-        <li><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></li>
+        <li><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %> <%= link_to badge.user.name, user_url(badge.user) %></li>
       <% end %>
     </ul>
   </div>
