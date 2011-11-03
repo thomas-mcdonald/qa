@@ -20,6 +20,7 @@ class Question < ActiveRecord::Base
   validates_length_of :title, :within => 10..150
   validates_length_of :body, :minimum => 30
   validates_numericality_of :user_id
+  validate :tag_validation
 
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')
@@ -37,6 +38,10 @@ class Question < ActiveRecord::Base
       self.tags << t if !self.tags.include?(t)
     end
     self
+  end
+
+  def tag_validation
+    self.errors.add(:tag_list, "must have at least one tag") if tag_list.blank?
   end
 
   def update_last_activity(user)
