@@ -115,12 +115,16 @@ span.tag-count {
   font-size: 11px;
 }
 
+// Questions#index
+// ---------------
+
 .mini-count {
   float: left;
   margin-top: 16px;
   text-align: center;
   width: 53px;
   .num { font-size: 16px; }
+  &.unanswered { color: darken($red, 3%); }
 }
 
 .row .question-summary {
