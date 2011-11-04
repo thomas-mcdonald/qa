@@ -242,3 +242,16 @@ del .btn.tag {
 .deleted {
   background: #fee;
 }
+
+// Post editor
+#gollum-editor {
+  p.error-text {
+    color: $red;
+    margin: 5px 0 3px;
+  }
+  #gollum-editor-page-title, #gollum-editor-body, #question_tag_list {
+    &.error {
+      border: 1px solid $red;
+    }
+  }
+}
