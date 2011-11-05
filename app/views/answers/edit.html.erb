@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Editing <small>an answer on "<%= @question.title %>"</small></h1>
-</div>
+<%= header :h1, "Editing", %[an answer on "#{@question.title}"] %>
 
 <%= render :partial => 'posts/editor', :locals => { :source => @answer, :returnobj => @question } %>
 

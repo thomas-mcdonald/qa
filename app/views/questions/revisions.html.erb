@@ -1,8 +1,6 @@
 <% title "Revisions for question" %>
 
-<div class="page-header">
-  <h1>Revisions <small>for <%= link_to @question.title, question_url(@question) %></small></h1>
-</div>
+<%= header :h1, "Revisions", %[for #{link_to @question.title, question_url(@question)}] %>
 
 <% @revisions.each do |revision| %>
   <div class="revison">

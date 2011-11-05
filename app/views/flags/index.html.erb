@@ -1,8 +1,6 @@
 <% title "Flags" %>
 
-<div class="page-header">
-  <h1>Flags <small><%= pluralize @flag_count, "flag" %> currently active</small></h1>
-</div>
+<%= header :h1, "Flags", %[#{pluralize(@flag_count, "flag")} currently active] %>
 
 <section id="flags">
   <% @flags.each do |flag| %>
