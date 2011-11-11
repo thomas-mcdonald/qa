@@ -25,5 +25,14 @@ module QA
         })
       end
     end
+
+    class ResyncAnswer < Base
+      @queue = :low
+
+      def self.perform(id)
+        answer = Answer.find(id)
+        process_answer(answer)
+      end
+    end
   end
 end
