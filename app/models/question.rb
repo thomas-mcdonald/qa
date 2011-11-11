@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :badges, :as => "source"
   has_many :flags, :as => "flaggable"
-  has_many :taggings
+  has_many :taggings, :autosave => true
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
   belongs_to :user
@@ -31,11 +31,12 @@ class Question < ActiveRecord::Base
   end
 
   def build_tags
-    return false if self.tag_list.blank?
-    self.tags.clear
-    self.tag_list.gsub(" ", "").split(",").each do |tag|
-      t = Tag.find_or_create_by_name(tag.strip)
-      self.tags << t if !self.tags.include?(t)
+    paramtags = self.tag_list.gsub(" ", "").split(",").collect { |t| Tag.find_or_create_by_name(t) }
+    self.tags.each do |tag|
+      self.tags.delete(tag) unless paramtags.include?(tag)
+    end
+    paramtags.each do |tag|
+      self.tags << tag unless self.tags.include?(tag)
     end
     self
   end
