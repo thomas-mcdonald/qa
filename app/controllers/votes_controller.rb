@@ -11,7 +11,7 @@ class VotesController < ApplicationController
       render :json => { :errors => { :message => "You do not have enough reputation to vote"} } and return
     end
     if @vote.save
-      Resque.enqueue(Async.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
+      Resque.enqueue(QA::Async.const_get("Create#{@vote.voteable_type}Vote"), @vote.id)
       Rails.logger.info("Queued #{@vote.voteable_type} vote for processing")
     end
     render :json => {

@@ -19,6 +19,6 @@ class ReputationEvent < ActiveRecord::Base
   validates_numericality_of :value, :user_id
 
   def refresh_reputation
-    Resque.enqueue(Async::ReputationRecalc, self.user.id)
+    Resque.enqueue(QA::Async::ReputationRecalc, self.user.id)
   end
 end

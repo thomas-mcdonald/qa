@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     @answer.user = current_user
     @question.update_last_activity!(current_user)
     if @answer.save
-      Resque.enqueue(Async::CreateAnswer, @answer.id)
+      Resque.enqueue(QA::Async::CreateAnswer, @answer.id)
       Rails.logger.info("Queued answer for processing")
     end
     redirect_to @question
@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
     @question = @answer.question
     @question.update_last_activity!(current_user)
     if @answer.save
-      Resque.enqueue(Async::EditAnswer, @answer.id)
+      Resque.enqueue(QA::Async::EditAnswer, @answer.id)
       redirect_to @question, :notice  => "Successfully updated answer."
     else
       render :action => 'edit'
