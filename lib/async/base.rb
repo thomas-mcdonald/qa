@@ -1,6 +1,44 @@
 module QA
   module Async
     class Base
+      def self.process_answer(answer)
+        if answer.vote_count >= 1
+          check = Badge.user(answer.user).where("token = 'teacher'").first
+          create_badge("teacher", answer.user, answer) unless check
+        end
+        if answer.vote_count >= 10
+          check = answer.badges.user(answer.user).where("token = 'nice_answer'").first
+          create_badge("nice_answer", answer.user, answer) unless check
+        end
+        if answer.vote_count >= 25
+          check = answer.badges.user(answer.user).where("token = 'good_answer'").first
+          create_badge("good_answer", answer.user, answer)
+        end
+        if answer.vote_count >= 100
+          check = answer.badges.user(answer.user).where("token = 'great_answer'").first
+          create_badge("great_answer", answer.user, answer)
+        end
+      end
+
+      def self.process_question(question)
+        if question.vote_count >= 1
+          check = Badge.user(question.user).where("token = 'student'").first
+          create_badge("student", question.user, question) unless check
+        end
+        if question.vote_count >= 10
+          check = question.badges.user(question.user).where("token = 'nice_question'").first
+          create_badge("nice_question", question.user, question) unless check
+        end
+        if question.vote_count >= 25
+          check = question.badges.user(question.user).where("token = 'good_question'").first
+          create_badge("good_question", question.user, question) unless check
+        end
+        if question.vote_count >= 100
+          check = question.badges.user(question.user).where("token = 'great_question'").first
+          create_badge("great_question", question.user, question) unless check
+        end
+      end
+
       def self.create_badge(token, user, source)
         badge = Badge.create(
           :source => source,
