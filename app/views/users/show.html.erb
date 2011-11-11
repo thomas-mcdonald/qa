@@ -4,8 +4,8 @@
 
 <div class="row">
   <div class="span3">
+    <p class="profile-reputation"><span><%= @user.reputation %></span> reputation</p>
     <%= gravatar(@user.email, 160) %>
-    <p><%= @user.reputation %> reputation</p>
   </div>
   <div class="span6"><%= format @user.about_me if @user.about_me %></div>
   <div class="span7"><%= @user.twitter %></div>

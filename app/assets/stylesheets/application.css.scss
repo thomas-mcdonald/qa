@@ -259,3 +259,14 @@ del .btn.tag {
     }
   }
 }
+
+.profile-reputation {
+  font-size: 16px;
+  text-align: center;
+  width: 160px;
+  span {
+    display: block;
+    font-size: 26px;
+    line-height: 27px;
+  }
+}
