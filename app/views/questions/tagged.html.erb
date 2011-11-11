@@ -1,13 +1,14 @@
 <% title "Questions tagged #{params[:tag]}" %>
 
-<section id="questions">
+<section>
   <div class="row">
     <div class="span4">
-      <h4><%= pluralize @question_count, "question" %> tagged <span class="btn tag"><%= @tag.name %></span></h4>
+      <h3><%= pluralize @question_count, "question" %> tagged</h3>
+      <h2 class="btn tag"><%= @tag.name %></h2>
       <!-- would be a good idea to stick something in here at some point -->
     </div>
     <div class="span12">
-      <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
+      <%= render :partial => "question", :collection => @questions, :locals => { :width => 9 } %>
       <%= paginate @questions %>
     </div>
   </div>
