@@ -154,6 +154,7 @@ namespace :import do
       end
       groupededits[edit[0]['PostId']] << result
     end
+    guidgroups = nil
 
     puts "Beginning insertion of questions"
     posts = []
