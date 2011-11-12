@@ -1,7 +1,7 @@
 class BadgesController < ApplicationController
 
   def index
-    @badges = Badge.all_badges
+    @badges = Badge.all_badges.each { |b| b[:count] = Badge.where('token = ?', b.token).count }
   end
   
   def show

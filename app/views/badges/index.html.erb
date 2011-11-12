@@ -17,7 +17,7 @@
     <div class="span13">
       <ul id="badge-list">
         <% @badges.each do |badge| %>
-          <li><div class="badge-wrap"><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %></div><%= badge.description %></li>
+          <li><div class="badge-wrap"><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %> x<%= badge[:count] %></div><%= badge.description %></li>
         <% end %>
       </ul>
     </div>

@@ -208,11 +208,13 @@ span.tag-count {
   list-style-type: none;
 }
 #badge-list li {
+  color: $grayDark;
   margin-top: 10px;
 }
 #badge-list li .badge-wrap {
+  color: $gray;
   display: inline-block;
-  width: 120px;
+  width: 150px;
 }
 
 ins .btn.tag {
