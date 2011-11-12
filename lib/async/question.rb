@@ -6,6 +6,7 @@ module QA
       def self.perform(id)
         question = Question.find(id)
         process_question(question)
+        Question.update_counters question.id, :answers_count => question.answers.count
       end
     end
   end
