@@ -2,7 +2,7 @@
 <div id="question-<%= question.id %>" class="row <%= "deleted" if question.deleted? %>">
   <div class="span3">
     <div class="mini-count"><%= pluralize_count question.vote_count, "vote" %></div>
-    <div class="mini-count <%= "unanswered" if question.answers.size == 0 %>"><%= pluralize_count question.answers_count, "answer" %></div>
+    <div class="mini-count <%= "unanswered" if question.answers_count == 0 %>"><%= pluralize_count question.answers_count, "answer" %></div>
     <div class="mini-count"><%= pluralize_count question.view_count, "view" %></div>
   </div>
   <div class="span<%= width %> question-summary">
