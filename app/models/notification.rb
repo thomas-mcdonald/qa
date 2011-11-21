@@ -11,6 +11,7 @@ class Notification < ActiveRecord::Base
     return false unless user.notifications.exists?(id)
     n = user.notifications.find(id)
     n.dismiss!
+    n
   end
 
   def dismiss!
