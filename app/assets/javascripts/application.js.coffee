@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require gollum
+//= require notifications
 //= require_self
 
 $ ->
@@ -13,10 +14,6 @@ $ ->
 
   # Intialize Gollum
   $.GollumEditor()
-
-  # Needs to be bound to all calls wanting a JSON response
-  $(".alert-message a").bind "ajax:beforeSend", (xhr, settings) ->
-    settings.setRequestHeader 'Accept', 'application/json'
 
   $(".flag-link").live "ajax:success", (xhr, data, status) ->
     $(data).appendTo($("body")).modal(backdrop: true, show: true).bind('hidden', ->
@@ -57,10 +54,6 @@ $ ->
        active.addClass('vote-inactive'); 
     else
       # $(this).popover(data.errors.voteable[0]);
-
-  $(".alert-message a").bind "ajax:success", (xhr, data, status) ->
-    $("#notification-" + data.dismiss).fadeOut 'fast', ->
-      $(this).remove();
 
 $.fn.qaPopover = (options) ->
   pop = this.popover(

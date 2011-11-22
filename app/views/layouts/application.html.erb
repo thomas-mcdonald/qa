@@ -34,6 +34,9 @@
                 </ul>
               </li>
               <li><p><%= current_user.reputation %></p></li>
+              <% if @notifications %>
+                <li><a class="label notification" id="notification-toggle" href="#"><%= @notifications.size %></a></li>
+              <% end %>
            <% else %>
              <li><%= link_to "Register", signup_url %></li>
              <li><%= link_to "Log in", login_url %></li>
@@ -42,12 +45,19 @@
         </div>
       </div>
     </div>
+    <div id="notification-centre">
+      <div class="container">
+        <h2>Notifications</h2>
+        <ul>
+          <% @notifications.each do |n| %>
+            <li class="notification"><%= send n.token, n %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
     <div class="container">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :class => "alert-message #{name}" %>
-      <% end %>
-      <% @notifications.each do |noti| %>
-        <%= send noti.token, noti %>
       <% end %>
       <%= yield %>
     </div>
