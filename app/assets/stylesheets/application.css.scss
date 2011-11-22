@@ -287,41 +287,4 @@ section.comments {
   }
 }
 
-//
-// Notification Centre
-#notification-centre {
-  background-image: url('ios-linen.jpg');
-  display: none;
-  margin-bottom: 20px;
-  padding: 20px;
-
-  h2 {
-    color: $grayLighter;
-  }
-
-  ul {
-    list-style-type: none;
-    margin-top: 4px;
-  }
-
-  p {
-    color: $grayLight;
-  }
-
-  p.dismissed {
-    color: $gray;
-  }
-
-  a {
-    color: $grayLighter;
-  }
-
-  .dismissed a {
-    color: $grayLight;
-  }
-}
-
-// Topbar link
-.label.notification {
-  background: $red;
-}
+@import "notification-centre";
