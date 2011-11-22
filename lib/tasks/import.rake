@@ -240,9 +240,25 @@ namespace :import do
       Version.import slice, :validate => false
     end
 
+    commentsxml = Nokogiri::XML(File.open(Rails.root + "lib/importdata/comments.xml")).css('comments row')
+    comments = []
+    commentsxml.each do |comment|
+      c = Comment.new
+      c.user = users[comment['UserId'].to_i] unless comment['UserId'].blank?
+      c.body = comment['Text']
+      c.post = posts[comment['PostId'].to_i]
+      c.created_at = DateTime.parse(comment['CreationDate'])
+      comments << c
+    end
+
+    comments.compact.each_slice(50) do |slice|
+      Comment.import slice
+    end
 
     #
-    # Clean up some stuff from inserting posts
+    # Clean up some stuff from inserting posts and comments
+    comments = nil
+    commentsxml = nil
     users = nil
 
     #

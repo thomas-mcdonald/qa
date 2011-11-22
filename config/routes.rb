@@ -2,6 +2,7 @@ Qa::Application.routes.draw do
   root :to => 'questions#index'
 
   resources :questions do
+    resources :comments, :only => [:new, :create]
     resources :flags, :only => [:new, :create]
 
     collection do
@@ -20,6 +21,7 @@ Qa::Application.routes.draw do
 
   # Avoid nesting answer routes under question
   resources :answers, :only => [:edit, :update, :destroy] do
+    resources :comments, :only => [:new, :create]
     resources :flags, :only => [:new, :create]
 
     member do

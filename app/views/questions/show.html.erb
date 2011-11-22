@@ -38,6 +38,16 @@
       <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
     </div>
   </div>
+  <section class="comments">
+    <div class="row">
+      <div class="span13 offset1 comment-container">
+        <%= render :partial => 'comments/comment', :collection => @question.comments %>
+        <% if logged_in? %>
+          <%= link_to "add comment", new_question_comment_path(@question), :remote => true, :class => "comment-link" %>
+        <% end %>
+      </div>
+    </div>
+  </section>
 </section>
 
 <% unless @answers.blank? %>
@@ -64,11 +74,20 @@
             <% end %>
           <% end %>
           <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
-    </div>
-
+        </div>
         <div class="span6 offset6">
           <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
         </div>
+        <section class="comments">
+          <div class="row">
+            <div class="span13 offset1 comment-container">
+              <%= render :partial => 'comments/comment', :collection => answer.comments %>
+              <% if logged_in? %>
+                <%= link_to "add comment", new_answer_comment_path(answer), :remote => true, :class => "comment-link" %>
+              <% end %>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
     <hr>

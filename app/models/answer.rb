@@ -1,6 +1,7 @@
 class Answer < ActiveRecord::Base
   has_paper_trail
   has_many :badges, :as => "source"
+  has_many :comments, :as => "post"
   has_many :flags, :as => "flaggable"
   belongs_to :question, :counter_cache => true
   belongs_to :user

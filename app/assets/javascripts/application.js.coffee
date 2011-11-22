@@ -26,6 +26,11 @@ $ ->
       e.preventDefault()
     )
 
+  $(".comment-link").live "ajax:success", (xhr, data, status) ->
+    container = $(this).parent()
+    $(this).remove()
+    $(data).appendTo(container)
+
   $("#new_flag").live "ajax:success", (xhr, data, status) ->
     if data.status is "ok"
       $(".modal").modal('hide')
@@ -33,6 +38,11 @@ $ ->
     else
       $(".modal").modal('hide')
       pop = $(".flag-link").attr("title", "Whoops").attr("data-content", data.errors.flaggable[0]).qaPopover()
+
+  $("#new_comment").live "ajax:success", (xhr, data, status) ->
+    container = $(this).parent()
+    $(this).remove()
+    $(data).appendTo(container)
 
   # /***************/
   $(".vote-form").live "ajax:success", (xhr, data, status) ->

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :answers
+  has_many :comments
   has_many :flags
   has_many :notifications
   has_many :questions
