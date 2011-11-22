@@ -30,7 +30,7 @@ module VotesHelper
     type = "upvote" if value == 1
     type = "downvote" if value == -1
     if logged_in?
-      flag = !current_user.votes.where(:voteable_id => vote_item.id, :voteable_type => vote_item.class, :value => value).first.blank?
+      flag = vote_item.votes.select { |v| v.user_id == current_user.id && v.value == value }.length > 0
     else
       flag = false
     end
