@@ -18,7 +18,11 @@ module ApplicationHelper
   end
 
   def format(string)
-    QA::TextParser.new(string).format
+    QA::TextParser::Post.new(string).format
+  end
+
+  def comment_format(string)
+    QA::TextParser::Comment.new(string).format
   end
 
   def show_link(object, content = "Show")
