@@ -14,10 +14,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:tags, :user).unscoped.find(params[:id])
+    @question = Question.includes(:comments, :tags, :user).unscoped.find(params[:id])
     authorize! :read, @question
     @question.viewed_by(request.remote_ip)
-    @answers = @question.answers.includes(:votes).page(params[:page]).all
+    @answers = @question.answers.includes(:comments, :votes).page(params[:page]).all
     @answer = Answer.new
   end
 
