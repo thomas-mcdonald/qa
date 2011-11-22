@@ -34,7 +34,6 @@ module VotesHelper
     else
       flag = false
     end
-    return "vote-active #{type}" if flag == want
-    "vote-inactive #{type}" unless flag == want
+    flag == want ? "vote-active #{type}" : "vote-inactive #{type}"
   end
 end
