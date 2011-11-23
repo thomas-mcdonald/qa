@@ -10,5 +10,5 @@ $ ->
 
   $(".notification a").bind "ajax:beforeSend", (xhr, settings) ->
     settings.setRequestHeader 'Accept', 'application/json'
-  $(".notification a").bind "ajax:success", (xhr, data, status) ->
+  .bind "ajax:success", (xhr, data, status) ->
     $("#notification-" + data.dismiss).addClass('dismissed').find('a.close').remove()
