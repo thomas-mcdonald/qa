@@ -15,7 +15,7 @@ class Badge < ActiveRecord::Base
   default_scope order('created_at DESC')
 
   def self.recent
-    limit(10)
+    limit(10).includes(:user)
   end
 
   def self.all_badges
