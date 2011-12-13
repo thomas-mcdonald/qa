@@ -7,8 +7,8 @@ class FlagsController < ApplicationController
   end
 
   def new
-    @item = Question.find(params[:question_id]) if params[:question_id]
-    @item = Answer.find(params[:answer_id]) if params[:answer_id]
+    @item = Question.unscoped.find(params[:question_id]) if params[:question_id]
+    @item = Answer.unscoped.find(params[:answer_id]) if params[:answer_id]
     if current_user.flags.where(:flaggable_id => @item.id, :flaggable_type => @item.class).first
       render :noflag, :layout => false
     else
