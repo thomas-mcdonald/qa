@@ -224,7 +224,13 @@ del .btn.tag {
   border: 1px solid rgba(255, 0, 0, 0.5);
 }
 
-.form-stacked .inputs-list label { display: inline; }
+
+// Hacks for forms in a modal
+input[type="radio"], input[type="checkbox"] {
+  .inputs-list & {
+    margin-left: 0;
+  }
+}
 .modal .form-stacked { padding-left: 0; }
 .modal form { margin-bottom: 0; }
 
