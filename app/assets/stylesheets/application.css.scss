@@ -155,6 +155,7 @@ span.tag-count {
   }
 }
 
+// Badge definition
 .badge {
   @include vertical-gradient(#555, #333);
   border-bottom: 1px solid #020202;
@@ -217,6 +218,7 @@ span.tag-count {
   width: 150px;
 }
 
+// Colours for tag addition/removal in comparisons
 ins .btn.tag {
   border: 1px solid rgba(0, 255, 0, 0.5);
 }
@@ -234,6 +236,7 @@ input[type="radio"], input[type="checkbox"] {
 .modal .form-stacked { padding-left: 0; }
 .modal form { margin-bottom: 0; }
 
+// Number labels in navigation
 .nav li .label {
   color: #fff;
   padding: 3px 5px;
