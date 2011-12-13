@@ -65,12 +65,20 @@ class User < ActiveRecord::Base
     display_name || username
   end
 
-  def can_upvote?
-    return true if self.reputation > PERMISSIONS['can_upvote']
+  def can_downvote?
+    true if self.reputation > PERMISSIONS['can_downvote']
   end
 
-  def can_downvote?
-    return true if self.reputation > PERMISSIONS['can_downvote']
+  def can_upvote?
+    true if self.reputation > PERMISSIONS['can_upvote']
+  end
+
+  def can_delete_items?
+    true if self.reputation > PERMISSIONS['can_delete_items'] or self.moderator?
+  end
+
+  def can_view_deleted_items?
+    true if self.reputation > PERMISSIONS['can_view_deleted_items'] or self.moderator?
   end
 
   private

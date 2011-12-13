@@ -1,3 +1,6 @@
 # Documents the needed reputation to be able to do stuff
 can_upvote: 50
 can_downvote: 100
+
+can_delete_items: 10000
+can_view_deleted_items: 10000

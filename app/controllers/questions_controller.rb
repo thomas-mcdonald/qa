@@ -2,15 +2,26 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :revisions, :tagged]
   
   def index
-    @questions = Question.unscoped.order('last_activity_at DESC').question_list_includes.page(params[:page])
+    # Can view deleted items?
+    if logged_in? and current_user.can_view_deleted_items?
+      @questions = Question.unscoped.activity_order.question_list_preloads.page(params[:page])
+    else
+      @questions = Question.question_list_preloads.page(params[:page])
+    end
     @recent_tags = Tag.recent.all
     @recent_badges = Badge.recent.all
   end
 
   def tagged
     @tag = Tag.where('name = ?', params[:tag]).first
-    @question_count = Question.tagged(params[:tag]).count
-    @questions = Question.tagged(params[:tag]).preload(:last_active_user, :tags, :votes).page(params[:page])
+    # Can view deleted items?
+    if logged_in? and current_user.can_view_deleted_items?
+      @question_count = Question.unscoped.tagged(params[:tag]).count
+      @questions = Question.unscoped.activity_order.tagged(params[:tag]).question_list_preloads.page(params[:page])
+    else
+      @question_count = Question.tagged(params[:tag]).count
+      @questions = Question.tagged(params[:tag]).question_list_preloads.page(params[:page])
+    end
   end
 
   def show

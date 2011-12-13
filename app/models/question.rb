@@ -12,8 +12,9 @@ class Question < ActiveRecord::Base
 
   attr_accessible :title, :body, :tag_list, :user_id
 
-  default_scope order('last_activity_at DESC')
-  scope :question_list_includes, includes(:tags, :votes, :last_active_user)
+  default_scope order('last_activity_at DESC').where('deleted_at IS NULL')
+  scope :question_list_preloads, preload(:tags, :votes, :last_active_user)
+  scope :activity_order, order('last_activity_at DESC')
 
   before_save :build_tags
 

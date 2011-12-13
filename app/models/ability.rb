@@ -10,7 +10,7 @@ class Ability
     can :read, Question do |q|
       f = true
       f = false if q.deleted?
-      f = true if @user.moderator?
+      f = true if @user.moderator? or @user.can_view_deleted_items?
       f
     end
     can :create, Question
@@ -25,7 +25,7 @@ class Ability
     can [:destroy, :restore], Question do |q|
       f = false
       next unless logged_in?
-      f = true if @user.moderator?
+      f = true if @user.moderator? or @user.can_delete_items?
       f
     end
     #
