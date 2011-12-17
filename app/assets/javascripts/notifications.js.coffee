@@ -3,7 +3,10 @@ $ ->
     placement: 'below'
   .click (e) ->
     e.preventDefault()
-    $("#notification-centre").slideDown()
+    if $("#notification-centre").css('display') == "block"
+      $("#notification-centre").slideUp()
+    else
+      $("#notification-centre").slideDown()
 
   $(".notification a").bind "ajax:beforeSend", (xhr, settings) ->
     settings.setRequestHeader 'Accept', 'application/json'
