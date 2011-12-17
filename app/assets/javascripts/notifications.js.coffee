@@ -3,9 +3,6 @@ $ ->
     placement: 'below'
   .click (e) ->
     e.preventDefault()
-    $("body").css(
-      marginTop: 40
-    )
     $("#notification-centre").slideDown()
 
   $(".notification a").bind "ajax:beforeSend", (xhr, settings) ->
