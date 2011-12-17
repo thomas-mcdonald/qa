@@ -49,8 +49,12 @@
       <div class="container">
         <h2>Notifications</h2>
         <ul>
-          <% @notifications.each do |n| %>
-            <li class="notification"><%= send n.token, n %></li>
+          <% if !@notifications.blank? %>
+            <% @notifications.each do |n| %>
+              <li class="notification"><%= send n.token, n %></li>
+            <% end %>
+          <% else %>
+            <p>No active notifications</p>
           <% end %>
         </ul>
       </div>
