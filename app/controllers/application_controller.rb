@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   def load_notifications
     @notifications = []
+    # TODO: load dismissed notifications as well
     @notifications = current_user.active_notifications if logged_in?
   end
 
