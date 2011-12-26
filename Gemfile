@@ -27,8 +27,12 @@ group :assets do
 end
 
 group :development do
+  gem 'guard', '0.9.4'
+  gem 'guard-cucumber'
+  gem 'guard-rspec'
   gem 'nifty-generators'
   gem 'rspec-rails'
+  gem 'ruby_gntp'
 end
 
 group :test do
@@ -44,10 +48,6 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
-  gem 'growl_notify'
-  gem 'guard-cucumber'
-  gem 'guard-rspec'
   gem 'pickle'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i  
 end
-
