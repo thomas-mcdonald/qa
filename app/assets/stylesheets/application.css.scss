@@ -112,6 +112,10 @@ span.tag-count {
 
 // Questions#index
 // ---------------
+.mini-counts {
+  @include makeColumn(2.25);
+  margin-left: 10px;
+}
 
 .mini-count {
   float: left;
@@ -122,8 +126,19 @@ span.tag-count {
   &.unanswered { color: darken($red, 3%); }
 }
 
-.row .question-summary {
+.question-summary {
+  @include makeColumn(7.75);
   margin-left: 10px;
+  padding-top: 5px;
+
+  h3 {
+    font-weight: normal;
+  }
+}
+
+// Question rows on user pages should be wider
+.user-questions .question-summary {
+  @include makeColumn(10);
 }
 
 .tags {
