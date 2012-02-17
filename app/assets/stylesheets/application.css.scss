@@ -7,6 +7,7 @@
 
 @import "global";
 @import "badges";
+@import "notification-centre";
 
 section#questions {
   @include clearfix();
@@ -185,9 +186,6 @@ section.comments {
   }
 }
 
-<<<<<<< HEAD
-@import "notification-centre";
-=======
 .user-info-box {
   @include makeColumn(3);
   float: right;
@@ -199,4 +197,3 @@ section.comments {
   p.user-link { margin-bottom: 0; }
   .reputation-score { font-weight: bold; }
 }
->>>>>>> Update some things here and there
