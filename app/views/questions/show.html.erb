@@ -4,38 +4,39 @@
   <%= header :h1, @question.title %>
 
   <div class="row">
-    <div class="span1"><%= vote_controls(@question) %></div>
-    <div class="span15"><%= format @question.body %></div>
-  </div>
-  <div class="row">
-    <div class="span6 offset1">
-      <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
+    <div class="span1">
+      <%= vote_controls(@question) %>
     </div>
-    <% if @question.deleted? %>
-      <div class="span7 offset2">
-        <p><strong>Deleted</strong> <%= time_ago_in_words @question.deleted_at %> ago, <strong>asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
+    <div class="span11">
+      <div class="row">
+        <div class="span11"><%= format @question.body %></div>
       </div>
-    <% else %>
-      <div class="span5 offset4">
-        <p><strong>Asked by</strong> <%= link_to @question.user.display_name, user_path(@question.user) %> <%= time_ago_in_words @question.created_at %> ago</p>
+      <div class="row">
+        <div class="span4">
+          <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
+        </div>
+        <%= render :partial => 'users/info-box', :locals => { :user => @question.user, :verb => 'asked', :time => @question.created_at } %>
+        <% if @question.deleted? %>
+          <p>Deleted <%= time_ago_in_words @question.deleted_at %> ago</p>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="span3 offset1">
-      <% if can? :update, @question %>
-        <%= link_to "edit", [:edit, @question] %> <span>|</span>
-      <% end %>
-      <% if @question.deleted? %>
-        <% if can? :restore, @question %>
-          <%= link_to("restore", restore_question_path(@question), :method => :post, :confirm => "Are you sure") %> <span>|</span>
-        <% end %>
-      <% else %>
-        <% if can? :destroy, @question %>
-          <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
-        <% end %>
-      <% end %>
-      <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
+      <div class="row">
+        <div class="span3">
+          <% if can? :update, @question %>
+            <%= link_to "edit", [:edit, @question] %> <span>|</span>
+          <% end %>
+          <% if @question.deleted? %>
+            <% if can? :restore, @question %>
+              <%= link_to("restore", restore_question_path(@question), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+            <% end %>
+          <% else %>
+            <% if can? :destroy, @question %>
+              <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+            <% end %>
+          <% end %>
+          <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
+        </div>
+      </div>
     </div>
   </div>
   <section class="comments">
@@ -57,38 +58,42 @@
     <div id="answer-<%= answer.id %>" class="answer">
       <div class="row">
         <div class="span1"><%= vote_controls(answer) %></div>
-        <div class="span15"><%= format answer.body %></div>
-      </div>
-      <div class="row">
-        <div class="span3 offset1">
-          <% if can? :update, answer %>
-            <%= link_to "edit", [:edit, answer] %> <span>|</span>
-          <% end %>
-          <% if answer.deleted? %>
-            <% if can? :restore, answer %>
-              <%= link_to("restore", restore_answer_path(answer), :method => :post, :confirm => "Are you sure") %> <span>|</span>
-            <% end %>
-          <% else %>
-            <% if can? :destroy, answer %>
-              <%= link_to("delete", answer, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
-            <% end %>
-          <% end %>
-          <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
-        </div>
-        <div class="span6 offset6">
-          <p><strong>Answered by</strong> <%= link_to answer.user.display_name, user_path(answer.user) %> <%= time_ago_in_words answer.created_at %> ago</p>
-        </div>
-        <section class="comments">
+        <div class="span11">
           <div class="row">
-            <div class="span13 offset1 comment-container">
-              <%= render :partial => 'comments/comment', :collection => answer.comments %>
-              <% if logged_in? %>
-                <%= link_to "add comment", new_answer_comment_path(answer), :remote => true, :class => "comment-link" %>
-              <% end %>
+            <div class="span11">
+              <%= format answer.body %>
             </div>
           </div>
-        </section>
+          <div class="row">
+            <div class="span3">
+              <% if can? :update, answer %>
+                <%= link_to "edit", [:edit, answer] %> <span>|</span>
+              <% end %>
+              <% if answer.deleted? %>
+                <% if can? :restore, answer %>
+                  <%= link_to("restore", restore_answer_path(answer), :method => :post, :confirm => "Are you sure") %> <span>|</span>
+                <% end %>
+              <% else %>
+                <% if can? :destroy, answer %>
+                  <%= link_to("delete", answer, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
+                <% end %>
+              <% end %>
+              <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
+            </div>
+            <%= render :partial => 'users/info-box', :locals => { :user => answer.user, :verb => 'answered', :time => answer.created_at } %>
+          </div>
+        </div>
       </div>
+      <section class="comments">
+        <div class="row">
+          <div class="span13 offset1 comment-container">
+            <%= render :partial => 'comments/comment', :collection => answer.comments %>
+            <% if logged_in? %>
+              <%= link_to "add comment", new_answer_comment_path(answer), :remote => true, :class => "comment-link" %>
+            <% end %>
+          </div>
+        </div>
+      </section>
     </div>
     <hr>
   <% end %>

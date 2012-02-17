@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     true if self.reputation > PERMISSIONS['can_view_deleted_items'] or self.moderator?
   end
 
+  def gravatar(size = 32)
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=#{size}"
+  end
+
   private
 
   def prepare_password

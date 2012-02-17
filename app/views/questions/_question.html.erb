@@ -5,7 +5,7 @@
     <div class="mini-count <%= "unanswered" if question.answers_count == 0 %>"><%= pluralize_count question.answers_count, "answer" %></div>
     <div class="mini-count"><%= pluralize_count question.view_count, "view" %></div>
   </div>
-  <div class="span<%= width %> question-summary">
+  <div class="question-summary">
     <h3><%= link_to question.title, question %></h3>
     <p class="tags"><%= render :partial => 'questions/tags', :locals => { :tags => question.tags } %></p>
     <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.last_activity_at %> ago</span> <%= homepage_user(question.last_active_user) %></p>

@@ -1,0 +1,60 @@
+// Contains application-wide styles
+
+// For main/sidebar layouts
+.main {
+  display: inline;
+  float: left;
+  margin-left: 10px;
+  width: 760px;
+}
+
+.sidebar {
+  display: inline;
+  float: left;
+  margin-left: 20px;
+  width: 170px;
+}
+
+// Page header has bizzaaaareeee massive padding
+.page-header { padding-bottom: 5px; }
+
+// uh..
+.btn, .alert-message {
+  &.notice {
+    color: $white;
+    @include gradientBar(#62c462, #57a957);
+  }    
+}
+
+/* Not sure if these are still used */
+.fieldWithErrors {
+  display: inline;
+}
+
+.error_messages {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  font-size: 12px;
+}
+
+.error_messages h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+.error_messages p {
+  margin: 8px 10px;
+}
+
+.error_messages ul {
+  margin: 0;
+}

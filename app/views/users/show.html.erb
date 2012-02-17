@@ -7,13 +7,12 @@
     <p class="profile-reputation"><span><%= @user.reputation %></span> reputation</p>
     <%= gravatar(@user.email, 160) %>
   </div>
-  <div class="span6"><%= format @user.about_me if @user.about_me %></div>
-  <div class="span7"><%= @user.twitter %></div>
+  <div class="span8"><%= format @user.about_me if @user.about_me %></div>
 </div>
 
 <section id="user-questions">
   <%= header :h3, pluralize(@total_questions.count, "Question") %>
-  <%= render :partial => "questions/question", :collection => @questions, :locals => { :width => 12 } %>
+  <%= render :partial => "questions/question", :collection => @questions %>
   <%= paginate @questions, :param_name => :question_page %>
 </section>
 
@@ -21,4 +20,3 @@
   <%= header :h3, pluralize(@total_answers.count, "Answer") %>
   <%= render :partial => "answers/answer_list", :collection => @answers, :as => :answer %>
 </section>
-
