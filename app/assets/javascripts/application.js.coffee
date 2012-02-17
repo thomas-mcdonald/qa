@@ -7,7 +7,7 @@
 
 $ ->
   # Header elements
-  $(".topbar").dropdown()
+  $(".dropdown-toggle").dropdown()
   $("#flag-count").twipsy(
     placement: 'below'
   )
