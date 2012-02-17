@@ -3,20 +3,20 @@
 <%= header :h1, "Log in" %>
 
 <div class="row">
-  <div class="span4">
+  <div class="span3">
     <p>Don't have an account? <%= link_to "Sign up!", signup_path %></p>
   </div>
-  <div class="span12">
+  <div class="span9">
     <%= form_tag sessions_path do %>
-      <div class="clearfix">
+      <div class="control-group">
         <%= label_tag :login, "Username or Email" %>
-        <div class="input">
+        <div class="controls">
           <%= text_field_tag :login, params[:login] %>
         </div>
       </div>
-      <div class="clearfix">
+      <div class="control-group">
         <%= label_tag :password %>
-        <div class="input">
+        <div class="controls">
           <%= password_field_tag :password %>
         </div>
       </div>

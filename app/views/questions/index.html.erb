@@ -16,7 +16,7 @@
     </ul>
   </div>
   <div class="main">
-    <%= render :partial => "question", :collection => @questions, :locals => { :width => 10 } %>
+    <%= render :partial => "question", :collection => @questions %>
     <%= paginate @questions %>
   </div>
 </section>

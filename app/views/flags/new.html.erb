@@ -7,21 +7,18 @@
     <div class="modal-body clearfix">
       <%= f.hidden_field :flaggable_id, :value => @item.id %>
       <%= f.hidden_field :flaggable_type, :value => @item.class %>
-      <div class="input">
-        <ul class="inputs-list">
-          <li>
-            <%= f.radio_button :reason, :attention %>
-            <%= f.label :reason, "it requires moderator attention", :value => :attention %>
-          </li>
-          <li>
-            <%= f.radio_button :reason, :offensive %>
-            <%= f.label :reason, "it contains offensive content", :value => :offensive %>
-          </li>
-          <li>
-            <%= f.radio_button :reason, :spam %>
-            <%= f.label :reason, "it is spam", :value => :spam %>
-          </li>
-        </ul>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.label :reason, :value => :attention, :class => :radio do %>
+            <% f.radio_button(:reason, :attention) + "it requires moderator attention"%>
+          <% end %>
+          <%= f.label :reason, :value => :offensive, :class => :radio do %>
+            <% f.radio_button(:reason, :offensive) + "it contains offensive content" %>
+          <% end %>
+          <%= f.label :reason, :value => :spam, :class => :radio do %>
+            <% f.radio_button(:reason, :spam) + "it is spam" %>
+          <% end %>
+        </div>
       </div>
     </div>  
     <div class="modal-footer">
@@ -30,4 +27,3 @@
     </div>
   <% end %>
 </div>
-
