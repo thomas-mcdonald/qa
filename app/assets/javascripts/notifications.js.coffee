@@ -1,6 +1,6 @@
 $ ->
-  $('#notification-toggle').twipsy
-    placement: 'below'
+  $('#notification-toggle').tooltip
+    placement: 'bottom'
   .click (e) ->
     e.preventDefault()
     if $("#notification-centre").css('display') == "block"

@@ -8,8 +8,8 @@
 $ ->
   # Header elements
   $(".dropdown-toggle").dropdown()
-  $("#flag-count").twipsy(
-    placement: 'below'
+  $("#flag-count").tooltip(
+    placement: 'bottom'
   )
 
   # Intialize Gollum
@@ -69,4 +69,3 @@ $.fn.fadeOutAndRemove = (speed) ->
   return this.each ->
     $(this).fadeOut speed, ->
       $(this).remove();
-

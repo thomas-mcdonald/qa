@@ -58,3 +58,15 @@
 .error_messages ul {
   margin: 0;
 }
+
+// Number labels in navigation
+// Specifity is not random, needs to be specific to override bootstrap
+.navbar .nav li a.label {
+  color: #fff;
+  padding: 3px 5px;
+  margin: 7px 5px 8px;
+  display: block;
+  &:hover {
+    @extend .label.notification;
+  }
+}
