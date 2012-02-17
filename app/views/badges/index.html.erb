@@ -14,7 +14,7 @@
         <p>Bronze badges are the easiest badges to get, often awarded for using advanced parts of QA for the first time.</p>
       </div>
     </div>
-    <div class="span13">
+    <div class="span9">
       <ul id="badge-list">
         <% @badges.each do |badge| %>
           <li><div class="badge-wrap"><%= link_to badge.name, badge_url(badge), :class => "badge #{badge.type}" %> x<%= badge[:count] %></div><%= badge.description %></li>

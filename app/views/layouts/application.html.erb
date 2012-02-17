@@ -61,7 +61,9 @@
     </div>
     <div class="container" id="page-root">
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :class => "alert-message #{name}" %>
+        <div class="alert alert-<%= name %>">
+          <%= msg %>
+        </div>
       <% end %>
       <%= yield %>
     </div>
