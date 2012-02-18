@@ -231,8 +231,10 @@ module QA
         end
 
         votes = Vote.all
-        questions = Question.all
-        answers = Answer.all
+        questions = []
+        Question.all.each { |q| questions[q.id] = q }
+        answers = []
+        Answer.all.each { |a| answers[a.id] = a }
         pbar = ProgressBar.new("rep events", votes.length)
         repevents = []
         votes.each do |v|
