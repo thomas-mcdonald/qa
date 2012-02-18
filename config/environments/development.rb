@@ -27,5 +27,8 @@ Qa::Application.configure do
 
   # Expands the asset loading lines
   config.assets.debug = true
+
+  # Auto-explain queries
+  config.active_record.auto_explain_threshold_in_seconds = 1
 end
 
