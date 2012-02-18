@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @total_questions = @user.questions
     @total_answers = @user.answers
     @questions = @total_questions.page(params[:question_page]).per(15).includes(:votes, :tags, :last_active_user)
-    @answers = @user.answers.includes(:question).all
+    @answers = @user.answers.includes(:question).page(params[:answer_page]).all
     @votes = @user.votes.all
   end
 
