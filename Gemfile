@@ -18,7 +18,7 @@ gem 'progressbar', '0.9.1'
 gem 'redcarpet', '2.0.0b5'
 gem 'resque', '1.19.0'
 
-gem 'mysql'
+gem 'mysql2'
 gem 'sqlite3'
 
 group :assets do
