@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :new, :create]
 
   def index
-    @users = User.order('repuation_cache DESC')
+    @users = User.order('reputation_cache DESC').page(params[:page]).per(28)
   end
 
   def show

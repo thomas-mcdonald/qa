@@ -189,4 +189,11 @@ section.comments {
   }
   p.user-link { margin-bottom: 0; }
   .reputation-score { font-weight: bold; }
+  // On the users#index page and other lists of users (nowhere yet)
+  // boxes should float to the left
+  .user-listing & {
+    float: left;
+    margin-bottom: 6px;
+    height: 64px; // height to fix boxes while images are loading
+  }
 }

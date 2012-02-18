@@ -1,0 +1,6 @@
+<div class="row user-listing">
+  <% @users.each do |user| %>
+    <%= render partial: 'listing-box', locals: { user: user } %>
+  <% end %>
+</div>
+<%= paginate @users %>
