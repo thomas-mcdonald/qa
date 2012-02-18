@@ -8,37 +8,7 @@
       <%= vote_controls(@question) %>
     </div>
     <div class="span11">
-      <div class="row">
-        <div class="span11"><%= format @question.body %></div>
-      </div>
-      <div class="row">
-        <div class="span4">
-          <p><%= render :partial => 'tags', :locals => { :tags => @question.tags } %></p>
-        </div>
-        <%= render :partial => 'users/info-box', :locals => { :user => @question.user, :verb => 'asked', :time => @question.created_at } %>
-        <% if @question.deleted? %>
-          <p>Deleted <%= time_ago_in_words @question.deleted_at %> ago</p>
-        <% end %>
-      </div>
-      <div class="row">
-        <div class="span3">
-          <% if can? :update, @question %>
-            <%= link_to "edit", [:edit, @question] %> <span>|</span>
-          <% end %>
-          <% if @question.deleted? %>
-            <% if can? :restore, @question %>
-              <%= link_to("restore", restore_question_path(@question), :method => :post, :confirm => "Are you sure") %> <span>|</span>
-            <% end %>
-          <% else %>
-            <% if can? :destroy, @question %>
-              <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
-            <% end %>
-          <% end %>
-          <% if logged_in? %>
-            <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
-          <% end %>
-        </div>
-      </div>
+      <%= render partial: 'posts/post', locals: { post: @question } %>
     </div>
   </div>
   <section class="comments">
@@ -61,29 +31,7 @@
       <div class="row">
         <div class="span1"><%= vote_controls(answer) %></div>
         <div class="span11">
-          <div class="row">
-            <div class="span11">
-              <%= format answer.body %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="span3">
-              <% if can? :update, answer %>
-                <%= link_to "edit", [:edit, answer] %> <span>|</span>
-              <% end %>
-              <% if answer.deleted? %>
-                <% if can? :restore, answer %>
-                  <%= link_to("restore", restore_answer_path(answer), :method => :post, :confirm => "Are you sure") %> <span>|</span>
-                <% end %>
-              <% else %>
-                <% if can? :destroy, answer %>
-                  <%= link_to("delete", answer, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
-                <% end %>
-              <% end %>
-              <%= link_to "flag", new_answer_flag_path(answer), :remote => true, :class => "flag-link" %>
-            </div>
-            <%= render :partial => 'users/info-box', :locals => { :user => answer.user, :verb => 'answered', :time => answer.created_at } %>
-          </div>
+          <%= render partial: 'posts/post', locals: { post: answer } %>
         </div>
       </div>
       <section class="comments">
