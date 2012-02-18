@@ -124,6 +124,8 @@ GEM
     pickle (0.4.10)
       cucumber (>= 0.8)
       rake
+    pjax_rails (0.1.10)
+      jquery-rails
     polyglot (0.3.3)
     progressbar (0.9.1)
     rack (1.4.1)
@@ -243,6 +245,7 @@ DEPENDENCIES
   paper_trail (= 2.2.4)
   permanent_records (= 2.1.2)
   pickle
+  pjax_rails (~> 0.1.7)
   progressbar (= 0.9.1)
   rails (= 3.2.1)
   rb-fsevent
