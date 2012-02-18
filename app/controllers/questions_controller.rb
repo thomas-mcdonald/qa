@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.includes({ :comments => :user }, :tags, :user).unscoped.find(params[:id])
     authorize! :read, @question
     @question.viewed_by(request.remote_ip)
-    @answers = @question.answers.includes({ :comments => :user }, :user, :votes).page(params[:page]).all
+    @answers = @question.answers.with_score.preload({ :comments => :user }, :user, :votes).page(params[:page]).all
     @answer = Answer.new
   end
 

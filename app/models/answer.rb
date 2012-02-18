@@ -11,6 +11,11 @@ class Answer < ActiveRecord::Base
   validates_presence_of :body
   validates_length_of :body, :minimum => 30
 
+  scope :with_score, select('answers.*, (SUM(votes.value)) as score')
+    .joins(:votes)
+    .group('answers.id')
+    .order('score DESC')
+
   attr_accessible :body, :question_id, :user_id
 
   def self.deleted
