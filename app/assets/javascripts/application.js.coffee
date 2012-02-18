@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require gollum
+//= require pjax
 //= require notifications
 //= require_self
 

@@ -34,7 +34,9 @@
               <%= link_to("delete", @question, :method => :delete, :confirm => "Are you sure?") %> <span>|</span>
             <% end %>
           <% end %>
-          <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
+          <% if logged_in? %>
+            <%= link_to "flag", new_question_flag_path(@question), :remote => true, :class => "flag-link" %>
+          <% end %>
         </div>
       </div>
     </div>

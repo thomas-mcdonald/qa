@@ -27,7 +27,7 @@
                   <li><%= link_to "Your Profile", user_url(current_user) %></li>
                   <li><%= link_to "Edit your details", edit_current_user_url %></li>
                   <li class="divider"></li>
-                  <li><%= link_to "Log out", logout_url %></li>
+                  <li><%= link_to "Log out", logout_url, 'data-skip-pjax' => 1 %></li>
                 </ul>
               </li>
               <li><p><%= current_user.reputation %></p></li>
@@ -59,7 +59,7 @@
         </ul>
       </div>
     </div>
-    <div class="container" id="page-root">
+    <div class="container" id="page-root" data-pjax-container>
       <% flash.each do |name, msg| %>
         <div class="alert alert-<%= name %>">
           <%= msg %>
