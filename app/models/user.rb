@@ -82,7 +82,8 @@ class User < ActiveRecord::Base
   end
 
   def gravatar(size = 32)
-    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?s=#{size}"
+    hash = Digest::MD5.hexdigest(email)
+    "http://robohash.org/#{hash}?gravatar=hashed&size=#{size}x#{size}&bgset=bg1"
   end
 
   private
