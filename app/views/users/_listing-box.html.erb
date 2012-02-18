@@ -1,5 +1,5 @@
 <div class="user-info-box">
   <img class="gravatar" src="<%= user.gravatar(64) %>">
-  <p class="user-link"><%= link_to user.display_name, user_url(user) %></p>
+  <p class="user-link"><%= link_to user.name, user_url(user) %></p>
   <p class="more-info"><span class="reputation-score"><%= reputation_formatter user.reputation %></span></p>
 </div>

@@ -62,7 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def name
-    display_name || username
+    n = CGI.escapeHTML(display_name || username)
+    if moderator?
+      n += " &bull;"
+    end
+    n.html_safe
   end
 
   def can_downvote?

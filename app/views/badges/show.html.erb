@@ -7,7 +7,7 @@
     <ul>
       <% @badges.each do |badge| %>
       <!-- TODO: some switchy toggle thing based on the type of source -->
-        <li><%= time_ago_in_words badge.created_at %> - <%= link_to badge.user.display_name, badge.user %></li>
+        <li><%= time_ago_in_words badge.created_at %> - <%= link_to badge.user.name, badge.user %></li>
       <% end %>
     </ul>
   </div>
