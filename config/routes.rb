@@ -27,6 +27,7 @@ Qa::Application.routes.draw do
     member do
       post 'accept'
       post 'restore'
+      post 'unaccept'
     end
   end
 

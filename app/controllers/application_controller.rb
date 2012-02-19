@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
   end
 
   def denied
-    redirect_to('/')
+    raise CanCan::AccessDenied.new
+  end
+
+  def unauthorized!
+    denied
   end
 end
