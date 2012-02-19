@@ -1,0 +1,6 @@
+<form action="/answers/<%= answer.id %>/accept" method="post" data-remote="true" class="accept-form">
+  <button type="submit" name="value" value="1" class="arrow accept">
+    <%= image_tag 'accept-on.png', class: accept_class(answer, true) %>
+    <%= image_tag 'accept-off.png', class: accept_class(answer, false) %>
+  </button>
+</form>

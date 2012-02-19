@@ -4,7 +4,7 @@
   <%= header :h1, @question.title %>
 
   <div class="row">
-    <div class="span1">
+    <div class="vote-controls">
       <%= vote_controls(@question) %>
     </div>
     <div class="span11">
@@ -29,7 +29,12 @@
   <% @answers.each do |answer| %>
     <div id="answer-<%= answer.id %>" class="answer">
       <div class="row">
-        <div class="span1"><%= vote_controls(answer) %></div>
+        <div class="vote-controls">
+          <%= vote_controls(answer) %>
+          <% if logged_in? and current_user.id == @question.user.id %>
+            <%= render partial: 'answers/accept_button', locals: { answer: answer } %>
+          <% end %>
+        </div>
         <div class="span11">
           <%= render partial: 'posts/post', locals: { post: answer } %>
         </div>

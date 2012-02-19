@@ -7,8 +7,9 @@ class Question < ActiveRecord::Base
   has_many :taggings, :autosave => true
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
+  belongs_to :accepted_answer, class_name: "Answer", foreign_key: "accepted_answer_id"
   belongs_to :user
-  belongs_to :last_active_user, :class_name => "User", :foreign_key => "last_active_user_id"
+  belongs_to :last_active_user, class_name: "User", foreign_key: "last_active_user_id"
 
   attr_accessible :title, :body, :tag_list, :user_id
 

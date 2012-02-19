@@ -36,4 +36,8 @@ module VotesHelper
     end
     flag == want ? "vote-active #{type}" : "vote-inactive #{type}"
   end
+
+  def accept_class(answer, want)
+    answer.accepted? == want ? "vote-active" : "vote-inactive"
+  end
 end

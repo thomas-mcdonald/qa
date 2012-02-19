@@ -101,6 +101,7 @@ span.tag-count {
 // --------------
 .vote-controls { @include makeColumn(1); }
 .vote-form { margin-left: 20px; width: 30px; }
+.accept-form { margin-left: 20px; width: 30px; }
 button.arrow {
   background: transparent;
   border: none;

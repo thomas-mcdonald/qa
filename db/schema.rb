@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111192410) do
+ActiveRecord::Schema.define(:version => 20120218211728) do
 
   create_table "answers", :force => true do |t|
     t.text     "body"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20111111192410) do
     t.datetime "last_activity_at"
     t.integer  "last_active_user_id"
     t.string   "tag_list"
+    t.integer  "accepted_answer_id"
   end
 
   create_table "reputation_events", :force => true do |t|

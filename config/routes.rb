@@ -25,6 +25,7 @@ Qa::Application.routes.draw do
     resources :flags, :only => [:new, :create]
 
     member do
+      post 'accept'
       post 'restore'
     end
   end
