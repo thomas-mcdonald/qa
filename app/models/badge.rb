@@ -39,7 +39,7 @@ class Badge < ActiveRecord::Base
   end
 
   def self.user(user)
-    where("user_id = #{user.id}")
+    where("user_id = ?", user.id)
   end
 
   def shallow?

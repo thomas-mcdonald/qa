@@ -90,6 +90,16 @@ class User < ActiveRecord::Base
     "http://robohash.org/#{hash}?gravatar=hashed&size=#{size}x#{size}&bgset=bg1"
   end
 
+  def has_badge?(token, on = nil)
+    # If 'on' is passed, the badge can be awarded multiple
+    # times to the same user on different items
+    if on
+      on.badges.user(self).where('token = ?', token).first
+    else
+      Badge.user(self).where('token = ?', token).first
+    end
+  end
+
   private
 
   def prepare_password
