@@ -32,7 +32,7 @@ group :development do
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'nifty-generators'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.8.0'
   gem 'ruby_gntp'
 end
 
@@ -41,7 +41,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'mocha'
-  gem 'rspec'
+  gem 'rspec', '~> 2.8.0'
   gem 'shoulda-matchers'
   gem 'webrat'
 end
