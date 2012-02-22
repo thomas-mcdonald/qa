@@ -32,7 +32,6 @@ group :development do
   gem 'guard-cucumber'
   gem 'guard-rspec'
   gem 'nifty-generators'
-  gem 'rspec-rails', '~> 2.8.0'
   gem 'ruby_gntp'
 end
 
@@ -49,4 +48,5 @@ group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'pickle'
+  gem 'rspec-rails', '~> 2.8.0'
 end

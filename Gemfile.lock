@@ -181,7 +181,7 @@ GEM
       ffi (>= 1.0.7)
       json_pure
       rubyzip
-    shoulda-matchers (1.0.0.beta3)
+    shoulda-matchers (1.0.0)
     sinatra (1.2.6)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
