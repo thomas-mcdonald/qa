@@ -12,8 +12,9 @@ describe Question do
     it { should have_many(:taggings) }
     it { should have_many(:tags).through(:taggings) }
     it { should have_many(:votes) }
-    it { should belong_to(:user) }
+    it { should belong_to(:accepted_answer) }
     it { should belong_to(:last_active_user) }
+    it { should belong_to(:user) }
   end
 
   describe "validation" do
@@ -35,10 +36,10 @@ describe Question do
       @questions[1].destroy # Delete the middle item
     end
 
-    it "default scope should return deleted items" do
+    it "default scope should not return deleted items" do
       questions = Question.all
-      questions.size.should == 3
-      questions.should include(@questions[1])
+      questions.size.should == 2
+      questions.should_not include(@questions[1])
     end
 
     it "deleted 'scope' should return only deleted items" do
