@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  has_paper_trail :ignore => [:answer_count, :last_activity_at, :last_active_user_id]
+  has_paper_trail :ignore => [:accepted_answer_id, :answer_count, :last_activity_at, :last_active_user_id]
   has_many :answers
   has_many :badges, :as => "source"
   has_many :comments, :as => "post"
@@ -7,8 +7,9 @@ class Question < ActiveRecord::Base
   has_many :taggings, :autosave => true
   has_many :tags, :through => :taggings
   has_many :votes, :as => "voteable"
+  belongs_to :accepted_answer, class_name: "Answer", foreign_key: "accepted_answer_id"
   belongs_to :user
-  belongs_to :last_active_user, :class_name => "User", :foreign_key => "last_active_user_id"
+  belongs_to :last_active_user, class_name: "User", foreign_key: "last_active_user_id"
 
   attr_accessible :title, :body, :tag_list, :user_id
 
@@ -55,6 +56,26 @@ class Question < ActiveRecord::Base
   def update_last_activity!(user)
     self.update_last_activity(user)
     self.save
+  end
+
+  def accept(answer)
+    self.accepted_answer = answer
+    # Build reputation event for user
+    ReputationEvent.create(
+      reputable: answer,
+      value: 5,
+      user: answer.user
+    )
+  end
+
+  def unaccept(answer)
+    self.accepted_answer_id
+    # Build reputation event
+    ReputationEvent.create(
+      reputable: answer,
+      value: 6,
+      user: answer.user
+    )
   end
 
   def vote_count

@@ -34,4 +34,8 @@ class Answer < ActiveRecord::Base
   def appear_deleted?
     return true if self.deleted_at or self.question.deleted?
   end
+
+  def accepted?
+    question.accepted_answer_id == id
+  end
 end

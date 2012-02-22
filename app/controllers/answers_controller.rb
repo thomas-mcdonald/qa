@@ -47,4 +47,20 @@ class AnswersController < ApplicationController
     @answer.save
     redirect_to @answer.question, :notice => "Restored answer"
   end
+
+  def accept
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    unauthorized! if @question.user_id != current_user.id
+    @question.accept(@answer)
+    @question.save
+  end
+
+  def unaccept
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    unauthorized! if @question.user_id != current_user.id
+    @question.unaccept(@answer)
+    @question.save
+  end
 end

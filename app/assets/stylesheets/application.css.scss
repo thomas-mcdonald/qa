@@ -19,28 +19,6 @@ section#questions {
   padding: 2px 5px;
 }
 
-button.arrow {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: block;
-  margin-left: 4px;
-}
-
-.vote-count {
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-}
-
-.vote-active {
-
-}
-
-.vote-inactive {
-  display:none;
-}
-
 #recent-tags {
   list-style-type: none;
   margin-left: -1px;
@@ -59,6 +37,7 @@ span.tag-count {
   font-size: 11px;
 }
 
+//
 // Questions#index
 // ---------------
 .mini-counts {
@@ -116,6 +95,37 @@ span.tag-count {
     width: 250px;
   }
 }
+
+//
+// Questions#show
+// --------------
+.vote-controls { @include makeColumn(1); }
+.vote-form { margin-left: 20px; width: 30px; }
+.accept-form { margin-left: 20px; width: 30px; }
+button.arrow {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 0 4px;
+  padding: 0;
+}
+
+.vote-count {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.vote-active {
+
+}
+
+.vote-inactive {
+  display:none;
+}
+
+
 
 // Colours for tag addition/removal in comparisons
 ins .btn.tag {
