@@ -52,7 +52,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     @question = @answer.question
     unauthorized! if @question.user_id != current_user.id
-    @question.accepted_answer = @answer
+    @question.accept(@answer)
     @question.save
   end
 
@@ -60,7 +60,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     @question = @answer.question
     unauthorized! if @question.user_id != current_user.id
-    @question.accepted_answer = nil
+    @question.unaccept(@answer)
     @question.save
   end
 end

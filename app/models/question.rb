@@ -58,6 +58,26 @@ class Question < ActiveRecord::Base
     self.save
   end
 
+  def accept(answer)
+    self.accepted_answer = answer
+    # Build reputation event for user
+    ReputationEvent.create(
+      reputable: answer,
+      value: 5,
+      user: answer.user
+    )
+  end
+
+  def unaccept(answer)
+    self.accepted_answer_id
+    # Build reputation event
+    ReputationEvent.create(
+      reputable: answer,
+      value: 6,
+      user: answer.user
+    )
+  end
+
   def vote_count
     votes = self.votes
     i = 0

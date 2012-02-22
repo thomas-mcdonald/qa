@@ -12,7 +12,9 @@ class ReputationEvent < ActiveRecord::Base
     { :name => :question_upvote, :value => 5 },
     { :name => :question_downvote, :value => -2 },
     { :name => :answer_upvote, :value => 10 },
-    { :name => :answer_downvote, :value => -1 }
+    { :name => :answer_downvote, :value => -1 },
+    { :name => :answer_accept, :value => 15 },
+    { :name => :answer_unaccept, :value => -15 }
   ]
 
   validates_presence_of :reputable, :user_id, :value
