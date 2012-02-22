@@ -1,4 +1,5 @@
 bundler_args: --without development
+before_script: "cp config/database.yml.sample config/database.yml"
 script: "bundle exec rake spec"
 rvm:
   - 1.9.2
