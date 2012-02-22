@@ -50,5 +50,4 @@ group :development, :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'pickle'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i  
 end
