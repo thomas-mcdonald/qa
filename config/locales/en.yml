@@ -1,40 +1,5 @@
 # Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  badges:
-    good_answer:
-      name: Good Answer
-      description: Added an answer with at least 25 score
-    good_question:
-      name: Good Question
-      description: Asked a question with at least 25 score
-    great_answer:
-      name: Great Answer
-      description: Added an answer with at least 100 score
-    great_question:
-      name: Great Question
-      description: Asked a question with at least 100 score
-    nice_answer:
-      name: Nice Answer
-      description: Added an answer with at least 10 score
-    nice_question:
-      name: Nice Question
-      description: Asked a question with at least 10 score
-    student:
-      name: Student
-      description: Asked first question with an upvote
-    teacher:
-      name: Teacher
-      description: First answer with an upvote
-  flags:
-    reasons:
-      attention: requires moderator attention
-      offensive: contains offensive content
-      spam: contains spam-like content
-  notifications:
-    edited_answer: Your answer on the question %{link} was edited
-    new_badge_with_answer_as_source: You earned the %{badge_link} badge for your answer on the question %{source_link}
-    new_badge_with_question_as_source: You earned the %{badge_link} badge for the question %{source_link}
-    new_badge_without_source: You earned the %{badge_link} badge.
-    new_answer: New answer posted on %{link}
+  hello: "Hello world"

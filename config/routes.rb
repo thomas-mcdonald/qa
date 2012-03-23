@@ -1,52 +1,58 @@
 Qa::Application.routes.draw do
-  root :to => 'questions#index'
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
-  resources :questions do
-    resources :comments, :only => [:new, :create]
-    resources :flags, :only => [:new, :create]
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
 
-    collection do
-      get 'tagged/:tag', :action => :tagged, :as => :tagged, :constraints => { :tag =>/.*/ }
-    end
-    member do
-      post 'restore'
-      get 'revisions'
-    end
-    resources :answers, :only => [:create] do
-      member do
-        get 'revisions'
-      end
-    end
-  end
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
 
-  # Avoid nesting answer routes under question
-  resources :answers, :only => [:edit, :update, :destroy] do
-    resources :comments, :only => [:new, :create]
-    resources :flags, :only => [:new, :create]
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
-    member do
-      post 'accept'
-      post 'restore'
-      post 'unaccept'
-    end
-  end
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
 
-  resources :flags, :only => [:index] do
-    member do
-      get 'dismiss'
-    end
-  end
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
 
-  resources :badges, :only => [:index, :show]
-  get '/notifications/:id/dismiss' => 'notifications#dismiss', :as => :dismiss_notification
-  resources :tags, :only => [:index]
-  resources :votes, :only => [:create, :destroy]
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
 
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
-  match 'signup' => 'users#new', :as => :signup
-  match 'logout' => 'sessions#destroy', :as => :logout
-  match 'login' => 'sessions#new', :as => :login
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
 
-  resources :sessions, :only => [:create]
-  resources :users, :except => [:destroy, :edit]
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id))(.:format)'
 end
