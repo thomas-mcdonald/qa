@@ -12,3 +12,19 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
+
+group :development do
+  # Guard for autorunning tests
+  gem 'guard', '1.0.1'
+  gem 'guard-cucumber', '0.7.5'
+  gem 'guard-rspec', '0.6.0'
+end
+
+group :development, :test do
+  gem 'cucumber-rails', '1.3.0'
+  gem 'rspec-rails', '2.9.0'
+end
+
+group :test do
+  gem 'database_cleaner', '0.7.2'
+end
