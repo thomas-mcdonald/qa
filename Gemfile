@@ -4,6 +4,7 @@ gem 'rails', '3.2.2'
 
 gem 'bootstrap-sass', git: 'git://github.com/thomas-mcdonald/bootstrap-sass.git', branch: '2.0.2'
 gem 'jquery-rails'
+gem 'simple_form', '2.0.1'
 gem 'sqlite3'
 
 # Authentication
