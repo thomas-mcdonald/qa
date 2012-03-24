@@ -8,7 +8,9 @@ Feature: Signup
     Then I should see a series of links to login providers
     And I should see a title of "Signup"
 
+  @omniauth
   Scenario: Selecting a login provider
     Given I am on the signup page
     When I click on the Google provider
     Then I should be returned to the confirmation page
+    And I should see a form for user details filled in

@@ -7,6 +7,14 @@ Then(/^I should see a series of links to login providers$/) do
   should have_link("twitter-login", href: "/auth/twitter")
 end
 
+
+Then(/^I should see a form for user details filled in$/) do
+  within('#new-user-info') do
+    should have_field('name', with: 'John Doe')
+    should have_field('email', with: 'example@google.com')
+  end
+end
+
 Then(/^I should see a title of "([^"]*)"$/) do |title|
   within(".page-header h1") do
     should have_content(title)
