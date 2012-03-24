@@ -9,9 +9,9 @@ end
 
 
 Then(/^I should see a form for user details filled in$/) do
-  within('#new-user-info') do
-    should have_field('name', with: 'John Doe')
-    should have_field('email', with: 'example@google.com')
+  within('#new_user') do
+    should have_field('Name', with: 'John Doe')
+    should have_field('Email', with: 'example@google.com')
   end
 end
 

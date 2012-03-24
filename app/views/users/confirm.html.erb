@@ -5,7 +5,15 @@
 <p>You are creating a <b>new account</b>. Are you sure this is what you want to do? Adding an OpenID to an existing account requires you to login first.</p>
 <p>Check the details below, and confirm</p>
 
-<form id="new-user-info">
-  <input id="name" type="text" value="<%= request.env['omniauth.auth'].info.name %>" />
-  <input id="email" type="email" value="<%= request.env['omniauth.auth'].info.email %>" />
-</form>
+<%= simple_form_for @user, html: { class: 'form-horizontal' } do |f| %>
+  <%= f.simple_fields_for :authorizations do |a| %>
+    <%= a.input :provider, as: :hidden %>
+    <%= a.input :email, as: :hidden %>
+    <%= a.input :uid, as: :hidden %>
+  <% end %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn-primary' %>
+  </div>
+<% end %>

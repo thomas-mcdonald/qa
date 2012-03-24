@@ -4,4 +4,7 @@
 // Fix for static navbar not having width
 .navbar-inner > .container { width:940px; }
 
+// Hidden form fields should have no height or etc
+html .control-group.hidden { margin-bottom: 0; }
+
 @import "users";
