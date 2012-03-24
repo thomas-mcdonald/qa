@@ -1,4 +1,20 @@
+<div class="page-header">
+  <h1>Signup</h1>
+</div>
+
 <p>Create an account with the provider of your choice</p>
 
-<p><a href="/auth/google" id="google-login">Login with Google</a></p>
-<p><a href="/auth/twitter" id="twitter-login">Login with Twitter</a></p>
+<ul id="provider-list">
+    <li>
+      <a id="google-login" href="/auth/google">
+        <p>Signup with <span>Google</span></p>
+        <%= image_tag "https://github.com/intridea/authbuttons/raw/master/png/google_128.png" %>
+      </a>
+    </li>
+    <li>
+      <a id="twitter-login" href="/auth/twitter">
+        <p>Signup with <span>Twitter</span></p>
+        <%= image_tag "https://github.com/intridea/authbuttons/raw/master/png/twitter_128.png" %>
+      </a>
+    </li>
+</ul>
