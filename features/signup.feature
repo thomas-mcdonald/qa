@@ -11,4 +11,4 @@ Feature: Signup
   Scenario: Selecting a login provider
     Given I am on the signup page
     When I click on the Google provider
-    Then I should be on the Google authentication page
+    Then I should be returned to the confirmation page
