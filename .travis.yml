@@ -1,6 +1,8 @@
 bundler_args: --without development
-before_script: "cp config/database.yml.sample config/database.yml"
-script: "bundle exec rake spec"
+script: "bundle exec rake travis"
 rvm:
   - 1.9.2
   - 1.9.3
+env:
+  - BUILD_TYPE=cucumber
+  - BUILD_TYPE=rspec
