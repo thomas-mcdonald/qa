@@ -23,6 +23,7 @@ group :development do
   gem 'guard', '1.0.1'
   gem 'guard-cucumber', '0.7.5'
   gem 'guard-rspec', '0.6.0'
+  gem 'ruby_gntp'
 end
 
 group :development, :test do
