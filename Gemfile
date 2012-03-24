@@ -30,7 +30,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails', '1.3.0'
+  gem 'cucumber-rails', '1.3.0', require: false
   gem 'database_cleaner', '0.7.2'
   gem 'shoulda-matchers', '1.0.0'
 end
