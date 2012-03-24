@@ -6,6 +6,10 @@ gem 'bootstrap-sass', git: 'git://github.com/thomas-mcdonald/bootstrap-sass.git'
 gem 'jquery-rails'
 gem 'sqlite3'
 
+# Authentication
+gem 'omniauth', '1.0.3'
+gem 'omniauth-openid', '1.0.1'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
