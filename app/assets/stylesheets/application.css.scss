@@ -1,2 +1,5 @@
 // Include bootstrap styles
 @import "bootstrap";
+
+// Fix for static navbar not having width
+.navbar-inner > .container { width:940px; }
