@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     @user = User.new_from_hash(auth_hash)
   end
 
+  def create
+    @user = User.create(params[:user])
+    redirect_to "/"
+  end
+
   private
 
   def auth_hash

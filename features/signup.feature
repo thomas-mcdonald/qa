@@ -14,3 +14,10 @@ Feature: Signup
     When I click on the Google provider
     Then I should be returned to the confirmation page
     And I should see a form for user details filled in
+
+  @omniauth
+  Scenario: Confirming user details
+    Given I am on the signup page
+    And I click on the Google provider
+    When I click on the submit button
+    Then I should have a user created with those details

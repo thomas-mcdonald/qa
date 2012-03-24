@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authorizations
-  attr_accessible :email, :name
+  attr_accessible :authorizations_attributes, :email, :name
   accepts_nested_attributes_for :authorizations, allow_destroy: false, reject_if: proc { |obj| obj.blank? }
 
   def self.new_from_hash(auth_hash)
