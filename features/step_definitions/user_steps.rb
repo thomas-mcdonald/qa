@@ -9,13 +9,13 @@ end
 
 Then(/^I should see a form for user details filled in$/) do
   within('#new_user') do
-    should have_field('Name', with: 'John Doe')
-    should have_field('Email', with: 'example@google.com')
+    should have_field('Name', with: google_hash[:info][:name])
+    should have_field('Email', with: google_hash[:info][:email])
   end
 end
 
 Then(/^I should have a user created with those details$/) do
-  user =  User.where('name = ?', 'John Doe').where('email = ?', 'example@google.com').first
+  user =  User.where('name = ?', google_hash[:info][:name]).where('email = ?', google_hash[:info][:email]).first
   assert user
   assert user.authorizations.length == 1
 end

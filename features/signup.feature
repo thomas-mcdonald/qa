@@ -3,7 +3,7 @@ Feature: Signup
   As a user
   I want to be able to sign up for the application
 
-  Scenario: Viewing login providers
+  Scenario: Viewing signup providers
     Given I am on the signup page
     Then I should see a series of links to login providers
     And I should see a title of "Signup"
