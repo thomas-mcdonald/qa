@@ -6,7 +6,7 @@ describe "routing to users" do
   end
 
   it "routes authorisation callbacks to users#confirm" do
-    { get: '/auth/google/callback' }.should route_to(controller: 'users', action: 'confirm', provider: 'google')
-    { post: '/auth/google/callback' }.should route_to(controller: 'users', action: 'confirm', provider: 'google')
+    { get: '/auth/google/callback' }.should route_to(controller: 'authorizations', action: 'callback', provider: 'google')
+    { post: '/auth/google/callback' }.should route_to(controller: 'authorizations', action: 'callback', provider: 'google')
   end
 end
