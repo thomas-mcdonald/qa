@@ -1,3 +1,7 @@
+Given(/^I have already signed up$/) do
+  @user = User.new_from_hash(google_hash).save
+end
+
 When(/^I click on the Google provider$/) do
   click_link_or_button("google-login")
 end
@@ -18,4 +22,8 @@ Then(/^I should have a user created with those details$/) do
   user =  User.where('name = ?', google_hash[:info][:name]).where('email = ?', google_hash[:info][:email]).first
   assert user
   assert user.authorizations.length == 1
+end
+
+Then(/^I should be logged in$/) do
+  should_not have_content("Login")
 end
