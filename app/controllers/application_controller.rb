@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def require_login
+    return true if logged_in?
+    redirect_to("/login")
+  end
+
   def login(user)
     session[:user_id] = user.id
   end
