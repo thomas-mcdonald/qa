@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_user
+    @current_user ||= User.where('user_id = ?', session[:user_id]).first if session[:user_id]
+  end
+
   def require_login
     return true if logged_in?
     redirect_to("/login")
