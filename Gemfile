@@ -20,6 +20,7 @@ group :assets do
 end
 
 group :development do
+  gem 'foreman'
   # Guard for autorunning tests
   gem 'guard', '1.0.1'
   gem 'guard-cucumber', '0.7.5'
