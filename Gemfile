@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1' 
+gem 'rails', '3.2.8' 
 
 gem 'activerecord-import'
 gem 'bcrypt-ruby', :require => 'bcrypt'
@@ -18,7 +18,7 @@ gem 'progressbar', '0.9.1'
 gem 'redcarpet', '2.0.0b5'
 gem 'resque', '1.19.0'
 
-gem 'mysql2'
+gem 'pg'
 gem 'sqlite3'
 
 group :assets do
