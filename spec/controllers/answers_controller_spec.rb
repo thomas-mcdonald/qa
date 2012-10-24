@@ -8,13 +8,13 @@ describe AnswersController do
   end
 
   before(:each) do
-    @question = Factory(:question)
-    @answer = Factory.attributes_for(:answer)
+    @question = FactoryGirl.create(:question)
+    @answer = FactoryGirl.attributes_for(:answer)
   end
 
   describe "as a logged in user" do
     before(:each) do
-      login_as(Factory(:user))
+      login_as(FactoryGirl.create(:user))
     end
 
     describe "POST create" do
@@ -26,7 +26,7 @@ describe AnswersController do
 
     describe "GET edit" do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
       end
 
       describe "with update permission" do
@@ -50,7 +50,7 @@ describe AnswersController do
 
     describe "PUT update" do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
       end
 
       describe "with update permission" do
@@ -83,7 +83,7 @@ describe AnswersController do
 
     describe 'DELETE destroy' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
       end
 
       describe 'with delete permissions' do
@@ -115,7 +115,7 @@ describe AnswersController do
 
     describe 'POST restore' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
         @answer.destroy
       end
 
@@ -153,7 +153,7 @@ describe AnswersController do
 
     describe 'POST create' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         post :create, :question_id => @question.id
       end
       it { should respond_with(:redirect) }
@@ -162,7 +162,7 @@ describe AnswersController do
     
     describe 'GET edit' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
         get :edit, :id => @answer.id
       end
       
@@ -172,7 +172,7 @@ describe AnswersController do
 
     describe 'PUT update' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
         put :update, :id => @answer.id
       end
 
@@ -182,7 +182,7 @@ describe AnswersController do
 
     describe 'DELETE destroy' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
         delete :destroy, :id => @answer.id
       end
 
@@ -192,7 +192,7 @@ describe AnswersController do
 
     describe 'POST restore' do
       before(:each) do
-        @answer = Factory(:answer)
+        @answer = FactoryGirl.create(:answer)
         @answer.destroy
         post :restore, :id => @answer.id
       end

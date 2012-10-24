@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ReputationEvent do
   it "has a valid factory" do
-    Factory(:reputation_event).should be_valid
+    FactoryGirl.create(:reputation_event).should be_valid
   end
 
   describe "associations" do

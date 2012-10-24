@@ -1,66 +1,68 @@
-Factory.define(:user) do |u|
-  u.username { Factory.next :username }
-  u.email { Factory.next :email }
-  u.password "secret"
-  u.password_confirmation "secret"
-end
+FactoryGirl.define do
+  factory :user do
+    username { generate :username }
+    email { generate :email }
+    password "secret"
+    password_confirmation "secret"
+  end
 
-Factory.define(:question) do |q|
-  q.title "What is this I don't even?"
-  q.body "I do not understand why it is doing this, it should be doing this but it is doing that"
-  q.tag_list "tag, example"
-  q.association :user
-end
+  factory :question do
+    title "What is this I don't even?"
+    body "I do not understand why it is doing this, it should be doing this but it is doing that"
+    tag_list "tag, example"
+    association :user
+  end
 
-Factory.define(:answer) do |a|
-  a.body "This is most likely the answer to your issue."
-  a.association :user
-  a.association :question
-end
+  factory :answer do
+    body "This is most likely the answer to your issue."
+    association :user
+    association :question
+  end
 
-Factory.define(:reputation_event) do |r|
-  r.reputable { Factory(:vote) }
-  r.user { Factory(:user) }
-  r.value 1
-end
+  factory :reputation_event do
+    association :reputable, factory: :vote
+    user
+    value 1
+  end
 
-Factory.define(:vote) do |v|
-  v.user { Factory(:user) }
-  v.voteable { Factory(:question) }
-  v.value 1
-end
+  factory :vote do
+    user
+    association :voteable, factory: :question
+    value 1
+  end
 
-Factory.define(:flag) do |f|
-  f.reason "spam"
-  f.user { Factory(:user) }
-  f.flaggable { Factory(:question) }
-end
+  factory :flag do
+    reason "spam"
+    user
+    association :flaggable, factory: :question
+  end
 
-Factory.define(:tag) do |t|
-  t.name "Example"
-end
+  factory :tag do
+    name "Example"
+  end
 
-Factory.define(:tagging) do |t|
-  t.question { Factory(:question) }
-  t.tag { Factory(:tag) }
-end
+  factory :tagging do
+    question
+    tag
+  end
 
-Factory.define(:badge) do |b|
-  b.token "student"
-  b.user { Factory(:user) }
-end
+  factory :badge do
+    token "student"
+    user
+  end
 
-Factory.define(:notification) do |n|
-  n.token 'new_answer'
-  n.user { Factory(:user) }
-end
+  factory :notification do
+    token 'new_answer'
+    user
+  end
 
-# Sequences
+  # Sequences
 
-Factory.sequence(:username) do |n|
-  "tom-#{n}"
-end
+  sequence(:username) do |n|
+    "tom-#{n}"
+  end
 
-Factory.sequence(:email) do |n|
-  "example-#{n}@example.com"
+  sequence(:email) do |n|
+    "example-#{n}@example.com"
+  end
 end

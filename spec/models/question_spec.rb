@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Question do
   it "has a valid factory" do
-    Factory(:question).should be_valid
+    FactoryGirl.create(:question).should be_valid
   end
 
   describe "associations" do
@@ -31,7 +31,7 @@ describe Question do
     before(:each) do
       @questions = []
       3.times do |i|
-        @questions << Factory(:question)
+        @questions << FactoryGirl.create(:question)
       end
       @questions[1].destroy # Delete the middle item
     end
@@ -51,20 +51,20 @@ describe Question do
 
   describe ".vote_count" do
     it "should be 0 for new posts" do
-      Factory(:question).vote_count.should == 0
+      FactoryGirl.create(:question).vote_count.should == 0
     end
 
     it "should be 1 for a post with 2 upvotes and 1 downvote" do
-      question = Factory(:question)
-      Factory(:vote, :voteable => question, :value => 1)
-      Factory(:vote, :voteable => question, :value => 1)
-      Factory(:vote, :voteable => question, :value => -1)
+      question = FactoryGirl.create(:question)
+      FactoryGirl.create(:vote, :voteable => question, :value => 1)
+      FactoryGirl.create(:vote, :voteable => question, :value => 1)
+      FactoryGirl.create(:vote, :voteable => question, :value => -1)
       question.vote_count.should == 1 
     end
 
     it "should be -1 for a post with 1 downvote" do
-      question = Factory(:question)
-      Factory(:vote, :voteable => question, :value => -1)
+      question = FactoryGirl.create(:question)
+      FactoryGirl.create(:vote, :voteable => question, :value => -1)
       question.vote_count.should == -1
     end
   end

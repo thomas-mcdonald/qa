@@ -13,7 +13,7 @@ describe UsersController do
   end
 
   it "create action should redirect when model is valid" do
-    post :create, :user => Factory.attributes_for(:user)
+    post :create, :user => FactoryGirl.attributes_for(:user)
     response.should redirect_to(root_url)
     session['user_id'].should == assigns['user'].id
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Flag do
   it "should have a valid factory" do
-    Factory.build(:flag).should be_valid
+    FactoryGirl.build(:flag).should be_valid
   end
 
   describe "assocations" do
@@ -19,24 +19,24 @@ describe Flag do
 
   describe "#should_be_unique" do
     it "should add an error when a similar flag exists by the user" do
-      flag = Factory(:flag)
+      flag = FactoryGirl.create(:flag)
       Flag.new(:user_id => flag.user_id, :flaggable => flag.flaggable).should have(1).errors_on(:flaggable)
     end
 
     it "should not add an error when a different user flags the same post" do
-      flag = Factory(:flag)
-      Flag.new(:user => Factory(:user), :flaggable => flag.flaggable).should have(0).errors_on(:flaggable)
+      flag = FactoryGirl.create(:flag)
+      Flag.new(:user => FactoryGirl.create(:user), :flaggable => flag.flaggable).should have(0).errors_on(:flaggable)
     end
 
     it "should not add an error when a user flags a different post" do
-      flag = Factory(:flag)
-      Flag.new(:user => flag.user, :flaggable => Factory(:question)).should have(0).errors_on(:flaggable)
+      flag = FactoryGirl.create(:flag)
+      Flag.new(:user => flag.user, :flaggable => FactoryGirl.create(:question)).should have(0).errors_on(:flaggable)
     end
   end
 
   describe "#dismiss!" do
     it "should dismiss a post when called" do
-      flag = Factory(:flag)
+      flag = FactoryGirl.create(:flag)
       flag.dismiss!
       flag.dismissed.should == true
     end

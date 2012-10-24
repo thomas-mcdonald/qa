@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl'
 require 'database_cleaner'
+require 'mocha_standalone'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -68,7 +69,7 @@ def logout
 end
 
 def ability_with_reputation(rep = 0)
-  user = Factory(:user)
+  user = FactoryGirl.create(:user)
   user.stubs(:reputation).returns(rep)
   Ability.new(user)
 end

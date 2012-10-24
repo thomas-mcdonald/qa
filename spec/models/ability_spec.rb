@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Ability do
   before(:each) do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
     @ability = Ability.new(@user)
   end
 
@@ -41,7 +41,7 @@ describe Ability do
       end
 
       it "should let the original creator edit" do
-        question = Factory.build(:question)
+        question = FactoryGirl.build(:question)
         Ability.new(question.user).should be_able_to(:update, question)
       end
 
@@ -50,7 +50,7 @@ describe Ability do
       end
 
       it "should let moderators edit" do
-        user = Factory(:user, :role => 'moderator')
+        user = FactoryGirl.create(:user, :role => 'moderator')
         Ability.new(user).should be_able_to(:update, Question.new)
       end
     end

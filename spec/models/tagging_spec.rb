@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tagging do
   it "has a valid factory" do
-    Factory(:tagging).should be_valid
+    FactoryGirl.create(:tagging).should be_valid
   end
   
   describe "associations" do

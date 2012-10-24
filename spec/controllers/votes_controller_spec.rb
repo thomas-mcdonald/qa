@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VotesController do
   describe "when logged in as a user," do
     before(:each) do
-      login_as(Factory(:user))
+      login_as(FactoryGirl.create(:user))
     end
 
     describe "POST create" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Badge do
   it "has a valid factory" do
-    Factory(:badge).should be_valid
+    FactoryGirl.create(:badge).should be_valid
   end
 
   describe "associations" do
@@ -41,20 +41,20 @@ describe Badge do
 
   describe ".param_token" do
     it "should return results with the tokenized token" do
-      badge = Factory(:badge, :token => 'nice_answer')
+      badge = FactoryGirl.create(:badge, :token => 'nice_answer')
 
       Badge.param_token('nice-answer').should include(badge)
     end
 
     it "should not return results with the parametized token" do
-      badge = Factory.build(:badge, :token => "nice-answer")
+      badge = FactoryGirl.build(:badge, :token => "nice-answer")
       badge.save(:validate => false)
 
       Badge.param_token('nice-answer').should_not include(badge)
     end
 
     it "should not return results with different tokens" do
-      badge = Factory(:badge, :token => 'great_answer')
+      badge = FactoryGirl.create(:badge, :token => 'great_answer')
 
       Badge.param_token('nice-answer').should_not include(badge)
     end
@@ -62,19 +62,19 @@ describe Badge do
 
   describe ".user" do
     it "should return results from a particular user" do
-      badge = Factory(:badge)
+      badge = FactoryGirl.create(:badge)
       Badge.user(badge.user).should include(badge)
     end
 
     it "should not return results from a different user" do
-      badge = Factory(:badge)
-      Badge.user(Factory(:user)).should_not include(badge)
+      badge = FactoryGirl.create(:badge)
+      Badge.user(FactoryGirl.create(:user)).should_not include(badge)
     end
   end
 
   describe "#shallow?" do
     it "should return false if not otherwise defined" do
-      badge = Factory(:badge)
+      badge = FactoryGirl.create(:badge)
       badge.shallow?.should == false
     end
 

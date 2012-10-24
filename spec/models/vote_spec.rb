@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Vote do
   it "should have a valid factory" do
-    Factory(:vote).should be_valid
+    FactoryGirl.create(:vote).should be_valid
   end
 
   describe "associations" do
@@ -18,20 +18,20 @@ describe Vote do
     it { should validate_numericality_of(:user_id) }
 
     it "only allow one vote on a particular post by the same user" do
-      question = Factory(:question)
-      vote = Factory.build(:vote)
+      question = FactoryGirl.create(:question)
+      vote = FactoryGirl.build(:vote)
       vote.voteable = question
       vote.save
       vote.should be_valid
-      v2 = Factory.build(:vote)
+      v2 = FactoryGirl.build(:vote)
       v2.voteable = question
       v2.user = vote.user
       v2.should have(1).errors_on(:voteable)
     end
 
     it "should not allow a user to vote on his own post" do
-      question = Factory.build(:question)
-      vote = Factory.build(:vote)
+      question = FactoryGirl.build(:question)
+      vote = FactoryGirl.build(:vote)
       vote.voteable = question
       vote.user = question.user
       vote.should have(1).errors_on(:voteable)

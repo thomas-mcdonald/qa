@@ -19,7 +19,7 @@ describe QuestionsController do
   
   describe 'GET show' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
     end
 
     describe 'with permission' do
@@ -47,7 +47,7 @@ describe QuestionsController do
 
   describe 'GET revisions' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
       get :revisions, :id => @question.id
     end
 
@@ -59,7 +59,7 @@ describe QuestionsController do
 
   describe 'GET tagged' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
       @tag = @question.tags.first
       get :tagged, :tag => @tag.name
     end
@@ -73,7 +73,7 @@ describe QuestionsController do
 
   describe 'when logged in as a user,' do
     before(:each) do
-      login_as(Factory(:user))
+      login_as(FactoryGirl.create(:user))
     end
 
     describe 'GET new' do
@@ -94,7 +94,7 @@ describe QuestionsController do
 
       describe 'with a valid question' do
         before(:each) do
-          post :create, :question => Factory.attributes_for(:question)
+          post :create, :question => FactoryGirl.attributes_for(:question)
         end
 
         it { should respond_with(:redirect) }
@@ -114,7 +114,7 @@ describe QuestionsController do
     
     describe 'GET edit' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
       end
 
       describe "with update permission" do
@@ -140,13 +140,13 @@ describe QuestionsController do
 
     describe 'PUT update' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
       end
 
       describe "with update permission" do
         before(:each) do
           @ability.can :update, Question
-          question = Factory.attributes_for(:question)
+          question = FactoryGirl.attributes_for(:question)
           question[:title] = "Changed title"
           put :update, :id => @question.id, :question => question
         end
@@ -158,7 +158,7 @@ describe QuestionsController do
       describe "without update permission" do
         before(:each) do
           @ability.cannot :update, Question
-          question = Factory.attributes_for(:question)
+          question = FactoryGirl.attributes_for(:question)
           question[:title] = "Changed title"
           put :update, :id => @question.id, :question => question
         end
@@ -169,7 +169,7 @@ describe QuestionsController do
 
     describe 'DELETE destroy' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
       end
 
       describe 'with delete permissions' do
@@ -201,7 +201,7 @@ describe QuestionsController do
 
     describe 'POST restore' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         @question.destroy
       end
 
@@ -251,7 +251,7 @@ describe QuestionsController do
     
     describe 'GET edit' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         get :edit, :id => @question.id
       end
       
@@ -261,7 +261,7 @@ describe QuestionsController do
 
     describe 'PUT update' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         put :update, :id => @question.id
       end
 
@@ -271,7 +271,7 @@ describe QuestionsController do
 
     describe 'DELETE destroy' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         delete :destroy, :id => @question.id
       end
 
@@ -281,7 +281,7 @@ describe QuestionsController do
 
     describe 'POST restore' do
       before(:each) do
-        @question = Factory(:question)
+        @question = FactoryGirl.create(:question)
         @question.destroy
         post :restore, :id => @question.id
       end
