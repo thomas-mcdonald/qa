@@ -4,7 +4,7 @@ gem 'rails', '3.2.8'
 
 gem 'activerecord-import', '~> 0.2.11'
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'bootstrap-sass', '2.0.1'
+gem 'bootstrap-sass', '2.2.1.1'
 gem 'cancan', '1.6.8'
 gem 'differ'
 gem 'foreman'

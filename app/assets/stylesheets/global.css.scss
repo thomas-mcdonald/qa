@@ -1,5 +1,11 @@
 // Contains application-wide styles
 
+// font sizes
+h3 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
 // For main/sidebar layouts
 .main {
   display: inline;
@@ -57,6 +63,10 @@
 
 .error_messages ul {
   margin: 0;
+}
+
+.navbar .container {
+  width: 940px;
 }
 
 // Number labels in navigation
