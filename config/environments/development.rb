@@ -1,3 +1,18 @@
+class DisableAssetsLogger
+  def initialize(app)
+    @app = app
+    Rails.application.assets.logger = Logger.new('/dev/null')
+  end
+
+  def call(env)
+    previous_level = Rails.logger.level
+    Rails.logger.level = Logger::ERROR if env['PATH_INFO'].index("/assets/") == 0
+    @app.call(env)
+  ensure
+    Rails.logger.level = previous_level
+  end
+end
+
 Qa::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -30,5 +45,8 @@ Qa::Application.configure do
 
   # Auto-explain queries
   config.active_record.auto_explain_threshold_in_seconds = 1
+
+  # Silence asset logging
+  config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
 end
 
