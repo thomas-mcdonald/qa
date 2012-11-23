@@ -8,7 +8,6 @@
 
 $ ->
   # Header elements
-  $(".dropdown-toggle").dropdown()
   $("#flag-count").tooltip(
     placement: 'bottom'
   )
