@@ -8,7 +8,6 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.question_list_preloads.page(params[:page])
     end
-    @recent_tags = Tag.recent.all
     @recent_badges = Badge.recent.all
   end
 

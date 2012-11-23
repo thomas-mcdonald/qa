@@ -2,12 +2,6 @@
 
 <section id="questions">
   <div class="sidebar">
-    <h3>Recent Tags</h3>
-    <ul id="recent-tags">
-      <% @recent_tags.each do |tag| %>
-        <li><%= link_to tag.name, tagged_questions_url(tag.name), :class => "btn tag" %> <span class="tag-count">x<%= tag.count %></span></li>
-      <% end %>
-    </ul>
     <h3>Recent Badges</h3>
     <ul id="recent-badges">
       <% @recent_badges.each do |badge| %>
