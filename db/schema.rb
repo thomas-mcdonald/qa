@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.datetime "deleted_at"
   end
 
@@ -27,17 +27,17 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.integer  "user_id"
     t.string   "source_type"
     t.integer  "source_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "comments", :force => true do |t|
-    t.string   "body"
+    t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
     t.string   "post_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "flags", :force => true do |t|
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.integer  "flaggable_id"
     t.integer  "user_id"
     t.string   "reason"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.boolean  "dismissed",      :default => false
   end
 
@@ -55,16 +55,16 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.string   "parameters"
     t.integer  "user_id"
     t.boolean  "dismissed",  :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "questions", :force => true do |t|
     t.string   "title"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.datetime "deleted_at"
     t.integer  "answers_count",       :default => 0
     t.datetime "last_activity_at"
@@ -78,15 +78,15 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.string   "reputable_type"
     t.integer  "reputable_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "taggings", :force => true do |t|
     t.integer  "question_id"
     t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "taggings", ["question_id"], :name => "index_taggings_on_question_id"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
 
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "taggings_count", :default => 0
   end
 
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "role"
     t.integer  "reputation_cache"
     t.text     "about_me"
@@ -122,15 +122,13 @@ ActiveRecord::Schema.define(:version => 20120218211728) do
     t.datetime "created_at"
   end
 
-  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
-
   create_table "votes", :force => true do |t|
     t.integer  "value"
     t.integer  "voteable_id"
     t.string   "voteable_type"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "votes", ["voteable_type", "voteable_id"], :name => "index_votes_on_voteable_type_and_voteable_id"
