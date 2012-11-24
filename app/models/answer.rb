@@ -12,7 +12,7 @@ class Answer < ActiveRecord::Base
   validates_length_of :body, :minimum => 30
 
   scope :with_score, select('answers.*, (SUM(votes.value)) as score')
-    .joins("LEFT JOIN `votes` ON votes.voteable_id = answers.id AND votes.voteable_type = 'Answer'")
+    .joins("LEFT JOIN votes ON votes.voteable_id = answers.id AND votes.voteable_type = 'Answer'")
     .group('answers.id')
     .order('score DESC')
 

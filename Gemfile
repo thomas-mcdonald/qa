@@ -40,7 +40,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'mocha'
-  gem 'rspec', '~> 2.11.0'
+  gem 'rspec', '~> 2.12.0'
   gem 'shoulda-matchers'
   gem 'webrat'
 end
@@ -48,5 +48,5 @@ end
 group :development, :test do
   gem 'capybara'
   gem 'pickle'
-  gem 'rspec-rails', '~> 2.11.0'
+  gem 'rspec-rails', '~> 2.12.0'
 end
