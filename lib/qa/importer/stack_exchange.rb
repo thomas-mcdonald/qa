@@ -1,6 +1,10 @@
 module QA
   module Importer
     class StackExchange < Abstract
+      def quote(string)
+        ActiveRecord::Base.connection.quote(string)
+      end
+
       def execute
         # Silence the Rails logger except if something goes belly up
         Rails.logger.level = Logger::FATAL
@@ -16,17 +20,18 @@ module QA
         pbar = ProgressBar.new("adding users", usersxml.length)
         usersxml.each do |user|
           i += 1
-          u = User.new(
-            :display_name => user['DisplayName'],
-            :about_me => user['AboutMe'],
-            :email => "example-#{i}@example.com"
-          )
-          u.username = user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + i.to_s
-          u.created_at = Date.parse(user['CreationDate'])
-          u.password_hash = "$2a$10$GNApXWcXPJ2ro5vgwMyo1.yGldKMZJcJnkDPXBoVNNpeF4Z2KBlpW"
-          u.password_salt = "$2a$10$GNApXWcXPJ2ro5vgwMyo1."
-          users[user['Id'].to_i] = u
-          u.save(:validate => false)
+          # hand rolled sql yeaaaahh
+          display_name = user['DisplayName']
+          about_me = user['AboutMe']
+          email = "example-#{i}@example.com"
+          username = user['DisplayName'].gsub(/[^0-9a-zA-Z@_\.]/, '') + i.to_s
+          created_at = Date.parse(user['CreationDate'])
+          password_hash = "$2a$10$GNApXWcXPJ2ro5vgwMyo1.yGldKMZJcJnkDPXBoVNNpeF4Z2KBlpW"
+          password_salt = "$2a$10$GNApXWcXPJ2ro5vgwMyo1."
+          result = ActiveRecord::Base.connection.execute(%{INSERT INTO users(username, email, password_hash, password_salt, created_at, updated_at, role, about_me, display_name)
+                VALUES (#{quote(username)}, #{quote(email)}, #{quote(password_hash)}, #{quote(password_salt)}, now(), now(), '', #{quote(about_me)}, #{quote(display_name)})
+              RETURNING id})
+          users[user['Id'].to_i] = result[0]["id"]
           pbar.inc
         end
 
@@ -99,10 +104,10 @@ module QA
           qu.title = originator[:title]
           qu.body = originator[:body]
           qu.tag_list = originator[:tag_list]
-          qu.user = users[originator[:user_id].to_i]
+          qu.user_id = users[originator[:user_id].to_i]
           qu.created_at = DateTime.parse(originator[:created_at])
           qu.last_activity_at = DateTime.parse(originator[:created_at])
-          qu.last_active_user = users[originator[:user_id].to_i]
+          qu.last_active_user_id = users[originator[:user_id].to_i]
           ActiveRecord::Base.transaction do
             if qu.save
               versionevents << qu.record_create
@@ -115,12 +120,13 @@ module QA
             qu.title = edit[:title] if edit[:title]
             qu.body = edit[:body] if edit[:body]
             qu.tag_list = edit[:tag_list] if edit[:tag_list]
-            qu.last_active_user = users[edit[:user_id].to_i]
+            qu.last_active_user_id = users[edit[:user_id].to_i]
             qu.last_activity_at = DateTime.parse(edit[:created_at])
             qu.updated_at = DateTime.parse(edit[:created_at])
             ActiveRecord::Base.transaction do
               if qu.valid?
-                versionevents << qu.record_update
+                event = qu.record_update
+                versionevents << event unless event.item_id == nil
                 qu.save
                 qu.build_tags
               end
@@ -152,15 +158,18 @@ module QA
           PaperTrail.whodunnit = users[originator[:user_id].to_i] 
           an.question_id = posts[a['ParentId'].to_i][:id]
           an.body = originator[:body]
-          an.user = users[originator[:user_id].to_i]
+          an.user_id = users[originator[:user_id].to_i]
           an.created_at = DateTime.parse(originator[:created_at])
-          an.save
-          versionevents << an.record_create
+          next unless an.save
+          event = an.record_create
+          event.item_id = an.id
+          versionevents << event
           edits.each do |edit|
             PaperTrail.whodunnit = users[edit[:user_id].to_i]
             an.body = edit[:body]
             an.updated_at = DateTime.parse(edit[:created_at])
-            versionevents << an.record_update
+            event = an.record_update
+            versionevents << event unless event.item_id == nil
           end
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
           pbar.inc
@@ -179,7 +188,7 @@ module QA
         commentsxml.each do |comment|
           next if posts[comment['PostId'].to_i].blank?
           c = Comment.new
-          c.user = users[comment['UserId'].to_i] unless comment['UserId'].blank?
+          c.user_id = users[comment['UserId'].to_i] unless comment['UserId'].blank?
           c.body = comment['Text']
           c.post_id = posts[comment['PostId'].to_i][:id]
           c.post_type = posts[comment['PostId'].to_i][:type]
