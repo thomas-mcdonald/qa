@@ -25,6 +25,14 @@ class Question < ActiveRecord::Base
   validates_numericality_of :user_id
   validate :tag_validation
 
+  def self.viewable_by_user(user)
+    if user and user.can_view_deleted_items?
+      unscoped.activity_order
+    else
+      self
+    end
+  end
+
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')
   end

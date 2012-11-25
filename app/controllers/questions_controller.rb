@@ -2,12 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :login_required, :except => [:index, :show, :revisions, :tagged]
   
   def index
-    # Can view deleted items?
-    if logged_in? and current_user.can_view_deleted_items?
-      @questions = Question.unscoped.activity_order.question_list_preloads.page(params[:page])
-    else
-      @questions = Question.question_list_preloads.page(params[:page])
-    end
+    @questions = Question.viewable_by_user(current_user).question_list_preloads.page(params[:page])
     @recent_badges = Badge.recent.all
   end
 
