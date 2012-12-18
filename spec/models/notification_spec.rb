@@ -17,7 +17,7 @@ describe Notification do
   describe ".dismiss!" do
     it "should dismiss notifications for a particular user" do
       n = FactoryGirl.create(:notification)
-      Notification.dismiss!(n.id, n.user).should == true
+      Notification.dismiss!(n.id, n.user).should == n
     end
 
     it "should not dismiss notifications by a different user" do

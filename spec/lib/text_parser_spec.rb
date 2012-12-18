@@ -4,7 +4,11 @@ describe QA::TextParser do
   describe "tag extraction" do
     it "should be able to extract multiple tags" do
       string = "[tag:foo] [tag:bar]"
-      result = QA::TextParser.new(string).format
+      result = QA::TextParser::Post.new(string).format
+      result.should include(%(<a href="/questions/tagged/foo" class="btn tag">foo</a>))
+      result.should include(%(<a href="/questions/tagged/bar" class="btn tag">bar</a>))
+
+      result = QA::TextParser::Comment.new(string).format
       result.should include(%(<a href="/questions/tagged/foo" class="btn tag">foo</a>))
       result.should include(%(<a href="/questions/tagged/bar" class="btn tag">bar</a>))
     end
