@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
-gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'jquery-rails'
 gem 'redcarpet', '~> 2.2.2'
 gem 'simple_form', '~> 2.0.4'
@@ -11,6 +10,10 @@ gem 'sqlite3'
 # Authentication
 gem 'omniauth', '1.0.3'
 gem 'omniauth-openid', '1.0.1'
+
+# Asset gems. Could probably go in assets group
+gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'font-awesome-sass-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
