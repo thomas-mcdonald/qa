@@ -9,4 +9,8 @@ describe 'routing for questions' do
   it 'routes /ask to questions#new' do
     { get: '/ask' }.should route_to(controller: 'questions', action: 'new')
   end
+
+  it 'routes post /questions to questions#create' do
+    { post: '/questions' }.should route_to(controller: 'questions', action: 'create')
+  end
 end
