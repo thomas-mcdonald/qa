@@ -1,3 +1,12 @@
+// questions#index
+.question-list {
+  @include makeColumn(12);
+
+  .summary {
+    height: 40px;
+  }
+}
+
 // new question form
 #new_question {
   #question_title {
