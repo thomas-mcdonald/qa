@@ -11,6 +11,9 @@
       <div class="navbar-inner">
         <div class="container">
           <%= link_to "QA", "/", class: :brand %>
+          <ul class="nav">
+            <li><%= link_to 'Ask Question', new_question_path %></li>
+          </ul>
           <ul class="nav pull-right">
             <% if logged_in? %>
             

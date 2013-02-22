@@ -1,0 +1,40 @@
+// questions#index
+.question-list {
+  @include makeColumn(12);
+
+  .summary {
+    height: 40px;
+  }
+}
+
+// new question form
+#new_question {
+  #question_title {
+    font-size: 30px;
+    height: 40px;
+    line-height: normal;
+    width: 620px;
+  }
+}
+
+// question display on questions#show
+.question {
+  @include makeRow();
+
+  .body, .meta {
+    @include makeColumn(12);
+  }
+
+  .body {
+    margin-bottom: 15px;
+  }
+
+  .meta {
+    border-top: 1px solid #ebebeb;
+    padding-top: 10px;
+  }
+
+  .righto {
+    float: right;
+  }
+}
