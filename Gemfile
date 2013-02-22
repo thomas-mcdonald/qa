@@ -4,7 +4,7 @@ gem 'rails', '3.2.12'
 
 gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'jquery-rails'
-gem 'simple_form', '2.0.2'
+gem 'simple_form', '~> 2.0.4'
 gem 'sqlite3'
 
 # Authentication
@@ -23,8 +23,10 @@ group :development do
   gem 'foreman'
   # Guard for autorunning tests
   gem 'guard', '~> 1.6.2'
-  gem 'guard-cucumber', '0.7.5'
-  gem 'guard-rspec', '0.6.0'
+  gem 'guard-cucumber', '~> 1.3.2'
+  gem 'guard-rspec', '~> 2.4.1'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'terminal-notifier-guard'
 end
 
 group :development, :test do
@@ -33,7 +35,7 @@ end
 
 group :test do
   gem 'cucumber-rails', '1.3.0', require: false
-  gem 'database_cleaner', '0.7.2'
-  gem 'factory_girl_rails', '3.1.0'
-  gem 'shoulda-matchers', '1.0.0'
+  gem 'database_cleaner', '~> 0.9.0'
+  gem 'factory_girl_rails', '~> 4.2.0'
+  gem 'shoulda-matchers', '~> 1.4.0'
 end
