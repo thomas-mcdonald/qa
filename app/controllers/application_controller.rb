@@ -1,3 +1,5 @@
+require_dependency 'qa'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -8,8 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    return true if logged_in?
-    redirect_to("/login")
+    raise QA::NotLoggedIn unless current_user.present?
   end
 
   def login(user)
@@ -20,4 +21,9 @@ class ApplicationController < ActionController::Base
     !!session[:user_id]
   end
   helper_method :logged_in?
+
+  rescue_from QA::NotLoggedIn do |e|
+    raise e if Rails.env.test?
+    redirect_to '/'
+  end
 end
