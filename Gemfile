@@ -40,3 +40,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'shoulda-matchers', '~> 1.4.0'
 end
+
+# require last. lol.
+gem 'rack-mini-profiler', git: 'git://github.com/SamSaffron/MiniProfiler'

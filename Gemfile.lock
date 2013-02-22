@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/SamSaffron/MiniProfiler
+  revision: cfbd331b6bdcb5b6776c5d0f46d02d93105297cb
+  specs:
+    rack-mini-profiler (0.1.23)
+      rack (>= 1.1.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -219,6 +226,7 @@ DEPENDENCIES
   jquery-rails
   omniauth (= 1.0.3)
   omniauth-openid (= 1.0.1)
+  rack-mini-profiler!
   rails (= 3.2.12)
   rb-fsevent (~> 0.9.1)
   redcarpet (~> 2.2.2)
