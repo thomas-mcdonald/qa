@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    return true if logged_in?
-    redirect_to("/login")
+    raise QA::NotLoggedIn unless current_user.present?
   end
 
   def login(user)
