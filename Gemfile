@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8' 
+gem 'rails', '3.2.12' 
 
 gem 'activerecord-import', '~> 0.2.11'
 gem 'bcrypt-ruby', :require => 'bcrypt'
