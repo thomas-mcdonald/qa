@@ -7,4 +7,10 @@
 // Hidden form fields should have no height or etc
 html .control-group.hidden { margin-bottom: 0; }
 
+// remove the padding and reduce the border on page-header.. really?
+.page-header {
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+
 @import "users";
