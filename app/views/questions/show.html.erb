@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1><%= @question.title %></h1>
+</div>
+
+<div class="question" id="question-<%= @question.id %>">
+  <div class="body"><%= @question.body %></div>
+  <div class="meta">
+    <div class="righto">
+      asked <%= time_ago_in_words @question.created_at %> ago by <%= @question.user.name %>
+    </div>
+  </div>
+</div>

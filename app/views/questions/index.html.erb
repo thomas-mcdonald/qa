@@ -1,7 +1,7 @@
 <div class="question-list">
   <% @questions.each do |question| %>
     <div class="summary">
-      <h3><%= link_to question.title %></h3>
+      <h3><%= link_to question.title, question %></h3>
     </div>
   <% end%>
 </div>
