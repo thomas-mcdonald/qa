@@ -4,7 +4,7 @@ Qa::Application.routes.draw do
   get '/questions/new' => redirect('/ask')
   resources :questions, only: [:create, :show]
 
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
   get '/login', to: 'sessions#new'
   get '/signup', to: 'users#new'
   match '/auth/:provider/callback', to: 'authorizations#callback'
