@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 
 gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'jquery-rails'
+gem 'redcarpet', '~> 2.2.2'
 gem 'simple_form', '~> 2.0.4'
 gem 'sqlite3'
 
