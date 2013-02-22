@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe QuestionsController do
-
-  describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      response.should be_success
+  context 'index' do
+    before do
+      get :index
     end
-  end
 
+    it { should respond_with(:success) }
+  end
 end
