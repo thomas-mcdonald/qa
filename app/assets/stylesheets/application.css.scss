@@ -1,5 +1,7 @@
-// Include bootstrap styles
-@import "bootstrap";
+// Include bootstrap & font awesome
+@import "custom-bootstrap";
+@import "font-awesome";
+
 
 // Fix for static navbar not having width
 .navbar-inner > .container { width:940px; }
