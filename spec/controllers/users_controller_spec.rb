@@ -5,7 +5,7 @@ describe UsersController do
     let(:user) { FactoryGirl.create(:user) }
 
     before do
-      get :show, id: user.id
+      get :show, id: user.id, slug: user.slug
     end
 
     it { should respond_with(:success) }
