@@ -22,13 +22,13 @@ end
 group :development do
   gem 'foreman'
   # Guard for autorunning tests
-  gem 'guard', '1.0.1'
+  gem 'guard', '~> 1.6.2'
   gem 'guard-cucumber', '0.7.5'
   gem 'guard-rspec', '0.6.0'
 end
 
 group :development, :test do
-  gem 'rspec-rails', '2.9.0'
+  gem 'rspec-rails', '~> 2.9'
 end
 
 group :test do
