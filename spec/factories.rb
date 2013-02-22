@@ -11,4 +11,10 @@ FactoryGirl.define do
     name  'John Smith'
     email # Uses email sequence
   end
+
+  factory :question do
+    title 'How do I aaaaa'
+    body 'What is the best way'
+    user
+  end
 end
