@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   rescue_from QA::NotLoggedIn do |e|
-    raise e if Rails.env.test?
+    raise e if ENV['RSPEC']
     redirect_to '/'
   end
 end

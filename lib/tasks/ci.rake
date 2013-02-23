@@ -9,7 +9,7 @@ namespace :ci do
       raise "Cucumber failed!" unless $?.exitstatus == 0
     else
       puts "Running RSpec"
-      system("bundle exec rake spec")
+      system("RSPEC=true bundle exec rake spec")
       raise "RSpec failed!" unless $?.exitstatus == 0
     end
   end
