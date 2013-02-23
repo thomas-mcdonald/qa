@@ -1,9 +1,21 @@
 // questions#index
 .question-list {
   @include makeColumn(12);
+}
 
-  .summary {
-    height: 40px;
+.question-summary {
+  @include makeColumn(11); // leave wide for now
+  margin-left: 10px;
+  padding-top: 5px;
+
+  h3 {
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .last-activity {
+    float: right;
+    font-size: 11px;
   }
 }
 
