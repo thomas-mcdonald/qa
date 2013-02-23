@@ -15,6 +15,9 @@ World(OmniAuthHelpers)
 
 OmniAuth.config.test_mode = true
 
-Before("@omniauth") do
-  OmniAuth.config.add_mock(:google, OmniAuthHelpers.google_hash)
+Before do
+  if !$hooked
+    OmniAuth.config.add_mock(:google, OmniAuthHelpers.google_hash)
+    $hooked = true
+  end
 end
