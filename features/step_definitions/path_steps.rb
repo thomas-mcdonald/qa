@@ -14,6 +14,6 @@ Then(/^I should be returned to the confirmation page$/) do
   current_path.should == "/auth/google/callback"
 end
 
-Then(/^I should be returned to the homepage$/) do
+Then(/^I should be (?:returned|redirected) to the homepage$/) do
   current_path.should == "/"
 end
