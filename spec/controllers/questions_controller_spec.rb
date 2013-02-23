@@ -34,7 +34,7 @@ describe QuestionsController do
     let(:question) { FactoryGirl.create(:question) }
 
     it 'requires login' do
-      -> { get :edit }.should raise_error(QA::NotLoggedIn)
+      -> { get :edit, id: question.id }.should raise_error(QA::NotLoggedIn)
     end
 
     context 'when logged in' do
@@ -45,6 +45,29 @@ describe QuestionsController do
       it 'returns success' do
         get :edit, id: question.id
         response.should be_success
+      end
+    end
+  end
+
+  context 'update' do
+    let(:question) { FactoryGirl.create(:question) }
+
+    it 'requires login' do
+      -> { put :update, id: question.id }.should raise_error(QA::NotLoggedIn)
+    end
+
+    context 'when logged in' do
+      before do
+        sign_in(alice)
+        put :update, id: question.id, question: { title: 'validlengthtitle' }
+      end
+
+      it 'updated the information' do
+        Question.find(question.id).title.should == 'validlengthtitle'
+      end
+
+      it 'redirects back to the question' do
+        response.should be_redirect
       end
     end
   end
