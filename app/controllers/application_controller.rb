@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.where('id = ?', session[:user_id]).first if session[:user_id]
   end
+  helper_method :current_user
 
   def require_login
     raise QA::NotLoggedIn unless current_user.present?
