@@ -13,6 +13,15 @@ describe QuestionsController do
     it 'requires login' do
       -> { get :new }.should raise_error(QA::NotLoggedIn)
     end
+
+    context 'when logged in' do
+      before { sign_in(alice) }
+
+      it 'returns success' do
+        get :new
+        response.should be_success
+      end
+    end
   end
 
   context 'create' do
@@ -22,6 +31,8 @@ describe QuestionsController do
   end
 
   context 'edit' do
+    let(:question) { FactoryGirl.create(:question) }
+
     it 'requires login' do
       -> { get :edit }.should raise_error(QA::NotLoggedIn)
     end
@@ -32,6 +43,7 @@ describe QuestionsController do
       end
 
       it 'returns success' do
+        get :edit, id: question.id
         response.should be_success
       end
     end
