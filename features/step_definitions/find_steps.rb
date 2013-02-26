@@ -1,5 +1,5 @@
 # Only include steps that can be used across multiple features
-When(/^I click on the Ask Questions button$/) do
+When(/^I click on the Ask Question button$/) do
   find(:xpath, '//a[@href="/ask"]').click
 end
 

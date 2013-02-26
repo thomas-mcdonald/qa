@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
-  before_filter :require_login, only: [:new, :create]
+  before_filter :require_login, only: [:new, :create, :edit, :update]
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:user).all
   end
 
   def show
@@ -18,6 +18,17 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     @question.save
     redirect_to '/'
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    @question.update_attributes!(params[:question])
+    @question.save
+    redirect_to @question
   end
 
   private

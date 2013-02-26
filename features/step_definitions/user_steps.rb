@@ -2,6 +2,13 @@ Given(/^I have already signed up$/) do
   @user = User.new_from_hash(google_hash).save
 end
 
+Given(/^I am logged in$/) do
+  step 'I have already signed up'
+  step 'I am on the login page'
+  step 'I click on the Google provider'
+  step 'I should be logged in'
+end
+
 When(/^I click on the Google provider$/) do
   click_link_or_button("google-login")
 end

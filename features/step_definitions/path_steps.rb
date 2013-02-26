@@ -17,3 +17,7 @@ end
 Then(/^I should be (?:returned|redirected) to the homepage$/) do
   current_path.should == "/"
 end
+
+Then(/^I should be on the new question page$/) do
+  current_path.should == '/ask'
+end

@@ -13,4 +13,8 @@ describe 'routing for questions' do
   it 'routes post /questions to questions#create' do
     { post: '/questions' }.should route_to(controller: 'questions', action: 'create')
   end
+
+  it 'routes get /questions/:id/:slug/edit to questions#edit' do
+    { get: '/questions/1/slug/edit' }.should route_to(controller: 'questions', action: 'edit', id: '1', slug: 'slug')
+  end
 end
