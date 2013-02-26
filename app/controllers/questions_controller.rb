@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     @question.save
-    redirect_to '/'
+    redirect_to @question
   end
 
   def edit
