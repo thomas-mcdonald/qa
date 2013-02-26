@@ -1,4 +1,6 @@
 class AuthorizationsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:callback]
+
   # Acts as a callback
   def callback
     @user = User.find_by_hash(auth_hash)
