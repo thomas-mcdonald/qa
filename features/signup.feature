@@ -19,3 +19,4 @@ Feature: Signup
     And I click on the Google provider
     When I click on the submit button
     Then I should have a user created with those details
+    And I should be logged in
