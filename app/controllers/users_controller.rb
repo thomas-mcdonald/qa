@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params[:user])
+    @user = User.create(user_params)
     redirect_to "/"
   end
 
@@ -23,6 +23,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:authorizations, :name, :email)
+    params.require(:user).permit(:name, :email, authorizations_attributes: [:provider, :email, :uid])
   end
 end
