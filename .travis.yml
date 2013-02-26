@@ -2,8 +2,8 @@ bundler_args: --without development
 before_script: "./script/ci_setup"
 script: "bundle exec rake travis"
 rvm:
-  - 1.9.2
   - 1.9.3
+  - 2.0.0
 env:
   - BUILD_TYPE=cucumber
   - BUILD_TYPE=rspec
