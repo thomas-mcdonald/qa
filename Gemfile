@@ -39,7 +39,7 @@ end
 
 group :test do
   gem 'cucumber-rails', '1.3.0', require: false
-  gem 'database_cleaner', '~> 0.9.0'
+  gem 'database_cleaner', github: 'bmabey/database_cleaner' # '~> 0.9.0', 
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'shoulda-matchers', '~> 1.4.0'
 end
