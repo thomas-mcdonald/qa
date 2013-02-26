@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(params[:question])
+    @question = Question.new(question_params)
     @question.user = current_user
     @question.save
     redirect_to '/'
@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    @question.update_attributes!(params[:question])
+    @question.update_attributes!(question_params)
     @question.save
     redirect_to @question
   end
@@ -38,5 +38,9 @@ class QuestionsController < ApplicationController
     if params[:slug] != @question.slug
       redirect_to @question
     end
+  end
+
+  def question_params
+    params.require(:question).permit(:body, :title)
   end
 end

@@ -28,6 +28,17 @@ describe QuestionsController do
     it 'requires login' do
       -> { post :create }.should raise_error(QA::NotLoggedIn)
     end
+
+    context 'when logged in' do
+      before do
+        sign_in(alice)
+      end
+
+      it 'creates a question if passed a valid question' do
+        question = FactoryGirl.attributes_for(:question)
+        post :create, question: question
+      end
+    end
   end
 
   context 'edit' do
