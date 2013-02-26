@@ -1,8 +1,4 @@
 # Only include steps that can be used across multiple features
-When(/^I click on the Ask Question button$/) do
-  find(:xpath, '//a[@href="/ask"]').click
-end
-
 When(/^I click on the submit button$/) do
   find(:xpath, '//input[@name="commit"]').click
 end

@@ -10,6 +10,10 @@ Given(/^I am on the login page$/) do
   visit("/login")
 end
 
+Given(/^I am on the new question page$/) do
+  visit("/ask")
+end
+
 Then(/^I should be returned to the confirmation page$/) do
   current_path.should == "/auth/google/callback"
 end
