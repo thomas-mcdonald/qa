@@ -8,7 +8,7 @@ gem 'simple_form', '~> 3.0.0.beta1'
 gem 'sqlite3'
 
 # Authentication
-gem 'omniauth', '1.0.3'
+gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems. Could probably go in assets group
