@@ -34,4 +34,7 @@ Qa::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Don't eager load, according to console
+  config.eager_load = false
 end

@@ -34,4 +34,7 @@ Qa::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Don't eager load, according to console
+  config.eager_load = false
 end
