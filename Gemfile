@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0.beta1'
 
 gem 'jquery-rails'
 gem 'redcarpet', '~> 2.2.2'
-gem 'simple_form', '~> 2.1.0'
+gem 'simple_form', '~> 3.0.0.beta1'
 gem 'sqlite3'
 
 # Authentication
@@ -18,8 +18,8 @@ gem 'font-awesome-sass-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.0.beta1'
+  gem 'coffee-rails', '~> 4.0.0.beta1'
   gem 'uglifier', '>= 1.0.3'
 end
 
