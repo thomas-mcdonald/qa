@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0.beta1'
 
 gem 'jquery-rails'
 gem 'redcarpet', '~> 2.2.2'
-gem 'simple_form', '~> 2.0.4'
+gem 'simple_form', '~> 3.0.0.beta1'
 gem 'sqlite3'
 
 # Authentication
@@ -12,14 +12,14 @@ gem 'omniauth', '1.0.3'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems. Could probably go in assets group
-gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'font-awesome-sass-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.0.beta1'
+  gem 'coffee-rails', '~> 4.0.0.beta1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -39,7 +39,7 @@ end
 
 group :test do
   gem 'cucumber-rails', '1.3.0', require: false
-  gem 'database_cleaner', '~> 0.9.0'
+  gem 'database_cleaner', github: 'bmabey/database_cleaner' # '~> 0.9.0', 
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'shoulda-matchers', '~> 1.4.0'
 end
