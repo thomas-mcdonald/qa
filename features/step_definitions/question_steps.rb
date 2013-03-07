@@ -1,4 +1,12 @@
 # steps relating to questions
+Given(/^I have a question$/) do
+  @question = Question.create(title: 'This is the title of the question', body: 'nope I am not that bothered', user: User.first)
+end
+
+Given(/^I am on the question page$/) do
+  visit question_url(@question)
+end
+
 When(/^I click on the Ask Question button$/) do
   find(:xpath, '//a[@href="/ask"]').click
 end

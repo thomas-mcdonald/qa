@@ -3,6 +3,7 @@ require_dependency 'slugger'
 class User < ActiveRecord::Base
   include QA::Slugger
 
+  has_many :answers
   has_many :authorizations
   has_many :questions
 

@@ -11,3 +11,22 @@
     </div>
   </div>
 </div>
+
+<div class="answers">
+  <% @answers.each do |answer| %>
+    <div class="answer" id="answer-<%= answer.id %>">
+      <%= answer.body%>
+    </div>
+  <% end %>
+</div>
+
+<% if logged_in? %>
+  <div class="page-header"><h3>Answer Question</h3></div>
+  <%= simple_form_for @answer, html: { class: 'form-vertical'} do |f| %>
+  <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
+    <%= f.input :body, label: false %>
+    <div class="form-actions">
+      <%= f.button :submit, class: 'btn-primary' %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+// generally only stuff related to display answers
+// not much
+
+.answers {
+  @include makeRow();
+
+  .answer {
+    @include makeColumn(12);
+  }
+}
