@@ -7,6 +7,8 @@ Qa::Application.routes.draw do
   get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
 
+  resources :answers, only: [:create]
+
   get '/users/:id/:slug', to: 'users#show'
   resources :users, only: [:create, :show]
   get '/login', to: 'sessions#new'

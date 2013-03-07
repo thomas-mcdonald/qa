@@ -3,6 +3,7 @@ require_dependency 'slugger'
 class Question < ActiveRecord::Base
   include QA::Slugger
 
+  has_many :answers
   belongs_to :user
 
   default_scope { order('created_at DESC') }
