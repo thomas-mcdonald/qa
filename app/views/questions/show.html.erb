@@ -12,9 +12,13 @@
   </div>
 </div>
 
-<% @answers.each do |answer| %>
-<%= answer.body%>
-<% end %>
+<div class="answers">
+  <% @answers.each do |answer| %>
+    <div class="answer" id="answer-<%= answer.id %>">
+      <%= answer.body%>
+    </div>
+  <% end %>
+</div>
 
 <% if logged_in? %>
   <div class="page-header"><h3>Answer Question</h3></div>

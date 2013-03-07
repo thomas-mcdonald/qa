@@ -1,3 +1,10 @@
-// Place all the styles related to the Answers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// generally only stuff related to display answers
+// not much
+
+.answers {
+  @include makeRow();
+
+  .answer {
+    @include makeColumn(12);
+  }
+}
