@@ -31,4 +31,12 @@ class User < ActiveRecord::Base
     )
     user
   end
+
+  def email_hash
+    Digest::MD5.hexdigest(email.strip.downcase)
+  end
+
+  def gravatar
+    "https://www.gravatar.com/avatar/#{email_hash}.png?s={size}&r=pg&d=identicon"
+  end
 end
