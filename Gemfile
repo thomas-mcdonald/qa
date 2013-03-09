@@ -28,7 +28,7 @@ group :development do
   # Guard for autorunning tests
   gem 'guard', '~> 1.6.2'
   gem 'guard-cucumber', '~> 1.3.2'
-  gem 'guard-rspec', '~> 2.4.1'
+  gem 'guard-rspec', '~> 2.5.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end
