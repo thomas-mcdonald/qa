@@ -17,4 +17,10 @@ FactoryGirl.define do
     body 'What is the best way'
     user
   end
+
+  factory :answer do
+    body 'answer on how to do it'
+    question
+    user
+  end
 end
