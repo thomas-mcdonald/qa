@@ -30,13 +30,12 @@ describe QuestionsController do
     end
 
     context 'when logged in' do
-      before do
-        sign_in(alice)
-      end
+      before { sign_in(alice) }
 
       it 'creates a question if passed a valid question' do
         question = FactoryGirl.attributes_for(:question)
         post :create, question: question
+        Question.last.body.should == question[:body]
       end
     end
   end
@@ -49,9 +48,7 @@ describe QuestionsController do
     end
 
     context 'when logged in' do
-      before do
-        sign_in(alice)
-      end
+      before { sign_in(alice) }
 
       it 'returns success' do
         get :edit, id: question.id
