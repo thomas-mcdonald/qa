@@ -67,15 +67,13 @@ module QA
 
       def build_edits(post_histories)
         puts "sorting histories by GUID"
-        guidgroups = {}
+        guidgroups = Hash.new { |hash, key| hash[key] = [] }
         post_histories.each do |row|
-          guidgroups[row['RevisionGUID']] = [] unless guidgroups[row['RevisionGUID']]
           guidgroups[row['RevisionGUID']] << row
         end
         puts "grouping GUIDs into single edits"
-        groupededits = {}
+        groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
-          groupededits[edit[0]['PostId']] = [] unless groupededits[edit[0]['PostId']]
           result = { 
             :post_id => edit[0]['PostId'],
             :comment => edit[0]['Comment'],
