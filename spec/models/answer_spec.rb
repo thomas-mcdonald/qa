@@ -1,5 +1,6 @@
 require 'spec_helper'
+require 'concerns/voteable_examples'
 
 describe Answer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it_should_behave_like 'voteable'
 end
