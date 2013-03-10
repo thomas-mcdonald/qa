@@ -3,7 +3,8 @@ module QA
     class StackExchange
       def initialize(dir)
         @dir = dir
-        create_users
+        @users = create_users
+        create_posts
       end
 
       def create_users
@@ -14,6 +15,76 @@ module QA
           users << User.new(name: u["DisplayName"], email: FactoryGirl.generate(:email), id: u["Id"])
         end
         User.import users
+        uhash = {}
+        users.each do |u|
+          uhash[u.id] = u
+        end
+        uhash
+      end
+
+      def create_posts
+        posts = Nokogiri::XML::Document.parse(File.read("#{@dir}/posts.xml")).css('posts row')
+        post_history = Nokogiri::XML::Document.parse(File.read("#{@dir}/posthistory.xml")).css('posthistory row')
+        answers = questions = []
+        posts.each do |post|
+          if post['PostTypeId'] == "1"
+            questions << post
+          elsif post['PostTypeId'] == "2"
+            answers << post
+          end
+        end
+        puts "sorting histories by GUID"
+        guidgroups = {}
+        post_history.each do |row|
+          guidgroups[row['RevisionGUID']] = [] unless guidgroups[row['RevisionGUID']]
+          guidgroups[row['RevisionGUID']] << row
+        end
+        puts "grouping GUIDs into single edits"
+        groupededits = {}
+        guidgroups.each do |key, edit|
+          groupededits[edit[0]['PostId']] = [] unless groupededits[edit[0]['PostId']]
+          result = { 
+            :post_id => edit[0]['PostId'],
+            :comment => edit[0]['Comment'],
+            :user_id => edit[0]['UserId'],
+            :created_at => edit[0]['CreationDate']
+          }
+          edit.each do |attr|
+            result[:new_record] = true if [1, 2, 3].include? attr['PostHistoryTypeId'].to_i
+            case attr['PostHistoryTypeId']
+            when "1", "4", "7"
+              result[:title] = attr["Text"]
+            when "2", "5", "8"
+              result[:body] = attr["Text"]
+            when "3", "6", "9"
+              # Handle what appears to be an edge case where a question has no tags... sigh.
+              if attr["Text"]
+                result[:tag_list] = attr["Text"].split("><").each { |t| t.gsub!(/[<>]/, "") }.join(",")
+              else
+                result[:tag_list] = "untagged"
+              end
+            end
+          end
+          groupededits[edit[0]['PostId']] << result
+        end
+
+        puts "Beginning insertion of questions"
+        posts = []
+        questions.each do |q|
+          qu = Question.new
+          edits = groupededits[q['Id']]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
+          edits.delete originator
+          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
+
+          qu.title = originator[:title]
+          qu.body = originator[:body]
+          qu.user_id = @users[originator[:user_id].to_i].id
+          qu.created_at = DateTime.parse(originator[:created_at])
+          qu.save
+          posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
+        end
+
       end
     end
   end
