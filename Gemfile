@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.beta1'
 
 gem 'jquery-rails'
+gem 'pg'
 gem 'redcarpet', '~> 2.2.2'
 gem 'simple_form', '~> 3.0.0.beta1'
-gem 'sqlite3'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
