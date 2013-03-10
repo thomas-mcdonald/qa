@@ -1,4 +1,4 @@
-== QA
+## QA
 
 [![Code Climate](https://codeclimate.com/github/thomas-mcdonald/qa.png)](https://codeclimate.com/github/thomas-mcdonald/qa)
 
