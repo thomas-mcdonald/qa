@@ -1,0 +1,27 @@
+.vote-controls {
+  @include makeColumn(1);
+
+  .vote-form {
+    margin-left: 20px;
+    width: 30px;
+  }
+
+  .vote-count {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .arrow {
+    background: none;
+    border: none;
+    font-size: 20px;
+    height: 20px;
+    width: 30px;
+  }
+
+  .vote-active {
+    color: green;
+  }
+}

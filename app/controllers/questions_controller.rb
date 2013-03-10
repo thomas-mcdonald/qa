@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
   private
 
   def load_and_verify_slug
-    @question = Question.find(params[:id])
+    @question = Question.includes(:votes).find(params[:id])
     if params[:slug] != @question.slug
       redirect_to @question
     end
