@@ -1,6 +1,6 @@
 .bundle
 db/*.sqlite3
-lib/importdata/*
+lib/import/data
 log/*.log
 .sass-cache/
 tmp/

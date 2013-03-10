@@ -2,10 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0.beta1'
 
+gem 'activerecord-import', github: 'spectator/activerecord-import', branch: 'rails4' # fork for Rails 4 ~> 0.3.1
 gem 'jquery-rails'
+gem 'pg'
 gem 'redcarpet', '~> 2.2.2'
 gem 'simple_form', '~> 3.0.0.beta1'
-gem 'sqlite3'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
@@ -28,7 +29,7 @@ group :development do
   # Guard for autorunning tests
   gem 'guard', '~> 1.6.2'
   gem 'guard-cucumber', '~> 1.3.2'
-  gem 'guard-rspec', '~> 2.4.1'
+  gem 'guard-rspec', '~> 2.5.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end
