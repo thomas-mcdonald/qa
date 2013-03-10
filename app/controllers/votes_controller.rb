@@ -2,8 +2,12 @@ class VotesController < ApplicationController
   before_filter :require_login
 
   def create
-    @vote = current_user.votes.create(vote_params)
-    render json: @vote
+    @vote = current_user.votes.new(vote_params)
+    if @vote.save
+      render json: @vote
+    else
+      render json: { errors: @vote.errors.full_messages }, status: 422
+    end
   end
 
   private
