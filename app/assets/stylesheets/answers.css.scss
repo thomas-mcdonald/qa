@@ -2,9 +2,11 @@
 // not much
 
 .answers {
-  @include makeRow();
-
   .answer {
-    @include makeColumn(12);
+    @include makeRow();
+
+    .body {
+      @include makeColumn(12);
+    }
   }
 }

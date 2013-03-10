@@ -15,9 +15,14 @@
 </div>
 
 <div class="answers">
+  <div class="page-header">
+    <h3><%= pluralize @answers.size, "Answer" %></h3>
+  </div>
   <% @answers.each do |answer| %>
     <div class="answer" id="answer-<%= answer.id %>">
-      <%= answer.body%>
+      <div class="body">
+        <%=format answer.body%>
+      </div>
     </div>
   <% end %>
 </div>
