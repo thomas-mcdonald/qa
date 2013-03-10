@@ -23,4 +23,9 @@ FactoryGirl.define do
     question
     user
   end
+
+  factory :upvote, class: Vote do
+    association :post, factory: :question
+    vote_type_id 1
+  end
 end

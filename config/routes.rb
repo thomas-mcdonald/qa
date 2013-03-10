@@ -8,6 +8,7 @@ Qa::Application.routes.draw do
   resources :questions, only: [:create, :show]
 
   resources :answers, only: [:create]
+  resources :votes, only: [:create]
 
   get '/users/:id/:slug', to: 'users#show'
   resources :users, only: [:create, :show]
