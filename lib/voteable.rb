@@ -9,7 +9,7 @@ module QA
     end
 
     def vote_count
-      self.votes.where(vote_type_id: [1, 2]).inject(0) { |sum, v| v.vote_type_id == 1 ? sum + 1 : sum - 1 }
+      self.votes.select { |v| [1,2].include? v.vote_type_id }.inject(0) { |sum, v| v.vote_type_id == 1 ? sum + 1 : sum - 1 }
     end
   end
 end
