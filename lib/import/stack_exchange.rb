@@ -25,14 +25,8 @@ module QA
       def create_posts
         posts = Nokogiri::XML::Document.parse(File.read("#{@dir}/posts.xml")).css('posts row')
         post_history = Nokogiri::XML::Document.parse(File.read("#{@dir}/posthistory.xml")).css('posthistory row')
-        answers = questions = []
-        posts.each do |post|
-          if post['PostTypeId'] == "1"
-            questions << post
-          elsif post['PostTypeId'] == "2"
-            answers << post
-          end
-        end
+        questions = posts.select { |p| p["PostTypeId"] == "1" }
+        answers = posts.select { |p| p["PostTypeId"] == "2" }
         puts "sorting histories by GUID"
         guidgroups = {}
         post_history.each do |row|
@@ -90,9 +84,8 @@ module QA
           next if posts[a['ParentId'].to_i].blank?
           an = Answer.new
           edits = groupededits[a['Id']]
-          originator = (edits.select { |v| v[:new_record] = true })[0]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
           edits.delete originator
-          puts a unless originator
           next unless @users[originator[:user_id].to_i]
 
           an.question_id = posts[a['ParentId'].to_i][:id]
