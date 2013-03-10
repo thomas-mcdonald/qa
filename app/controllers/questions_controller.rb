@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.answers
+    @answers = @question.answers.includes(:votes)
     @answer = Answer.new
   end
 
