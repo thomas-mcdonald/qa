@@ -85,6 +85,23 @@ module QA
           posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
 
+        puts "inserting answers"
+        answers.each do |a|
+          next if posts[a['ParentId'].to_i].blank?
+          an = Answer.new
+          edits = groupededits[a['Id']]
+          originator = (edits.select { |v| v[:new_record] = true })[0]
+          edits.delete originator
+          puts a unless originator
+          next unless @users[originator[:user_id].to_i]
+
+          an.question_id = posts[a['ParentId'].to_i][:id]
+          an.body = originator[:body]
+          an.user_id = @users[originator[:user_id].to_i]
+          an.created_at = DateTime.parse(originator[:created_at])
+          next unless an.save
+          posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
+        end
       end
     end
   end
