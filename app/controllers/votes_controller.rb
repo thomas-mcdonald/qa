@@ -13,6 +13,14 @@ class VotesController < ApplicationController
     end
   end
 
+  def destroy
+    @vote = current_user.votes.find(params[:id]).destroy
+    render json: {
+      content: render_to_string(partial: 'votes/create', layout: false, locals: { post: @vote.post, vote_type_id: @vote.vote_type_id }),
+      count: @vote.post.vote_count
+    }
+  end
+
   private
 
   def vote_params
