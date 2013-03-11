@@ -3,7 +3,10 @@
 </div>
 
 <div class="question" id="question-<%= @question.id %>">
-  <div class="body"><%=format @question.body %></div>
+  <div class="main">
+    <div class="vote-controls"><%= vote_controls(@question) %></div>
+    <div class="body"><%=format @question.body %></div>
+  </div>
   <div class="meta">
     <div class="links">
       <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
@@ -20,8 +23,9 @@
   </div>
   <% @answers.each do |answer| %>
     <div class="answer" id="answer-<%= answer.id %>">
-      <div class="body">
-        <%=format answer.body%>
+      <div class="main">
+        <div class="vote-controls"><%= vote_controls(answer) %></div>
+        <div class="body"><%=format answer.body%></div>
       </div>
     </div>
   <% end %>

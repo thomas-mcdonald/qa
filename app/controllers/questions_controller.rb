@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answers = @question.answers
+    @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
 
@@ -36,7 +37,7 @@ class QuestionsController < ApplicationController
   private
 
   def load_and_verify_slug
-    @question = Question.find(params[:id])
+    @question = Question.includes(:votes).find(params[:id])
     if params[:slug] != @question.slug
       redirect_to @question
     end

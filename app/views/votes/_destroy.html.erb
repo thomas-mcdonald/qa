@@ -1,0 +1,2 @@
+<% value = vote.vote_type_id == 1 ? '&#xf077;' : '&#xf078;' %>
+<%= button_to value.html_safe, vote, method: :delete, remote: true, class: 'arrow fa-input vote-active', form_class: 'vote-form' %>

@@ -1,0 +1,7 @@
+<form action="/votes" method="post" data-remote="true" class="vote-form" id="<%= "vote-#{post.class.name.downcase}-#{post.id}" %>">
+  <%= hidden_field_tag "vote[post_id]", post.id %>
+  <%= hidden_field_tag "vote[post_type]", post.class %>
+  <button type="submit" name="vote[vote_type_id]" value="<%= vote_type_id %>" class="arrow">
+    <i class="<%= vote_type_id == 1 ? 'icon-chevron-up' : 'icon-chevron-down' %>"></i>
+  </button>
+</form>

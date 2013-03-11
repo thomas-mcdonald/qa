@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :authorizations
   has_many :questions
+  has_many :votes
 
   accepts_nested_attributes_for :authorizations, allow_destroy: false, reject_if: proc { |obj| obj.blank? }
 
