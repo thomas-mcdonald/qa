@@ -10,10 +10,10 @@ module QA
       class Edit
         def initialize(edit)
           @result = {
-            :post_id => edit[0]['PostId'],
-            :comment => edit[0]['Comment'],
-            :user_id => edit[0]['UserId'],
-            :created_at => edit[0]['CreationDate']
+            post_id: edit[0]['PostId'],
+            comment: edit[0]['Comment'],
+            user_id: edit[0]['UserId'],
+            created_at: edit[0]['CreationDate']
           }
 
           edit.each do |attr|
