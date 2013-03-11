@@ -14,4 +14,13 @@ class Question < ActiveRecord::Base
   validates_presence_of :body, :title
 
   is_slugged :title
+
+  def votes_on_self_and_answers_by_user(user)
+    return [] if user == nil
+    votes = self.votes.where(user_id: user.id)
+    self.answers.includes(:votes).where('votes.user_id = ?', user.id).references(:votes).each do |answer|
+      votes += answer.votes
+    end
+    votes
+  end
 end
