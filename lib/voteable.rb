@@ -13,7 +13,11 @@ module QA
     end
 
     def has_vote_by_user(user, vote_type_id)
-      !self.votes.where(user_id: user.id, vote_type_id: vote_type_id).empty?
+      !!self.vote_by_user(user, vote_type_id)
+    end
+
+    def vote_by_user(user, vote_type_id)
+      self.votes.where(user_id: user.id, vote_type_id: vote_type_id).first
     end
   end
 end
