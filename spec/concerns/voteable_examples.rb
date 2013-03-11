@@ -5,19 +5,19 @@ shared_examples_for 'voteable' do
 
   context 'vote_count' do
     it 'counts upvotes as 1' do
-      item.votes << Vote.new(vote_type_id: 1)
+      item.votes << FactoryGirl.build(:upvote)
       item.vote_count.should == 1
     end
 
     it 'counts downvotes as -1' do
-      item.votes << Vote.new(vote_type_id: 2)
+      item.votes << FactoryGirl.build(:downvote)
       item.vote_count.should == -1
     end
 
     it 'handles a series of votes' do
-      item.votes << Vote.new(vote_type_id: 1)
-      item.votes << Vote.new(vote_type_id: 2)
-      item.votes << Vote.new(vote_type_id: 1)
+      item.votes << FactoryGirl.build(:upvote)
+      item.votes << FactoryGirl.build(:downvote)
+      item.votes << FactoryGirl.build(:upvote)
 
       item.vote_count.should == 1
     end
