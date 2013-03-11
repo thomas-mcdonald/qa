@@ -1,5 +1,5 @@
 $(document).ready ->
-  $(".vote-form").on 'ajax:success', (event, xhr, status) ->
+  $(".vote-controls").on 'ajax:success', '.vote-form', (event, xhr, status) ->
     $(this).parent().find('.vote-count').html(xhr.count)
     $(this).replaceWith(xhr.content)
 
