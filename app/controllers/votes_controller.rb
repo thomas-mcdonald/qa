@@ -4,7 +4,10 @@ class VotesController < ApplicationController
   def create
     @vote = current_user.votes.new(vote_params)
     if @vote.save
-      render partial: 'votes/destroy', layout: false, locals: { vote: @vote }
+      render json: {
+        content: render_to_string(partial: 'votes/destroy', layout: false, locals: { vote: @vote }),
+        count: @vote.post.vote_count
+      }
     else
       render json: { errors: @vote.errors.full_messages }, status: 422
     end
