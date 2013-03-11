@@ -2,10 +2,8 @@ class Vote < ActiveRecord::Base
   belongs_to :post, polymorphic: true
   belongs_to :user
 
-  TYPES = {
-    UPVOTE: 1,
-    DOWNVOTE: 2
-  }
+  UPVOTE = 1
+  DOWNVOTE = 2
 
   validates_presence_of :post_type, :post_id, :user_id, :vote_type_id
   validate :validate_one_updown_vote

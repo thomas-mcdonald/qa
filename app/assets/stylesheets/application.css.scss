@@ -15,6 +15,12 @@ html .control-group.hidden { margin-bottom: 0; }
   margin-bottom: 20px;
 }
 
+// input that should use font-awesome
+.fa-input {
+  background-color: transparent;
+  font-family: FontAwesome;
+}
+
 @import "answers";
 @import "questions";
 @import "users";

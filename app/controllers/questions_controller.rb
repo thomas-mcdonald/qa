@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.answers.includes(:votes)
+    @answers = @question.answers
+    @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
 
