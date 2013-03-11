@@ -4,6 +4,3 @@ script: "bundle exec rake travis"
 rvm:
   - 1.9.3
   - 2.0.0
-env:
-  - BUILD_TYPE=cucumber
-  - BUILD_TYPE=rspec
