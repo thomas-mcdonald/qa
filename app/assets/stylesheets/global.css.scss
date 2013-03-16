@@ -1,0 +1,31 @@
+// This file includes Bootstrap fixes and other 'global' customisation
+
+// Fix for static navbar not having width
+.navbar-inner > .container {
+  width:940px;
+}
+
+// remove gradient & rounded corners from navbar
+.navbar > .navbar-inner {
+  @include border-radius(none);
+  background: white;
+}
+
+// Hidden form fields should have no height or etc
+html .control-group.hidden { margin-bottom: 0; }
+
+// remove the padding and reduce the border on page-header.. really?
+.page-header {
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+
+// input that should use font-awesome
+.fa-input {
+  background-color: transparent;
+  font-family: FontAwesome;
+}
+
+#body { float: left; width: 700px; }
+
+#sidebar { float: left; width: 220px; margin-left: 20px; }
