@@ -1,5 +1,6 @@
 .vote-controls {
   @include makeColumn(1);
+  margin-bottom: 15px;
 
   .vote-form {
     margin: 0 0 5px 20px;
