@@ -9,6 +9,16 @@ Given(/^I am logged in$/) do
   step 'I should be logged in'
 end
 
+Given(/^I am not logged in$/) do
+  visit '/'
+  step 'I click on the logout button' unless has_content?("Login")
+end
+
+When(/^I click on the logout button$/) do
+  click_link_or_button("user-dropdown")
+  click_link_or_button("logout")
+end
+
 When(/^I click on the Google provider$/) do
   click_link_or_button("google-login")
 end
@@ -29,6 +39,10 @@ Then(/^I should have a user created with those details$/) do
   user =  User.where('name = ?', google_hash[:info][:name]).where('email = ?', google_hash[:info][:email]).first
   assert user
   assert user.authorizations.length == 1
+end
+
+Then(/^I should be logged out$/) do
+  should have_content("Login")
 end
 
 Then(/^I should be logged in$/) do

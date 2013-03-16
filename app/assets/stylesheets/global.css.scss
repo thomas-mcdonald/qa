@@ -26,6 +26,42 @@ html .control-group.hidden { margin-bottom: 0; }
   font-family: FontAwesome;
 }
 
+// logout button in dropdown menu
+.dropdown-menu {
+  form {
+    margin: 0;
+  }
+
+  // can't extend nested elements :(
+  input[type="submit"] {
+    background: transparent;
+    border: none;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #333333;
+    text-align: left;
+    width: 160px;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: none;
+      color: white;
+      background-color: #0081c2;
+      background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+      background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+      background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+      background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0088CC', endColorstr='#FF0077B3', GradientType=0);
+    }
+  }
+}
+
+
 #body { float: left; width: 700px; }
 
 #sidebar { float: left; width: 220px; margin-left: 20px; }
