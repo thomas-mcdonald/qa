@@ -34,12 +34,12 @@
   @include makeRow();
 
   .body {
-    @include makeColumn(11);
+    @include makeColumn(8);
     margin-bottom: 15px;
   }
 
   .meta {
-    @include makeColumn(12);
+    @include makeColumn(9);
     border-top: 1px solid #ebebeb;
     padding-top: 10px;
   }
