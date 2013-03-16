@@ -73,6 +73,7 @@ module QA
 
           qu.title = originator[:title]
           qu.body = originator[:body]
+          qu.tag_list = originator[:tag_list]
           qu.user_id = @users[originator[:user_id].to_i].id
           qu.created_at = DateTime.parse(originator[:created_at])
           qu.save
