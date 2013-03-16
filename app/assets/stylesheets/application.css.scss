@@ -2,9 +2,16 @@
 @import "custom-bootstrap";
 @import "font-awesome";
 
-
 // Fix for static navbar not having width
-.navbar-inner > .container { width:940px; }
+.navbar-inner > .container {
+  width:940px;
+}
+
+// remove gradient & rounded corners from navbar
+.navbar > .navbar-inner {
+  @include border-radius(none);
+  background: white;
+}
 
 // Hidden form fields should have no height or etc
 html .control-group.hidden { margin-bottom: 0; }
