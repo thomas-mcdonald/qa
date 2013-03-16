@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
-    @questions = Question.includes(:user).page(params[:page]).load
+    @questions = Question.includes(:tags, :user).page(params[:page]).load
   end
 
   def show
