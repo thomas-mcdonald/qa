@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def allow_mini_profiler
-    Rack::MiniProfiler.authorize_request
+    Rack::MiniProfiler.authorize_request unless Rails.env.test?
   end
 
   def current_user
