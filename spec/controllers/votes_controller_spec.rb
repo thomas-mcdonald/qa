@@ -6,7 +6,8 @@ describe VotesController do
 
   context 'create' do
     it 'requires login' do
-      -> { post :create }.should raise_error(QA::NotLoggedIn)
+      post :create
+      response.status.should == 401
     end
 
     context 'logged in' do

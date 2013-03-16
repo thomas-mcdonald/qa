@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_filter :require_login
+  before_filter :json_require_login
 
   def create
     @vote = current_user.votes.new(vote_params)
@@ -22,6 +22,12 @@ class VotesController < ApplicationController
   end
 
   private
+
+  def json_require_login
+    if !logged_in?
+      render json: { errors: 'You must be logged in to vote' }, status: 401 and return
+    end
+  end
 
   def vote_params
     params.require(:vote).permit(:post_id, :post_type, :vote_type_id)
