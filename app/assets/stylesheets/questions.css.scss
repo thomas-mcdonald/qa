@@ -13,6 +13,17 @@
     margin-bottom: 8px;
   }
 
+  .tags {
+    float: left;
+    margin-left: 0;
+    list-style-type: none;
+
+    li {
+      float: left;
+      margin-right: 6px;
+    }
+  }
+
   .last-activity {
     float: right;
     font-size: 11px;
@@ -26,6 +37,10 @@
     height: 40px;
     line-height: normal;
     width: 620px;
+  }
+
+  #question_body {
+    height: 250px;
   }
 }
 

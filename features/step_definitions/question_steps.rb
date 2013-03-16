@@ -1,7 +1,6 @@
 # steps relating to questions
 Given(/^I have a question$/) do
-  FactoryGirl.create(:user)
-  @question = Question.create(title: 'This is the title of the question', body: 'nope I am not that bothered', user: User.first)
+  @question = FactoryGirl.create(:question)
 end
 
 Given(/^I am on the question page$/) do
@@ -12,9 +11,16 @@ When(/^I click on the Ask Question button$/) do
   find(:xpath, '//a[@href="/ask"]').click
 end
 
+When(/^I fill in the form with question data but without any tags$/) do
+  step 'I fill in the form with question data'
+  fill_in 'question_tag_list', with: ''
+end
+
 When(/^I fill in the form with question data$/) do
-  fill_in 'question_title', with: "Example title of question?"
-  fill_in 'question_body', with: "A really long and confusion body to a non existant question. Plese advise?"
+  @data = FactoryGirl.attributes_for(:question)
+  fill_in 'question_title', with: @data[:title]
+  fill_in 'question_body', with: @data[:body]
+  fill_in 'question_tag_list', with: @data[:tag_list]
 end
 
 Then(/^I should be on the question page$/) do
@@ -22,7 +28,16 @@ Then(/^I should be on the question page$/) do
   current_path.should match(/questions\/\d/)
 end
 
+Then(/^I should still be on the new question page$/) do
+  current_path.should == '/questions'
+  should have_content 'Ask Question'
+end
+
 Then(/^I should see the question$/) do
-  should have_content("Example title of question?")
-  should have_content("A really long and confusion") # etc
+  should have_content(@data[:title])
+  should have_content(@data[:body]) # etc
+end
+
+Then(/^I should see that there is an error with the tags$/) do
+  should have_content('Question must be tagged')
 end

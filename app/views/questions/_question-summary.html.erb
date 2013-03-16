@@ -1,6 +1,11 @@
 <div id="question-<%= question.id %>" class="row">
   <div class="question-summary">
     <h3><%= link_to question.title, question %></h3>
+    <ul class="tags">
+      <% question.tags.each do |tag| %>
+        <li class="btn tag"><%= tag.name %></li>
+      <% end %>
+    </ul>
     <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.created_at %> ago</span> <%= link_to question.user.name, question.user %></p>
   </div>
 </div>

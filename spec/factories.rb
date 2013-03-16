@@ -15,6 +15,7 @@ FactoryGirl.define do
   factory :question do
     title 'How do I aaaaa'
     body 'What is the best way'
+    tag_list 'example-tag, multiple'
     user
   end
 
