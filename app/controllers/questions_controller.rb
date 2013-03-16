@@ -20,8 +20,11 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-    @question.save
-    redirect_to @question
+    if @question.save
+      redirect_to @question
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -45,6 +48,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:body, :title)
+    params.require(:question).permit(:body, :tag_list, :title)
   end
 end

@@ -21,3 +21,11 @@ Feature: Create question
     And I click on the submit button
     Then I should be on the question page
     And I should see the question
+
+  Scenario: Cannot create question without tag data
+    Given I am logged in
+    And I am on the new question page
+    When I fill in the form with question data but without any tags
+    And I click on the submit button
+    Then I should still be on the new question page
+    And I should see that there is an error with the tags
