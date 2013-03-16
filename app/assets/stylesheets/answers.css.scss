@@ -6,7 +6,7 @@
     @include makeRow();
 
     .body {
-      @include makeColumn(11);
+      @include makeColumn(8);
     }
   }
 }
