@@ -1,7 +1,6 @@
 # steps relating to questions
 Given(/^I have a question$/) do
-  FactoryGirl.create(:user)
-  @question = Question.create(title: 'This is the title of the question', body: 'nope I am not that bothered', user: User.first)
+  @question = FactoryGirl.create(:question)
 end
 
 Given(/^I am on the question page$/) do
