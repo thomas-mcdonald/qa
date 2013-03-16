@@ -14,7 +14,8 @@
     width: 30px;
   }
 
-  .arrow {
+  // more specific to avoid popover css conflict
+  form .arrow {
     background: none;
     border: none;
     font-size: 20px;

@@ -4,7 +4,12 @@ $(document).ready ->
     $(this).replaceWith(xhr.content)
 
   $(".vote-form").on 'ajax:error', (event, xhr, status) ->
-    # TODO: handle error on vote submit
-    console.log event
-    console.log xhr
-    console.log status
+    $t = $(this)
+    json = $.parseJSON(xhr.responseText)
+    $t.popover
+      content: json.errors
+      placement: 'bottom'
+      trigger: 'manual'
+    $t.popover('show')
+    $(document).one 'click', ->
+      $t.popover('destroy')
