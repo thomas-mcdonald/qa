@@ -8,7 +8,7 @@ class Question < ActiveRecord::Base
   has_many :answers
   belongs_to :user
 
-  default_scope { order('created_at DESC') }
+  default_scope { order('questions.created_at DESC') }
 
   validates_length_of :title, within: 10..150
   validates_presence_of :body, :title
