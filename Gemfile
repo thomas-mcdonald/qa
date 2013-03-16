@@ -7,6 +7,8 @@ gem 'jquery-rails'
 gem 'kaminari', '~> 0.14.1'
 gem 'pg'
 gem 'redcarpet', '~> 2.2.2'
+gem 'redis', '~> 3.0.2'
+gem 'redis-namespace', '~> 1.2.1'
 gem 'simple_form', '~> 3.0.0.beta1'
 
 # Authentication
