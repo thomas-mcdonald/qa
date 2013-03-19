@@ -16,7 +16,7 @@ gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems. Could probably go in assets group
-gem 'bootstrap-sass', '~> 2.3.0.0'
+gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'font-awesome-sass-rails'
 
 # Gems used only for assets and not required
