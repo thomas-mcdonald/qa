@@ -46,7 +46,7 @@ group :test do
   gem 'database_cleaner', github: 'bmabey/database_cleaner' # '~> 0.9.0'
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'poltergeist'
-  gem 'shoulda-matchers', '~> 1.4.0'
+  gem 'shoulda-matchers', '~> 1.5.0'
 end
 
 # require last. lol.
