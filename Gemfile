@@ -30,8 +30,8 @@ end
 group :development do
   gem 'foreman'
   # Guard for autorunning tests
-  gem 'guard', '~> 1.6.2'
-  gem 'guard-cucumber', '~> 1.3.2'
+  gem 'guard', '~> 1.7.0'
+  gem 'guard-cucumber', '~> 1.4.0'
   gem 'guard-rspec', '~> 2.5.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
