@@ -2,13 +2,8 @@ require_dependency 'qa'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :allow_mini_profiler
 
   private
-
-  def allow_mini_profiler
-    Rack::MiniProfiler.authorize_request unless Rails.env.test?
-  end
 
   def current_user
     @current_user ||= User.where('id = ?', session[:user_id]).first if session[:user_id]

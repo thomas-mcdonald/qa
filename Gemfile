@@ -48,6 +48,3 @@ group :test do
   gem 'poltergeist'
   gem 'shoulda-matchers', '~> 1.5.0'
 end
-
-# require last. lol.
-gem 'rack-mini-profiler', github: 'SamSaffron/MiniProfiler'
