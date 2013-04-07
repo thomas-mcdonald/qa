@@ -15,7 +15,7 @@ describe Question do
   context 'votes_on_self_and_answers_by_user' do
     let(:answer) { FactoryGirl.create(:answer) }
     let(:question) { answer.question }
-    let(:user) { answer.user }
+    let(:user) { FactoryGirl.create(:user) }
 
     it 'returns an empty array if user is nil' do
       question.votes_on_self_and_answers_by_user(nil).should == []
