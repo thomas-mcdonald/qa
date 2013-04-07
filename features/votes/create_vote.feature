@@ -19,3 +19,12 @@ Feature: Create vote
     When I click on the upvote question button
     Then I should see an active upvote
     And I should see an updated vote count
+
+  @javascript
+  Scenario: User cannot upvote own post
+    Given I am logged in
+    And I have a question by me
+    And I am on the question page
+    When I click on the upvote question button
+    Then I should not see an active upvote
+    And I am told I cannot vote on my own posts

@@ -3,6 +3,10 @@ Given(/^I have a question$/) do
   @question = FactoryGirl.create(:question)
 end
 
+Given(/^I have a question by me$/) do
+  @question = FactoryGirl.create(:question, user: User.last)
+end
+
 Given(/^I am on the question page$/) do
   visit question_path(@question)
 end

@@ -8,9 +8,19 @@ Then(/^I am told I have to log in$/) do
   end
 end
 
+Then(/^I am told I cannot vote on my own posts$/) do
+  within('.popover') do
+    should have_content 'You cannot vote on your own posts'
+  end
+end
+
 Then(/^I should see an active upvote$/) do
   # todo: check for upvote rather than just active vote
   should have_css('.question .vote-active')
+end
+
+Then(/^I should not see an active upvote$/) do
+  should_not have_css('.question .vote-active')
 end
 
 Then(/^I should see an updated vote count$/) do
