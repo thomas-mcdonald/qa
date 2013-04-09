@@ -4,16 +4,16 @@
 
 <div id="body">
   <div class="question" id="question-<%= @question.id %>">
+    <div class="vote-controls"><%= vote_controls(@question) %></div>
     <div class="main">
-      <div class="vote-controls"><%= vote_controls(@question) %></div>
       <div class="body"><%=format @question.body %></div>
-    </div>
-    <div class="meta">
-      <div class="links">
-        <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
-      </div>
-      <div class="righto">
-        <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.name, @question.user %></p>
+      <div class="meta">
+        <div class="links">
+          <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
+        </div>
+        <div class="righto">
+          <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.name, @question.user %></p>
+        </div>
       </div>
     </div>
   </div>

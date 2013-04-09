@@ -48,14 +48,15 @@
 .question {
   @include makeRow();
 
-  .body {
+  .main {
     @include makeColumn(8);
+  }
+
+  .body {
     margin-bottom: 15px;
   }
 
   .meta {
-    @include makeColumn(9);
-    border-top: 1px solid #ebebeb;
     padding-top: 10px;
   }
 
