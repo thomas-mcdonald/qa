@@ -1,3 +1,14 @@
+@mixin tag-list($float: left) {
+  float: $float;
+  margin-left: 0;
+  list-style-type: none;
+
+  li {
+    float: left;
+    margin-right: 6px;
+  }
+}
+
 // questions#index
 .question-list {
   @include makeColumn(12);
@@ -14,14 +25,7 @@
   }
 
   .tags {
-    float: left;
-    margin-left: 0;
-    list-style-type: none;
-
-    li {
-      float: left;
-      margin-right: 6px;
-    }
+    @include tag-list();
   }
 
   .last-activity {
@@ -54,6 +58,11 @@
 
   .body {
     margin-bottom: 15px;
+  }
+
+  .tags {
+    @extend .clearfix;
+    @include tag-list(none);
   }
 
   .meta {

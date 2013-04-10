@@ -7,6 +7,11 @@
     <div class="vote-controls"><%= vote_controls(@question) %></div>
     <div class="main">
       <div class="body"><%=format @question.body %></div>
+      <ul class="tags">
+        <% @question.tags.each do |tag| %>
+          <li class="btn tag"><%= tag.name %></li>
+        <% end %>
+      </ul>
       <div class="meta">
         <div class="links">
           <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
