@@ -4,10 +4,17 @@ describe UsersController do
   context 'show' do
     let(:user) { FactoryGirl.create(:user) }
 
-    before do
-      get :show, id: user.id, slug: user.slug
+    context 'with slug' do
+      before do
+        get :show, id: user.id, slug: user.slug
+      end
+
+      it { should respond_with(:success) }
     end
 
-    it { should respond_with(:success) }
+    it 'redirect if slug is incorrect or missing' do
+      get :show, id: user.id
+      response.status.should == 302
+    end
   end
 end
