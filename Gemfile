@@ -5,7 +5,7 @@ gem 'rails', '4.0.0.beta1'
 gem 'activerecord-import', github: 'spectator/activerecord-import', branch: 'rails4' # fork for Rails 4 ~> 0.3.1
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.14.1'
-gem 'pg'
+gem 'pg', '~> 0.15.0'
 gem 'redcarpet', '~> 2.2.2'
 gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
