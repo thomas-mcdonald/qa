@@ -9,6 +9,13 @@ class Vote < ActiveRecord::Base
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 
+  after_save :update_post_vote_count
+  after_destroy :update_post_vote_count
+
+  def update_post_vote_count
+    self.post.update_vote_count!
+  end
+
   def validate_one_updown_vote
     if self.post.votes.where(user_id: self.user.id, vote_type_id: [1,2]).length > 0
       self.errors[:base] << 'Can only vote once on a post'

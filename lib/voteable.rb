@@ -8,8 +8,9 @@ module QA
       has_many :votes, as: :post
     end
 
-    def vote_count
-      self.votes.select { |v| [1,2].include? v.vote_type_id }.inject(0) { |sum, v| v.vote_type_id == 1 ? sum + 1 : sum - 1 }
+    def update_vote_count!
+      self.vote_count = self.votes.where(vote_type_id: [1,2]).inject(0) { |sum, v| v.vote_type_id == 1 ? sum + 1 : sum - 1 }
+      save
     end
 
     def has_vote_by_user(user, vote_type_id)
