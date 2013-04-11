@@ -2,7 +2,7 @@
   <div class="mini-counts">
     <div class="mini-count"><div class="num"><%= question.vote_count %></div><div>votes</div></div>
     <div class="mini-count"><div class="num"><%= question.answers.count %></div><div>answers</div></div>
-    <div class="mini-count"><div class="num"><%= question.view_count %></div><div>views</div></div>
+    <div class="mini-count"><div class="num"><%= views_formatted(question.view_count) %></div><div>views</div></div>
   </div>
   <div class="question-summary">
     <h3><%= link_to question.title, question %></h3>
