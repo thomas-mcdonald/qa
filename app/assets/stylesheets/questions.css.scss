@@ -1,5 +1,5 @@
 %tag-list {
-  margin-left: 0;
+  margin: 0;
   list-style-type: none;
 
   li {
@@ -11,22 +11,32 @@
 // questions#index
 .question-list {
   @include makeColumn(12);
+
+  > div {
+    border-bottom: 1px solid #eee;
+    margin-top: 1px;
+    padding-bottom: 10px;
+  }
 }
 
 .question-summary {
-  @include makeColumn(11); // leave wide for now
+  @include makeColumn(8.75); // leave wide for now
   margin-left: 10px;
-  padding-top: 5px;
 
   h3 {
+    font-size: 18px;
     font-weight: normal;
     line-height: 32px;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
   }
 
   .tags {
     float: left;
     @extend %tag-list;
+  }
+
+  > p {
+    margin-bottom: 0;
   }
 
   .last-activity {
