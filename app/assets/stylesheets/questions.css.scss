@@ -19,6 +19,19 @@
   }
 }
 
+.mini-counts {
+  @include makeColumn(2.25);
+  margin-top: 14px;
+
+  > div {
+    float: left;
+    text-align: center;
+    width: 53px;
+    .num { font-size: 16px; }
+    &.unanswered { color: darken($red, 3%); }
+  }
+}
+
 .question-summary {
   @include makeColumn(8.75); // leave wide for now
   margin-left: 10px;
