@@ -102,3 +102,11 @@
     float: right;
   }
 }
+
+#sidebar .summary {
+  list-style-type: none;
+
+  li span {
+    font-weight: 600;
+  }
+}

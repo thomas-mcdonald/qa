@@ -52,5 +52,9 @@
 </div>
 
 <div id="sidebar">
-  viewed <%= pluralize @question.view_count, "time" %>
+  <ul class="summary">
+    <li>asked <span><%= time_ago_in_words @question.created_at %></span> ago</li>
+    <li>viewed <span><%= pluralize @question.view_count, "time" %></span></li>
+    <li>active <span><%= time_ago_in_words @question.last_active_at %></span> ago</li>
+  </ul>
 </div>

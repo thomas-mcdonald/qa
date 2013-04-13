@@ -12,6 +12,15 @@ describe Question do
 
   it_should_behave_like 'voteable'
 
+  context '#update_last_activity' do
+    let(:question) { FactoryGirl.build(:question) }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before { question.update_last_activity(user) }
+
+    pending 'look into Timecop for testing time updates'
+  end
+
   context 'votes_on_self_and_answers_by_user' do
     let(:answer) { FactoryGirl.create(:answer) }
     let(:question) { answer.question }

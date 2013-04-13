@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.update_last_activity(current_user)
     @question.user = current_user
     if @question.save
       redirect_to @question
@@ -34,6 +35,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     @question.update_attributes!(question_params)
+    @question.update_last_activity(current_user)
     @question.save
     redirect_to @question
   end
