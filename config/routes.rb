@@ -3,7 +3,7 @@ Qa::Application.routes.draw do
   get '/ask', to: 'questions#new', as: 'new_question'
   get '/questions/new' => redirect('/ask')
   get '/questions/:id/:slug', to: 'questions#show'
-  put '/questions/:id/:slug', to: 'questions#update'
+  patch '/questions/:id/:slug', to: 'questions#update'
   get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
 
