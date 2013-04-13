@@ -1,8 +1,8 @@
 <div id="question-<%= question.id %>" class="row">
   <div class="mini-counts">
-    <div class="mini-count"><div class="num"><%= question.vote_count %></div><div>votes</div></div>
-    <div class="mini-count"><div class="num"><%= question.answers.count %></div><div>answers</div></div>
-    <div class="mini-count"><div class="num"><%= views_formatted(question.view_count) %></div><div>views</div></div>
+    <div class="mini-count"><div class="num"><%= question.vote_count %></div><div><%= "vote".pluralize(question.vote_count) %></div></div>
+    <div class="mini-count"><div class="num"><%= question.answers.count %></div><div><%= "answer".pluralize(question.answers.count) %></div></div>
+    <div class="mini-count"><div class="num"><%= views_formatted(question.view_count) %></div><div><%= "view".pluralize(question.view_count) %></div></div>
   </div>
   <div class="question-summary">
     <h3><%= link_to question.title, question %></h3>
