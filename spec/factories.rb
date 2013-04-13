@@ -13,8 +13,10 @@ FactoryGirl.define do
   end
 
   factory :question do
+    association :last_active_user, factory: :user
     title 'How do I aaaaa'
     body 'What is the best way'
+    last_active_at DateTime.current
     tag_list 'example-tag, multiple'
     user
   end
