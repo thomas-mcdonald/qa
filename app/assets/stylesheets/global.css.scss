@@ -7,7 +7,7 @@
 
 // remove gradient & rounded corners from navbar
 .navbar > .navbar-inner {
-  @include border-radius(none);
+  @include border-radius(0);
   background: white;
 }
 
