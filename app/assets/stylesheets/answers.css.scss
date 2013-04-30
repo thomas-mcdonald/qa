@@ -5,7 +5,7 @@
   .answer {
     @include makeRow();
 
-    .body {
+    .main {
       @include makeColumn(8);
     }
   }
