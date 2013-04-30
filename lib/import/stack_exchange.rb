@@ -75,7 +75,9 @@ module QA
           qu.body = originator[:body]
           qu.tag_list = originator[:tag_list]
           qu.user_id = @users[originator[:user_id].to_i].id
+          qu.last_active_user_id = @users[originator[:user_id].to_i].id
           qu.created_at = DateTime.parse(originator[:created_at])
+          qu.last_active_at = DateTime.parse(originator[:created_at])
           qu.save
           posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
@@ -92,7 +94,9 @@ module QA
           an.question_id = posts[a['ParentId'].to_i][:id]
           an.body = originator[:body]
           an.user_id = @users[originator[:user_id].to_i]
+          an.last_active_user_id = @users[originator[:user_id].to_i].id
           an.created_at = DateTime.parse(originator[:created_at])
+          an.last_active_at = DateTime.parse(originator[:created_at])
           next unless an.save
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
