@@ -28,14 +28,7 @@
       <div class="page-header">
         <h3><%= pluralize @answers.size, "Answer" %></h3>
       </div>
-      <% @answers.each do |answer| %>
-        <div class="answer" id="answer-<%= answer.id %>">
-          <div class="vote-controls"><%= vote_controls(answer) %></div>
-          <div class="main">
-            <div class="body"><%=format answer.body%></div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: 'answers/answer', collection: @answers %>
     </div>
   <% end %>
 
