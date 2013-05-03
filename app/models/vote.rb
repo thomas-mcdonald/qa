@@ -10,8 +10,20 @@ class Vote < ActiveRecord::Base
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 
+  after_save :create_reputation_events
   after_save :update_post_vote_count
   after_destroy :update_post_vote_count
+
+  def create_reputation_events
+    if self.post.class == Question
+      r = ReputationEvent.new
+      r.action = self
+      r.event_type = 1
+      r.user = self.post.user
+      r.save
+    else
+    end
+  end
 
   def update_post_vote_count
     self.post.update_vote_count!
