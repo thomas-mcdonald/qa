@@ -16,11 +16,7 @@ class Vote < ActiveRecord::Base
 
   def create_reputation_events
     if self.post.class == Question
-      r = ReputationEvent.new
-      r.action = self
-      r.event_type = 1
-      r.user = self.post.user
-      r.save
+      ReputationEvent.create_for_receiving_question_upvote(self)
     else
     end
   end

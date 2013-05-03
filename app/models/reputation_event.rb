@@ -12,4 +12,11 @@ class ReputationEvent < ActiveRecord::Base
     { action: 'receive answer downvote',
       reputation: -5 }
   ]
+
+  def self.create_for_receiving_question_upvote(vote)
+    vote.post.user.reputation_events.create(
+      action: vote,
+      event_type: 1
+    )
+  end
 end

@@ -14,7 +14,7 @@ describe Vote do
         vote = FactoryGirl.build(:upvote, post: question)
         vote.create_reputation_events
         re = ReputationEvent.where(action: vote).first
-        re.event_type == 1
+        re.event_type.should == 1
       end
     end
   end
