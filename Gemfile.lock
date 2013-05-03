@@ -5,6 +5,14 @@ GIT
     database_cleaner (0.9.1)
 
 GIT
+  remote: git://github.com/irfn/seed-fu.git
+  revision: feb70cf0c0b4f20b09d03335a2d9792544876f31
+  specs:
+    seed-fu (2.3.1)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+
+GIT
   remote: git://github.com/spectator/activerecord-import.git
   revision: b7851b1b0bb50412240d37afe2ceeb10af406b99
   branch: rails4
@@ -271,6 +279,7 @@ DEPENDENCIES
   redis-namespace (~> 1.2.1)
   rspec-rails (~> 2.9)
   sass-rails (~> 4.0.0.beta1)
+  seed-fu!
   shoulda-matchers (~> 1.5.0)
   simple_form (~> 3.0.0.beta1)
   terminal-notifier-guard

@@ -9,6 +9,7 @@ gem 'pg', '~> 0.15.0'
 gem 'redcarpet', '~> 2.2.2'
 gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
+gem 'seed-fu', github: 'irfn/seed-fu'
 gem 'simple_form', '~> 3.0.0.beta1'
 
 # Authentication
