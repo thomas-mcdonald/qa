@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   has_many :tags, through: :taggings
   belongs_to :user
 
-  default_scope { order('questions.created_at DESC') }
+  default_scope { order('questions.last_active_at DESC') }
 
   validates_length_of :title, within: 10..150
   validates_presence_of :body, :title, :last_active_user_id, :last_active_at
