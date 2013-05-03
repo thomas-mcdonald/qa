@@ -18,4 +18,9 @@ Qa::Application.routes.draw do
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
   post '/auth/:provider/callback', to: 'authorizations#callback'
+
+  # development routes
+  if Rails.env.development?
+    get '/dev/login', to: 'dev#login'
+  end
 end
