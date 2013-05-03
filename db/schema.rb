@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130413185828) do
+ActiveRecord::Schema.define(version: 20130502145148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20130413185828) do
     t.integer  "vote_count",          default: 0, null: false
     t.integer  "last_active_user_id"
     t.datetime "last_active_at"
+    t.integer  "answers_count"
   end
 
   create_table "taggings", force: true do |t|

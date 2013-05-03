@@ -5,6 +5,7 @@ module QA
         @dir = dir
         @users = create_users
         create_posts
+        update_counters
       end
 
       class Edit
@@ -99,6 +100,13 @@ module QA
 #          an.last_active_at = DateTime.parse(originator[:created_at])
           next unless an.save
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
+        end
+      end
+
+      def update_counters
+        puts "updating cache column counters"
+        Question.all.each do |q|
+          Question.update_counters q.id, answers_count: q.answers.length
         end
       end
 
