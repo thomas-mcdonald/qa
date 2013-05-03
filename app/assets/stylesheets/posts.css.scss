@@ -1,0 +1,13 @@
+// This contains styling used in both displaying questions & answers
+
+.post {
+  @include makeRow();
+
+  .main {
+    @include makeColumn(8);
+  }
+
+  .body { margin-bottom: 15px; }
+  .links { float: left; }
+  .righto { float: right; }
+}

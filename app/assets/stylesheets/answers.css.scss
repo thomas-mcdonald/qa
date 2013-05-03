@@ -3,29 +3,12 @@
 
 .answers {
   .answer {
-    @include makeRow();
     padding-bottom: 15px;
     border-bottom: 1px solid #efefef;
     margin-bottom: 15px;
 
     &:last-child {
       border-bottom: none;
-    }
-
-    .main {
-      @include makeColumn(8);
-    }
-
-    .body {
-      margin-bottom: 15px;
-    }
-
-    .links {
-      float: left;
-    }
-
-    .righto {
-      float: right;
     }
   }
 }
