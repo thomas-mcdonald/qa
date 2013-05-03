@@ -3,13 +3,13 @@ class ReputationEvent < ActiveRecord::Base
   belongs_to :user
 
   TYPES = [
-    { action: 'recieve question upvote',
+    { action: 'receive question upvote',
       reputation: 10 },
-    { action: 'recieve question downvote',
+    { action: 'receive question downvote',
       reputation: -5 },
-    { action: 'recieve answer upvote',
+    { action: 'receive answer upvote',
       reputation: 10 },
-    { action: 'recieve answer downvote',
+    { action: 'receive answer downvote',
       reputation: -5 }
   ]
 end
