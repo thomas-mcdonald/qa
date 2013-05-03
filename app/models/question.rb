@@ -1,17 +1,18 @@
+require_dependency 'last_activity'
 require_dependency 'slugger'
 require_dependency 'voteable'
 
 class Question < ActiveRecord::Base
+  include QA::LastActivity
   include QA::Slugger
   include QA::Voteable
 
   has_many :answers
   has_many :taggings
   has_many :tags, through: :taggings
-  belongs_to :last_active_user, class_name: 'User', foreign_key: 'last_active_user_id'
   belongs_to :user
 
-  default_scope { order('questions.created_at DESC') }
+  default_scope { order('questions.last_active_at DESC') }
 
   validates_length_of :title, within: 10..150
   validates_presence_of :body, :title, :last_active_user_id, :last_active_at
@@ -40,11 +41,6 @@ class Question < ActiveRecord::Base
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create!
     end
-  end
-
-  def update_last_activity(user)
-    self.last_active_user = user
-    self.last_active_at = DateTime.current
   end
 
   def viewed_by(key)

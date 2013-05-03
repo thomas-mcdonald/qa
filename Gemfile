@@ -9,6 +9,7 @@ gem 'pg', '~> 0.15.0'
 gem 'redcarpet', '~> 2.2.2'
 gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
+gem 'seed-fu', github: 'irfn/seed-fu'
 gem 'simple_form', '~> 3.0.0.beta1'
 
 # Authentication
@@ -30,9 +31,9 @@ end
 group :development do
   gem 'foreman'
   # Guard for autorunning tests
-  gem 'guard', '~> 1.7.0'
+  gem 'guard', '~> 1.8.0'
   gem 'guard-cucumber', '~> 1.4.0'
-  gem 'guard-rspec', '~> 2.5.0'
+  gem 'guard-rspec', '~> 2.6.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end

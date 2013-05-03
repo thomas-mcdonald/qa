@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20130503164538) do
     t.integer  "vote_count",          default: 0, null: false
     t.integer  "last_active_user_id"
     t.datetime "last_active_at"
+    t.integer  "answers_count"
   end
 
   create_table "reputation_events", force: true do |t|
@@ -61,8 +62,8 @@ ActiveRecord::Schema.define(version: 20130503164538) do
     t.datetime "updated_at"
   end
 
-  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id"
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"

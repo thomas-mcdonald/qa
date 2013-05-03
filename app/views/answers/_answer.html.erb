@@ -1,8 +1,9 @@
-<div class="answer" id="answer-<%= answer.id %>">
+<div class="answer post" id="answer-<%= answer.id %>">
   <div class="vote-controls"><%= vote_controls(answer) %></div>
   <div class="main">
     <div class="body"><%=format answer.body%></div>
     <div class="meta">
+      <div class="links"><%= link_to 'edit', edit_answer_path(answer) if logged_in? %></div>
       <div class="righto">answered <%= time_ago_in_words answer.created_at %> ago by <%= link_to answer.user.name, answer.user %></div>
     </div>
   </div>

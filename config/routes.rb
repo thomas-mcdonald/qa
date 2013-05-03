@@ -7,7 +7,7 @@ Qa::Application.routes.draw do
   get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
 
-  resources :answers, only: [:create]
+  resources :answers, only: [:create, :edit, :update]
   resources :votes, only: [:create, :destroy]
 
   get '/users/:id/:slug', to: 'users#show'
@@ -18,4 +18,9 @@ Qa::Application.routes.draw do
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
   post '/auth/:provider/callback', to: 'authorizations#callback'
+
+  # development routes
+  if Rails.env.development?
+    get '/dev/login', to: 'dev#login'
+  end
 end
