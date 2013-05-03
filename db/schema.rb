@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20130503164538) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",      default: false, null: false
   end
 
   create_table "votes", force: true do |t|
