@@ -20,8 +20,18 @@
       margin-bottom: 15px;
     }
 
+    .links {
+      float: left;
+    }
+
     .righto {
       float: right;
     }
+  }
+}
+
+.edit_answer {
+  #answer_body {
+    height: 400px;
   }
 }
