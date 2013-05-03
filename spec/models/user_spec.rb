@@ -5,6 +5,20 @@ describe User do
     it { should have_many(:authorizations) }
   end
 
+  describe 'display_name' do
+    let(:user) { FactoryGirl.build(:user) }
+
+    it 'does not change name for normal users' do
+      user.name == user.display_name
+    end
+
+    it 'appends a ♦ for admins' do
+      user.admin = true
+      user.display_name.should include(user.name)
+      user.display_name.should include('♦')
+    end
+  end
+
   describe 'email_hash' do
     before do
       @user = FactoryGirl.build(:user)

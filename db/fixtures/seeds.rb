@@ -1,5 +1,5 @@
 User.seed(:id,
-  { id: 1, name: 'Thomas McDonald', email: 'example@example.com' },
+  { id: 1, name: 'Thomas McDonald', email: 'example@example.com', admin: true },
   { id: 2, name: 'John Doe', email: 'example2@example.com' }
 )
 
