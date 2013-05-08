@@ -6,6 +6,7 @@ module QA
         @users = create_users
         @posts = create_posts
         create_votes
+        create_reputation
         update_counters
       end
 
@@ -125,7 +126,25 @@ module QA
           vote.updated_at = DateTime.parse row['CreationDate']
           votes << vote
         end
-        Vote.import votes
+        # Not much point in validating this data... it doesn't matter *that*
+        # much if someone upvotes themselves or multiple posts, but it does
+        # create fuck loads of select queries.
+        #
+        # I guess if a user has already voted on a post we should removed them
+        # from possible selection, which would essentially do the validation
+        # there instead.
+        Vote.import(votes, validate: false)
+      end
+
+      def create_reputation
+        puts "Creating reputation events"
+        Vote.all.each do |v|
+          v.create_reputation_events(false)
+        end
+        puts "Calculating reputation"
+        User.all.each do |u|
+          u.calculate_reputation!
+        end
       end
 
       def update_counters
