@@ -4,7 +4,7 @@ User.seed(:id,
 )
 
 Question.seed(:id,
-  { id: 1, title: 'Is my QA instance running properly?', body: "I think I've installed QA. Is it all working correctly?", user_id: 2, last_active_at: DateTime.now }
+  { id: 1, title: 'Is my QA instance running properly?', body: "I think I've installed QA. Is it all working correctly?", user_id: 2, last_active_at: DateTime.now, last_active_user_id: 2 }
 )
 
 Answer.seed(:id,
