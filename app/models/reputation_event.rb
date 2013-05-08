@@ -3,6 +3,7 @@ class ReputationEvent < ActiveRecord::Base
   belongs_to :user
 
   TYPES = [
+    {},
     { action: 'receive question upvote',
       reputation: 10 },
     { action: 'receive question downvote',
