@@ -4,7 +4,8 @@ module QA
       def initialize(dir)
         @dir = dir
         @users = create_users
-        create_posts
+        @posts = create_posts
+        create_votes
         update_counters
       end
 
@@ -101,12 +102,40 @@ module QA
           next unless an.save
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
+        posts
+      end
+
+      def create_votes
+        voterow = Nokogiri::XML::Document.parse(File.read("#{@dir}/votes.xml")).css('votes row')
+        puts "Loaded votes"
+
+        size = User.count
+        users = User.all
+        votes = []
+        voterow.each do |row|
+          next unless [2, 3].include? row['VoteTypeId'].to_i
+          next if @posts[row['PostId'].to_i].blank?
+          vote = Vote.new
+          vote.post_id = @posts[row['PostId'].to_i][:id]
+          vote.post_type = @posts[row['PostId'].to_i][:type]
+          vote.vote_type_id = 1 if row['VoteTypeId'].to_i == 2
+          vote.vote_type_id = 2 if row['VoteTypeId'].to_i == 3
+          vote.user = users[(rand*size).floor]
+          vote.created_at = DateTime.parse row['CreationDate']
+          vote.updated_at = DateTime.parse row['CreationDate']
+          votes << vote
+        end
+        Vote.import votes
       end
 
       def update_counters
         puts "updating cache column counters"
         Question.all.each do |q|
           Question.update_counters q.id, answers_count: q.answers.length
+          q.update_vote_count!
+        end
+        Answer.all.each do |a|
+          a.update_vote_count!
         end
       end
 
