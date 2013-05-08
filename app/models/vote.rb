@@ -1,6 +1,6 @@
 class Vote < ActiveRecord::Base
   belongs_to :post, polymorphic: true
-  has_many :reputation_events, as: :action
+  has_many :reputation_events, as: :action, dependent: :destroy
   belongs_to :user
 
   UPVOTE = 1
