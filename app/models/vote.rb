@@ -14,9 +14,9 @@ class Vote < ActiveRecord::Base
   after_save :update_post_vote_count
   after_destroy :update_post_vote_count
 
-  def create_reputation_events
+  def create_reputation_events(recalculate = true)
     if self.post.class == Question
-      ReputationEvent.create_for_receiving_question_upvote(self)
+      ReputationEvent.create_for_receiving_question_upvote(self, recalculate)
     else
     end
   end

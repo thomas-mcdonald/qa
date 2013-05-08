@@ -14,12 +14,12 @@ class ReputationEvent < ActiveRecord::Base
       reputation: -5 }
   ]
 
-  def self.create_for_receiving_question_upvote(vote)
+  def self.create_for_receiving_question_upvote(vote, recalculate = true)
     event = vote.post.user.reputation_events.create(
       action: vote,
       event_type: 1
     )
-    vote.post.user.calculate_reputation!
+    vote.post.user.calculate_reputation! if recalculate
     event
   end
 end
