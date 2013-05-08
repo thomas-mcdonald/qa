@@ -6,6 +6,20 @@ describe User do
     it { should have_many(:reputation_events) }
   end
 
+  describe 'calculate_reputation!' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'sums the total reputation events for the user' do
+      ReputationEvent.create(
+        action: FactoryGirl.create(:upvote),
+        event_type: 1,
+        user: user
+      )
+      user.calculate_reputation!
+      user.reputation.should == ReputationEvent::TYPES[1][:reputation]
+    end
+  end
+
   describe 'display_name' do
     let(:user) { FactoryGirl.build(:user) }
 

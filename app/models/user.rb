@@ -34,6 +34,15 @@ class User < ActiveRecord::Base
     user
   end
 
+  def calculate_reputation!
+    rep = reputation_events.inject(0) do |sum, event|
+      Rails.logger.info 'in sum'
+      sum + ReputationEvent::TYPES[event.event_type][:reputation]
+    end
+    self.reputation = rep
+    self.save
+  end
+
   def display_name
     if admin?
       name + " ♦"
