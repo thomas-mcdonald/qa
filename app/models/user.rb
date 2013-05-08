@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
 
   def calculate_reputation!
     rep = reputation_events.inject(0) do |sum, event|
-      Rails.logger.info 'in sum'
       sum + ReputationEvent::TYPES[event.event_type][:reputation]
     end
     self.reputation = rep
