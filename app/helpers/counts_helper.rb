@@ -13,4 +13,18 @@ module CountsHelper
       count
     end
   end
+
+  def rep_formatted(count)
+    case count
+    when 0..999
+      count.to_s
+    when 1000..9999
+      number_with_delimiter(count).to_s
+    when 10000..99999
+      tmp = (count / 100).to_s
+      tmp[0..1] + "." + tmp[2] + "k"
+    else
+      "lots" # TODO: wtf
+    end
+  end
 end
