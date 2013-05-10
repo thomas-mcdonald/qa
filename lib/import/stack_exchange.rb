@@ -3,6 +3,7 @@ module QA
     class StackExchange
       def initialize(dir)
         @dir = dir
+        output_intro
         @users = create_users
         @posts = create_posts
         create_votes
@@ -41,13 +42,22 @@ module QA
         end
       end
 
+      def output_intro
+        puts " Welcome to QA."
+        puts " Importing from a Stack Exchange Data Dump"
+      end
+
       def create_users
         users_doc = Nokogiri::XML::Document.parse(File.read("#{@dir}/users.xml")).css('users row')
+        puts " Creating Users"
+        bar = ProgressBar.create(title: 'Users', total: users_doc.length, format: '%t: |%B| %E')
         users = []
         users_doc.each do |u|
+          bar.increment
           next if u["Id"].to_i < 0
           users << User.new(name: u["DisplayName"], email: FactoryGirl.generate(:email), id: u["Id"])
         end
+        puts " Importing Users"
         User.import users
         uhash = {}
         users.each do |u|
@@ -64,9 +74,11 @@ module QA
 
         grouped_edits = build_edits(post_histories)
 
-        puts "Beginning insertion of questions"
+        puts "Creating and inserting questions"
+        bar = ProgressBar.create(title: 'Questions', total: questions.length, format: '%t: |%B| %E')
         posts = []
         questions.each do |q|
+          bar.increment
           qu = Question.new
           edits = grouped_edits[q['Id']]
           originator = (edits.select { |v| v[:new_record] == true })[0]
@@ -84,8 +96,10 @@ module QA
           posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
 
-        puts "inserting answers"
+        puts "Creating and inserting answers"
+        bar = ProgressBar.create(title: 'Answers', total: answers.length, format: '%t: |%B| %E')
         answers.each do |a|
+          bar.increment
           next if posts[a['ParentId'].to_i].blank?
           an = Answer.new
           edits = grouped_edits[a['Id']]
@@ -141,13 +155,17 @@ module QA
 
       def build_edits(post_histories)
         puts "sorting histories by GUID"
+        bar = ProgressBar.create(title: 'Sorting', total: post_histories.length, format: '%t: |%B| %E')
         guidgroups = Hash.new { |hash, key| hash[key] = [] }
         post_histories.each do |row|
+          bar.increment
           guidgroups[row['RevisionGUID']] << row
         end
         puts "grouping GUIDs into single edits"
+        bar = ProgressBar.create(title: 'Grouping', total: post_histories.length, format: '%t: |%B| %E')
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
+          bar.increment
           groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
         end
         groupededits
