@@ -55,13 +55,9 @@ module QA
           edits.delete originator
           next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
 
-          qu.title = originator[:title]
-          qu.body = originator[:body]
-          qu.tag_list = originator[:tag_list]
+          qu.assign_attributes(originator.simple_hash)
           qu.user_id = @users[originator[:user_id].to_i].id
           qu.last_active_user_id = @users[originator[:user_id].to_i].id
-          qu.created_at = DateTime.parse(originator[:created_at])
-          qu.last_active_at = DateTime.parse(originator[:created_at])
           qu.save
           posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
@@ -130,6 +126,10 @@ module QA
           a.update_vote_count!
         end
       end
+
+      # Although all the methods above should probably be private, these are only
+      # used internally in the ones above.
+      private
 
       def build_edits(post_histories)
         puts " Sorting histories by GUID"

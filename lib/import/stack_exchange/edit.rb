@@ -33,8 +33,8 @@ module QA
 
           def simple_hash
             @result.slice(:title, :body, :tag_list).merge(
-              created_at: DateTime.parse(originator[:created_at]),
-              last_active_at: DateTime.parse(originator[:created_at])
+              created_at: DateTime.parse(@result[:created_at]),
+              last_active_at: DateTime.parse(@result[:created_at])
             )
           end
         end
