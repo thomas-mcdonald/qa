@@ -74,7 +74,7 @@ module QA
 
         grouped_edits = build_edits(post_histories)
 
-        puts "Creating and inserting questions"
+        puts " Creating and inserting questions"
         bar = ProgressBar.create(title: 'Questions', total: questions.length, format: '%t: |%B| %E')
         posts = []
         questions.each do |q|
@@ -96,7 +96,7 @@ module QA
           posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
 
-        puts "Creating and inserting answers"
+        puts " Creating and inserting answers"
         bar = ProgressBar.create(title: 'Answers', total: answers.length, format: '%t: |%B| %E')
         answers.each do |a|
           bar.increment
@@ -110,9 +110,7 @@ module QA
           an.question_id = posts[a['ParentId'].to_i][:id]
           an.body = originator[:body]
           an.user_id = @users[originator[:user_id].to_i].id
-#          an.last_active_user_id = @users[originator[:user_id].to_i].id
           an.created_at = DateTime.parse(originator[:created_at])
-#          an.last_active_at = DateTime.parse(originator[:created_at])
           next unless an.save
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
@@ -121,12 +119,14 @@ module QA
 
       def create_votes
         voterow = Nokogiri::XML::Document.parse(File.read("#{@dir}/votes.xml")).css('votes row')
-        puts "Loaded votes"
+        puts " Creating votes"
 
         size = User.count
         users = User.all
         votes = []
+        bar = ProgressBar.create(title: 'Votes', total: voterow.count, format: '%t: |%B| %E')
         voterow.each do |row|
+          bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
           next if @posts[row['PostId'].to_i].blank?
           vote = Vote.new
@@ -139,30 +139,38 @@ module QA
           vote.updated_at = DateTime.parse row['CreationDate']
           votes << vote
         end
-        Vote.import votes
+
+        puts " Inserting votes"
+        votes.each_slice(50) do |vote|
+          Vote.import vote
+        end
       end
 
       def update_counters
-        puts "updating cache column counters"
+        puts " Updating cache column counters"
+        bar = ProgressBar.create(title: 'Question counters', total: Question.count, format: '%t: |%B| %E')
         Question.all.each do |q|
+          bar.increment
           Question.update_counters q.id, answers_count: q.answers.length
           q.update_vote_count!
         end
+        bar = ProgressBar.create(title: 'Answer counters', total: Answer.count, format: '%t: |%B| %E')
         Answer.all.each do |a|
+          bar.increment
           a.update_vote_count!
         end
       end
 
       def build_edits(post_histories)
-        puts "sorting histories by GUID"
+        puts " Sorting histories by GUID"
         bar = ProgressBar.create(title: 'Sorting', total: post_histories.length, format: '%t: |%B| %E')
         guidgroups = Hash.new { |hash, key| hash[key] = [] }
         post_histories.each do |row|
           bar.increment
           guidgroups[row['RevisionGUID']] << row
         end
-        puts "grouping GUIDs into single edits"
-        bar = ProgressBar.create(title: 'Grouping', total: post_histories.length, format: '%t: |%B| %E')
+        puts " Grouping GUIDs into single edits"
+        bar = ProgressBar.create(title: 'Grouping', total: guidgroups.length, format: '%t: |%B| %E')
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
           bar.increment
