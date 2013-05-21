@@ -1,8 +1,10 @@
+require_dependency 'vote_creator'
+
 class VotesController < ApplicationController
   before_filter :json_require_login
 
   def create
-    @vote = current_user.votes.new(vote_params)
+    @vote = VoteCreator.new(current_user, vote_params).create
     if @vote.save
       render json: {
         content: render_to_string(partial: 'votes/destroy', layout: false, locals: { vote: @vote }),
