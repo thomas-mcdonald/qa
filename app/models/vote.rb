@@ -16,9 +16,21 @@ class Vote < ActiveRecord::Base
 
   def create_reputation_events(recalculate = true)
     if self.post.class == Question
-      ReputationEvent.create_for_receiving_question_upvote(self, recalculate)
+      if is_upvote?
+        ReputationEvent.create_for_receiving_question_upvote(self, recalculate)
+      elsif is_downvote?
+        ReputationEvent.create_for_receiving_question_downvote(self, recalculate)
+      end
     else
     end
+  end
+
+  def is_downvote?
+    vote_type_id == 2
+  end
+
+  def is_upvote?
+    vote_type_id == 1
   end
 
   def update_post_vote_count

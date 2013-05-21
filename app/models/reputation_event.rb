@@ -22,4 +22,13 @@ class ReputationEvent < ActiveRecord::Base
     vote.post.user.calculate_reputation! if recalculate
     event
   end
+
+  def self.create_for_receiving_question_downvote(vote, recalculate = true)
+    event = vote.post.user.reputation_events.create(
+      action: vote,
+      event_type: 2
+    )
+    vote.post.user.calculate_reputation! if recalculate
+    event
+  end
 end
