@@ -26,17 +26,17 @@ module QA
               end
             end
           end
+        end
 
-          def [](sym)
-            @result[sym]
-          end
+        def [](sym)
+          @result[sym]
+        end
 
-          def simple_hash
-            @result.slice(:title, :body, :tag_list).merge(
-              created_at: DateTime.parse(@result[:created_at]),
-              last_active_at: DateTime.parse(@result[:created_at])
-            )
-          end
+        def simple_hash
+          @result.slice(:title, :body, :tag_list).merge(
+            created_at: DateTime.parse(@result[:created_at]),
+            last_active_at: DateTime.parse(@result[:created_at])
+          )
         end
       end
     end
