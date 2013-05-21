@@ -48,6 +48,6 @@ group :test do
   gem 'cucumber-rails', '~> 1.3.0', require: false
   gem 'database_cleaner', '~> 1.0.0'
   gem 'factory_girl_rails', '~> 4.2.0'
-  gem 'poltergeist'
+  gem 'poltergeist', '~> 1.3.0'
   gem 'shoulda-matchers', '~> 1.5.0'
 end
