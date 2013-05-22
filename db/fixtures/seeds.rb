@@ -8,6 +8,6 @@ Question.seed(:id,
 )
 
 Answer.seed(:id,
-  { id: 1, body: 'If you can view this message, then most likely! Eventually we are looking at setting up a status page where you can view the status of various services QA depends on, but for now
+  { id: 1, question_id: 1, body: 'If you can view this message, then most likely! Eventually we are looking at setting up a status page where you can view the status of various services QA depends on, but for now
     this is the best indication that your instance is working!', user_id: 2}
 )

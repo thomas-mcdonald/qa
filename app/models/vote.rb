@@ -10,20 +10,7 @@ class Vote < ActiveRecord::Base
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 
-  after_save :create_reputation_events
-  after_save :update_post_vote_count
   after_destroy :update_post_vote_count
-
-  def create_reputation_events(recalculate = true)
-    if self.post.class == Question
-      if is_upvote?
-        ReputationEvent.create_for_receiving_question_upvote(self, recalculate)
-      elsif is_downvote?
-        ReputationEvent.create_for_receiving_question_downvote(self, recalculate)
-      end
-    else
-    end
-  end
 
   def is_downvote?
     vote_type_id == 2
