@@ -9,7 +9,6 @@ class Vote < ActiveRecord::Base
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 
-  after_save :update_post_vote_count
   after_destroy :update_post_vote_count
 
   def update_post_vote_count
