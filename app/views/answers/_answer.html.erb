@@ -1,5 +1,7 @@
 <div class="answer post" id="answer-<%= answer.id %>">
-  <div class="vote-controls"><%= vote_controls(answer) %></div>
+  <div class="controls">
+    <div class="vote-controls"><%= vote_controls(answer) %></div>
+  </div>
   <div class="main">
     <div class="body"><%=format answer.body%></div>
     <div class="meta">
