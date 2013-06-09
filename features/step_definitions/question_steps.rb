@@ -7,7 +7,12 @@ Given(/^I have a question by me$/) do
   @question = FactoryGirl.create(:question, user: User.last)
 end
 
-Given(/^I am on the question page$/) do
+Given(/^I asked a question with an answer$/) do
+  @question = FactoryGirl.create(:question, user: User.last)
+  FactoryGirl.create(:answer, question: @question)
+end
+
+Given(/^I (?:am on|visit) the question page$/) do
   visit question_path(@question)
 end
 
@@ -35,6 +40,12 @@ end
 Then(/^I should still be on the new question page$/) do
   current_path.should == '/questions'
   should have_content 'Ask Question'
+end
+
+Then(/^I should see buttons to accept the answer$/) do
+  within('.answer') do
+    should have_css '.accept-answer'
+  end
 end
 
 Then(/^I should see the question$/) do

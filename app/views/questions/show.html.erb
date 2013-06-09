@@ -30,7 +30,7 @@
       <div class="page-header">
         <h3><%= pluralize @answers.size, "Answer" %></h3>
       </div>
-      <%= render partial: 'answers/answer', collection: @answers %>
+      <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
     </div>
   <% end %>
 

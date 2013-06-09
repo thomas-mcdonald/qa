@@ -1,5 +1,14 @@
 // This contains styling used in both displaying questions & answers
 
+%control-container {
+  margin-bottom: 5px;
+
+  form {
+    margin: 0 0 5px 20px;
+    width: 30px;
+  }
+}
+
 .post {
   @include makeRow();
 
@@ -9,10 +18,7 @@
   }
 
   .vote-controls {
-    .vote-form {
-      margin: 0 0 5px 20px;
-      width: 30px;
-    }
+    @extend %control-container;
 
     .vote-count {
       font-weight: bold;
@@ -34,6 +40,20 @@
     .vote-active {
       color: green;
     }
+  }
+
+  .accept-answer {
+    @extend %control-container;
+
+    width: 30px;
+
+    .icon-ok {
+      font-size: 26px;
+      text-shadow: 0 0 1px #000;
+    }
+
+    .inactive.icon-ok { color: #eee; }
+    .active.icon-ok { color: green; text-shadow: 0 0 2px #000; }
   }
 
   .main {

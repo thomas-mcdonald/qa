@@ -1,6 +1,11 @@
 <div class="answer post" id="answer-<%= answer.id %>">
   <div class="controls">
     <div class="vote-controls"><%= vote_controls(answer) %></div>
+    <% if current_user == question.user %>
+      <div class="accept-answer">
+        <a class="icon-ok inactive"></a>
+      </div>
+    <% end %>
   </div>
   <div class="main">
     <div class="body"><%=format answer.body%></div>
