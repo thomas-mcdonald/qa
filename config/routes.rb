@@ -6,6 +6,7 @@ Qa::Application.routes.draw do
   patch '/questions/:id/:slug', to: 'questions#update'
   get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
+  post '/questions/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
 
   resources :answers, only: [:create, :edit, :update]
   resources :votes, only: [:create, :destroy]

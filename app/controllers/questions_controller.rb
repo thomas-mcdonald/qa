@@ -40,6 +40,16 @@ class QuestionsController < ApplicationController
     redirect_to @question
   end
 
+  def accept_answer
+    @question = Question.find(params[:id])
+    answer_ids = @question.answers.pluck(:id)
+    # TODO: handle this somewhat gracefully...
+    raise ArgumentError unless answer_ids.include? params[:answer_id].to_i
+    @question.accepted_answer_id = params[:answer_id]
+    @question.save
+    render json: @question
+  end
+
   private
 
   def load_and_verify_slug
