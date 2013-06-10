@@ -16,9 +16,22 @@ class Question < ActiveRecord::Base
 
   validates_length_of :title, within: 10..150
   validates_presence_of :body, :title, :last_active_user_id, :last_active_at
-  validate :tags_exist
+  validate :accepted_is_on_question, :tags_exist
 
   is_slugged :title
+
+  def accepted_is_on_question
+    if accepted_answer_id.present?
+      answer_ids = self.answers.pluck(:id)
+      if !answer_ids.include? accepted_answer_id.to_i
+        self.errors.add(:accepted_answer_id, 'Answer ID must be valid')
+      end
+    end
+  end
+
+  def tags_exist
+    self.errors.add(:tag_list, 'Question must be tagged') if self.tags.empty?
+  end
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).questions
@@ -27,10 +40,6 @@ class Question < ActiveRecord::Base
   def self.tag_counts
     Tag.select("tags.*, count(taggings.tag_id) as count").
       joins(:taggings).group("taggings.tag_id")
-  end
-
-  def tags_exist
-    self.errors.add(:tag_list, 'Question must be tagged') if self.tags.empty?
   end
 
   def tag_list

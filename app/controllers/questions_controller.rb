@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_filter :require_login, only: [:new, :create, :edit, :update]
+  before_filter :require_login, except: [:index, :show]
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
@@ -41,13 +41,14 @@ class QuestionsController < ApplicationController
   end
 
   def accept_answer
+    # TODO: require correct user
     @question = Question.find(params[:id])
-    answer_ids = @question.answers.pluck(:id)
-    # TODO: handle this somewhat gracefully...
-    raise ArgumentError unless answer_ids.include? params[:answer_id].to_i
     @question.accepted_answer_id = params[:answer_id]
-    @question.save
-    render json: @question
+    if @question.save
+      render json: @question
+    else
+      render json: { error: 'Nope, not doing that' } # TODO: properly handle
+    end
   end
 
   private
