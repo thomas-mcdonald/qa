@@ -18,7 +18,7 @@ gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems. Could probably go in assets group
-gem 'bootstrap-sass', '2.3.1.0'
+gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'font-awesome-sass-rails'
 
 # Gems used only for assets and not required
@@ -34,7 +34,7 @@ group :development do
   # Guard for autorunning tests
   gem 'guard', '~> 1.8.0'
   gem 'guard-cucumber', '~> 1.4.0'
-  gem 'guard-rspec', '~> 2.6.0'
+  gem 'guard-rspec', '~> 3.0.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end
@@ -45,8 +45,8 @@ end
 
 group :test do
   gem 'coveralls', require: false
-  gem 'cucumber-rails', '1.3.0', require: false
-  gem 'database_cleaner', github: 'bmabey/database_cleaner' # '~> 0.9.0'
+  gem 'cucumber-rails', '~> 1.3.0', require: false
+  gem 'database_cleaner', '~> 1.0.0'
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'poltergeist', '~> 1.3.0'
   gem 'shoulda-matchers', '~> 1.5.0'

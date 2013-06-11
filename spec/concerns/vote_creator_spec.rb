@@ -11,8 +11,8 @@ describe VoteCreator do
   end
 
   it 'requires some other non-nil parameters' do
-    -> { VoteCreator.new(user, post_id: nil, post_type: Question, vote_type_id: 1) }.should raise_error(ArgumentError)
-    -> { VoteCreator.new(user, post_id: 1, post_type: Question, vote_type_id: nil) }.should raise_error(ArgumentError)
+    -> { VoteCreator.new(user, post_id: nil, post_type: 'Question', vote_type_id: 1) }.should raise_error(ArgumentError)
+    -> { VoteCreator.new(user, post_id: 1, post_type: 'Question', vote_type_id: nil) }.should raise_error(ArgumentError)
     -> { VoteCreator.new(user, post_id: 1, post_type: nil, vote_type_id: 1) }.should raise_error(ArgumentError)
   end
 
