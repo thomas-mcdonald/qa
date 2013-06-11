@@ -80,6 +80,18 @@ module QA
           next unless an.save
           posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
+
+        puts " Updating accepted answer IDs"
+        bar = ProgressBar.create(title: 'Accepting', total: questions.length, format: '%t: |%B| %E')
+        questions.each do |q|
+          bar.increment
+          info = posts[q['Id'].to_i]
+          answer = posts[q['AcceptedAnswerId'].to_i]
+          next unless answer
+          qu = Question.find(info[:id])
+          qu.accepted_answer_id = answer[:id]
+          qu.save
+        end
         posts
       end
 
