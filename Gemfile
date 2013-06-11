@@ -11,7 +11,7 @@ gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'irfn/seed-fu'
-gem 'simple_form', '~> 3.0.0.beta1'
+gem 'simple_form', '~> 3.0.0.rc'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
