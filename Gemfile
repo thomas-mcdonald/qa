@@ -11,7 +11,7 @@ gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'irfn/seed-fu'
-gem 'simple_form', '~> 3.0.0.beta1'
+gem 'simple_form', '~> 3.0.0.rc'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
@@ -48,6 +48,6 @@ group :test do
   gem 'cucumber-rails', '~> 1.3.0', require: false
   gem 'database_cleaner', '~> 1.0.0'
   gem 'factory_girl_rails', '~> 4.2.0'
-  gem 'poltergeist'
+  gem 'poltergeist', '~> 1.3.0'
   gem 'shoulda-matchers', '~> 1.5.0'
 end
