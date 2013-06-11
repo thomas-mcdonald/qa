@@ -86,11 +86,9 @@ module QA
         questions.each do |q|
           bar.increment
           info = posts[q['Id'].to_i]
-          answer = posts[q['AcceptedAnswerId'].to_i]
-          next unless answer
-          qu = Question.find(info[:id])
-          qu.accepted_answer_id = answer[:id]
-          qu.save
+          answer_info = posts[q['AcceptedAnswerId'].to_i]
+          next unless answer_info # answer doesn't exist... for whatever reason
+          Question.update(info[:id], accepted_answer_id: answer_info[:id])
         end
         posts
       end
