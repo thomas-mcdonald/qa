@@ -47,9 +47,10 @@
 
   .accept-answer {
     @extend %control-container;
-    margin-top: 3px;
+    margin-top: 5px;
 
     form { margin-left: 17px; } // reduce margin slightly to centre
+    .accepted-standalone { margin-left: 17px + 6px; } // match active buttons
 
     .icon-ok {
       font-size: 26px;
@@ -57,7 +58,7 @@
     }
 
     .inactive.icon-ok { color: #eee; }
-    .active.icon-ok { color: green; text-shadow: 0 0 2px #000; }
+    .active.icon-ok { color: green; text-shadow: 0 0 1px #000; }
   }
 
   .main {
