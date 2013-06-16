@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/spectator/activerecord-import.git
-  revision: b7851b1b0bb50412240d37afe2ceeb10af406b99
+  revision: 161dc35c43f8ce4d77c8fb4dc812df660597f8ae
   branch: rails4
   specs:
     activerecord-import (0.4.0)
@@ -139,7 +139,7 @@ GEM
     minitest (4.7.4)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
-    multi_json (1.7.6)
+    multi_json (1.7.7)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     omniauth (1.1.4)
