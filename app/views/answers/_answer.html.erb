@@ -1,16 +1,7 @@
 <div class="answer post" id="answer-<%= answer.id %>">
   <div class="controls">
     <div class="vote-controls"><%= vote_controls(answer) %></div>
-    <% if current_user == question.user %>
-      <div class="accept-answer">
-        <%= form_tag accept_answer_url(id: @question.id), remote: true do %>
-          <%= hidden_field_tag :answer_id, answer.id %>
-          <button type="submit">
-            <i class="icon-ok inactive"></i>
-          </button>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render partial: 'answers/accept_answer', locals: { question: question, answer: answer } %>
   </div>
   <div class="main">
     <div class="body"><%=format answer.body%></div>
