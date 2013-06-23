@@ -4,6 +4,10 @@ require 'concerns/voteable_examples'
 describe Answer do
   it_should_behave_like 'voteable'
 
+  context 'associations' do
+    it { should have_many(:timeline_events) }
+  end
+
   context '#question_view_ordering' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil) }
     let(:a1) { FactoryGirl.create(:answer, question: question) }

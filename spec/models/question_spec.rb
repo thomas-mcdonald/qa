@@ -2,15 +2,18 @@ require 'spec_helper'
 require 'concerns/voteable_examples'
 
 describe Question do
-  it { should have_many(:answers) }
-  it { should have_many(:taggings) }
-  it { should have_many(:tags) }
-  it { should belong_to(:user) }
+  it_should_behave_like 'voteable'
+
+  context 'associations' do
+    it { should have_many(:answers) }
+    it { should have_many(:taggings) }
+    it { should have_many(:tags) }
+    it { should belong_to(:user) }
+  end
+
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:body) }
   it { should ensure_length_of(:title).is_at_least(10).is_at_most(150) }
-
-  it_should_behave_like 'voteable'
 
   context 'accepted_is_on_question' do
     it 'does not add an error if there is no accepted_answer_id' do

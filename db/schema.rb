@@ -74,6 +74,24 @@ ActiveRecord::Schema.define(version: 20140117104353) do
     t.datetime "updated_at"
   end
 
+  create_table "timeline_actors", force: true do |t|
+    t.integer  "timeline_event_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeline_actors", ["timeline_event_id"], name: "index_timeline_actors_on_timeline_event_id", using: :btree
+  add_index "timeline_actors", ["user_id"], name: "index_timeline_actors_on_user_id", using: :btree
+
+  create_table "timeline_events", force: true do |t|
+    t.integer  "post_id"
+    t.string   "post_type"
+    t.integer  "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"

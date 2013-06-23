@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   include QA::Voteable
 
   belongs_to :question
+  has_many :timeline_events
   belongs_to :user
 
   def self.question_view_ordering(question)
