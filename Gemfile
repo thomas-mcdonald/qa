@@ -31,6 +31,7 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'quiet_assets'
   # Guard for autorunning tests
   gem 'guard', '~> 1.8.0'
   gem 'guard-cucumber', '~> 1.4.0'
