@@ -1,4 +1,5 @@
 require 'import/stack_exchange/edit'
+require 'vote_creator'
 
 module QA
   module Import
@@ -117,11 +118,13 @@ module QA
       end
 
       def create_reputation
+        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type_id: 0, recalculate: false)
         puts "Creating reputation events"
         bar = ProgressBar.create(title: 'Reputation', total: Vote.count, format: '%t: |%B| %E')
         Vote.all.each do |v|
           bar.increment
-          v.create_reputation_events(false)
+          vc.instance_variable_set(:@vote, v)
+          vc.create_reputation_events
         end
         puts "Calculating reputation"
         bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
