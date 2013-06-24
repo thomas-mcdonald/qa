@@ -1,10 +1,12 @@
+require_dependency 'timeline'
 require_dependency 'voteable'
 
 class Answer < ActiveRecord::Base
+  include QA::Timeline
   include QA::Voteable
 
   belongs_to :question
-  has_many :timeline_events
+  has_many :timeline_events, as: :post
   belongs_to :user
 
   def self.question_view_ordering(question)

@@ -4,8 +4,12 @@ module QA
   module Timeline
     extend ActiveSupport::Concern
 
-    def create_timeline_event(user)
-      TimelineEvent.on_post_create(self, user)
+    included do
+      after_create :create_timeline_event
+    end
+
+    def create_timeline_event
+      TimelineEvent.on_post_create(self, self.user)
     end
   end
 end

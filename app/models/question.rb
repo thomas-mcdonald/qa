@@ -1,15 +1,18 @@
 require_dependency 'last_activity'
 require_dependency 'slugger'
+require_dependency 'timeline'
 require_dependency 'voteable'
 
 class Question < ActiveRecord::Base
   include QA::LastActivity
   include QA::Slugger
+  include QA::Timeline
   include QA::Voteable
 
   has_many :answers
   has_many :taggings
   has_many :tags, through: :taggings
+  has_many :timeline_events, as: :post
   belongs_to :user
 
   default_scope { order('questions.last_active_at DESC') }
