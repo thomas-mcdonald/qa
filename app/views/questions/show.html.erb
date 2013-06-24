@@ -9,7 +9,7 @@
       <div class="body"><%=format @question.body %></div>
       <ul class="tags">
         <% @question.tags.each do |tag| %>
-          <li class="btn tag"><%= tag.name %></li>
+          <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
         <% end %>
       </ul>
       <div class="meta">

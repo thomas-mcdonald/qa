@@ -8,7 +8,7 @@
     <h3><%= link_to question.title, question %></h3>
     <ul class="tags">
       <% question.tags.each do |tag| %>
-        <li class="btn tag"><%= tag.name %></li>
+        <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
       <% end %>
     </ul>
     <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.last_active_at %> ago</span> <%= link_to question.last_active_user.display_name, question.last_active_user %></p>
