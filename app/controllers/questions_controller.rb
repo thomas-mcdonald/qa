@@ -6,6 +6,11 @@ class QuestionsController < ApplicationController
     @questions = Question.includes(:last_active_user, :tags).page(params[:page]).load
   end
 
+  def tagged
+    @questions = Question.tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
+    render :index
+  end
+
   def show
     @question.viewed_by(request.remote_ip)
     @answers = @question.answers.order('vote_count DESC')
