@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20130510231737) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "answers", force: true do |t|
     t.integer  "question_id"
     t.integer  "user_id"
@@ -45,7 +42,8 @@ ActiveRecord::Schema.define(version: 20130510231737) do
     t.integer  "vote_count",          default: 0, null: false
     t.integer  "last_active_user_id"
     t.datetime "last_active_at"
-    t.integer  "answers_count",       default: 0, null: false
+    t.integer  "answers_count"
+    t.integer  "accepted_answer_id"
   end
 
   create_table "taggings", force: true do |t|

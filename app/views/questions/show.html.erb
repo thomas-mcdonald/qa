@@ -4,7 +4,9 @@
 
 <div id="body">
   <div class="question post" id="question-<%= @question.id %>">
-    <div class="vote-controls"><%= vote_controls(@question) %></div>
+    <div class="controls">
+      <div class="vote-controls"><%= vote_controls(@question) %></div>
+    </div>
     <div class="main">
       <div class="body"><%=format @question.body %></div>
       <ul class="tags">
@@ -28,7 +30,7 @@
       <div class="page-header">
         <h3><%= pluralize @answers.size, "Answer" %></h3>
       </div>
-      <%= render partial: 'answers/answer', collection: @answers %>
+      <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
     </div>
   <% end %>
 

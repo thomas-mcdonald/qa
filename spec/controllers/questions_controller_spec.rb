@@ -79,4 +79,27 @@ describe QuestionsController do
       end
     end
   end
+
+  context 'accept_answer' do
+    let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil) }
+
+    it 'requires login' do
+      -> { post :accept_answer, id: question.id }.should raise_error(QA::NotLoggedIn)
+    end
+
+    context 'when logged in' do
+      before { sign_in(alice) }
+
+      it 'updates the accepted answer id if it is valid' do
+        answer = FactoryGirl.create(:answer, question_id: question.id)
+        post :accept_answer, id: question.id, answer_id: answer.id
+        Question.find(question.id).accepted_answer_id.should == answer.id
+      end
+
+      it 'does not update the accepted answer id if it is not valid' do
+        post :accept_answer, id: question.id, answer_id: 999
+        Question.find(question.id).accepted_answer_id.should == nil
+      end
+    end
+  end
 end

@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 require 'vote_creator'
 
 describe VoteCreator do
