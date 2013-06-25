@@ -43,9 +43,17 @@ class QuestionsController < ApplicationController
   def accept_answer
     # TODO: require correct user
     @question = Question.find(params[:id])
-    @question.accepted_answer_id = params[:answer_id]
+    if !params[:answer_id].blank?
+      @question.accepted_answer_id = params[:answer_id]
+      @answer = Answer.find(params[:answer_id])
+    else
+      @answer = Answer.find(@question.accepted_answer_id)
+      @question.accepted_answer_id = nil
+    end
     if @question.save
-      render json: @question
+      render json: {
+        content: render_to_string(partial: 'answers/accept_answer', layout: false, locals: { question: @question, answer: @answer })
+      }
     else
       render json: { error: 'Nope, not doing that' } # TODO: properly handle
     end

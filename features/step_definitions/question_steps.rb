@@ -48,6 +48,16 @@ Then(/^I should see buttons to accept the answer$/) do
   end
 end
 
+When(/^I click on the accept answer button$/) do
+  find('.answer .accept-answer').click
+end
+
+Then(/^I should see it become active$/) do
+  within('.accept-answer button') do
+    should have_css '.icon-ok.active'
+  end
+end
+
 Then(/^I should see the question$/) do
   should have_content(@data[:title])
   should have_content(@data[:body]) # etc

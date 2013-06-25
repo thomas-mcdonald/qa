@@ -1,6 +1,6 @@
 <% if current_user == question.user %>
   <div class="accept-answer">
-    <%= form_tag accept_answer_url(id: question.id), remote: true do %>
+    <%= form_tag accept_answer_url(id: question.id), remote: true, class: 'accept-form' do %>
       <% if question.accepted_answer_id == answer.id %>
         <%= hidden_field_tag :answer_id, nil %>
         <button type="submit">
