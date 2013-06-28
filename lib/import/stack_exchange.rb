@@ -20,7 +20,7 @@ module QA
       def create_users
         users_doc = Nokogiri::XML::Document.parse(File.read("#{@dir}/users.xml")).css('users row')
         puts " Creating Users"
-        bar = ProgressBar.create(title: 'Users', total: users_doc.length, format: '%t: |%B| %E')
+        bar = progress_bar('Users', users_doc.length)
         users = []
         users_doc.each do |u|
           bar.increment
@@ -40,7 +40,7 @@ module QA
         grouped_edits = build_edits(post_histories)
 
         puts " Creating and inserting questions"
-        bar = ProgressBar.create(title: 'Questions', total: questions.length, format: '%t: |%B| %E')
+        bar = progress_bar('Questions', questions.length)
         posts = []
         questions.each do |q|
           bar.increment
@@ -58,7 +58,7 @@ module QA
         end
 
         puts " Creating and inserting answers"
-        bar = ProgressBar.create(title: 'Answers', total: answers.length, format: '%t: |%B| %E')
+        bar = progress_bar('Answers', answers.length)
         answers.each do |a|
           bar.increment
           next if posts[a['ParentId'].to_i].blank?
@@ -77,7 +77,7 @@ module QA
         end
 
         puts " Updating accepted answer IDs"
-        bar = ProgressBar.create(title: 'Accepting', total: questions.length, format: '%t: |%B| %E')
+        bar = progress_bar('Accepting', questions.length)
         questions.each do |q|
           bar.increment
           info = posts[q['Id'].to_i]
@@ -95,7 +95,7 @@ module QA
         size = User.count
         users = User.all
         votes = []
-        bar = ProgressBar.create(title: 'Votes', total: voterow.count, format: '%t: |%B| %E')
+        bar = progress_bar('Votes', voterow.count)
         voterow.each do |row|
           bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
@@ -119,13 +119,13 @@ module QA
 
       def update_counters
         puts " Updating cache column counters"
-        bar = ProgressBar.create(title: 'Question counters', total: Question.count, format: '%t: |%B| %E')
+        bar = progress_bar('Question counters', Question.count)
         Question.all.each do |q|
           bar.increment
           Question.update_counters q.id, answers_count: q.answers.length
           q.update_vote_count!
         end
-        bar = ProgressBar.create(title: 'Answer counters', total: Answer.count, format: '%t: |%B| %E')
+        bar = progress_bar('Answer counters', Answer.count)
         Answer.all.each do |a|
           bar.increment
           a.update_vote_count!
@@ -138,14 +138,14 @@ module QA
 
       def build_edits(post_histories)
         puts " Sorting histories by GUID"
-        bar = ProgressBar.create(title: 'Sorting', total: post_histories.length, format: '%t: |%B| %E')
+        bar = progress_bar('Sorting', post_histories.length)
         guidgroups = Hash.new { |hash, key| hash[key] = [] }
         post_histories.each do |row|
           bar.increment
           guidgroups[row['RevisionGUID']] << row
         end
         puts " Grouping GUIDs into single edits"
-        bar = ProgressBar.create(title: 'Grouping', total: guidgroups.length, format: '%t: |%B| %E')
+        bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
           bar.increment
@@ -157,11 +157,15 @@ module QA
       # import_users takes an array of ActiveRecord user models and imports
       # them to the database, after which we return a hash which maps user IDs
       # to the AR objects
-      def import_users(user)
+      def import_users(users)
         User.import users
         uhash = {}
         users.each { |u| uhash[u.id] = u }
         uhash
+      end
+
+      def progress_bar(title, length)
+        ProgressBar.create(title: title, total: length, format: '%t: |%B| %E')
       end
     end
   end
