@@ -16,7 +16,7 @@
       </ul>
       <div class="meta">
         <div class="links">
-          <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
+          <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) if logged_in? %>
         </div>
         <div class="righto">
           <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.display_name, @question.user %></p>
