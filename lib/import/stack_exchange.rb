@@ -5,9 +5,10 @@ module QA
     class StackExchange
       def initialize(dir)
         @dir = dir
+        @posts = []
         output_intro
         @users = create_users
-        @posts = create_posts
+        create_posts
         create_votes
         update_counters
       end
@@ -20,7 +21,7 @@ module QA
       def create_users
         users_doc = Nokogiri::XML::Document.parse(File.read("#{@dir}/users.xml")).css('users row')
         puts " Creating Users"
-        bar = ProgressBar.create(title: 'Users', total: users_doc.length, format: '%t: |%B| %E')
+        bar = progress_bar('Users', users_doc.length)
         users = []
         users_doc.each do |u|
           bar.increment
@@ -28,12 +29,7 @@ module QA
           users << User.new(name: u["DisplayName"], email: FactoryGirl.generate(:email), id: u["Id"])
         end
         puts " Importing Users"
-        User.import users
-        uhash = {}
-        users.each do |u|
-          uhash[u.id] = u
-        end
-        uhash
+        import_users(users)
       end
 
       def create_posts
@@ -43,50 +39,18 @@ module QA
         answers = posts.select { |p| p["PostTypeId"] == "2" }
 
         grouped_edits = build_edits(post_histories)
+        post_histories = nil
+        posts = nil
 
-        puts " Creating and inserting questions"
-        bar = ProgressBar.create(title: 'Questions', total: questions.length, format: '%t: |%B| %E')
-        posts = []
-        questions.each do |q|
-          bar.increment
-          qu = Question.new
-          edits = grouped_edits[q['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
-          edits.delete originator
-          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
-
-          qu.assign_attributes(originator.simple_hash)
-          qu.user_id = @users[originator[:user_id].to_i].id
-          qu.last_active_user_id = @users[originator[:user_id].to_i].id
-          qu.save
-          posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
-        end
-
-        puts " Creating and inserting answers"
-        bar = ProgressBar.create(title: 'Answers', total: answers.length, format: '%t: |%B| %E')
-        answers.each do |a|
-          bar.increment
-          next if posts[a['ParentId'].to_i].blank?
-          an = Answer.new
-          edits = grouped_edits[a['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
-          edits.delete originator
-          next unless @users[originator[:user_id].to_i]
-
-          an.question_id = posts[a['ParentId'].to_i][:id]
-          an.body = originator[:body]
-          an.user_id = @users[originator[:user_id].to_i].id
-          an.created_at = DateTime.parse(originator[:created_at])
-          next unless an.save
-          posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
-        end
+        create_questions(questions, grouped_edits)
+        create_answers(answers, grouped_edits)
 
         puts " Updating accepted answer IDs"
-        bar = ProgressBar.create(title: 'Accepting', total: questions.length, format: '%t: |%B| %E')
+        bar = progress_bar('Accepting', questions.length)
         questions.each do |q|
           bar.increment
-          info = posts[q['Id'].to_i]
-          answer_info = posts[q['AcceptedAnswerId'].to_i]
+          info = @posts[q['Id'].to_i]
+          answer_info = @posts[q['AcceptedAnswerId'].to_i]
           next unless answer_info # answer doesn't exist... for whatever reason
           Question.update(info[:id], accepted_answer_id: answer_info[:id])
         end
@@ -100,7 +64,7 @@ module QA
         size = User.count
         users = User.all
         votes = []
-        bar = ProgressBar.create(title: 'Votes', total: voterow.count, format: '%t: |%B| %E')
+        bar = progress_bar('Votes', voterow.count)
         voterow.each do |row|
           bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
@@ -124,13 +88,13 @@ module QA
 
       def update_counters
         puts " Updating cache column counters"
-        bar = ProgressBar.create(title: 'Question counters', total: Question.count, format: '%t: |%B| %E')
+        bar = progress_bar('Question counters', Question.count)
         Question.all.each do |q|
           bar.increment
           Question.update_counters q.id, answers_count: q.answers.length
           q.update_vote_count!
         end
-        bar = ProgressBar.create(title: 'Answer counters', total: Answer.count, format: '%t: |%B| %E')
+        bar = progress_bar('Answer counters', Answer.count)
         Answer.all.each do |a|
           bar.increment
           a.update_vote_count!
@@ -143,20 +107,74 @@ module QA
 
       def build_edits(post_histories)
         puts " Sorting histories by GUID"
-        bar = ProgressBar.create(title: 'Sorting', total: post_histories.length, format: '%t: |%B| %E')
+        bar = progress_bar('Sorting', post_histories.length)
         guidgroups = Hash.new { |hash, key| hash[key] = [] }
         post_histories.each do |row|
           bar.increment
           guidgroups[row['RevisionGUID']] << row
         end
         puts " Grouping GUIDs into single edits"
-        bar = ProgressBar.create(title: 'Grouping', total: guidgroups.length, format: '%t: |%B| %E')
+        bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
           bar.increment
           groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
         end
         groupededits
+      end
+
+      # import_users takes an array of ActiveRecord user models and imports
+      # them to the database, after which we return a hash which maps user IDs
+      # to the AR objects
+      def import_users(users)
+        User.import users
+        uhash = {}
+        users.each { |u| uhash[u.id] = u }
+        uhash
+      end
+
+      def progress_bar(title, length)
+        ProgressBar.create(title: title, total: length, format: '%t: |%B| %E')
+      end
+
+      def create_questions(questions, grouped_edits)
+        puts " Creating and inserting questions"
+        bar = progress_bar('Questions', questions.length)
+        questions.each do |q|
+          bar.increment
+          qu = Question.new
+          edits = grouped_edits[q['Id']]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
+          edits.delete originator
+          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
+
+          qu.assign_attributes(originator.simple_hash)
+          qu.user_id = @users[originator[:user_id].to_i].id
+          qu.last_active_user_id = @users[originator[:user_id].to_i].id
+          qu.save
+          @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
+        end
+      end
+
+      def create_answers(answers, grouped_edits)
+        puts " Creating and inserting answers"
+        bar = progress_bar('Answers', answers.length)
+        answers.each do |a|
+          bar.increment
+          next if @posts[a['ParentId'].to_i].blank?
+          an = Answer.new
+          edits = grouped_edits[a['Id']]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
+          edits.delete originator
+          next unless @users[originator[:user_id].to_i]
+
+          an.question_id = @posts[a['ParentId'].to_i][:id]
+          an.body = originator[:body]
+          an.user_id = @users[originator[:user_id].to_i].id
+          an.created_at = DateTime.parse(originator[:created_at])
+          next unless an.save
+          @posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
+        end
       end
     end
   end
