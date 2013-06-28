@@ -28,12 +28,7 @@ module QA
           users << User.new(name: u["DisplayName"], email: FactoryGirl.generate(:email), id: u["Id"])
         end
         puts " Importing Users"
-        User.import users
-        uhash = {}
-        users.each do |u|
-          uhash[u.id] = u
-        end
-        uhash
+        import_users(users)
       end
 
       def create_posts
@@ -157,6 +152,16 @@ module QA
           groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
         end
         groupededits
+      end
+
+      # import_users takes an array of ActiveRecord user models and imports
+      # them to the database, after which we return a hash which maps user IDs
+      # to the AR objects
+      def import_users(user)
+        User.import users
+        uhash = {}
+        users.each { |u| uhash[u.id] = u }
+        uhash
       end
     end
   end
