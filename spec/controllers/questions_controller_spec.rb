@@ -96,7 +96,8 @@ describe QuestionsController do
         Question.find(question.id).accepted_answer_id.should == answer.id
       end
 
-      it 'does not update the accepted answer id if it is not valid' do
+      it 'does not update the accepted answer id if it is not an answer on the question' do
+        FactoryGirl.create(:answer, id: 999)
         post :accept_answer, id: question.id, answer_id: 999
         Question.find(question.id).accepted_answer_id.should == nil
       end
