@@ -5,9 +5,10 @@ module QA
     class StackExchange
       def initialize(dir)
         @dir = dir
+        @posts = []
         output_intro
         @users = create_users
-        @posts = create_posts
+        create_posts
         create_votes
         update_counters
       end
@@ -38,50 +39,18 @@ module QA
         answers = posts.select { |p| p["PostTypeId"] == "2" }
 
         grouped_edits = build_edits(post_histories)
+        post_histories = nil
+        posts = nil
 
-        puts " Creating and inserting questions"
-        bar = progress_bar('Questions', questions.length)
-        posts = []
-        questions.each do |q|
-          bar.increment
-          qu = Question.new
-          edits = grouped_edits[q['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
-          edits.delete originator
-          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
-
-          qu.assign_attributes(originator.simple_hash)
-          qu.user_id = @users[originator[:user_id].to_i].id
-          qu.last_active_user_id = @users[originator[:user_id].to_i].id
-          qu.save
-          posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
-        end
-
-        puts " Creating and inserting answers"
-        bar = progress_bar('Answers', answers.length)
-        answers.each do |a|
-          bar.increment
-          next if posts[a['ParentId'].to_i].blank?
-          an = Answer.new
-          edits = grouped_edits[a['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
-          edits.delete originator
-          next unless @users[originator[:user_id].to_i]
-
-          an.question_id = posts[a['ParentId'].to_i][:id]
-          an.body = originator[:body]
-          an.user_id = @users[originator[:user_id].to_i].id
-          an.created_at = DateTime.parse(originator[:created_at])
-          next unless an.save
-          posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
-        end
+        create_questions(questions, grouped_edits)
+        create_answers(answers, grouped_edits)
 
         puts " Updating accepted answer IDs"
         bar = progress_bar('Accepting', questions.length)
         questions.each do |q|
           bar.increment
-          info = posts[q['Id'].to_i]
-          answer_info = posts[q['AcceptedAnswerId'].to_i]
+          info = @posts[q['Id'].to_i]
+          answer_info = @posts[q['AcceptedAnswerId'].to_i]
           next unless answer_info # answer doesn't exist... for whatever reason
           Question.update(info[:id], accepted_answer_id: answer_info[:id])
         end
@@ -166,6 +135,46 @@ module QA
 
       def progress_bar(title, length)
         ProgressBar.create(title: title, total: length, format: '%t: |%B| %E')
+      end
+
+      def create_questions(questions, grouped_edits)
+        puts " Creating and inserting questions"
+        bar = progress_bar('Questions', questions.length)
+        questions.each do |q|
+          bar.increment
+          qu = Question.new
+          edits = grouped_edits[q['Id']]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
+          edits.delete originator
+          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
+
+          qu.assign_attributes(originator.simple_hash)
+          qu.user_id = @users[originator[:user_id].to_i].id
+          qu.last_active_user_id = @users[originator[:user_id].to_i].id
+          qu.save
+          @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
+        end
+      end
+
+      def create_answers(answers, grouped_edits)
+        puts " Creating and inserting answers"
+        bar = progress_bar('Answers', answers.length)
+        answers.each do |a|
+          bar.increment
+          next if @posts[a['ParentId'].to_i].blank?
+          an = Answer.new
+          edits = grouped_edits[a['Id']]
+          originator = (edits.select { |v| v[:new_record] == true })[0]
+          edits.delete originator
+          next unless @users[originator[:user_id].to_i]
+
+          an.question_id = @posts[a['ParentId'].to_i][:id]
+          an.body = originator[:body]
+          an.user_id = @users[originator[:user_id].to_i].id
+          an.created_at = DateTime.parse(originator[:created_at])
+          next unless an.save
+          @posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
+        end
       end
     end
   end
