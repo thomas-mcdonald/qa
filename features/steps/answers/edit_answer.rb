@@ -16,19 +16,13 @@ class Spinach::Features::EditAnswer < Spinach::FeatureSteps
     within('.answer .links') { should have_content('edit') }
   end
 
-  step 'I fill out the form with updated answer information' do
+  step 'I submit the form with updated answer information' do
     fill_in 'answer_body', with: 'Actually, I believe the answer should be more like this'
-  end
-
-  step 'I click on the submit button' do
     find(:xpath, '//input[@name="commit"]').click
   end
 
-  step 'I am on the question page' do
-    current_path.should == question_path(current_question)
-  end
-
   step 'I can see the updated answer' do
+    current_path.should == question_path(current_question)
     should have_content 'Actually, I believe the answer should be more like this'
   end
 

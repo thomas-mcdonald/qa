@@ -12,6 +12,6 @@ Feature: Signup
   Scenario: Confirming user details
     When I visit the signup page
     And I click on the Google provider
-    And I click on the submit button
+    And I submit the user details form
     Then I should have a user created with those details
     And I should be logged in

@@ -6,15 +6,12 @@ Feature: Create question
   Scenario: Can create question when logged in
     Given I am logged in
     When I visit the new question page
-    And I fill in the form with question data
-    And I click on the submit button
-    Then I am on the question page
-    And I should see the question
+    And I submit the form with a valid question
+    Then I should see the question
 
   Scenario: Cannot create question without tag data
     Given I am logged in
     When I visit the new question page
-    And I fill in the form with question data but without any tags
-    And I click on the submit button
+    And I submit the form with question data but without any tags
     Then I am on the new question page
     And I should see that there is an error with the tags

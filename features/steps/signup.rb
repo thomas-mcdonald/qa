@@ -16,7 +16,7 @@ class Spinach::Features::Signup < Spinach::FeatureSteps
     end
   end
 
-  step 'I click on the submit button' do
+  step 'I submit the user details form' do
     find(:xpath, '//input[@name="commit"]').click
   end
 

@@ -18,7 +18,5 @@ Feature: Edit answer
     Given I am logged in
     And there exists a question with an answer
     When I visit the answer edit page
-    And I fill out the form with updated answer information
-    And I click on the submit button
-    Then I am on the question page
-    And I can see the updated answer
+    And I submit the form with updated answer information
+    Then I can see the updated answer
