@@ -5,9 +5,9 @@ Feature: Create answer
 
   Scenario: Create question as logged in user
     Given I am logged in
-    And I have a question
-    And I am on the question page
+    And there exists a question
+    And I visit the question page
     When I fill in the answer form
     And I click on the submit button
-    Then I should be on the question page
+    Then I am on the question page
     And I should see the answer

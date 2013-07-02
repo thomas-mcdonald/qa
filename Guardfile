@@ -16,9 +16,9 @@ guard :rspec, all_on_start: true, env: { 'RSPEC' => true } do
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 end
 
-guard :cucumber do
-  watch('config/routes.rb')
-  watch(%r{^features/.+\.feature$})
-  watch(%r{^features/support/.+$})          { 'features' }
-  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
+guard 'spinach', all_on_start: true do
+  watch(%r|^features/(.*)\.feature|)
+  watch(%r|^features/steps/(.*)([^/]+)\.rb|) do |m|
+    "features/#{m[1]}#{m[2]}.feature"
+  end
 end
