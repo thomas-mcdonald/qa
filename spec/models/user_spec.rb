@@ -16,7 +16,7 @@ describe User do
         user: user
       )
       user.calculate_reputation!
-      user.reputation.should == ReputationEvent::TYPES[1][:reputation]
+      user.reputation.should == ReputationValues['question_upvote']
     end
   end
 
