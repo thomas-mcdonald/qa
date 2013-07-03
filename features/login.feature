@@ -4,9 +4,9 @@ Feature: Login
   I want to be able to log in to the application
 
   Scenario: Logging in
-    Given I am on the login page
-    And I have already signed up
-    When I click on the Google provider
+    Given I have already signed up
+    When I visit the login page
+    And I click on the Google provider
     Then I should be returned to the homepage
     And I should be logged in
 

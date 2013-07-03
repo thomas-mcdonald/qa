@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'vote_creator'
 
 def create_vote(type, item)
   v = FactoryGirl.build(type, post: item)

@@ -1,7 +1,65 @@
 // This contains styling used in both displaying questions & answers
 
+%control-container {
+  margin-bottom: 5px;
+
+  form {
+    margin: 0 0 5px 20px;
+    width: 30px;
+
+    button, input[type="submit"] {
+      background: none;
+      border: none;
+    }
+  }
+}
+
 .post {
   @include makeRow();
+
+  .controls {
+    @include makeColumn(1);
+    margin-bottom: 15px;
+  }
+
+  .vote-controls {
+    @extend %control-container;
+
+    .vote-count {
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0 0 0 20px;
+      text-align: center;
+      width: 30px;
+    }
+
+    // more specific to avoid popover css conflict
+    form .arrow {
+      font-size: 20px;
+      height: 20px;
+      width: 30px;
+    }
+
+    .vote-active {
+      color: green;
+    }
+  }
+
+  .accept-answer {
+    @extend %control-container;
+    margin-top: 5px;
+
+    form { margin-left: 17px; } // reduce margin slightly to centre
+    .accepted-standalone { margin-left: 17px + 6px; } // match active buttons
+
+    .icon-ok {
+      font-size: 26px;
+      text-shadow: 0 0 1px #000;
+    }
+
+    .inactive.icon-ok { color: #eee; }
+    .active.icon-ok { color: green; text-shadow: 0 0 1px #000; }
+  }
 
   .main {
     @include makeColumn(8);

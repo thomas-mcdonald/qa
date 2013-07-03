@@ -2,10 +2,12 @@ Qa::Application.routes.draw do
   root to: 'questions#index'
   get '/ask', to: 'questions#new', as: 'new_question'
   get '/questions/new' => redirect('/ask')
+  get '/questions/tagged/:tag', to: 'questions#tagged', as: 'questions_tagged'
   get '/questions/:id/:slug', to: 'questions#show'
   patch '/questions/:id/:slug', to: 'questions#update'
   get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
+  post '/questions/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
 
   resources :answers, only: [:create, :edit, :update]
   resources :votes, only: [:create, :destroy]
