@@ -34,21 +34,23 @@ group :development do
   gem 'quiet_assets'
   # Guard for autorunning tests
   gem 'guard', '~> 1.8.0'
-  gem 'guard-cucumber', '~> 1.4.0'
   gem 'guard-rspec', '~> 3.0.0'
+  gem 'guard-spinach'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.9'
+  gem 'spinach-rails'
 end
 
 group :test do
   gem 'coveralls', require: false
-  gem 'cucumber-rails', '~> 1.3.0', require: false
   gem 'database_cleaner', '~> 1.0.0'
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'poltergeist', '~> 1.3.0'
+  gem 'rspec', '~> 2.13'
   gem 'shoulda-matchers', '~> 1.5.0'
+  gem 'spinach', '~> 0.8.3'
 end
