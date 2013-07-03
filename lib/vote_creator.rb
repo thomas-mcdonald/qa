@@ -10,7 +10,6 @@ class VoteCreator
     [:post_id, :post_type, :vote_type_id].each { |k| raise ArgumentError, "#{k} is missing" unless opts[k] }
     @user = user
     @vote_params = opts.slice(:post_id, :post_type, :vote_type_id)
-    @recalculate = opts[:recalculate] || true
   end
 
   def create
@@ -36,9 +35,9 @@ class VoteCreator
   def create_reputation_events
     if @vote.post.class == Question
       if @vote.is_upvote?
-        ReputationEvent.create_for_receiving_question_upvote(@vote, @recalculate)
+        ReputationEvent.create_for_receiving_question_upvote(@vote)
       elsif @vote.is_downvote?
-        ReputationEvent.create_for_receiving_question_downvote(@vote, @recalculate)
+        ReputationEvent.create_for_receiving_question_downvote(@vote)
       end
     end
   end

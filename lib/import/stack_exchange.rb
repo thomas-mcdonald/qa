@@ -92,7 +92,7 @@ module QA
       end
 
       def create_reputation
-        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type_id: 0, recalculate: false)
+        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type_id: 0)
         puts "Creating reputation events"
         bar = ProgressBar.create(title: 'Reputation', total: Vote.count, format: '%t: |%B| %E')
         Vote.all.each do |v|

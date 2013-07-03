@@ -11,21 +11,21 @@ class ReputationEvent < ActiveRecord::Base
     ReputationValues[INVERT[id]]
   end
 
-  def self.create_for_receiving_question_upvote(vote, recalculate = true)
+  def self.create_for_receiving_question_upvote(vote)
     event = vote.post.user.reputation_events.create(
       action: vote,
       event_type: QUESTION_UPVOTE
     )
-    vote.post.user.calculate_reputation! if recalculate
+    vote.post.user.calculate_reputation!
     event
   end
 
-  def self.create_for_receiving_question_downvote(vote, recalculate = true)
+  def self.create_for_receiving_question_downvote(vote)
     event = vote.post.user.reputation_events.create(
       action: vote,
       event_type: QUESTION_DOWNVOTE
     )
-    vote.post.user.calculate_reputation! if recalculate
+    vote.post.user.calculate_reputation!
     event
   end
 end
