@@ -20,14 +20,9 @@ gem 'omniauth-openid', '1.0.1'
 # Asset gems. Could probably go in assets group
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'font-awesome-sass-rails'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 4.0.0'
-  gem 'coffee-rails', '~> 4.0.0'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.0.3'
 
 group :development do
   gem 'foreman'
