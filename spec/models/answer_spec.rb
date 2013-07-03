@@ -1,7 +1,9 @@
 require 'spec_helper'
-require 'concerns/voteable_examples'
+require 'examples/timeline_examples'
+require 'examples/voteable_examples'
 
 describe Answer do
+  it_should_behave_like 'timelined'
   it_should_behave_like 'voteable'
 
   context 'associations' do
