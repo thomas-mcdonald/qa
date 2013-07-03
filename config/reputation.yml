@@ -1,2 +1,4 @@
 question_upvote: 5
 question_downvote: -5
+answer_upvote: 10
+answer_downvote: -5

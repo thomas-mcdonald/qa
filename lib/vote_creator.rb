@@ -33,12 +33,6 @@ class VoteCreator
   end
 
   def create_reputation_events
-    if @vote.post.class == Question
-      if @vote.is_upvote?
-        ReputationEvent.create_for_receiving_question_upvote(@vote)
-      elsif @vote.is_downvote?
-        ReputationEvent.create_for_receiving_question_downvote(@vote)
-      end
-    end
+    ReputationEvent.create_on_receive_vote(@vote)
   end
 end
