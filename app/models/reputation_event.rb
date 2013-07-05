@@ -6,7 +6,12 @@ class ReputationEvent < ActiveRecord::Base
   QUESTION_DOWNVOTE = 2
   ANSWER_UPVOTE = 3
   ANSWER_DOWNVOTE = 4
-  INVERT = ['question_upvote', 'question_downvote'].unshift(nil).freeze
+  INVERT = [
+    'question_upvote',
+    'question_downvote',
+    'answer_upvote',
+    'answer_downvote'
+  ].unshift(nil).freeze
 
   # Given an event type ID, returns the rep change associated with the ID
   def self.reputation_for(id)
