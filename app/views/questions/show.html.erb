@@ -19,7 +19,14 @@
           <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) if logged_in? %>
         </div>
         <div class="righto">
-          <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.display_name, @question.user %></p>
+          <div class="user-info">
+            <p class="asked">asked <%= time_ago_in_words @question.created_at %> ago</p>
+            <img class="gravatar" src="<%= @question.user.gravatar %>" />
+            <div class="user-details">
+              <%= link_to @question.user.display_name, @question.user %>
+              <span><%= @question.user.reputation %></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
