@@ -47,6 +47,12 @@
 </div>
 
 <div id="sidebar">
+  <h5>tagged</h5>
+  <ul class="sidebar-tags">
+    <% @question.tags.each do |tag| %>
+      <li><%= link_to tag.name, questions_tagged_path(tag.name), class: 'btn tag' %> <span>x&nbsp;<%= tag.frequency %></span></li>
+    <% end %>
+  </ul>
   <ul class="summary">
     <li>asked <span><%= time_ago_in_words @question.created_at %></span> ago</li>
     <li>viewed <span><%= pluralize @question.view_count, "time" %></span></li>
