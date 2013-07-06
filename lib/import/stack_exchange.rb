@@ -8,6 +8,7 @@ module QA
         @dir = dir
         @posts = []
         output_intro
+        patch_classes
         @users = create_users
         create_posts
         create_votes
@@ -32,6 +33,18 @@ module QA
         end
         puts " Importing Users"
         import_users(users)
+      end
+
+      def patch_classes
+        ReputationEvent.instance_eval %(
+          def create_on_receive_vote(vote)
+            event = vote.post.user.reputation_events.create(
+              action: vote,
+              event_type: vote.reputation_event_type
+            )
+            event
+          end
+        )
       end
 
       def create_posts
