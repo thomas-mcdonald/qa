@@ -2,10 +2,21 @@ require 'spec_helper'
 
 describe QuestionsController do
   context 'index' do
-    before do
-      get :index
-    end
+    before { get :index }
+    it { should respond_with(:success) }
+  end
 
+  context 'show' do
+    let(:question) { FactoryGirl.create(:question) }
+    before { get :show, id: question.id, slug: question.slug }
+    it { should respond_with(:success) }
+  end
+
+  context 'tagged' do
+    before do
+      FactoryGirl.create(:question, tag_list: 'tag')
+      get :tagged, tag: 'tag'
+    end
     it { should respond_with(:success) }
   end
 

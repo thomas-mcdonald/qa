@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_filter :require_login, except: [:index, :show]
+  before_filter :require_login, except: [:index, :show, :tagged]
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
