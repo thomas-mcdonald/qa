@@ -2,6 +2,8 @@ class ReputationEvent < ActiveRecord::Base
   belongs_to :action, polymorphic: true
   belongs_to :user
 
+  validates :user_id, uniqueness: { scope: [:action_id, :action_type] }
+
   # Create the reputation event constants
   _invert = []
   %w(receive_question_upvote receive_question_downvote receive_answer_upvote
