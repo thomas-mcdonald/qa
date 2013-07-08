@@ -20,14 +20,12 @@ class Vote < ActiveRecord::Base
     vote_type_id == 1
   end
 
-  def reputation_event_type
+  def event_type
     # TODO: return nil or something appropriate if not an updown vote
-    # I also think this could be better just returning the string, to be
-    # consted in ReputationEvent
     str = post_type + '_'
     str << 'upvote' if is_upvote?
     str << 'downvote' if is_downvote?
-    ReputationEvent.const_get(str.upcase)
+    str
   end
 
   def update_post_vote_count

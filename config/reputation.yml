@@ -1,4 +1,18 @@
-question_upvote: 5
-question_downvote: -5
-answer_upvote: 10
-answer_downvote: -5
+# Reputation values for QA.
+# Receive values are awarded to the user who wrote the post when it is upvoted
+receive_question_upvote: 5
+receive_question_downvote: -5
+receive_answer_upvote: 10
+receive_answer_downvote: -5
+
+# TODO: needs implementing
+# Give values are awarded to the user who creates the vote - e.g. to discourage
+# downvoting
+give_question_upvote: 0
+give_question_downvote: -1
+give_answer_upvote: 0
+give_answer_downvote: -1
+
+# Awarded for accepting an answer/having an answer accepted
+accept_answer: 2
+accepted_answer: 15

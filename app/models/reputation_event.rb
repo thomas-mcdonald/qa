@@ -2,16 +2,16 @@ class ReputationEvent < ActiveRecord::Base
   belongs_to :action, polymorphic: true
   belongs_to :user
 
-  QUESTION_UPVOTE = 1
-  QUESTION_DOWNVOTE = 2
-  ANSWER_UPVOTE = 3
-  ANSWER_DOWNVOTE = 4
-  INVERT = [
-    'question_upvote',
-    'question_downvote',
-    'answer_upvote',
-    'answer_downvote'
-  ].unshift(nil).freeze
+  # Create the reputation event constants
+  _invert = []
+  %w(receive_question_upvote receive_question_downvote receive_answer_upvote
+    receive_answer_downvote give_question_upvote give_question_downvote
+    give_answer_upvote give_answer_downvote accept_answer accepted_answer
+  ).each_with_index do |str, i|
+    self.const_set(str.upcase, i + 1)
+    _invert[i+1] = str
+  end
+  INVERT = _invert.freeze
 
   # Given an event type ID, returns the rep change associated with the ID
   def self.reputation_for(id)
@@ -23,7 +23,7 @@ class ReputationEvent < ActiveRecord::Base
   def self.create_on_receive_vote(vote)
     event = vote.post.user.reputation_events.create(
       action: vote,
-      event_type: vote.reputation_event_type
+      event_type: ReputationEvent.const_get(%(receive_#{vote.event_type}).upcase)
     )
     vote.post.user.calculate_reputation!
     event
