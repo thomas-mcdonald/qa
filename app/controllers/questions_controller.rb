@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question.viewed_by(request.remote_ip)
-    @answers = @question.answers.question_view_ordering(@question)
+    @answers = @question.answers.includes(:user).question_view_ordering(@question)
     @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
