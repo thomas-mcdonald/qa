@@ -32,7 +32,9 @@ class VoteCreator
     result
   end
 
+  # Create the reputation events for the users involved in the vote
   def create_reputation_events
     ReputationEvent.create_on_receive_vote(@vote)
+    ReputationEvent.create_on_give_vote(@vote)
   end
 end
