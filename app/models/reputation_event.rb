@@ -28,4 +28,15 @@ class ReputationEvent < ActiveRecord::Base
     vote.post.user.calculate_reputation!
     event
   end
+
+  # Given a vote, create a reputation event on the user who created the vote
+  # and recalculate his reputation
+  def self.create_on_give_vote(vote)
+    event = vote.user.reputation_events.create(
+      action: vote,
+      event_type: ReputationEvent.const_get(%(give_#{vote.event_type}).upcase)
+    )
+    vote.user.calculate_reputation!
+    event
+  end
 end
