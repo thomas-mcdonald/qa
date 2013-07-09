@@ -20,6 +20,19 @@ class ReputationEvent < ActiveRecord::Base
     ReputationValues[INVERT[id]]
   end
 
+  def self.create_on_accept_answer(question, answer)
+    question.user.reputation_events.create(
+      action: question,
+      event_type: ReputationEvent::ACCEPT_ANSWER
+    )
+    answer.user.reputation_events.create(
+      action: answer,
+      event_type: ReputationEvent::ACCEPTED_ANSWER
+    )
+    question.user.calculate_reputation!
+    answer.user.calculate_reputation!
+  end
+
   # Given a vote, create a reputation event on the user who created the post
   # and recalculate his reputation.
   def self.create_on_receive_vote(vote)
