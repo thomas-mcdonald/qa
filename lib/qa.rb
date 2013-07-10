@@ -1,3 +1,5 @@
+require_dependency 'jobs'
+
 module QA
   class NotAuthorised < Exception; end
   class NotLoggedIn < Exception; end
