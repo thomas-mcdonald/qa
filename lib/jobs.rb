@@ -1,0 +1,1 @@
+Dir["#{Rails.root}/lib/jobs/*"].each {|file| require_dependency file }
