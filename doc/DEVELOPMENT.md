@@ -1,15 +1,19 @@
-# Setup
+# Development Setup
 
-```
-brew install postgresql phantomjs
-bundle install
-rake db:setup
-rake db:seed_fu
-```
+## Prerequisites
 
-... or something like that. I'm working on a Vagrant setup that will be much easier.
+QA requires Ruby 2.0.0+ and PostgreSQL to be installed. Running the test suite also requires
+phantomjs. If you're on OS X and use homebrew, PostgreSQL and phantomjs can be installed with
+`brew install postgresql phantomjs`
 
-# Import sample data
+## Setup
+
+0. Make sure you have the prerequisites above installed
+1. Clone the repository - `git clone git://github.com/thomas-mcdonald/qa.git`
+2. Setup the database - `rake db:setup`
+3. Install some seed data - `rake db:seed_fu`
+
+## Import sample data
 
 QA will import Stack Exchange data dumps. Drop the un7zed files into
 `lib/import/data` and run `rake import:se`.
