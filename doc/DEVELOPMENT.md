@@ -2,9 +2,14 @@
 
 ## Prerequisites
 
-QA requires Ruby 2.0.0+ and PostgreSQL to be installed. Running the test suite also requires
-phantomjs. If you're on OS X and use homebrew, PostgreSQL and phantomjs can be installed with
-`brew install postgresql phantomjs`
+QA requires Ruby 2.0.0+, PostgreSQL and Redis to be installed. Running the test suite also requires
+phantomjs.
+
+### Installation
+
+#### OS X - Homebrew
+
+PostgreSQL, phantomjs and Redis can be installed with `brew install postgresql phantomjs`
 
 ## Setup
 
