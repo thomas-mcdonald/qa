@@ -9,7 +9,7 @@ Qa::Application.routes.draw do
   resources :questions, only: [:create, :show]
 
   # Shorter URLs where slugs don't matter
-  patch '/q/:id', to: 'questions#update'
+  patch '/q/:id', to: 'questions#update', as: 'update_question'
   get '/q/:id/edit', to: 'questions#edit', as: 'edit_question'
   post '/q/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
 
