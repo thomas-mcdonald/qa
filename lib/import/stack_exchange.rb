@@ -122,18 +122,10 @@ module QA
       end
 
       def update_counters
-        puts " Updating cache column counters"
-        bar = progress_bar('Question counters', Question.count)
-        Question.all.each do |q|
-          bar.increment
-          Question.update_counters q.id, answers_count: q.answers.length
-          q.update_vote_count!
-        end
-        bar = progress_bar('Answer counters', Answer.count)
-        Answer.all.each do |a|
-          bar.increment
-          a.update_vote_count!
-        end
+        print " Queueing updates to cache column counters"
+        Question.all.each { |q| Jobs::QuestionStats.perform_async(q.id) }
+        Answer.all.each { |a| Jobs::AnswerStats.perform_async(a.id) }
+        puts " - done!"
       end
 
       # Although all the methods above should probably be private, these are only

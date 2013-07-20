@@ -12,6 +12,7 @@ gem 'redis-namespace', '~> 1.2.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'irfn/seed-fu'
 gem 'settingslogic', '~> 2.0.9'
+gem 'sidekiq', '~> 2.13.0'
 gem 'simple_form', '~> 3.0.0.rc'
 
 # Authentication
