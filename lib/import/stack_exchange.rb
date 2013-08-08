@@ -40,7 +40,14 @@ module QA
           def create_on_receive_vote(vote)
             event = vote.post.user.reputation_events.create(
               action: vote,
-              event_type: vote.reputation_event_type
+              event_type: ReputationEvent.const_get(%(receive_\#{vote.event_type}).upcase)
+            )
+            event
+          end
+          def self.create_on_give_vote(vote)
+            event = vote.user.reputation_events.create(
+              action: vote,
+              event_type: ReputationEvent.const_get(%(give_\#{vote.event_type}).upcase)
             )
             event
           end
