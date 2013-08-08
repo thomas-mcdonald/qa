@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
 
-gem 'activerecord-import', github: 'spectator/activerecord-import', branch: 'rails4' # fork for Rails 4 ~> 0.3.1
+gem 'activerecord-import', '~> 0.4.1'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.14.1'
 gem 'pg', '~> 0.15.0'

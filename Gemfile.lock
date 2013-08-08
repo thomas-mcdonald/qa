@@ -6,14 +6,6 @@ GIT
       activerecord (>= 3.1, < 4.1)
       activesupport (>= 3.1, < 4.1)
 
-GIT
-  remote: git://github.com/spectator/activerecord-import.git
-  revision: 161dc35c43f8ce4d77c8fb4dc812df660597f8ae
-  branch: rails4
-  specs:
-    activerecord-import (0.4.0)
-      activerecord (>= 3.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,6 +27,8 @@ GEM
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-import (0.4.1)
+      activerecord (>= 3.0)
     activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -260,7 +254,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import!
+  activerecord-import (~> 0.4.1)
   bootstrap-sass (~> 2.3.1.0)
   coffee-rails (~> 4.0.0)
   coveralls
