@@ -173,7 +173,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
-    redcarpet (2.2.2)
+    redcarpet (3.0.0)
     redis (3.0.4)
     redis-namespace (1.2.2)
       redis (~> 3.0.0)
@@ -274,7 +274,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.0.0)
   rb-fsevent (~> 0.9.1)
-  redcarpet (~> 2.2.2)
+  redcarpet (~> 3.0.0)
   redis (~> 3.0.2)
   redis-namespace (~> 1.2.1)
   rspec (~> 2.13)
