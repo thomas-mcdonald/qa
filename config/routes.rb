@@ -23,9 +23,11 @@ QA::Application.routes.draw do
   # Shorter URLs where slugs don't matter
   patch '/q/:id', to: 'questions#update', as: 'update_question'
   get '/q/:id/edit', to: 'questions#edit', as: 'edit_question'
+  get '/q/:id/timeline', to: 'questions#timeline', as: 'question_timeline'
   post '/q/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
 
   resources :answers, only: [:create, :edit, :update]
+  get '/a/:id/timeline', to: 'answers#timeline', as: 'answer_timeline'
   resources :votes, only: [:create, :destroy]
 
   get '/user/edit', to: 'users#edit', as: 'edit_user'

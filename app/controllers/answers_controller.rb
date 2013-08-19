@@ -1,5 +1,9 @@
+require_dependency 'timeline_action'
+
 class AnswersController < ApplicationController
-  before_filter :require_login
+  include TimelineAction
+
+  before_filter :require_login, except: [:timeline]
 
   def create
     @question = Question.find(params[:answer][:question_id])
@@ -25,5 +29,9 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:body)
+  end
+
+  def load_timeline_post
+    @post = Answer.find(params[:id])
   end
 end

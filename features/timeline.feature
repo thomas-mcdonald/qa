@@ -1,0 +1,14 @@
+Feature: Post timelines
+  In order to view the history of a post
+  As a user of website
+  I want the post histories to be recorded and viewable
+  
+  Scenario: Creating a question
+    Given there exists a question
+    When I visit the question timeline page
+    Then I see the created timeline event
+
+  Scenario: Creating an answer
+    Given there exists a question with an answer
+    When I visit the answer timeline page
+    Then I see the created timeline event

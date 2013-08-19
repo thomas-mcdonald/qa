@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h1>Timeline for <%= @post.class.to_s.downcase %></h1>
+</div>
+
+<% @post.timeline_events.each do |event| %>
+  <%= render partial: %(posts/timeline/#{TimelineEvent::INVERT[event.action]}), locals: { event: event } %>
+<% end %>

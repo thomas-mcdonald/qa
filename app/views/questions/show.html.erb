@@ -13,10 +13,11 @@
         <ul class="tags">
           <% @question.tags.each do |tag| %>
             <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
-            <% end %>
+          <% end %>
         </ul>
         <div class="meta">
           <div class="links">
+            <%= link_to 'timeline', question_timeline_url(@question.id) %>
             <% if policy(@question).edit? %>
               <%= link_to 'edit', edit_question_path(@question.id) if logged_in? %>
             <% end%>

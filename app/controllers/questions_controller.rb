@@ -1,5 +1,9 @@
+require_dependency 'timeline_action'
+
 class QuestionsController < ApplicationController
-  before_filter :require_login, except: [:index, :show, :tagged]
+  include TimelineAction
+
+  before_filter :require_login, except: [:index, :show, :tagged, :timeline]
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
@@ -72,6 +76,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def load_timeline_post
+    @post = Question.find(params[:id])
+  end
 
   def load_and_verify_slug
     @question = Question.includes(:votes).find(params[:id])
