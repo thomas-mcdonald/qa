@@ -1,0 +1,18 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    build-essential (1.4.0)
+    chef_handler (1.1.4)
+    chocolatey (0.0.5)
+      powershell (>= 0.0.0)
+    phantomjs (1.0.2)
+      build-essential (>= 0.0.0)
+      chocolatey (>= 0.0.0)
+    powershell (1.1.0)
+      windows (>= 1.2.8)
+    windows (1.10.0)
+      chef_handler (>= 0.0.0)
+
+DEPENDENCIES
+  phantomjs (>= 0)
+
