@@ -5,3 +5,5 @@ lib/import/data
 log/*.log
 .sass-cache/
 tmp/
+vagrant/packer/packer_cache
+vagrant/packer/*.box
