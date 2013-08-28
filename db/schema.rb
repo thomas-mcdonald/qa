@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130411152319) do
+ActiveRecord::Schema.define(version: 20130510231737) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20130411152319) do
     t.datetime "updated_at"
     t.integer  "vote_count",  default: 0, null: false
   end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "authorizations", force: true do |t|
     t.integer  "user_id"
@@ -37,7 +39,11 @@ ActiveRecord::Schema.define(version: 20130411152319) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vote_count", default: 0, null: false
+    t.integer  "vote_count",          default: 0, null: false
+    t.integer  "last_active_user_id"
+    t.datetime "last_active_at"
+    t.integer  "answers_count"
+    t.integer  "accepted_answer_id"
   end
 
   create_table "taggings", force: true do |t|
@@ -47,8 +53,8 @@ ActiveRecord::Schema.define(version: 20130411152319) do
     t.datetime "updated_at"
   end
 
-  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id"
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
@@ -61,6 +67,7 @@ ActiveRecord::Schema.define(version: 20130411152319) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",      default: false, null: false
   end
 
   create_table "votes", force: true do |t|
@@ -71,5 +78,7 @@ ActiveRecord::Schema.define(version: 20130411152319) do
     t.datetime "updated_at"
     t.string   "post_type"
   end
+
+  add_index "votes", ["post_type", "post_id"], name: "index_votes_on_post_type_and_post_id", using: :btree
 
 end

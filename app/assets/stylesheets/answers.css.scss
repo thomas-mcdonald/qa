@@ -3,10 +3,18 @@
 
 .answers {
   .answer {
-    @include makeRow();
+    padding-bottom: 15px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 15px;
 
-    .body {
-      @include makeColumn(8);
+    &:last-child {
+      border-bottom: none;
     }
+  }
+}
+
+.edit_answer {
+  #answer_body {
+    height: 400px;
   }
 }

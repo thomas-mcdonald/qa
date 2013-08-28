@@ -1,31 +1,37 @@
 require 'spec_helper'
+require 'vote_creator'
+
+def create_vote(type, item)
+  v = FactoryGirl.build(type, post: item)
+  VoteCreator.new(v.user, v.slice(:post_id, :post_type, :vote_type_id)).create
+end
 
 shared_examples_for 'voteable' do
   let(:item) { FactoryGirl.create(described_class.to_s.downcase.to_sym) }
 
   context 'vote_count' do
     it 'counts upvotes as 1' do
-      FactoryGirl.create(:upvote, post: item)
+      create_vote(:upvote, item)
       item.reload
       item.vote_count.should == 1
     end
 
     it 'counts downvotes as -1' do
-      FactoryGirl.create(:downvote, post: item)
+      create_vote(:downvote, item)
       item.reload
       item.vote_count.should == -1
     end
 
     it 'handles a series of votes' do
-      FactoryGirl.create(:upvote, post: item)
-      FactoryGirl.create(:downvote, post: item)
-      FactoryGirl.create(:upvote, post: item)
+      create_vote(:upvote, item)
+      create_vote(:downvote, item)
+      create_vote(:upvote, item)
       item.reload
       item.vote_count.should == 1
     end
 
     it 'updates after vote destroy' do
-      vote = FactoryGirl.create(:upvote, post: item)
+      vote = create_vote(:upvote, item)
       item.reload
       item.vote_count.should == 1
       vote.destroy

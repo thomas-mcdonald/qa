@@ -1,13 +1,19 @@
 Qa::Application.routes.draw do
   root to: 'questions#index'
+
+  # Question URLs
   get '/ask', to: 'questions#new', as: 'new_question'
   get '/questions/new' => redirect('/ask')
+  get '/questions/tagged/:tag', to: 'questions#tagged', as: 'questions_tagged'
   get '/questions/:id/:slug', to: 'questions#show'
-  put '/questions/:id/:slug', to: 'questions#update'
-  get '/questions/:id/:slug/edit', to: 'questions#edit', as: 'edit_question'
   resources :questions, only: [:create, :show]
 
-  resources :answers, only: [:create]
+  # Shorter URLs where slugs don't matter
+  patch '/q/:id', to: 'questions#update'
+  get '/q/:id/edit', to: 'questions#edit', as: 'edit_question'
+  post '/q/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
+
+  resources :answers, only: [:create, :edit, :update]
   resources :votes, only: [:create, :destroy]
 
   get '/users/:id/:slug', to: 'users#show'
@@ -18,4 +24,9 @@ Qa::Application.routes.draw do
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
   post '/auth/:provider/callback', to: 'authorizations#callback'
+
+  # development routes
+  if Rails.env.development?
+    get '/dev/login', to: 'dev#login'
+  end
 end

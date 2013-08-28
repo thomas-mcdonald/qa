@@ -1,0 +1,13 @@
+<div class="answer post" id="answer-<%= answer.id %>">
+  <div class="controls">
+    <div class="vote-controls"><%= vote_controls(answer) %></div>
+    <%= render partial: 'answers/accept_answer', locals: { question: question, answer: answer } %>
+  </div>
+  <div class="main">
+    <div class="body"><%=format answer.body%></div>
+    <div class="meta">
+      <div class="links"><%= link_to 'edit', edit_answer_path(answer) if logged_in? %></div>
+      <div class="righto">answered <%= time_ago_in_words answer.created_at %> ago by <%= link_to answer.user.display_name, answer.user %></div>
+    </div>
+  </div>
+</div>

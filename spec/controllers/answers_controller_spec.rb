@@ -19,4 +19,21 @@ describe AnswersController do
       end
     end
   end
+
+  context 'edit' do
+    let(:answer) { FactoryGirl.create(:answer) }
+
+    it 'requires login' do
+      -> { get :edit, id: answer.id }.should raise_error(QA::NotLoggedIn)
+    end
+
+    context 'when logged in' do
+      before { sign_in(alice) }
+
+      it 'is success' do
+        get :edit, id: answer.id
+        response.status.should == 200
+      end
+    end
+  end
 end

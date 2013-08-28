@@ -74,16 +74,6 @@
 
 // question display on questions#show
 .question {
-  @include makeRow();
-
-  .main {
-    @include makeColumn(8);
-  }
-
-  .body {
-    margin-bottom: 15px;
-  }
-
   .tags {
     float: none;
     @extend .clearfix;
@@ -93,12 +83,28 @@
   .meta {
     padding-top: 10px;
   }
+}
 
-  .links {
-    float: left;
+#sidebar {
+  h5 {
+    font-weight: normal;
+    margin: 0 0 6px 25px;
+  }
+  .sidebar-tags {
+    list-style-type: none;
+
+    li { margin-bottom: 6px; }
+    span {
+      color: #b1b1b1;
+      font-size: 12px;
+    }
   }
 
-  .righto {
-    float: right;
+  .summary {
+    list-style-type: none;
+
+    li span {
+      font-weight: 600;
+    }
   }
 }

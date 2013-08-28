@@ -1,7 +1,7 @@
 require_dependency 'qa'
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
   private
 
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     raise QA::NotLoggedIn unless current_user.present?
   end
 
+  def require_user(user)
+    raise QA::NotAuthorised unless current_user.id == user.id
+  end
+
   def login(user)
     session[:user_id] = user.id
   end
@@ -23,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
 
-  rescue_from QA::NotLoggedIn do |e|
+  rescue_from QA::NotAuthorised, QA::NotLoggedIn do |e|
     raise e if ENV['RSPEC']
     redirect_to '/'
   end

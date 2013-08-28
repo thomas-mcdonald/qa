@@ -1,4 +1,9 @@
 module CountsHelper
+  def mini_count(count, string, opts = {})
+    plural = string.pluralize(opts[:with] || count)
+    %(<div class="mini-count"><div class="num">#{count}</div><div>#{plural}</div></div>).html_safe
+  end
+
   def views_formatted(count)
     case count
     when 0..999

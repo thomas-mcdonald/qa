@@ -3,21 +3,23 @@
 </div>
 
 <div id="body">
-  <div class="question" id="question-<%= @question.id %>">
-    <div class="vote-controls"><%= vote_controls(@question) %></div>
+  <div class="question post" id="question-<%= @question.id %>">
+    <div class="controls">
+      <div class="vote-controls"><%= vote_controls(@question) %></div>
+    </div>
     <div class="main">
       <div class="body"><%=format @question.body %></div>
       <ul class="tags">
         <% @question.tags.each do |tag| %>
-          <li class="btn tag"><%= tag.name %></li>
+          <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
         <% end %>
       </ul>
       <div class="meta">
         <div class="links">
-          <%= link_to 'edit', edit_question_url(@question.id, slug: @question.slug) %>
+          <%= link_to 'edit', edit_question_url(@question.id) if logged_in? %>
         </div>
         <div class="righto">
-          <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.name, @question.user %></p>
+          <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.display_name, @question.user %></p>
         </div>
       </div>
     </div>
@@ -28,14 +30,7 @@
       <div class="page-header">
         <h3><%= pluralize @answers.size, "Answer" %></h3>
       </div>
-      <% @answers.each do |answer| %>
-        <div class="answer" id="answer-<%= answer.id %>">
-          <div class="main">
-            <div class="vote-controls"><%= vote_controls(answer) %></div>
-            <div class="body"><%=format answer.body%></div>
-          </div>
-        </div>
-      <% end %>
+      <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
     </div>
   <% end %>
 
@@ -52,5 +47,15 @@
 </div>
 
 <div id="sidebar">
-  viewed <%= pluralize @question.view_count, "time" %>
+  <h5>tagged</h5>
+  <ul class="sidebar-tags">
+    <% @question.tags.each do |tag| %>
+      <li><%= link_to tag.name, questions_tagged_path(tag.name), class: 'btn tag' %> <span>x&nbsp;<%= tag.frequency %></span></li>
+    <% end %>
+  </ul>
+  <ul class="summary">
+    <li>asked <span><%= time_ago_in_words @question.created_at %></span> ago</li>
+    <li>viewed <span><%= pluralize @question.view_count, "time" %></span></li>
+    <li>active <span><%= time_ago_in_words @question.last_active_at %></span> ago</li>
+  </ul>
 </div>

@@ -12,6 +12,37 @@ describe Question do
 
   it_should_behave_like 'voteable'
 
+  context 'accepted_is_on_question' do
+    it 'does not add an error if there is no accepted_answer_id' do
+      question = FactoryGirl.build(:question, accepted_answer_id: nil)
+      question.should be_valid
+    end
+
+    it 'is valid if the answer id is an answer to the question' do
+      answer = FactoryGirl.create(:answer)
+      question = answer.question
+      question.accepted_answer_id = answer.id
+      question.should be_valid
+    end
+
+    it 'is not valid if the answer id is not an answer to the question' do
+      question = FactoryGirl.build(:question, accepted_answer_id: 1)
+      question.should_not be_valid
+
+      question = FactoryGirl.build(:question, accepted_answer_id: 'string')
+      question.should_not be_valid
+    end
+  end
+
+  context '#update_last_activity' do
+    let(:question) { FactoryGirl.build(:question) }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before { question.update_last_activity(user) }
+
+    pending 'look into Timecop for testing time updates'
+  end
+
   context 'votes_on_self_and_answers_by_user' do
     let(:answer) { FactoryGirl.create(:answer) }
     let(:question) { answer.question }

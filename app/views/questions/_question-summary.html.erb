@@ -1,16 +1,16 @@
 <div id="question-<%= question.id %>" class="row">
   <div class="mini-counts">
-    <div class="mini-count"><div class="num"><%= question.vote_count %></div><div>votes</div></div>
-    <div class="mini-count"><div class="num"><%= question.answers.count %></div><div>answers</div></div>
-    <div class="mini-count"><div class="num"><%= views_formatted(question.view_count) %></div><div>views</div></div>
+    <%= mini_count question.vote_count, "vote" %>
+    <%= mini_count question.answers_count, "answer" %>
+    <%= mini_count views_formatted(question.view_count), "view", with: question.view_count %>
   </div>
   <div class="question-summary">
     <h3><%= link_to question.title, question %></h3>
     <ul class="tags">
       <% question.tags.each do |tag| %>
-        <li class="btn tag"><%= tag.name %></li>
+        <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
       <% end %>
     </ul>
-    <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.created_at %> ago</span> <%= link_to question.user.name, question.user %></p>
+    <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.last_active_at %> ago</span> <%= link_to question.last_active_user.display_name, question.last_active_user %></p>
   </div>
 </div>

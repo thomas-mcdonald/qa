@@ -33,6 +33,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def display_name
+    if admin?
+      name + " ♦"
+    else
+      name
+    end
+  end
+
   def email_hash
     Digest::MD5.hexdigest(email.strip.downcase)
   end
