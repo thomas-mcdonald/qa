@@ -19,7 +19,7 @@ gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems
-gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 gem 'font-awesome-sass-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
