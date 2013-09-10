@@ -1,5 +1,6 @@
 %tag-list {
   margin: 0;
+  padding: 0;
   list-style-type: none;
 
   li {
@@ -12,7 +13,8 @@
 .question-list {
   @include make-md-column(12);
 
-  > div {
+  .question-summary {
+    @include make-row();
     border-bottom: 1px solid #eee;
     margin-top: 1px;
     padding-bottom: 10px;
@@ -20,7 +22,7 @@
 }
 
 .mini-counts {
-  @include make-md-column(2.25);
+  @include make-md-column(2);
   margin-top: 14px;
 
   > div {
@@ -32,9 +34,8 @@
   }
 }
 
-.question-summary {
-  @include make-md-column(8.75); // leave wide for now
-  margin-left: 10px;
+.question-info {
+  @include make-md-column(10); // leave wide for now
 
   h3 {
     font-size: 18px;

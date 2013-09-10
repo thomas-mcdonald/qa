@@ -3,11 +3,12 @@
 // Hidden form fields should have no height or etc
 html .control-group.hidden { margin-bottom: 0; }
 
-// remove the padding and reduce the border on page-header.. really?
+// remove the padding and reduce the border on page-header
 .page-header {
   padding-bottom: 0;
   margin-bottom: 20px;
 }
+.container > .page-header { margin-top: 0; } // no margin on initial header
 
 // input that should use font-awesome
 .fa-input {
