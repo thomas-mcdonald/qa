@@ -1,16 +1,5 @@
 // This file includes Bootstrap fixes and other 'global' customisation
 
-// Fix for static navbar not having width
-.navbar-inner > .container {
-  width:940px;
-}
-
-// remove gradient & rounded corners from navbar
-.navbar > .navbar-inner {
-  @include border-radius(0);
-  background: white;
-}
-
 // Hidden form fields should have no height or etc
 html .control-group.hidden { margin-bottom: 0; }
 
@@ -49,7 +38,7 @@ html .control-group.hidden { margin-bottom: 0; }
     &:hover {
       text-decoration: none;
       color: white;
-      @include gradient-vertical(#0088cc, #0077b3);
+      background-color: #428bca;
     }
   }
 }
