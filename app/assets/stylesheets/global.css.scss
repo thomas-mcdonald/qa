@@ -44,6 +44,10 @@ html .control-group.hidden { margin-bottom: 0; }
   }
 }
 
+// Don't allow really long lines of `asdb` text
+code { white-space: pre-wrap; }
+
+// Wrapper for body/sidebar pages
 #pagewrap { @include make-row(); }
 #body {
   @include make-md-column(9);
