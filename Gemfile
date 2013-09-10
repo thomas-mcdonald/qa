@@ -12,7 +12,7 @@ gem 'redis-namespace', '~> 1.2.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'mbleigh/seed-fu'
 gem 'sidekiq', '~> 2.13.0'
-gem 'simple_form', '~> 3.0.0.rc'
+gem 'simple_form', github: 'plataformatec/simple_form'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
