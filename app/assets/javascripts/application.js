@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-dropdown
-//= require bootstrap-tooltip
-//= require bootstrap-popover
+//= require bootstrap/dropdown
+//= require bootstrap/tooltip
+//= require bootstrap/popover
 //= require_tree .

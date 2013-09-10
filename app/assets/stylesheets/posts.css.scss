@@ -15,10 +15,10 @@
 }
 
 .post {
-  @include makeRow();
+  @include make-row();
 
   .controls {
-    @include makeColumn(1);
+    @include make-md-column(1);
     margin-bottom: 15px;
   }
 
@@ -62,7 +62,7 @@
   }
 
   .main {
-    @include makeColumn(8);
+    @include make-md-column(8);
   }
 
   .body { margin-bottom: 15px; }

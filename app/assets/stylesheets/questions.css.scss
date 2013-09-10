@@ -10,7 +10,7 @@
 
 // questions#index
 .question-list {
-  @include makeColumn(12);
+  @include make-md-column(12);
 
   > div {
     border-bottom: 1px solid #eee;
@@ -20,7 +20,7 @@
 }
 
 .mini-counts {
-  @include makeColumn(2.25);
+  @include make-md-column(2.25);
   margin-top: 14px;
 
   > div {
@@ -28,12 +28,12 @@
     text-align: center;
     width: 53px;
     .num { font-size: 16px; }
-    &.unanswered { color: darken($red, 3%); }
+    &.unanswered { color: darken(#f00, 3%); }
   }
 }
 
 .question-summary {
-  @include makeColumn(8.75); // leave wide for now
+  @include make-md-column(8.75); // leave wide for now
   margin-left: 10px;
 
   h3 {
