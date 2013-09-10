@@ -44,10 +44,15 @@ html .control-group.hidden { margin-bottom: 0; }
   }
 }
 
-
-#body { float: left; width: 700px; }
-
-#sidebar { float: left; width: 220px; margin-left: 20px; }
+#pagewrap { @include make-row(); }
+#body {
+  @include make-md-column(9);
+  @include make-sm-column(9);
+}
+#sidebar {
+  @include make-md-column(3);
+  @include make-sm-column(3);
+}
 
 .pagination {
   > ul {

@@ -2,60 +2,61 @@
   <h1><%= @question.title %></h1>
 </div>
 
-<div id="body">
-  <div class="question post" id="question-<%= @question.id %>">
-    <div class="controls">
-      <div class="vote-controls"><%= vote_controls(@question) %></div>
-    </div>
-    <div class="main">
-      <div class="body"><%=format @question.body %></div>
-      <ul class="tags">
-        <% @question.tags.each do |tag| %>
-          <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
-        <% end %>
-      </ul>
-      <div class="meta">
-        <div class="links">
-          <%= link_to 'edit', edit_question_path(@question.id) if logged_in? %>
-        </div>
-        <div class="righto">
-          <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.display_name, @question.user %></p>
+<div id="page-wrap">
+  <div id="body">
+    <div class="question post" id="question-<%= @question.id %>">
+      <div class="controls">
+        <div class="vote-controls"><%= vote_controls(@question) %></div>
+      </div>
+      <div class="main">
+        <div class="body"><%=format @question.body %></div>
+        <ul class="tags">
+          <% @question.tags.each do |tag| %>
+            <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
+            <% end %>
+        </ul>
+        <div class="meta">
+          <div class="links">
+            <%= link_to 'edit', edit_question_path(@question.id) if logged_in? %>
+          </div>
+          <div class="righto">
+            <p>asked <%= time_ago_in_words @question.created_at %> ago by <%= link_to @question.user.display_name, @question.user %></p>
+          </div>
         </div>
       </div>
     </div>
+
+    <% if !@answers.empty? %>
+      <div class="answers">
+        <div class="page-header">
+          <h3><%= pluralize @answers.size, "Answer" %></h3>
+        </div>
+        <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
+      </div>
+    <% end %>
+
+    <% if logged_in? %>
+      <div class="page-header"><h3>Answer Question</h3></div>
+      <%= simple_form_for @answer, html: { class: 'form-vertical'} do |f| %>
+        <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
+        <%= f.input :body, label: false %>
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn-primary' %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-
-  <% if !@answers.empty? %>
-    <div class="answers">
-      <div class="page-header">
-        <h3><%= pluralize @answers.size, "Answer" %></h3>
-      </div>
-      <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
-    </div>
-  <% end %>
-
-  <% if logged_in? %>
-    <div class="page-header"><h3>Answer Question</h3></div>
-    <%= simple_form_for @answer, html: { class: 'form-vertical'} do |f| %>
-      <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
-      <%= f.input :body, label: false %>
-      <div class="form-actions">
-        <%= f.button :submit, class: 'btn-primary' %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
-<div id="sidebar">
-  <h5>tagged</h5>
-  <ul class="sidebar-tags">
-    <% @question.tags.each do |tag| %>
-      <li><%= link_to tag.name, questions_tagged_path(tag.name), class: 'btn tag' %> <span>x&nbsp;<%= tag.frequency %></span></li>
-    <% end %>
-  </ul>
-  <ul class="summary">
-    <li>asked <span><%= time_ago_in_words @question.created_at %></span> ago</li>
-    <li>viewed <span><%= pluralize @question.view_count, "time" %></span></li>
-    <li>active <span><%= time_ago_in_words @question.last_active_at %></span> ago</li>
-  </ul>
+  <div id="sidebar">
+    <h5>tagged</h5>
+    <ul class="sidebar-tags">
+      <% @question.tags.each do |tag| %>
+        <li><%= link_to tag.name, questions_tagged_path(tag.name), class: 'btn btn-default tag' %> <span>x&nbsp;<%= tag.frequency %></span></li>
+      <% end %>
+    </ul>
+    <ul class="summary">
+      <li>asked <span><%= time_ago_in_words @question.created_at %></span> ago</li>
+      <li>viewed <span><%= pluralize @question.view_count, "time" %></span></li>
+      <li>active <span><%= time_ago_in_words @question.last_active_at %></span> ago</li>
+    </ul>
+  </div>
 </div>
