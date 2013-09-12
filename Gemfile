@@ -2,15 +2,15 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
 
-gem 'activerecord-import', github: 'spectator/activerecord-import', branch: 'rails4' # fork for Rails 4 ~> 0.3.1
+gem 'activerecord-import', '~> 0.4.1'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.14.1'
 gem 'pg', '~> 0.15.0'
-gem 'redcarpet', '~> 2.2.2'
+gem 'redcarpet', '~> 3.0.0'
 gem 'redis', '~> 3.0.2'
 gem 'redis-namespace', '~> 1.2.1'
 gem 'ruby-progressbar'
-gem 'seed-fu', github: 'irfn/seed-fu'
+gem 'seed-fu', github: 'mbleigh/seed-fu'
 gem 'settingslogic', '~> 2.0.9'
 gem 'sidekiq', '~> 2.13.0'
 gem 'simple_form', '~> 3.0.0.rc'
@@ -19,8 +19,8 @@ gem 'simple_form', '~> 3.0.0.rc'
 gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
-# Asset gems. Could probably go in assets group
-gem 'bootstrap-sass', '~> 2.3.1.0'
+# Asset gems
+gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'font-awesome-sass-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
