@@ -1,4 +1,12 @@
+# Responsible for creating votes
 class VoteCreator
+
+  attr_reader :errors
+
+  def self.create(user, opts = {})
+    self.new(user, opts).create
+  end
+
   # Creates a vote
   # user - the user creating the vote
   # opts - hash of options
@@ -13,23 +21,29 @@ class VoteCreator
   end
 
   def create
-    create_vote
-    self.save
+    @vote = nil
+
+    Vote.transaction do
+      create_vote
+      update_post_vote_count
+      create_reputation_events
+    end
+
     @vote
   end
 
+  private
+
   def create_vote
     @vote = @user.votes.new(@vote_params)
+    if !@vote.save
+      @errors = @vote.errors
+      raise ActiveRecord::Rollback
+    end
   end
 
-  def save
-    result = false
-    Vote.transaction do
-      result = @vote.save
-      @vote.post.update_vote_count!
-      self.create_reputation_events
-    end
-    result
+  def update_post_vote_count
+    @vote.post.update_vote_count!
   end
 
   # Create the reputation events for the users involved in the vote
