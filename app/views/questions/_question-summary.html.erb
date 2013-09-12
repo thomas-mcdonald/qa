@@ -11,6 +11,10 @@
         <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn tag' %></li>
       <% end %>
     </ul>
-    <p class="last-activity"><span class="timeago"><%= time_ago_in_words question.last_active_at %> ago</span> <%= link_to question.last_active_user.display_name, question.last_active_user %></p>
+    <p class="last-activity">
+      <span class="timeago"><%= time_ago_in_words question.last_active_at %> ago</span>
+      <%= link_to question.last_active_user.display_name, question.last_active_user %>
+      <%= rep_formatted question.last_active_user.reputation %>
+    </p>
   </div>
 </div>

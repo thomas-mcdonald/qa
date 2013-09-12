@@ -3,6 +3,21 @@ require 'spec_helper'
 describe User do
   context 'associations' do
     it { should have_many(:authorizations) }
+    it { should have_many(:reputation_events) }
+  end
+
+  describe 'calculate_reputation!' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'sums the total reputation events for the user' do
+      ReputationEvent.create(
+        action: FactoryGirl.create(:upvote),
+        event_type: 1,
+        user: user
+      )
+      user.calculate_reputation!
+      user.reputation.should == ReputationValues['receive_question_upvote']
+    end
   end
 
   describe 'display_name' do

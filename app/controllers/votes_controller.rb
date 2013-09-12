@@ -4,9 +4,9 @@ class VotesController < ApplicationController
   before_filter :json_require_login
 
   def create
-    vote_creator = VoteCreator.new(current_user, vote_params)
-    @vote = vote_creator.create
-    if @vote.errors.blank?
+    creator = VoteCreator.new(current_user, vote_params)
+    @vote = creator.create
+    if creator.errors.blank?
       render json: {
         content: render_to_string(partial: 'votes/destroy', layout: false, locals: { vote: @vote }),
         count: @vote.post.vote_count

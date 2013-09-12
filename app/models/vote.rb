@@ -1,5 +1,6 @@
 class Vote < ActiveRecord::Base
   belongs_to :post, polymorphic: true
+  has_many :reputation_events, as: :action, dependent: :destroy
   belongs_to :user
 
   UPVOTE = 1
@@ -10,6 +11,22 @@ class Vote < ActiveRecord::Base
   validate :validate_not_own_post
 
   after_destroy :update_post_vote_count
+
+  def is_downvote?
+    vote_type_id == 2
+  end
+
+  def is_upvote?
+    vote_type_id == 1
+  end
+
+  def event_type
+    # TODO: return nil or something appropriate if not an updown vote
+    str = post_type + '_'
+    str << 'upvote' if is_upvote?
+    str << 'downvote' if is_downvote?
+    str
+  end
 
   def update_post_vote_count
     self.post.update_vote_count!

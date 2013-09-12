@@ -1,4 +1,5 @@
 require 'import/stack_exchange/edit'
+require 'vote_creator'
 
 module QA
   module Import
@@ -7,9 +8,11 @@ module QA
         @dir = dir
         @posts = []
         output_intro
+        patch_classes
         @users = create_users
         create_posts
         create_votes
+        create_reputation
         update_counters
       end
 
@@ -30,6 +33,25 @@ module QA
         end
         puts " Importing Users"
         import_users(users)
+      end
+
+      def patch_classes
+        ReputationEvent.instance_eval %(
+          def create_on_receive_vote(vote)
+            event = vote.post.user.reputation_events.create(
+              action: vote,
+              event_type: ReputationEvent.const_get(%(receive_\#{vote.event_type}).upcase)
+            )
+            event
+          end
+          def self.create_on_give_vote(vote)
+            event = vote.user.reputation_events.create(
+              action: vote,
+              event_type: ReputationEvent.const_get(%(give_\#{vote.event_type}).upcase)
+            )
+            event
+          end
+        )
       end
 
       def create_posts
@@ -79,10 +101,30 @@ module QA
           vote.updated_at = DateTime.parse row['CreationDate']
           votes << vote
         end
+        # Not much point in validating this data... it doesn't matter *that*
+        # much if someone upvotes themselves or multiple posts, but it does
+        # create fuck loads of select queries.
+        #
+        # I guess if a user has already voted on a post we should removed them
+        # from possible selection, which would essentially do the validation
+        # there instead.
+        Vote.import(votes, validate: false)
+      end
 
-        puts " Inserting votes"
-        votes.each_slice(50) do |vote|
-          Vote.import vote
+      def create_reputation
+        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type_id: 0)
+        puts "Creating reputation events"
+        bar = ProgressBar.create(title: 'Reputation', total: Vote.count, format: '%t: |%B| %E')
+        Vote.all.each do |v|
+          bar.increment
+          vc.instance_variable_set(:@vote, v)
+          vc.create_reputation_events
+        end
+        puts "Calculating reputation"
+        bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
+        User.all.each do |u|
+          bar.increment
+          u.calculate_reputation!
         end
       end
 
