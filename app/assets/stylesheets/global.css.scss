@@ -22,13 +22,14 @@ code { white-space: pre-wrap; }
 // Wrapper for body/sidebar pages
 #pagewrap { @include make-row(); }
 #body {
+  @include make-sm-column(8);
   @include make-md-column(9);
-  @include make-sm-column(9);
 }
 #sidebar {
+  // TODO: make the sidebar work nicely on small mobile devices
   @extend .hidden-xs;
+  @include make-sm-column(4);
   @include make-md-column(3);
-  @include make-sm-column(3);
 }
 
 .pagination {
