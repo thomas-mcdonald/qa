@@ -23,6 +23,7 @@
                   <li><%= button_to 'Logout', '/logout', method: :post, id: 'logout' %></li>
                 </ul>
               </li>
+              <li><p class="navbar-reputation"><%= current_user.reputation %></p></li>
             <% else %>
               <li><%= link_to "Login", login_path %></li>
             <% end %>
