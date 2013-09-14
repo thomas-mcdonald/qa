@@ -1,8 +1,10 @@
 <div id="question-<%= question.id %>" class="question-summary">
   <div class="mini-counts">
-    <%= mini_count question.vote_count, "vote" %>
-    <%= mini_count question.answers_count, "answer" %>
-    <%= mini_count views_formatted(question.view_count), "view", with: question.view_count %>
+    <div class="fluid-count">
+      <%= mini_count question.vote_count, "vote" %>
+      <%= mini_count question.answers_count, "answer" %>
+      <%= mini_count views_formatted(question.view_count), "view", with: question.view_count %>
+    </div>
   </div>
   <div class="question-info">
     <h3><%= link_to question.title, question %></h3>

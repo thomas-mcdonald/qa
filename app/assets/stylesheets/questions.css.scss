@@ -22,10 +22,16 @@
 }
 
 .mini-counts {
-  @include make-md-column(2);
+  @include make-md-column(2.5);
+  @include clearfix();
   margin-top: 14px;
 
-  > div {
+  .fluid-count {
+    width: 53 * 3px;
+    margin: 0 auto;
+  }
+
+  > div > div {
     float: left;
     text-align: center;
     width: 53px;
@@ -35,7 +41,7 @@
 }
 
 .question-info {
-  @include make-md-column(10); // leave wide for now
+  @include make-md-column(9.5); // leave wide for now
 
   h3 {
     font-size: 18px;
