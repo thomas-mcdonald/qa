@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'vote_creator'
 
 describe VoteCreator do
+  let(:post) { FactoryGirl.create(:question) }
   let(:user) { FactoryGirl.create(:user) }
 
   it 'requires a non-nil user object' do
@@ -14,9 +15,18 @@ describe VoteCreator do
     -> { VoteCreator.new(user, post_id: 1, post_type: nil, vote_type_id: 1) }.should raise_error(ArgumentError)
   end
 
-  it 'creates a standard vote' do
-    question = FactoryGirl.create(:question)
-    vote = VoteCreator.new(user, post_id: question.id, post_type: 'Question', vote_type_id: 1)
+  it 'returns the vote when create is called' do
+    vote = VoteCreator.new(user, post_id: post.id, post_type: 'Question', vote_type_id: 1)
     vote.create.should be_a(Vote)
+  end
+
+  context '#create_reputation_events' do
+    context 'on a question vote' do
+      it 'creates a reputation event with the correct type' do
+        vote = VoteCreator.create(user, post_id: post.id, post_type: 'Question', vote_type_id: 1)
+        re = ReputationEvent.where(action: vote).first
+        re.event_type.should == 1
+      end
+    end
   end
 end

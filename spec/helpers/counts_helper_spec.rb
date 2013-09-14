@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe CountsHelper do
+  describe 'rep formatter' do
+    it 'does not change numbers under 1000' do
+      rep_formatted(1).should == "1"
+      rep_formatted(10).should == "10"
+      rep_formatted(999).should == "999"
+    end
+
+    it 'inserts delimiters for numbers between 1000 and 9999' do
+      rep_formatted(1000).should == "1,000"
+      rep_formatted(9999).should == "9,999"
+    end
+
+    it 'shortens numbers between 10000 and 99999' do
+      rep_formatted(10000).should == "10.0k"
+    end
+  end
+
   describe 'view formatter' do
     it 'does not change numbers under 1000' do
       views_formatted(1).should == "1"

@@ -1,0 +1,46 @@
+// This file contains our fixes to the navbar styling as well as additional custom styles
+
+// Fix for static navbar not having width
+.navbar-inner > .container {
+  width:940px;
+}
+
+// remove gradient & rounded corners from navbar
+.navbar > .navbar-inner {
+  @include border-radius(0);
+  background: white;
+}
+
+// logout button in dropdown menu
+.dropdown-menu {
+  form {
+    margin: 0;
+  }
+
+  // can't extend nested elements :(
+  input[type="submit"] {
+    background: transparent;
+    border: none;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #333333;
+    text-align: left;
+    width: 160px;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: none;
+      color: white;
+      background-color: #428bca;
+    }
+  }
+}
+
+.navbar-reputation {
+  @extend .navbar-text;
+  font-weight: 700;
+//  margin-right: 20px;
+}

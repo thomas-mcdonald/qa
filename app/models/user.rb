@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :authorizations
   has_many :questions
+  has_many :reputation_events
   has_many :votes
 
   accepts_nested_attributes_for :authorizations, allow_destroy: false, reject_if: proc { |obj| obj.blank? }
@@ -33,6 +34,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def calculate_reputation!
+    rep = reputation_events.inject(0) do |sum, event|
+      sum + ReputationEvent.reputation_for(event.event_type)
+    end
+    self.reputation = rep
+    self.save
+  end
+
   def display_name
     if admin?
       name + " ♦"
@@ -45,7 +54,7 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(email.strip.downcase)
   end
 
-  def gravatar
-    "https://www.gravatar.com/avatar/#{email_hash}.png?s={size}&r=pg&d=identicon"
+  def gravatar(size = 32)
+    "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
   end
 end

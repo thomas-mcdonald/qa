@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20130510231737) do
     t.integer  "accepted_answer_id"
   end
 
+  create_table "reputation_events", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_type"
+    t.string   "action_type"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "question_id"
@@ -68,6 +77,7 @@ ActiveRecord::Schema.define(version: 20130510231737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",      default: false, null: false
+    t.integer  "reputation", default: 0,     null: false
   end
 
   create_table "votes", force: true do |t|

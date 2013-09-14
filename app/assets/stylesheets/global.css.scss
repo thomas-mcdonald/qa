@@ -16,34 +16,6 @@ html .control-group.hidden { margin-bottom: 0; }
   font-family: FontAwesome;
 }
 
-// logout button in dropdown menu
-.dropdown-menu {
-  form {
-    margin: 0;
-  }
-
-  // can't extend nested elements :(
-  input[type="submit"] {
-    background: transparent;
-    border: none;
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: normal;
-    line-height: 20px;
-    color: #333333;
-    text-align: left;
-    width: 160px;
-    white-space: nowrap;
-
-    &:hover {
-      text-decoration: none;
-      color: white;
-      background-color: #428bca;
-    }
-  }
-}
-
 // Don't allow really long lines of `asdb` text
 code { white-space: pre-wrap; }
 
