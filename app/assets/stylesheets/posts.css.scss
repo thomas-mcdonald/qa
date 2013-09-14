@@ -19,6 +19,7 @@
   @include make-row();
 
   .controls {
+    @extend .hidden-xs;
     @include make-md-column(1);
     margin-bottom: 15px;
   }

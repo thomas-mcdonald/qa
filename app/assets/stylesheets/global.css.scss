@@ -26,6 +26,7 @@ code { white-space: pre-wrap; }
   @include make-sm-column(9);
 }
 #sidebar {
+  @extend .hidden-xs;
   @include make-md-column(3);
   @include make-sm-column(3);
 }
