@@ -14,7 +14,7 @@
     <p class="last-activity">
       <span class="timeago"><%= time_ago_in_words question.last_active_at %> ago</span>
       <%= link_to question.last_active_user.display_name, question.last_active_user %>
-      <%= rep_formatted question.last_active_user.reputation %>
+      <span class="rep"><%= rep_formatted question.last_active_user.reputation %></span>
     </p>
   </div>
 </div>
