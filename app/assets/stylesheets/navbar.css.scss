@@ -1,15 +1,4 @@
-// This file contains our fixes to the navbar styling as well as additional custom styles
-
-// Fix for static navbar not having width
-.navbar-inner > .container {
-  width:940px;
-}
-
-// remove gradient & rounded corners from navbar
-.navbar > .navbar-inner {
-  @include border-radius(0);
-  background: white;
-}
+// This file contains navbar custom styles
 
 // logout button in dropdown menu
 .dropdown-menu {
@@ -34,7 +23,7 @@
     &:hover {
       text-decoration: none;
       color: white;
-      @include gradient-vertical(#0088cc, #0077b3);
+      background-color: #428bca;
     }
   }
 }
@@ -42,5 +31,5 @@
 .navbar-reputation {
   @extend .navbar-text;
   font-weight: 700;
-  margin-top: -1px;
+  margin-top: 15px; // slightly less top margin to counter additional font weight
 }

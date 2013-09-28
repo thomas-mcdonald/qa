@@ -3,7 +3,7 @@
 #provider-list {
   list-style-type: none;
   li {
-    @include makeRow();
+    @include make-row();
     // Get button styling in here
     @extend .btn;
     // But tone down the border slightly
@@ -16,7 +16,7 @@
     }
 
     img, p {
-      @include makeColumn(1);
+      @include make-md-column(1);
       display: inline;
     }
 
@@ -24,7 +24,7 @@
       width: 68px;
       margin-left: 12px;
       margin-top: 11px;
-      span { font-size: $baseFontSize + 2; }
+      span { font-size: $font-size-base + 2; }
     }
   }
 }

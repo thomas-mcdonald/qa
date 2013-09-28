@@ -1,4 +1,3 @@
-# Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   # Wrappers are used by the form builder to generate a
   # complete input. You can remove any component from the
@@ -45,7 +44,7 @@ SimpleForm.setup do |config|
     b.use :error, :wrap_with => { :tag => :span, :class => :error }
   end
 
-  config.wrappers :bootstrap, :tag => 'div', :class => 'control-group', :error_class => 'error' do |b|
+  config.wrappers :bootstrap, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -56,7 +55,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :prepend, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :prepend, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -69,7 +68,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :append, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
+  config.wrappers :append, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
     b.use :label
@@ -97,8 +96,7 @@ SimpleForm.setup do |config|
   # Default class for buttons
   config.button_class = 'btn'
 
-  # Method used to tidy up errors.
-  # config.error_method = :first
+  config.input_class = 'form-control'
 
   # Default tag used for error notification helper.
   config.error_notification_tag = :div

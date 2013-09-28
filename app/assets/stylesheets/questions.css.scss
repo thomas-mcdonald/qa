@@ -1,5 +1,6 @@
 %tag-list {
   margin: 0;
+  padding: 0;
   list-style-type: none;
 
   li {
@@ -10,9 +11,10 @@
 
 // questions#index
 .question-list {
-  @include makeColumn(12);
+  @include make-md-column(12);
 
-  > div {
+  .question-summary {
+    @include make-row();
     border-bottom: 1px solid #eee;
     margin-top: 1px;
     padding-bottom: 10px;
@@ -20,21 +22,44 @@
 }
 
 .mini-counts {
-  @include makeColumn(2.25);
+  $sm-width: 48px;
+  $normal-width: 53px;
+
+  @include make-xs-column(2.25);
+  @include make-sm-column(3);
+  @include make-md-column(2.5);
   margin-top: 14px;
 
-  > div {
+  .fluid-count {
+    margin: 0 auto;
+    width: $normal-width * 3;
+    // views count is hidden on mobile
+    @media screen and (max-width: $screen-sm) {
+      width: $sm-width * 2;
+    }
+  }
+
+  .mini-count {
     float: left;
     text-align: center;
-    width: 53px;
+    width: $normal-width;
+    @media screen and (max-width: $screen-sm) {
+      width: $sm-width;
+    }
     .num { font-size: 16px; }
-    &.unanswered { color: darken($red, 3%); }
+    &.unanswered { color: darken(#f00, 3%); }
+  }
+
+  // hide the view count on mobile
+  .mini-count:last-child {
+    @extend .hidden-xs;
   }
 }
 
-.question-summary {
-  @include makeColumn(8.75); // leave wide for now
-  margin-left: 10px;
+.question-info {
+  @include make-xs-column(9.75);
+  @include make-sm-column(9);
+  @include make-md-column(9.5); // leave wide for now
 
   h3 {
     font-size: 18px;

@@ -1,5 +1,6 @@
 // Include bootstrap & font awesome
-$baseFontSize: 13px;
+$font-size-base: 13px;
+$screen-lg: 99999px; // essentially disable large media queries
 
 @import "custom-bootstrap";
 @import "font-awesome";
