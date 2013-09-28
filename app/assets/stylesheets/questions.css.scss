@@ -79,7 +79,15 @@
 
   .last-activity {
     float: right;
-    font-size: 11px;
+    font-size: 12px;
+
+    span, a {
+      margin-left: 1px;
+    }
+
+    .rep {
+      font-weight: 500;
+    }
   }
 }
 
