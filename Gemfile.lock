@@ -13,6 +13,14 @@ GIT
     bootstrap-sass (3.0.0.0)
       sass (~> 3.2)
 
+GIT
+  remote: git://github.com/thomas-mcdonald/guard-spinach.git
+  revision: 6102d37cdc4ef7c0f82b84846d66506673f44d25
+  specs:
+    guard-spinach (0.0.2)
+      guard (>= 1.1)
+      spinach
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -102,9 +110,6 @@ GEM
     guard-rspec (3.0.3)
       guard (>= 1.8)
       rspec (~> 2.13)
-    guard-spinach (0.0.2)
-      guard (>= 1.1)
-      spinach
     hashie (2.0.5)
     hike (1.2.3)
     http_parser.rb (0.5.3)
@@ -272,7 +277,7 @@ DEPENDENCIES
   foreman
   guard (~> 1.8.0)
   guard-rspec (~> 3.0.0)
-  guard-spinach
+  guard-spinach!
   jquery-rails
   kaminari (~> 0.14.1)
   omniauth (~> 1.1.0)

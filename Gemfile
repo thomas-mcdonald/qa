@@ -32,7 +32,7 @@ group :development do
   # Guard for autorunning tests
   gem 'guard', '~> 1.8.0'
   gem 'guard-rspec', '~> 3.0.0'
-  gem 'guard-spinach'
+  gem 'guard-spinach', github: 'thomas-mcdonald/guard-spinach'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'terminal-notifier-guard'
 end
