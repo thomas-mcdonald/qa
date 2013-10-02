@@ -52,6 +52,15 @@ class Question < ActiveRecord::Base
     end
   end
 
+  def accept_answer(answer)
+    self.accepted_answer_id = answer.id
+    ReputationEvent.create_on_accept_answer(self, answer)
+  end
+
+  def unaccept_answer
+    self.accepted_answer_id = nil
+  end
+
   def viewed_by(key)
     $view.sadd("question-#{self.id}", key)
   end

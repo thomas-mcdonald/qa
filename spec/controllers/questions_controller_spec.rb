@@ -92,13 +92,13 @@ describe QuestionsController do
   end
 
   context 'accept_answer' do
-    let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil) }
+    let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
 
     it 'requires login' do
       -> { post :accept_answer, id: question.id }.should raise_error(QA::NotLoggedIn)
     end
 
-    context 'when logged in' do
+    context 'when logged in as the question asker' do
       before { sign_in(alice) }
       let(:answer) { FactoryGirl.create(:answer, question: question) }
 
@@ -123,6 +123,13 @@ describe QuestionsController do
         question.save
         post :accept_answer, id: question.id
         Question.find(question.id).accepted_answer_id.should == nil
+      end
+    end
+
+    context 'when logged in as a different user' do
+      it 'raises unauthorised' do
+        sign_in(bob)
+        -> { post :accept_answer, id: question.id }.should raise_error(QA::NotAuthorised)
       end
     end
   end

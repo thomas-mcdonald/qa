@@ -48,18 +48,17 @@ class QuestionsController < ApplicationController
   def accept_answer
     # TODO: this method requires refactoring
     # TODO: reputation events need destroying on new accepted answers
-    # TODO: require correct user
     @question = Question.find(params[:id])
+    require_user(@question.user)
     if params[:answer_id].blank? and @question.accepted_answer_id.blank?
       head :bad_request and return
     end
-    if params[:answer_id].present?
-      @question.accepted_answer_id = params[:answer_id]
+    if params[:answer_id].present? # setting new accept
       @answer = Answer.find(params[:answer_id])
-      ReputationEvent.create_on_accept_answer(@question, @answer)
-    else
+      @question.accept_answer(@answer)
+    else # removing an existing accept
       @answer = Answer.find(@question.accepted_answer_id)
-      @question.accepted_answer_id = nil
+      @question.unaccept_answer
     end
     if @question.save
       render json: {
