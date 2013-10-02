@@ -118,7 +118,7 @@ module QA
         Vote.all.each do |v|
           bar.increment
           vc.instance_variable_set(:@vote, v)
-          vc.create_reputation_events
+          vc.send(:create_reputation_events)
         end
         puts "Calculating reputation"
         bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
