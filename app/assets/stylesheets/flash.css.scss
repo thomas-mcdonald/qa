@@ -1,0 +1,23 @@
+@mixin flash-a-generator($color) {
+  a {
+    color: darken($color, 10%);
+  }
+}
+
+.flash-success {
+  @extend .alert;
+  @extend .alert-success;
+  @include flash-a-generator($alert-success-text);
+}
+
+.flash-notice {
+  @extend .alert;
+  @extend .alert-info;
+  @include flash-a-generator($alert-info-text);
+}
+
+.flash-error {
+  @extend .alert;
+  @extend .alert-danger;
+  @include flash-a-generator($alert-danger-text);
+}
