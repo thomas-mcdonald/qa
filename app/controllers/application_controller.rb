@@ -27,8 +27,20 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
 
-  rescue_from QA::NotAuthorised, QA::NotLoggedIn do |e|
+  # This feels a bit hacky
+  def handle_env(e)
     raise e if ENV['RSPEC']
+  end
+
+  rescue_from QA::NotAuthorised do |e|
+    handle_env(e)
+    flash[:error] = "Sorry, you can't do that"
     redirect_to '/'
+  end
+
+  rescue_from QA::NotLoggedIn do |e|
+    handle_env(e)
+    flash[:notice] = "You must be logged in to perform that action"
+    redirect_to login_url
   end
 end
