@@ -100,9 +100,14 @@ describe QuestionsController do
 
     context 'when logged in' do
       before { sign_in(alice) }
+      let(:answer) { FactoryGirl.create(:answer, question: question) }
+
+      it 'returns bad request if neither accepted answer in question or param' do
+        post :accept_answer, id: question.id
+        response.status.should == 400
+      end
 
       it 'updates the accepted answer id if it is valid' do
-        answer = FactoryGirl.create(:answer, question_id: question.id)
         post :accept_answer, id: question.id, answer_id: answer.id
         Question.find(question.id).accepted_answer_id.should == answer.id
       end
@@ -110,6 +115,13 @@ describe QuestionsController do
       it 'does not update the accepted answer id if it is not an answer on the question' do
         FactoryGirl.create(:answer, id: 999)
         post :accept_answer, id: question.id, answer_id: 999
+        Question.find(question.id).accepted_answer_id.should == nil
+      end
+
+      it 'removes the accepted answer if there is no answer_id' do
+        question.accepted_answer_id = answer.id
+        question.save
+        post :accept_answer, id: question.id
         Question.find(question.id).accepted_answer_id.should == nil
       end
     end

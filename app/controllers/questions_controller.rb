@@ -50,7 +50,10 @@ class QuestionsController < ApplicationController
     # TODO: reputation events need destroying on new accepted answers
     # TODO: require correct user
     @question = Question.find(params[:id])
-    if !params[:answer_id].blank?
+    if params[:answer_id].blank? and @question.accepted_answer_id.blank?
+      head :bad_request and return
+    end
+    if params[:answer_id].present?
       @question.accepted_answer_id = params[:answer_id]
       @answer = Answer.find(params[:answer_id])
       ReputationEvent.create_on_accept_answer(@question, @answer)
