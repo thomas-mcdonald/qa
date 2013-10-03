@@ -4,9 +4,12 @@
 
 <div class="question-list user-question-list">
   <h3>Questions</h3>
-  <% @user.questions.each do |question| %>
-    <div class="summary">
-      <%= link_to question.title, question %>
-    </div>
-  <% end %>
+  <ul>
+    <% @questions.each do |question| %>
+      <li>
+        <span class="vote-count"><%= question.vote_count %></span>
+        <%= link_to question.title, question %>
+      </li>
+    <% end %>
+  </ul>
 </div>

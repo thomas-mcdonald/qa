@@ -33,4 +33,24 @@
   h3 {
     margin-top: 0;
   }
+
+  ul { list-style-type: none; }
+  li {
+    @include clearfix();
+    height: 25px;
+
+    .vote-count, a {
+      display: block;
+      float: left;
+    }
+
+    .vote-count {
+      background-color: rgba(125, 125, 125, .1);
+      height: $font-size-base + 6;
+      margin-right: 3px;
+      padding-top: 1px;
+      text-align: center;
+      width: 20px;
+    }
+  }
 }
