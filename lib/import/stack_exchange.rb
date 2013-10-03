@@ -139,6 +139,9 @@ module QA
       # used internally in the ones above.
       private
 
+      # build edits runs through the post histories and groups the edits in two passes:
+      #  1) groups the individual data into a single edit
+      #  2) associates these with the post they refer to
       def build_edits(post_histories)
         puts " Sorting histories by GUID"
         bar = progress_bar('Sorting', post_histories.length)
@@ -151,8 +154,9 @@ module QA
         bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
+          eobj = StackExchange::Edit.new(edit)
           bar.increment
-          groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
+          groupededits[eobj.post_id] << eobj
         end
         groupededits
       end

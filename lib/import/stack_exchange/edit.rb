@@ -28,6 +28,10 @@ module QA
           end
         end
 
+        def post_id
+          @result[:post_id]
+        end
+
         def [](sym)
           @result[sym]
         end
