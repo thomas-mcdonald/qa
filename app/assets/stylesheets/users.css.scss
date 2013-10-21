@@ -1,5 +1,6 @@
 // Provider list
 // A list of OpenID providers
+// used on login pages
 #provider-list {
   list-style-type: none;
   li {
@@ -25,6 +26,19 @@
       margin-left: 12px;
       margin-top: 11px;
       span { font-size: $font-size-base + 2; }
+    }
+  }
+}
+
+// user#show pages
+.user-misc {
+  @include make-row();
+
+  .identity {
+    @include make-md-column(2);
+
+    .reputation {
+      display: block;
     }
   }
 }

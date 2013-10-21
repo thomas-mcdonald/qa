@@ -2,6 +2,13 @@
   <h1><%= @user.name %></h1>
 </div>
 
+<div class="user-misc">
+  <div class="identity">
+    <img src="<%= @user.gravatar(128) %>" class="gravatar">
+    <p><span class="reputation"><%= @user.reputation %></span> reputation</p>
+  </div>
+</div>
+
 <div class="question-list user-question-list">
   <h3>Questions</h3>
   <ul>
