@@ -51,6 +51,8 @@
           <%= f.button :submit, class: 'btn btn-default' %>
         </div>
       <% end %>
+    <% else %>
+      <h3><%= link_to 'Login', login_url %> to add your answer</h3>
     <% end %>
   </div>
 
