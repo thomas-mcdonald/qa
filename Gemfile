@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 
 gem 'activerecord-import', '~> 0.4.1'
 gem 'jquery-rails'
