@@ -33,21 +33,25 @@
   .fluid-count {
     margin: 0 auto;
     width: $normal-width * 3;
-    // views count is hidden on mobile
-    @media screen and (max-width: $screen-sm) {
-      width: $sm-width * 2;
-    }
   }
 
   .mini-count {
     float: left;
     text-align: center;
     width: $normal-width;
-    @media screen and (max-width: $screen-sm) {
-      width: $sm-width;
-    }
     .num { font-size: 16px; }
     &.unanswered { color: darken(#f00, 3%); }
+  }
+
+  // views count is hidden on small
+  @media screen and (max-width: $screen-sm) {
+    .fluid-count {
+      width: $sm-width * 2;
+    }
+
+    .mini-count {
+      width: $sm-width;
+    }
   }
 
   // hide the view count on mobile
