@@ -54,6 +54,12 @@
     }
   }
 
+  @media screen and (max-width: $screen-xs) {
+    .mini-count {
+      float: none;
+    }
+  }
+
   // hide the view count on mobile
   .mini-count:last-child {
     @extend .hidden-xs;
