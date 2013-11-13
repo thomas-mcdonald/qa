@@ -118,7 +118,7 @@ module QA
         Vote.all.each do |v|
           bar.increment
           vc.instance_variable_set(:@vote, v)
-          vc.send(:create_reputation_events)
+          vc.create_reputation_events
         end
         puts "Calculating reputation"
         bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
@@ -139,9 +139,6 @@ module QA
       # used internally in the ones above.
       private
 
-      # build edits runs through the post histories and groups the edits in two passes:
-      #  1) groups the individual data into a single edit
-      #  2) associates these with the post they refer to
       def build_edits(post_histories)
         puts " Sorting histories by GUID"
         bar = progress_bar('Sorting', post_histories.length)
@@ -154,9 +151,8 @@ module QA
         bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
-          eobj = StackExchange::Edit.new(edit)
           bar.increment
-          groupededits[eobj.post_id] << eobj
+          groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
         end
         groupededits
       end

@@ -18,8 +18,6 @@ html .control-group.hidden { margin-bottom: 0; }
 
 // Don't allow really long lines of `asdb` text
 code { white-space: pre-wrap; }
-// stop images flowing outside of text
-img { max-width: 100%; }
 
 // Wrapper for body/sidebar pages
 #pagewrap { @include make-row(); }

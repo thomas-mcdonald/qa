@@ -9,7 +9,7 @@ module UserSupport
   end
 
   def bob
-    @bob || FactoryGirl.create(:user, name: 'Bob')
+    @bob ||= FactoryGirl.create(:user, name: 'Bob')
   end
 
   def sign_in(user)

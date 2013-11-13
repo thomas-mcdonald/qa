@@ -101,7 +101,6 @@ describe QuestionsController do
 
   describe 'accept_answer' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
-
     it { -> { post :accept_answer, id: question.id }.should require_login }
 
     context 'when logged in as the question asker' do
