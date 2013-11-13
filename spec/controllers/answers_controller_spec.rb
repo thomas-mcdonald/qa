@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'controllers/shared/timeline_action'
 
 describe AnswersController do
+  it_behaves_like 'TimelineAction'
+
   describe 'create' do
     it { -> { post :create }.should require_login }
 

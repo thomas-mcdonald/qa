@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'controllers/shared/timeline_action'
 
 describe QuestionsController do
+  it_behaves_like 'TimelineAction'
+
   describe 'index' do
     before { get :index }
     it { should respond_with(:success) }
