@@ -1,4 +1,4 @@
-Qa::Application.routes.draw do
+QA::Application.routes.draw do
   root to: 'questions#index'
 
   # Question URLs

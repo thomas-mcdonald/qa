@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Qa::Application.config.secret_key_base = '1849d564c2e354051098f63142a66185344c81256f535c29ad34ffdbafe6822297d9b330e190e46f73abebf59b4eecacbb4cee673957995e4fd051b3deb31b2e'
+QA::Application.config.secret_key_base = '1849d564c2e354051098f63142a66185344c81256f535c29ad34ffdbafe6822297d9b330e190e46f73abebf59b4eecacbb4cee673957995e4fd051b3deb31b2e'
