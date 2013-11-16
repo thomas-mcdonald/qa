@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   def tagged
     @questions = Question.tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
     @count = Question.tagged_with(params[:tag]).count
-    @related_tags = Tag.where(name: params[:tag]).first.related_tags
+    @related_tags = Tag.named(params[:tag]).related_tags
   end
 
   def show

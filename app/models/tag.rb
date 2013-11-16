@@ -2,6 +2,10 @@ class Tag < ActiveRecord::Base
   has_many :taggings
   has_many :questions, through: :taggings
 
+  def self.named(name)
+    where(name: name).first
+  end
+
   def frequency
     self.taggings.count
   end

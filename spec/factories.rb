@@ -27,6 +27,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :tag do
+    name 'example-tag'
+  end
+
   factory :upvote, class: Vote do
     association :post, factory: :question
     user
