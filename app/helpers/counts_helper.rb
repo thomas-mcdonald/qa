@@ -20,6 +20,8 @@ module CountsHelper
   end
 
   def rep_formatted(count)
+    negative = ->(x) { x < 0 }
+    large = ->(x) { x > 999999 }
     case count
     when 0..999
       count.to_s
@@ -27,9 +29,17 @@ module CountsHelper
       number_with_delimiter(count).to_s
     when 10000..99999
       tmp = (count / 100).to_s
-      tmp[0..1] + "." + tmp[2] + "k"
-    else
-      "lots" # TODO: wtf
+      if tmp[2] == "0"
+        tmp[0..1] + "k"
+      else
+        tmp[0..1] + "." + tmp[2] + "k"
+      end
+    when 100000..999999
+      (count / 1000).to_s << "k"
+    when large
+      "> 1m"
+    when negative
+      count.to_s
     end
   end
 end
