@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.1'
+gem 'rails', '4.0.2'
 
 gem 'activerecord-import', '~> 0.4.1'
 gem 'jquery-rails'
@@ -20,7 +20,7 @@ gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Asset gems
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.0.3'
 gem 'font-awesome-sass-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
