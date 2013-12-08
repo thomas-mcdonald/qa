@@ -3,6 +3,7 @@
     <div class="question-list">
       <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
     </div>
+    <%= paginate @questions %>
   </div>
   <div id="sidebar">
     <h4><%= @count %> questions tagged <a class="btn btn-default tag"><%= params[:tag] %></a></h4>
@@ -14,5 +15,3 @@
     </ul>
   </div>
 </div>
-
-<%= paginate @questions %>
