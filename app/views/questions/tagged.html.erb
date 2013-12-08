@@ -9,7 +9,7 @@
     <h5>related tags</h5>
     <ul class="sidebar-tags">
       <% @related_tags.each do |tag| %>
-        <li><a class="btn btn-default tag"><%= tag.name %></a></li>
+        <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
       <% end %>
     </ul>
   </div>
