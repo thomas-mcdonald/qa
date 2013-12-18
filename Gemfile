@@ -52,6 +52,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'poltergeist', '~> 1.4.0'
   gem 'rspec', '~> 2.13'
-  gem 'shoulda-matchers', '~> 1.5.0'
+  gem 'shoulda-matchers', '~> 2.4.0'
   gem 'spinach', '~> 0.8.3'
 end
