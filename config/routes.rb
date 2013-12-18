@@ -1,4 +1,16 @@
+require 'sidekiq/web'
+
+class AdminConstraint
+  def matches?(request)
+    return false unless request.session[:user_id]
+    user = User.find(request.session[:user_id])
+    user && user.admin?
+  end
+end
+
 QA::Application.routes.draw do
+  mount Sidekiq::Web => '/admin/sidekiq', constraints: AdminConstraint.new
+
   root to: 'questions#index'
 
   # Question URLs
