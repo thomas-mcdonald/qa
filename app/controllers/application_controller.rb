@@ -27,6 +27,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
 
+  def render_json_partial(name, locals, extras = {})
+    render json: {
+      content: render_to_string(partial: name, layout: false, locals: locals)
+    }.merge(extras)
+  end
+
   # This feels a bit hacky
   def handle_env(e)
     raise e if ENV['RSPEC']
