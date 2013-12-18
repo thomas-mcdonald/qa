@@ -1,6 +1,7 @@
 require_dependency 'qa'
 
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery with: :exception
 
   private

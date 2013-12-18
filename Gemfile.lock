@@ -150,6 +150,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pundit (0.2.1)
+      activesupport (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     racc (1.4.10)
@@ -288,6 +290,7 @@ DEPENDENCIES
   omniauth-openid (= 1.0.1)
   pg (~> 0.15.0)
   poltergeist (~> 1.4.0)
+  pundit (~> 0.2.1)
   quiet_assets
   rails (= 4.0.2)
   rb-fsevent (~> 0.9.1)
