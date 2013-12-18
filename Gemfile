@@ -12,12 +12,15 @@ gem 'redis-namespace', '~> 1.3.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'mbleigh/seed-fu'
 gem 'settingslogic', '~> 2.0.9'
-gem 'sidekiq', '~> 2.15.0'
 gem 'simple_form', '~> 3.0.0'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
+
+# Jobs & web interface
+gem 'sidekiq', '~> 2.17.0'
+gem 'sinatra'
 
 # Asset gems
 gem 'bootstrap-sass', '~> 3.0.3'
