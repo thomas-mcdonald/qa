@@ -62,9 +62,10 @@ class QuestionsController < ApplicationController
       @question.unaccept_answer
     end
     if @question.save
-      render json: {
-        content: render_to_string(partial: 'answers/accept_answer', layout: false, locals: { question: @question, answer: @answer })
-      }
+      render_json_partial('answers/accept_answer', {
+        question: @question,
+        answer: @answer
+      })
     else
       render json: { error: 'Nope, not doing that' } # TODO: properly handle
     end
