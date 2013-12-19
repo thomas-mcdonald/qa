@@ -2,6 +2,10 @@ module SharedAuthentication
   include Spinach::DSL
 
   step 'I am logged in' do
+    login
+  end
+
+  def login
     # ensure there is a user in the database
     create_user unless User.first
     visit '/login'

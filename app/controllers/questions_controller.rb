@@ -36,10 +36,12 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    authorize(@question)
   end
 
   def update
     @question = Question.find(params[:id])
+    authorize(@question)
     @question.update_attributes!(question_params)
     @question.update_last_activity(current_user)
     @question.save

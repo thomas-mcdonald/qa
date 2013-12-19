@@ -3,6 +3,20 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   include SharedPaths
   include SharedQuestion
 
+  step 'I am logged in and cannot edit questions' do
+    login
+    current_user[:reputation] = 0
+  end
+
+  step 'I am logged in and can edit questions' do
+    login
+    current_user.reputation = 1000; current_user.save
+  end
+
+  step 'I cannot see a link to edit the question' do
+    should_not have_link('edit', href: edit_question_path(current_question.id))
+  end
+
   step 'I can see a link to edit the question' do
     should have_link('edit', href: edit_question_path(current_question.id))
   end

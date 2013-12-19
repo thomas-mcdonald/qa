@@ -17,7 +17,9 @@
         </ul>
         <div class="meta">
           <div class="links">
-            <%= link_to 'edit', edit_question_path(@question.id) if logged_in? %>
+            <% if policy(@question).edit? %>
+              <%= link_to 'edit', edit_question_path(@question.id) if logged_in? %>
+            <% end%>
           </div>
           <div class="righto">
             <div class="user-info">
