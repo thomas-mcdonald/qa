@@ -7,6 +7,7 @@ ENV['RAILS_ENV'] = 'test'
 require './config/environment'
 
 require 'rspec/expectations'
+require 'rspec/mocks'
 
 # Require all shared step files
 Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}

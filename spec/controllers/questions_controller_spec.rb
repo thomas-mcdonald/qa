@@ -52,8 +52,13 @@ describe QuestionsController do
 
     it { -> { get :edit, id: question.id }.should require_login }
 
-    context 'when logged in' do
-      before { sign_in(alice) }
+    it 'raises without permissions' do
+      sign_in(FactoryGirl.create(:user, reputation: 0))
+      -> { get :edit, id: question.id }.should raise_error(Pundit::NotAuthorizedError)
+    end
+
+    context 'when logged in with permission' do
+      before { sign_in(a_k) }
 
       it 'returns success' do
         get :edit, id: question.id
@@ -67,9 +72,14 @@ describe QuestionsController do
 
     it { -> { put :update, id: question.id }.should require_login }
 
-    context 'when logged in' do
+    it 'raises without permissions' do
+      sign_in(FactoryGirl.create(:user, reputation: 0))
+      -> { put :update, id: question.id }.should raise_error(Pundit::NotAuthorizedError)
+    end
+
+    context 'when logged in with permissions' do
       before do
-        sign_in(alice)
+        sign_in(a_k)
         put :update, id: question.id, question: { title: 'validlengthtitle' }
       end
 
