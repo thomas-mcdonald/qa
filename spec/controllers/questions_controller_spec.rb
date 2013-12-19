@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe QuestionsController do
-  context 'index' do
+  describe 'index' do
     before { get :index }
     it { should respond_with(:success) }
   end
 
-  context 'show' do
+  describe 'show' do
     let(:question) { FactoryGirl.create(:question) }
     before { get :show, id: question.id, slug: question.slug }
     it { should respond_with(:success) }
   end
 
-  context 'tagged' do
+  describe 'tagged' do
     before do
       FactoryGirl.create(:question, tag_list: 'tag')
       get :tagged, tag: 'tag'
@@ -20,10 +20,8 @@ describe QuestionsController do
     it { should respond_with(:success) }
   end
 
-  context 'ask' do
-    it 'requires login' do
-      -> { get :new }.should raise_error(QA::NotLoggedIn)
-    end
+  describe 'ask' do
+    it { -> { get :new }.should require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }
@@ -35,10 +33,8 @@ describe QuestionsController do
     end
   end
 
-  context 'create' do
-    it 'requires login' do
-      -> { post :create }.should raise_error(QA::NotLoggedIn)
-    end
+  describe 'create' do
+    it { -> { post :create }.should require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }
@@ -51,12 +47,10 @@ describe QuestionsController do
     end
   end
 
-  context 'edit' do
+  describe 'edit' do
     let(:question) { FactoryGirl.create(:question) }
 
-    it 'requires login' do
-      -> { get :edit, id: question.id }.should raise_error(QA::NotLoggedIn)
-    end
+    it { -> { get :edit, id: question.id }.should require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }
@@ -68,12 +62,10 @@ describe QuestionsController do
     end
   end
 
-  context 'update' do
+  describe 'update' do
     let(:question) { FactoryGirl.create(:question) }
 
-    it 'requires login' do
-      -> { put :update, id: question.id }.should raise_error(QA::NotLoggedIn)
-    end
+    it { -> { put :update, id: question.id }.should require_login }
 
     context 'when logged in' do
       before do
@@ -91,12 +83,10 @@ describe QuestionsController do
     end
   end
 
-  context 'accept_answer' do
+  describe 'accept_answer' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
 
-    it 'requires login' do
-      -> { post :accept_answer, id: question.id }.should raise_error(QA::NotLoggedIn)
-    end
+    it { -> { post :accept_answer, id: question.id }.should require_login }
 
     context 'when logged in as the question asker' do
       before { sign_in(alice) }

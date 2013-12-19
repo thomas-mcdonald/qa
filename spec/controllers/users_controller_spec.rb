@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  context 'show' do
+  describe 'show' do
     let(:user) { FactoryGirl.create(:user) }
 
     context 'with slug' do

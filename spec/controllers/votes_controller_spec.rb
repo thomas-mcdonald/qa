@@ -4,7 +4,7 @@ describe VotesController do
   let(:question) { FactoryGirl.create(:question) }
   let(:vote) { FactoryGirl.attributes_for(:upvote) }
 
-  context 'create' do
+  describe 'create' do
     it 'requires login' do
       post :create
       response.status.should == 401
