@@ -7,10 +7,7 @@ class VotesController < ApplicationController
     creator = VoteCreator.new(current_user, vote_params)
     @vote = creator.create
     if creator.errors.blank?
-      render json: {
-        content: render_to_string(partial: 'votes/destroy', layout: false, locals: { vote: @vote }),
-        count: @vote.post.vote_count
-      }
+      render_json_partial('votes/destroy', { vote: @vote }, count: @vote.post.vote_count)
     else
       render json: { errors: @vote.errors.full_messages }, status: 422
     end
@@ -18,10 +15,10 @@ class VotesController < ApplicationController
 
   def destroy
     @vote = current_user.votes.find(params[:id]).destroy
-    render json: {
-      content: render_to_string(partial: 'votes/create', layout: false, locals: { post: @vote.post, vote_type_id: @vote.vote_type_id }),
-      count: @vote.post.vote_count
-    }
+    render_json_partial('votes/create', {
+      post: @vote.post,
+      vote_type_id: @vote.vote_type_id
+    }, count: @vote.post.vote_count)
   end
 
   private

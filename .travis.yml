@@ -1,6 +1,9 @@
 before_install: gem install bundler --pre
 bundler_args: -j2 --without development
 before_script: "./script/ci_setup"
-script: "bundle exec rake travis --trace"
+cache: bundler
 rvm:
   - 2.0.0
+script: "bundle exec rake travis --trace"
+services:
+  - redis-server

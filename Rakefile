@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Qa::Application.load_tasks
+QA::Application.load_tasks

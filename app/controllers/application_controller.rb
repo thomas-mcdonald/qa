@@ -1,6 +1,7 @@
 require_dependency 'qa'
 
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery with: :exception
 
   private
@@ -26,6 +27,12 @@ class ApplicationController < ActionController::Base
     !!session[:user_id]
   end
   helper_method :logged_in?
+
+  def render_json_partial(name, locals, extras = {})
+    render json: {
+      content: render_to_string(partial: name, layout: false, locals: locals)
+    }.merge(extras)
+  end
 
   # This feels a bit hacky
   def handle_env(e)

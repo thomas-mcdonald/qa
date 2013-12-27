@@ -1,0 +1,17 @@
+<div id="page-wrap">
+  <div id="body">
+    <div class="question-list">
+      <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
+    </div>
+    <%= paginate @questions %>
+  </div>
+  <div id="sidebar">
+    <h4><%= @count %> questions tagged <a class="btn btn-default tag"><%= params[:tag] %></a></h4>
+    <h5>related tags</h5>
+    <ul class="sidebar-tags">
+      <% @related_tags.each do |tag| %>
+        <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

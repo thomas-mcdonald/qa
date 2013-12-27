@@ -13,8 +13,28 @@ describe CountsHelper do
       rep_formatted(9999).should == "9,999"
     end
 
-    it 'shortens numbers between 10000 and 99999' do
-      rep_formatted(10000).should == "10.0k"
+    it 'displays the first hundred reputation of a thousand without decimals' do
+      rep_formatted(10000).should == "10k"
+      rep_formatted(95000).should == "95k"
+    end
+
+    it 'inserts decimals and shortens for thousands' do
+      rep_formatted(11100).should == "11.1k"
+      rep_formatted(55500).should == "55.5k"
+      rep_formatted(99999).should == "99.9k"
+    end
+
+    it 'handles 100ks' do
+      rep_formatted(100000).should == "100k"
+      rep_formatted(123456).should == "123k"
+    end
+
+    it 'displays gt 1m for values over 1 million' do
+      rep_formatted(1000000).should == "> 1m"
+    end
+
+    it 'displays negatives' do
+      rep_formatted(-100).should == '-100'
     end
   end
 

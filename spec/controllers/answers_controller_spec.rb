@@ -1,10 +1,8 @@
 require 'spec_helper'
 
 describe AnswersController do
-  context 'create' do
-    it 'requires login' do
-      -> { post :create }.should raise_error(QA::NotLoggedIn)
-    end
+  describe 'create' do
+    it { -> { post :create }.should require_login }
 
     context 'when logged in' do
       let(:question) { FactoryGirl.create(:question) }
@@ -20,12 +18,10 @@ describe AnswersController do
     end
   end
 
-  context 'edit' do
+  describe 'edit' do
     let(:answer) { FactoryGirl.create(:answer) }
 
-    it 'requires login' do
-      -> { get :edit, id: answer.id }.should raise_error(QA::NotLoggedIn)
-    end
+    it { -> { get :edit, id: answer.id }.should require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }

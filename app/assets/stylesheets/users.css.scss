@@ -4,28 +4,37 @@
 #provider-list {
   list-style-type: none;
   li {
-    @include make-row();
     // Get button styling in here
     @extend .btn;
+    @extend .btn-default;
+    @include gradient-vertical(#fff, #ebebec);
     // But tone down the border slightly
     @include border-radius(3px);
     margin-right: 30px;
+    width: 175px;
 
     a {
+      @include make-row();
       display: block;
       height: 70px;
     }
 
     img, p {
-      @include make-md-column(1);
+      @include make-md-column(6);
       display: inline;
     }
 
     p {
-      width: 68px;
-      margin-left: 12px;
       margin-top: 11px;
-      span { font-size: $font-size-base + 2; }
+      span { font-size: $font-size-base + 2;
+        float: left;}
+    }
+
+    img {
+      height: 60px;
+      padding-left: 0;
+      padding-right: 0;
+      width: 60px;
     }
   }
 }

@@ -1,26 +1,30 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 gem 'activerecord-import', '~> 0.4.1'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.14.1'
 gem 'pg', '~> 0.15.0'
+gem 'pundit', '~> 0.2.1'
 gem 'redcarpet', '~> 3.0.0'
 gem 'redis', '~> 3.0.4'
 gem 'redis-namespace', '~> 1.3.1'
 gem 'ruby-progressbar'
 gem 'seed-fu', github: 'mbleigh/seed-fu'
 gem 'settingslogic', '~> 2.0.9'
-gem 'sidekiq', '~> 2.15.0'
 gem 'simple_form', '~> 3.0.0'
 
 # Authentication
 gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-openid', '1.0.1'
 
+# Jobs & web interface
+gem 'sidekiq', '~> 2.17.0'
+gem 'sinatra'
+
 # Asset gems
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.0.3'
 gem 'font-awesome-sass-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -48,6 +52,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.2.0'
   gem 'poltergeist', '~> 1.4.0'
   gem 'rspec', '~> 2.13'
-  gem 'shoulda-matchers', '~> 1.5.0'
+  gem 'shoulda-matchers', '~> 2.4.0'
   gem 'spinach', '~> 0.8.3'
 end

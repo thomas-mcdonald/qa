@@ -23,36 +23,60 @@
 
 .mini-counts {
   $sm-width: 48px;
-  $normal-width: 53px;
+  $normal-width: 54px;
+  $body-width: 46px;
 
   @include make-xs-column(2.25);
   @include make-sm-column(3);
   @include make-md-column(2.5);
   margin-top: 14px;
 
+  // full screen question listing
   .fluid-count {
     margin: 0 auto;
     width: $normal-width * 3;
-    // views count is hidden on mobile
-    @media screen and (max-width: $screen-sm) {
-      width: $sm-width * 2;
-    }
   }
 
   .mini-count {
     float: left;
     text-align: center;
     width: $normal-width;
-    @media screen and (max-width: $screen-sm) {
-      width: $sm-width;
-    }
     .num { font-size: 16px; }
     &.unanswered { color: darken(#f00, 3%); }
+  }
+
+  // page with sidebar
+  #page-wrap & .mini-count {
+    width: $body-width;
+  }
+
+  // rejig sizes on small screens.
+  // also hide view count if on a sidebar page
+  @media screen and (max-width: $screen-sm) {
+    .fluid-count {
+      width: $sm-width * 2;
+    }
+
+    .mini-count {
+      width: $sm-width;
+    }
+  }
+
+  // counts are stacked on extra small
+  @media screen and (max-width: $screen-xs) {
+    .mini-count {
+      float: none;
+    }
   }
 
   // hide the view count on mobile
   .mini-count:last-child {
     @extend .hidden-xs;
+  }
+
+  // hide it on small if page with sidebar
+  #page-wrap & .mini-count:last-child {
+    @extend .hidden-sm;
   }
 }
 
@@ -120,7 +144,6 @@
 
 #sidebar {
   h5 {
-    font-weight: normal;
     margin: 0 0 6px 25px;
   }
   .sidebar-tags {

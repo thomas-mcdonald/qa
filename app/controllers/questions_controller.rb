@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
 
   def tagged
     @questions = Question.tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
-    render :index
+    @count = Question.tagged_with(params[:tag]).count
+    @related_tags = Tag.named(params[:tag]).related_tags
   end
 
   def show
@@ -35,10 +36,12 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    authorize(@question)
   end
 
   def update
     @question = Question.find(params[:id])
+    authorize(@question)
     @question.update_attributes!(question_params)
     @question.update_last_activity(current_user)
     @question.save
@@ -61,9 +64,10 @@ class QuestionsController < ApplicationController
       @question.unaccept_answer
     end
     if @question.save
-      render json: {
-        content: render_to_string(partial: 'answers/accept_answer', layout: false, locals: { question: @question, answer: @answer })
-      }
+      render_json_partial('answers/accept_answer', {
+        question: @question,
+        answer: @answer
+      })
     else
       render json: { error: 'Nope, not doing that' } # TODO: properly handle
     end
