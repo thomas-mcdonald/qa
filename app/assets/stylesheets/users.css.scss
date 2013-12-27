@@ -57,23 +57,28 @@
     margin-top: 0;
   }
 
-  ul { list-style-type: none; }
+  ul {
+    padding-left: 0;
+    list-style-type: none;
+  }
+
   li {
+    @include make-row();
     @include clearfix();
     height: 25px;
-
-    .vote-count, a {
-      display: block;
-      float: left;
-    }
+    clear: both;
 
     .vote-count {
+      @include clearfix();
+      @include make-md-column(.5);
       background-color: rgba(125, 125, 125, .1);
       height: $font-size-base + 6;
-      margin-right: 3px;
-      padding-top: 1px;
+      padding: 1px 0 0; // this removes some of the padding given by md-column, needed for centered counts
       text-align: center;
-      width: 20px;
+    }
+
+    > a {
+      @include make-md-column(11.5);
     }
   }
 }
