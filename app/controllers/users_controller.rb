@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @questions = @user.questions.limit(5)
+    @answers = @user.answers.limit(5)
   end
 
   def new

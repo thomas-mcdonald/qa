@@ -52,7 +52,9 @@
   }
 }
 
-.user-question-list {
+.user-answer-list, .user-question-list {
+  @include make-md-column(6);
+
   h3 {
     margin-top: 0;
   }

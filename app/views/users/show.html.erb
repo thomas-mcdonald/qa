@@ -9,7 +9,8 @@
   </div>
 </div>
 
-<div class="question-list user-question-list">
+<div class="row">
+<div class="user-question-list">
   <h3>Questions</h3>
   <ul>
     <% @questions.each do |question| %>
@@ -19,4 +20,17 @@
       </li>
     <% end %>
   </ul>
+</div>
+
+<div class="user-answer-list">
+  <h3>Answers</h3>
+  <ul>
+    <% @answers.each do |answer| %>
+      <li>
+        <span class="vote-count"><%= answer.vote_count %></span>
+        <%= link_to answer.question.title, answer.question %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 </div>
