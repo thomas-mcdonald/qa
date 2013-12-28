@@ -53,9 +53,7 @@ class QuestionsController < ApplicationController
     # TODO: reputation events need destroying on new accepted answers
     @question = Question.find(params[:id])
     require_user(@question.user)
-    if params[:answer_id].blank? and @question.accepted_answer_id.blank?
-      head :bad_request and return
-    end
+    head :bad_request and return if missing_accept_params
     if params[:answer_id].present? # setting new accept
       @answer = Answer.find(params[:answer_id])
       @question.accept_answer(@answer)
@@ -84,5 +82,10 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:body, :tag_list, :title)
+  end
+
+  # check to ensure we have required parameters for accept_answer
+  def missing_accept_params
+    params[:answer_id].blank? and @question.accepted_answer_id.blank?
   end
 end
