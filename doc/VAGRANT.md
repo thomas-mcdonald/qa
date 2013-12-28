@@ -1,5 +1,7 @@
 # Developing with Vagrant
 
+**At this point we have an automatic build of the Vagrant base box, but the environment might not be fully setup on box creation.**
+
 ```
 cd vagrant
 vagrant up
