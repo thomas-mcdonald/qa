@@ -37,6 +37,8 @@ QA::Application.routes.draw do
   get '/auth/:provider/callback', to: 'authorizations#callback'
   post '/auth/:provider/callback', to: 'authorizations#callback'
 
+  get '/tags', to: 'tags#index'
+
   # development routes
   if Rails.env.development?
     get '/dev/login', to: 'dev#login'
