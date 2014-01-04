@@ -2,6 +2,10 @@ class Tag < ActiveRecord::Base
   has_many :taggings
   has_many :questions, through: :taggings
 
+  def self.by_popularity
+    select('tags.*, count(*) as count').joins(:taggings).order('count(*) DESC, name ASC').group('tags.id')
+  end
+
   def self.named(name)
     where(name: name).first
   end
