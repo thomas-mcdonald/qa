@@ -9,7 +9,7 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   end
 
   step 'I am logged in and can edit questions' do
-    User.any_instance.stubs(:reputation).returns(1000)
+    User.any_instance.stubs(:reputation).returns(ReputationRequirements.question.edit)
     login
   end
 
