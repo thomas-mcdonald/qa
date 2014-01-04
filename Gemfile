@@ -50,6 +50,7 @@ group :test do
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.1.0'
   gem 'factory_girl_rails', '~> 4.2.0'
+  gem 'mocha', '~> 0.14.0', require: false
   gem 'poltergeist', '~> 1.4.0'
   gem 'rspec', '~> 2.13'
   gem 'shoulda-matchers', '~> 2.4.0'

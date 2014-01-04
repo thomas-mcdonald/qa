@@ -9,13 +9,13 @@ Feature: Edit answer
     Then I cannot see a link to edit the answer
 
   Scenario: Logged in users can edit questions
-    Given I am logged in
+    Given I am logged in and can edit answers
     And there exists a question with an answer
     When I visit the question page
     Then I can see a link to edit the answer
   
   Scenario: Logged in users can update questions
-    Given I am logged in
+    Given I am logged in and can edit answers
     And there exists a question with an answer
     When I visit the answer edit page
     And I submit the form with updated answer information

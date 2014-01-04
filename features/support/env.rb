@@ -7,7 +7,7 @@ ENV['RAILS_ENV'] = 'test'
 require './config/environment'
 
 require 'rspec/expectations'
-require 'rspec/mocks'
+require 'mocha/setup'
 
 # Require all shared step files
 Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}
@@ -39,6 +39,7 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 Spinach.hooks.before_scenario { DatabaseCleaner.clean }
+Spinach.hooks.after_scenario { Mocha::Mockery.teardown }
 
 # factorygirl niceness
 Spinach.hooks.before_run do

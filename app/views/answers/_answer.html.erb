@@ -6,7 +6,10 @@
   <div class="main">
     <div class="body"><%=format answer.body%></div>
     <div class="meta">
-      <div class="links"><%= link_to 'edit', edit_answer_path(answer) if logged_in? %></div>
+      <div class="links">
+        <% if policy(answer).edit? %>
+          <%= link_to 'edit', edit_answer_path(answer) %>
+        <% end %></div>
       <div class="righto">
         <div class="user-info">
           <p class="asked">answered <%= time_ago_in_words answer.created_at %> ago</p>

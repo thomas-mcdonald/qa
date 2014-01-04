@@ -7,7 +7,7 @@ class QuestionPolicy
   end
 
   def edit?
-    user && user.reputation >= 1000
+    user && user.reputation >= ReputationRequirements.question.edit
   end
 
   def update?

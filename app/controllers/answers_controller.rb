@@ -11,10 +11,12 @@ class AnswersController < ApplicationController
 
   def edit
     @answer = Answer.find(params[:id])
+    authorize(@answer)
   end
 
   def update
     @answer = Answer.find(params[:id])
+    authorize(@answer)
     @answer.update_attributes(answer_params)
     redirect_to @answer.question
   end
