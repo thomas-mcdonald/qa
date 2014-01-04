@@ -3,6 +3,11 @@ class Spinach::Features::EditAnswer < Spinach::FeatureSteps
   include SharedPaths
   include SharedQuestion
 
+  step 'I am logged in and can edit answers' do
+    AnswerPolicy.any_instance.stubs(:edit?).returns(true)
+    login
+  end
+
   step 'there exists a question with an answer' do
     @answer = FactoryGirl.create(:answer)
     @question = @answer.question

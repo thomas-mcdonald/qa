@@ -4,12 +4,12 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   include SharedQuestion
 
   step 'I am logged in and cannot edit questions' do
-    User.any_instance.stubs(:reputation).returns(0)
+    QuestionPolicy.any_instance.stubs(:edit?).returns(false)
     login
   end
 
   step 'I am logged in and can edit questions' do
-    User.any_instance.stubs(:reputation).returns(ReputationRequirements.question.edit)
+    QuestionPolicy.any_instance.stubs(:edit?).returns(true)
     login
   end
 
