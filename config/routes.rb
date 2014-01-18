@@ -28,11 +28,13 @@ QA::Application.routes.draw do
   resources :answers, only: [:create, :edit, :update]
   resources :votes, only: [:create, :destroy]
 
+  get '/user/edit', to: 'users#edit', as: 'edit_user'
   get '/users/:id/:slug', to: 'users#show'
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show, :update]
   get '/login', to: 'sessions#new', as: 'login'
   post '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
+
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
   post '/auth/:provider/callback', to: 'authorizations#callback'

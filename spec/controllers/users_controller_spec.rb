@@ -17,4 +17,25 @@ describe UsersController do
       response.status.should == 302
     end
   end
+
+  describe 'edit' do
+    before { sign_in(alice) }
+    it 'loads successfully' do
+      get :edit
+      response.status.should == 200
+    end
+  end
+
+  describe 'update' do
+    before { sign_in(alice)}
+
+    it 'rejects updates done by a different user' do
+      -> { patch :update, id: bob.id, user: {name: 'Ed Balls'} }.should raise_error(QA::NotAuthorised)
+    end
+
+    it 'allows and updates if valid user' do
+      patch :update, id: alice.id, user: { name: 'Ed Balls' }
+      alice.reload.name.should == 'Ed Balls'
+    end
+  end
 end
