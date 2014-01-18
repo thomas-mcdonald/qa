@@ -8,6 +8,14 @@ describe Tag do
   it { should have_many(:taggings) }
   it { should have_many(:questions) }
 
+  describe '.popularity' do
+    it 'orders tags by their usage count' do
+      FactoryGirl.create(:question, tag_list: 'foo, bar')
+      FactoryGirl.create(:question, tag_list: 'foo')
+      Tag.by_popularity.should == [tag_finder('foo'), tag_finder('bar')]
+    end
+  end
+
   describe '.named' do
     let(:tag) { FactoryGirl.create(:tag) }
 
