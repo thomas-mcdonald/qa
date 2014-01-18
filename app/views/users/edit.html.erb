@@ -1,0 +1,12 @@
+<div class="page-header">
+  <h1>Edit your profile</h1>
+</div>
+
+<%= simple_form_for @user, url: user_path(id: @user.id) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :about_me %>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn-primary' %>
+  </div>
+<% end %>

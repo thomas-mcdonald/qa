@@ -57,4 +57,8 @@ class User < ActiveRecord::Base
   def gravatar(size = 32)
     "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
   end
+
+  def rendered_about_me
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, no_styles: true, safe_links_only: true)).render(self.about_me).html_safe
+  end
 end

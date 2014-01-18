@@ -20,4 +20,8 @@ module SharedPaths
   step 'I visit the answer edit page' do
     visit edit_answer_path(current_answer)
   end
+
+  step 'I visit the user edit page' do
+    visit edit_user_path
+  end
 end

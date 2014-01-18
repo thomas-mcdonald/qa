@@ -2,11 +2,38 @@
   <h1><%= @user.name %></h1>
 </div>
 
-<div class="question-list user-question-list">
+<div class="user-misc">
+  <div class="identity">
+    <img src="<%= @user.gravatar(128) %>" class="gravatar">
+    <p><span class="reputation"><%= @user.reputation %></span> reputation</p>
+  </div>
+  <div class="about-me">
+    <%= @user.rendered_about_me %>
+  </div>
+</div>
+
+<div class="row">
+<div class="user-question-list">
   <h3>Questions</h3>
-  <% @user.questions.each do |question| %>
-    <div class="summary">
-      <%= link_to question.title, question %>
-    </div>
-  <% end %>
+  <ul>
+    <% @questions.each do |question| %>
+      <li>
+        <span class="vote-count"><%= question.vote_count %></span>
+        <%= link_to question.title, question %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="user-answer-list">
+  <h3>Answers</h3>
+  <ul>
+    <% @answers.each do |answer| %>
+      <li>
+        <span class="vote-count"><%= answer.vote_count %></span>
+        <%= link_to answer.question.title, answer.question %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 </div>

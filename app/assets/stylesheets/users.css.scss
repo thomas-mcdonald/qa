@@ -1,5 +1,6 @@
 // Provider list
 // A list of OpenID providers
+// used on login pages
 #provider-list {
   list-style-type: none;
   li {
@@ -38,8 +39,63 @@
   }
 }
 
-.user-question-list {
+// user#show pages
+.user-misc {
+  @include make-row();
+
+  .identity {
+    @include make-md-column(2);
+
+    p {
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .reputation {
+      display: block;
+      font-size: $font-size-base + 5;
+      font-weight: bold;
+      line-height: $font-size-base + 4;
+    }
+  }
+
+  .about-me {
+    @include make-md-column(6);
+    background: #efefef;
+    padding: 7px 10px;
+    min-height: 160px;
+  }
+}
+
+.user-answer-list, .user-question-list {
+  @include make-md-column(6);
+
   h3 {
     margin-top: 0;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style-type: none;
+  }
+
+  li {
+    @include make-row();
+    @include clearfix();
+    height: 25px;
+    clear: both;
+
+    .vote-count {
+      @include clearfix();
+      @include make-md-column(.5);
+      background-color: rgba(125, 125, 125, .1);
+      height: $font-size-base + 6;
+      padding: 1px 0 0; // this removes some of the padding given by md-column, needed for centered counts
+      text-align: center;
+    }
+
+    > a {
+      @include make-md-column(11.5);
+    }
   }
 }
