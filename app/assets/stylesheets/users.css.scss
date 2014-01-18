@@ -58,6 +58,13 @@
       line-height: $font-size-base + 4;
     }
   }
+
+  .about-me {
+    @include make-md-column(6);
+    background: #efefef;
+    padding: 7px 10px;
+    min-height: 160px;
+  }
 }
 
 .user-answer-list, .user-question-list {
