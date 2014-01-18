@@ -23,8 +23,13 @@ describe AnswersController do
 
     it { -> { get :edit, id: answer.id }.should require_login }
 
+    it 'requires permissions' do
+      sign_in(FactoryGirl.create(:user, reputation: 0))
+      -> { get :edit, id: answer.id }.should raise_error(Pundit::NotAuthorizedError)
+    end
+
     context 'when logged in' do
-      before { sign_in(alice) }
+      before { sign_in(a_k) }
 
       it 'is success' do
         get :edit, id: answer.id
