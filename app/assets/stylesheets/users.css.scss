@@ -46,6 +46,11 @@
   .identity {
     @include make-md-column(2);
 
+    img {
+      height: 128px;
+      width: 128px;
+    }
+
     p {
       margin-top: 6px;
       text-align: center;
