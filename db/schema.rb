@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140117104353) do
     t.integer  "vote_count",          default: 0, null: false
     t.integer  "last_active_user_id"
     t.datetime "last_active_at"
-    t.integer  "answers_count"
+    t.integer  "answers_count",       default: 0, null: false
     t.integer  "accepted_answer_id"
   end
 
