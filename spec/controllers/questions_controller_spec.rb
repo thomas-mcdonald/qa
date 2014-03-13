@@ -15,12 +15,6 @@ describe QuestionsController do
     it { should respond_with(:success) }
   end
 
-  describe 'timeline' do
-    let(:question) { FactoryGirl.create(:question) }
-    before { get :timeline, id: question.id }
-    it { should respond_with(:success) }
-  end
-
   describe 'tagged' do
     before do
       FactoryGirl.create(:question, tag_list: 'tag')
