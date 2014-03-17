@@ -35,7 +35,7 @@ GEM
       activesupport (= 4.0.4)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
-    activerecord-import (0.4.1)
+    activerecord-import (0.5.0)
       activerecord (>= 3.0)
     activesupport (4.0.4)
       i18n (~> 0.6, >= 0.6.9)
@@ -45,7 +45,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.16)
-    bootstrap-sass (3.0.3.0)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
@@ -82,10 +82,10 @@ GEM
     dotenv (0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
-    factory_girl (4.3.0)
+    factory_girl (4.4.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.3.0)
-      factory_girl (~> 4.3.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
     ffi (1.9.3)
     font-awesome-sass-rails (3.0.2.2)
@@ -97,9 +97,9 @@ GEM
     formatador (0.2.4)
     gherkin-ruby (0.3.1)
       racc
-    guard (2.2.5)
+    guard (2.5.1)
       formatador (>= 0.2.4)
-      listen (~> 2.1)
+      listen (~> 2.6)
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
@@ -275,15 +275,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import (~> 0.4.1)
-  bootstrap-sass (~> 3.0.3)
+  activerecord-import (~> 0.5.0)
+  bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
   coveralls
   database_cleaner (~> 1.2.0)
-  factory_girl_rails (~> 4.3.0)
+  factory_girl_rails (~> 4.4.1)
   font-awesome-sass-rails
   foreman
-  guard (~> 2.2.0)
+  guard (~> 2.5.0)
   guard-rspec (~> 4.2.0)
   guard-spinach!
   jquery-rails
