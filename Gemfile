@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.4'
 
-gem 'activerecord-import', '~> 0.4.1'
+gem 'activerecord-import', '~> 0.5.0'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.15.0'
 gem 'pg', '~> 0.17.0'
@@ -24,7 +24,7 @@ gem 'sidekiq', '~> 2.17.0'
 gem 'sinatra'
 
 # Asset gems
-gem 'bootstrap-sass', '~> 3.0.3'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-sass-rails'
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -34,7 +34,7 @@ group :development do
   gem 'foreman'
   gem 'quiet_assets'
   # Guard for autorunning tests
-  gem 'guard', '~> 2.2.0'
+  gem 'guard', '~> 2.5.0'
   gem 'guard-rspec', '~> 4.2.0'
   gem 'guard-spinach', github: 'thomas-mcdonald/guard-spinach'
   gem 'rb-fsevent', '~> 0.9.1'
@@ -49,7 +49,7 @@ end
 group :test do
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.2.0'
-  gem 'factory_girl_rails', '~> 4.3.0'
+  gem 'factory_girl_rails', '~> 4.4.1'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
   gem 'rspec', '~> 2.13'
