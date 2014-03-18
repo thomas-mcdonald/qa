@@ -5,7 +5,11 @@ Coveralls.wear_merged!('rails')
 ENV["RAILS_ENV"] ||= 'test'
 ENV["RSPEC"] = 'true'
 
+# special test support/matchers for gems
 require 'pundit/rspec'
+require 'sidekiq'
+require 'sidekiq/testing'
+
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
@@ -32,6 +36,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    Sidekiq::Testing.fake!
   end
 
   config.before(:each) do
