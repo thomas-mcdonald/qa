@@ -1,3 +1,4 @@
+require_dependency 'question_creator'
 require_dependency 'timeline_action'
 
 class QuestionsController < ApplicationController
@@ -28,10 +29,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.update_last_activity(current_user)
-    @question.user = current_user
-    if @question.save
+    creator = QuestionCreator.new(current_user, question_params)
+    @question = creator.create
+    if creator.errors.blank?
       redirect_to @question
     else
       render 'new'

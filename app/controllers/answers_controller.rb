@@ -1,3 +1,4 @@
+require_dependency 'answer_creator'
 require_dependency 'timeline_action'
 
 class AnswersController < ApplicationController
@@ -7,10 +8,10 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:answer][:question_id])
-    @answer = @question.answers.new(answer_params)
-    @answer.user = current_user
-    @answer.save
-    redirect_to @answer.question
+    creator = AnswerCreator.new(@question, current_user, answer_params)
+    @answer = creator.create
+    # TODO: handle errors here
+    redirect_to @question
   end
 
   def edit
