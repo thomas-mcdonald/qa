@@ -118,7 +118,7 @@ module QA
         Vote.all.each do |v|
           bar.increment
           vc.instance_variable_set(:@vote, v)
-          vc.create_reputation_events
+          vc.send(:create_reputation_events)
         end
         puts "Calculating reputation"
         bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
@@ -151,8 +151,9 @@ module QA
         bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
         guidgroups.each do |key, edit|
+          eobj = StackExchange::Edit.new(edit)
           bar.increment
-          groupededits[edit[0]['PostId']] << StackExchange::Edit.new(edit)
+          groupededits[eobj.post_id] << eobj
         end
         groupededits
       end
