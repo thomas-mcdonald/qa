@@ -34,7 +34,7 @@ group :development do
   gem 'foreman'
   gem 'quiet_assets'
   # Guard for autorunning tests
-  gem 'guard', '~> 2.2.0'
+  gem 'guard', '~> 2.6.0'
   gem 'guard-rspec', '~> 4.2.0'
   gem 'guard-spinach', github: 'thomas-mcdonald/guard-spinach'
   gem 'rb-fsevent', '~> 0.9.1'
@@ -42,17 +42,18 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.9'
+  gem 'rspec-rails', '~> 2.14'
   gem 'spinach-rails'
 end
 
 group :test do
+  gem 'minitest'
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails', '~> 4.3.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
   gem 'rspec', '~> 2.13'
-  gem 'shoulda-matchers', '~> 2.5.0'
+  gem 'shoulda-matchers', '~> 2.5.0', require: false
   gem 'spinach', '~> 0.8.3'
 end
