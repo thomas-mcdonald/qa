@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 def event_type(type, vote)
-  Vote.new(post_type: type, vote_type_id: vote).event_type
+  Vote.new(post_type: type, vote_type: vote).event_type
 end
 
 describe Vote do
@@ -12,10 +12,10 @@ describe Vote do
 
   context '#event_type' do
     it 'returns the correct event type for the post and vote' do
-      event_type('question', Vote::UPVOTE).should == 'question_upvote'
-      event_type('question', Vote::DOWNVOTE).should == 'question_downvote'
-      event_type('answer', Vote::UPVOTE).should == 'answer_upvote'
-      event_type('answer', Vote::DOWNVOTE).should == 'answer_downvote'
+      event_type('question', Vote.types['upvote']).should == 'question_upvote'
+      event_type('question', Vote.types['downvote']).should == 'question_downvote'
+      event_type('answer', Vote.types['upvote']).should == 'answer_upvote'
+      event_type('answer', Vote.types['downvote']).should == 'answer_downvote'
     end
   end
 end

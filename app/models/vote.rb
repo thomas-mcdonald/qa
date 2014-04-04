@@ -3,28 +3,24 @@ class Vote < ActiveRecord::Base
   has_many :reputation_events, as: :action, dependent: :destroy
   belongs_to :user
 
-  UPVOTE = 1
-  DOWNVOTE = 2
+  enum vote_type: { upvote: 1, downvote: 2 }
 
-  validates_presence_of :post_type, :post_id, :user_id, :vote_type_id
+  validates_presence_of :post_type, :post_id, :user_id, :vote_type
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 
   after_destroy :update_post_vote_count
 
-  def is_downvote?
-    vote_type_id == 2
-  end
-
-  def is_upvote?
-    vote_type_id == 1
+  # alias types to vote_types
+  def self.types
+    vote_types
   end
 
   def event_type
     # TODO: return nil or something appropriate if not an updown vote
     str = post_type + '_'
-    str << 'upvote' if is_upvote?
-    str << 'downvote' if is_downvote?
+    str << 'upvote' if upvote?
+    str << 'downvote' if downvote?
     str
   end
 
@@ -33,7 +29,7 @@ class Vote < ActiveRecord::Base
   end
 
   def validate_one_updown_vote
-    if self.post.votes.where(user_id: self.user.id, vote_type_id: [1,2]).length > 0
+    if self.post.votes.where(user_id: self.user.id, vote_type: [1,2]).length > 0
       self.errors[:base] << 'Can only vote once on a post'
     end
   end

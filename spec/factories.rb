@@ -34,12 +34,12 @@ FactoryGirl.define do
   factory :upvote, class: Vote do
     association :post, factory: :question
     user
-    vote_type_id 1
+    vote_type 'upvote'
   end
 
   factory :downvote, class: Vote do
     association :post, factory: :question
     user
-    vote_type_id 2
+    vote_type 'downvote'
   end
 end

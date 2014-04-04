@@ -3,7 +3,7 @@ require 'vote_creator'
 
 def create_vote(type, item)
   v = FactoryGirl.build(type, post: item)
-  VoteCreator.new(v.user, v.slice(:post_id, :post_type, :vote_type_id)).create
+  VoteCreator.new(v.user, v.slice(:post_id, :post_type, :vote_type)).create
 end
 
 shared_examples_for 'voteable' do

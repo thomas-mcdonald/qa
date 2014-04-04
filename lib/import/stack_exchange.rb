@@ -94,8 +94,8 @@ module QA
           vote = Vote.new
           vote.post_id = @posts[row['PostId'].to_i][:id]
           vote.post_type = @posts[row['PostId'].to_i][:type]
-          vote.vote_type_id = 1 if row['VoteTypeId'].to_i == 2
-          vote.vote_type_id = 2 if row['VoteTypeId'].to_i == 3
+          vote.vote_type = 'upvote' if row['VoteTypeId'].to_i == 2
+          vote.vote_type = 'downvote' if row['VoteTypeId'].to_i == 3
           vote.user = users[(rand*size).floor]
           vote.created_at = DateTime.parse row['CreationDate']
           vote.updated_at = DateTime.parse row['CreationDate']
@@ -112,7 +112,7 @@ module QA
       end
 
       def create_reputation
-        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type_id: 0)
+        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type: 0)
         puts "Creating reputation events"
         bar = ProgressBar.create(title: 'Reputation', total: Vote.count, format: '%t: |%B| %E')
         Vote.all.each do |v|
