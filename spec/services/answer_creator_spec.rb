@@ -21,6 +21,12 @@ describe AnswerCreator do
     answer.should be_valid
   end
 
+  it 'sets the user' do
+    creator = AnswerCreator.new(question, user, mock_data.merge(user_id: 99999))
+    answer = creator.create
+    answer.user_id.should == user.id
+  end
+
   it 'creates the timeline events' do
     Answer.any_instance.expects(:create_timeline_event!)
     AnswerCreator.new(question, user, mock_data).create

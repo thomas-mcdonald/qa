@@ -20,6 +20,7 @@ class AnswerCreator
 
   def create_answer
     @answer = @question.answers.new(@params)
+    @answer.user = @user
     if !@answer.save
       @errors = @answer.errors
       raise ActiveRecord::Rollback
