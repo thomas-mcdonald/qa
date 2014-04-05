@@ -3,12 +3,13 @@ class TimelineEvent < ActiveRecord::Base
   has_many :timeline_actors
   has_many :users, through: :timeline_actors
 
-  POST_CREATE = 1
-  INVERT = ['post_create'].unshift(nil).freeze
+  enum action: {
+    post_create: 1
+  }
 
   def self.on_post_create(post, user)
     event = TimelineEvent.new(post: post)
-    event.action = TimelineEvent::POST_CREATE
+    event.action = 'post_create'
     event.timeline_actors << TimelineActor.new(user: user)
     event.save
     event
