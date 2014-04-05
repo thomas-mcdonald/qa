@@ -27,6 +27,6 @@ class AnswerCreator
   end
 
   def create_timeline_event
-    @answer.create_timeline_event
+    @answer.create_timeline_event!
   end
 end

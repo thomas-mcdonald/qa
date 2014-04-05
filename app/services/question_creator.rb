@@ -28,6 +28,6 @@ class QuestionCreator
   end
 
   def create_timeline_events
-    @question.create_timeline_event
+    @question.create_timeline_event!
   end
 end

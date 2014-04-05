@@ -48,6 +48,7 @@ class QuestionsController < ApplicationController
     authorize(@question)
     @question.update_attributes!(question_params)
     @question.update_last_activity(current_user)
+    @question.edit_timeline_event!(current_user)
     @question.save
     redirect_to @question
   end

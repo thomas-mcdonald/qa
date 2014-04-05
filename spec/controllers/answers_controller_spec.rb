@@ -40,4 +40,19 @@ describe AnswersController do
       end
     end
   end
+
+  describe 'update' do
+    let(:answer) { FactoryGirl.create(:answer) }
+
+    it { -> { post :update, id: answer.id }.should require_login }
+
+    context 'when logged in' do
+      before { sign_in(a_k) }
+
+      it 'creates a timeline event' do
+        Answer.any_instance.expects(:edit_timeline_event!)
+        post :update, id: answer.id, answer: { body: 'this is a new body' }
+      end
+    end
+  end
 end

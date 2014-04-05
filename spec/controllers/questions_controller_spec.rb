@@ -81,16 +81,23 @@ describe QuestionsController do
     end
 
     context 'when logged in with permissions' do
-      before do
+      def req
         sign_in(a_k)
         put :update, id: question.id, question: { title: 'validlengthtitle' }
       end
 
+      it 'makes a call to create a timeline event' do
+        Question.any_instance.expects(:edit_timeline_event!)
+        req
+      end
+
       it 'updated the information' do
+        req
         Question.find(question.id).title.should == 'validlengthtitle'
       end
 
       it 'redirects back to the question' do
+        req
         response.should be_redirect
       end
     end
