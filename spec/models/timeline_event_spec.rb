@@ -15,4 +15,13 @@ describe TimelineEvent do
       event.timeline_actors.first.user.should == user
     end
   end
+
+  describe '#on_post_edit' do
+    it 'creates a timeline event' do
+      event = TimelineEvent.on_post_edit(question, user)
+      event.timeline_actors.size.should == 1
+      event.timeline_actors.first.user.should == user
+      event.action.should == 'post_edit'
+    end
+  end
 end
