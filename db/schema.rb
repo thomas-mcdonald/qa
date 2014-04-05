@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117104353) do
+ActiveRecord::Schema.define(version: 20140404165642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140117104353) do
   create_table "votes", force: true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
-    t.integer  "vote_type_id"
+    t.integer  "vote_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "post_type"

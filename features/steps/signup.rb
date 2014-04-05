@@ -22,8 +22,8 @@ class Spinach::Features::Signup < Spinach::FeatureSteps
 
   step 'I should have a user created with those details' do
     user =  User.where('name = ?', omniauth_hash[:info][:name]).where('email = ?', omniauth_hash[:info][:email]).first
-    assert user
-    assert user.authorizations.length == 1
+    user.should_not be_nil
+    user.authorizations.length.should == 1
   end
 
   step 'I should be logged in' do

@@ -17,7 +17,7 @@ class VotesController < ApplicationController
     @vote = current_user.votes.find(params[:id]).destroy
     render_json_partial('votes/create', {
       post: @vote.post,
-      vote_type_id: @vote.vote_type_id
+      vote_type: @vote.vote_type
     }, count: @vote.post.vote_count)
   end
 
@@ -30,6 +30,6 @@ class VotesController < ApplicationController
   end
 
   def vote_params
-    params.require(:vote).permit(:post_id, :post_type, :vote_type_id)
+    params.require(:vote).permit(:post_id, :post_type, :vote_type)
   end
 end
