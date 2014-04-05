@@ -53,7 +53,7 @@
     </nav>
     <div class="container">
       <% flash.each do |name, msg| %>
-        <div class="flash-<%= flash %>"><%= msg %></div>
+        <div class="flash-<%= name %>"><%= msg %></div>
       <% end %>
       <%= yield %>
     </div>
