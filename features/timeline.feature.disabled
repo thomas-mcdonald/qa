@@ -1,8 +1,11 @@
+this is broken, need to move these into post create when it actually goes
+through create flow to have any value
+
 Feature: Post timelines
   In order to view the history of a post
   As a user of website
   I want the post histories to be recorded and viewable
-  
+
   Scenario: Creating a question
     Given there exists a question
     When I visit the question timeline page

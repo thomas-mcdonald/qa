@@ -9,7 +9,9 @@
       <div class="links">
         <% if policy(answer).edit? %>
           <%= link_to 'edit', edit_answer_path(answer) %>
-        <% end %></div>
+        <% end %>
+        <%= link_to 'timeline', answer_timeline_path(answer) %>
+      </div>
       <div class="righto">
         <div class="user-info">
           <p class="asked">answered <%= time_ago_in_words answer.created_at %> ago</p>

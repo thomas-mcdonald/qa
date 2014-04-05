@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     authorize(@answer)
     @answer.update_attributes(answer_params)
-    @answer.edit_timeline_event!
+    @answer.edit_timeline_event!(current_user)
     redirect_to @answer.question
   end
 

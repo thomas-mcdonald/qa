@@ -3,5 +3,5 @@
 </div>
 
 <% @post.timeline_events.each do |event| %>
-  <%= render partial: %(posts/timeline/#{TimelineEvent::INVERT[event.action]}), locals: { event: event } %>
+  <%= render partial: %(posts/timeline/#{event.action}), locals: { event: event } %>
 <% end %>
