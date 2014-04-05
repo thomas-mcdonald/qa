@@ -15,9 +15,9 @@ class VoteCreator
   #  type_id - type of vote
   def initialize(user, opts = {})
     raise ArgumentError unless user
-    [:post_id, :post_type, :vote_type_id].each { |k| raise ArgumentError, "#{k} is missing" unless opts[k] }
+    [:post_id, :post_type, :vote_type].each { |k| raise ArgumentError, "#{k} is missing" unless opts[k] }
     @user = user
-    @vote_params = opts.slice(:post_id, :post_type, :vote_type_id)
+    @vote_params = opts.slice(:post_id, :post_type, :vote_type)
   end
 
   def create

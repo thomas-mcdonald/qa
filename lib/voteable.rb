@@ -9,16 +9,16 @@ module QA
     end
 
     def update_vote_count!
-      self.vote_count = self.votes.where(vote_type_id: [1,2]).inject(0) { |sum, v| v.vote_type_id == 1 ? sum + 1 : sum - 1 }
+      self.vote_count = self.votes.where(vote_type: [1,2]).inject(0) { |sum, v| v.upvote? ? sum + 1 : sum - 1 }
       save
     end
 
-    def has_vote_by_user(user, vote_type_id)
-      !!self.vote_by_user(user, vote_type_id)
+    def has_vote_by_user(user, vote_type)
+      !!self.vote_by_user(user, vote_type)
     end
 
-    def vote_by_user(user, vote_type_id)
-      self.votes.where(user_id: user.id, vote_type_id: vote_type_id).first
+    def vote_by_user(user, vote_type)
+      self.votes.where(user_id: user.id, vote_type: vote_type).first
     end
   end
 end

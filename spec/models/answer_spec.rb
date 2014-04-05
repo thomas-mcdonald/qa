@@ -11,7 +11,7 @@ describe Answer do
 
     before do
       # create an upvote on a2
-      VoteCreator.new(FactoryGirl.create(:user), post_id: a2.id, post_type: 'Answer', vote_type_id: 1).create
+      VoteCreator.new(FactoryGirl.create(:user), post_id: a2.id, post_type: 'Answer', vote_type: 'upvote').create
     end
 
     it 'orders by vote as per usual if there is no accepted answer' do
