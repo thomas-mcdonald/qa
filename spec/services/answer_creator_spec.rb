@@ -3,6 +3,9 @@ require 'spec_helper'
 describe AnswerCreator do
   let(:question) { FactoryGirl.create(:question) }
   let(:user) { FactoryGirl.create(:user) }
+  mock_data = {
+    body: 'I have nothing of interest to add to this question'
+  }
 
   it 'does not accept nil question' do
     -> { AnswerCreator.new(nil, User.new, {}) }.should raise_error(ArgumentError)
@@ -13,14 +16,13 @@ describe AnswerCreator do
   end
 
   it 'creates a valid answer' do
-    creator = AnswerCreator.new(question, user, {
-      body: 'I have nothing of interest to add to this question'
-    })
+    creator = AnswerCreator.new(question, user, mock_data)
     answer = creator.create
     answer.should be_valid
   end
 
   it 'creates the timeline events' do
-    Answer.any_instance.expects(:create_timeline_events)
+    Answer.any_instance.expects(:create_timeline_event!)
+    AnswerCreator.new(question, user, mock_data).create
   end
 end
