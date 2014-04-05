@@ -25,7 +25,7 @@ describe VoteCreator do
       it 'creates a reputation event with the correct type' do
         vote = VoteCreator.create(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote')
         re = ReputationEvent.where(action: vote).first
-        re.event_type.should == 1
+        re.event_type.should == 'receive_question_upvote'
       end
     end
   end

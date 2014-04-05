@@ -18,7 +18,7 @@ class Vote < ActiveRecord::Base
 
   def event_type
     # TODO: return nil or something appropriate if not an updown vote
-    str = post_type + '_'
+    str = post_type.downcase + '_'
     str << 'upvote' if upvote?
     str << 'downvote' if downvote?
     str
