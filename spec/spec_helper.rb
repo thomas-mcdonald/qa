@@ -35,8 +35,10 @@ RSpec.configure do |config|
 
   config.include UserSupport, type: :controller
 
-  # set up database cleaner
   config.before(:suite) do
+    ActiveRecord::Migration.maintain_test_schema!
+
+    # set up database cleaner
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
     Sidekiq::Testing.fake!
