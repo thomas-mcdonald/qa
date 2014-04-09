@@ -1,6 +1,6 @@
 <div class="answer post" id="answer-<%= answer.id %>">
   <div class="controls">
-    <div class="vote-controls"><%= vote_controls(answer) %></div>
+    <div class="vote-controls"><%= vote_controls(answer, @user_votes) %></div>
     <%= render partial: 'answers/accept_answer', locals: { question: question, answer: answer } %>
   </div>
   <div class="main">

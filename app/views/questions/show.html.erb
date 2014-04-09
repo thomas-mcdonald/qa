@@ -6,7 +6,7 @@
   <div id="body">
     <div class="question post" id="question-<%= @question.id %>">
       <div class="controls">
-        <div class="vote-controls"><%= vote_controls(@question) %></div>
+        <div class="vote-controls"><%= vote_controls(@question, @user_votes) %></div>
       </div>
       <div class="main">
         <div class="body"><%=format @question.body %></div>

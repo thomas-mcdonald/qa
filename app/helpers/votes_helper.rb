@@ -4,10 +4,11 @@ module VotesHelper
   #
   # it does this by seeing which posts a user has voted on and renders the
   # appropriate partial
-  def vote_controls(post)
+  def vote_controls(post, user_votes)
+    user_votes ||= []
     ret = ""
-    upvote = find_vote(@user_votes, post, Vote.types[:upvote])
-    downvote = find_vote(@user_votes, post, Vote.types[:downvote])
+    upvote = find_vote(user_votes, post, Vote.types[:upvote])
+    downvote = find_vote(user_votes, post, Vote.types[:downvote])
     ret << select_partial(upvote, post, 'upvote')
     ret << %(<p class="vote-count">#{ post.vote_count }</p>)
     ret << select_partial(downvote, post, 'downvote')
