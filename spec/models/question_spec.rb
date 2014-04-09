@@ -14,6 +14,7 @@ describe Question do
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:body) }
   it { should ensure_length_of(:title).is_at_least(10).is_at_most(150) }
+  it { should ensure_length_of(:body).is_at_least(10).is_at_most(30000) }
 
   context 'accepted_is_on_question' do
     it 'does not add an error if there is no accepted_answer_id' do
