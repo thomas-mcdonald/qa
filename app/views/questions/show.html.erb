@@ -36,18 +36,18 @@
       </div>
     </div>
 
-    <% if !@answers.empty? %>
-      <div class="answers">
+    <div class="answers">
+      <% if !@answers.empty? %>
         <div class="page-header">
           <h3><%= pluralize @answers.size, "Answer" %></h3>
         </div>
         <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <% if logged_in? %>
       <div class="page-header"><h3>Answer Question</h3></div>
-      <%= simple_form_for @answer, html: { class: 'form-vertical'} do |f| %>
+      <%= simple_form_for @answer, html: { class: 'form-vertical'}, remote: true do |f| %>
         <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
         <%= f.input :body, label: false %>
         <div class="form-actions">

@@ -9,3 +9,11 @@ Feature: Create answer
     And I visit the question page
     When I submit the answer form with a valid answer
     Then I should see the answer
+
+  @javascript
+  Scenario: Create question as logged in user with javascript
+    Given I am logged in
+    And there exists a question
+    And I visit the question page
+    When I submit the answer form with a valid answer
+    Then I should see the answer

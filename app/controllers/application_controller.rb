@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def render_json_partial(name, locals, extras = {})
     render json: {
-      content: render_to_string(partial: name, layout: false, locals: locals)
+      content: render_to_string(partial: name, formats: [:html], layout: false, locals: locals)
     }.merge(extras)
   end
 

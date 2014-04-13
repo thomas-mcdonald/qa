@@ -11,7 +11,12 @@ class AnswersController < ApplicationController
     creator = AnswerCreator.new(@question, current_user, answer_params)
     @answer = creator.create
     # TODO: handle errors here
-    redirect_to @question
+    respond_to do |format|
+      format.html { redirect_to @answer.question }
+      format.json { render_json_partial('answers/answer',
+        { answer: @answer, question: @question }) }
+      end
+    end
   end
 
   def edit

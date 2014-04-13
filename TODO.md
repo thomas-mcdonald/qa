@@ -20,7 +20,6 @@ Some of these are currently in embedded TODOs. Most are not.
 
 ## Answers
 
-* Should be able to create an answer from the question page with a remote form.
 * If you have already answered a question the insert form is hidden and you are
   asked if you actually want to create another answer or edit existing.
 * Errors in answers should be handled.
