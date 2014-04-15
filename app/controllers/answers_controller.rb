@@ -15,7 +15,6 @@ class AnswersController < ApplicationController
       format.html { redirect_to @answer.question }
       format.json { render_json_partial('answers/answer',
         { answer: @answer, question: @question }) }
-      end
     end
   end
 
