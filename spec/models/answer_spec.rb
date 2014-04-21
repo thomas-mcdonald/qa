@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'examples/voteable_examples'
+require 'concerns/voteable_examples'
 
 describe Answer do
   it_should_behave_like 'voteable'
