@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0.rc2'
+gem 'rails', '4.1.0'
 
 gem 'activerecord-import', '~> 0.5.0'
 gem 'jquery-rails'
@@ -11,9 +11,9 @@ gem 'redcarpet', '~> 3.0.0'
 gem 'redis', '~> 3.0.4'
 gem 'redis-namespace', '~> 1.4.1'
 gem 'ruby-progressbar'
-gem 'seed-fu', github: 'mbleigh/seed-fu'
+gem 'seed-fu', '~> 2.3.1'
 gem 'settingslogic', '~> 2.0.9'
-gem 'simple_form', '~> 3.0.0'
+gem 'simple_form', '~> 3.0.2'
 
 # Authentication
 gem 'omniauth', '~> 1.2.0'
