@@ -1,5 +1,7 @@
 module QA
   module BadgeDefinition
-    attr_reader :check_on
+    class Base
+      attr_reader :check_on
+    end
   end
 end
