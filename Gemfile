@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'kaminari', '~> 0.15.0'
 gem 'pg', '~> 0.17.0'
 gem 'pundit', '~> 0.2.1'
-gem 'redcarpet', '~> 3.0.0'
+gem 'redcarpet', '~> 3.1.0'
 gem 'redis', '~> 3.0.4'
 gem 'redis-namespace', '~> 1.4.1'
 gem 'ruby-progressbar'
@@ -20,7 +20,7 @@ gem 'omniauth', '~> 1.2.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Jobs & web interface
-gem 'sidekiq', '~> 2.17.0'
+gem 'sidekiq', '~> 3.0.0'
 gem 'sinatra'
 
 # Asset gems
@@ -54,6 +54,6 @@ group :test do
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
   gem 'rspec', '~> 2.13'
-  gem 'shoulda-matchers', '~> 2.5.0', require: false
+  gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'
 end

@@ -6,7 +6,6 @@ ENV["RAILS_ENV"] ||= 'test'
 ENV["RSPEC"] = 'true'
 
 # special test support/matchers for gems
-require 'pundit/rspec'
 require 'sidekiq'
 require 'sidekiq/testing'
 
@@ -15,6 +14,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'shoulda/matchers'
+require 'pundit/rspec' # require *after* shoulda-matchers to override pundit
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
