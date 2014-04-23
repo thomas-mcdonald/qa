@@ -1,5 +1,7 @@
-require 'coveralls'
-Coveralls.wear_merged!('rails')
+if ENV['CI']
+  require 'coveralls'
+  Coveralls.wear_merged!('rails')
+end
 
 ENV['RAILS_ENV'] = 'test'
 require './config/environment'
