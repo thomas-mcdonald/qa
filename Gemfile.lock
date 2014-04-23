@@ -241,6 +241,7 @@ GEM
       capybara (>= 2.0.0)
       railties (>= 3)
       spinach (>= 0.4)
+    spring (1.1.2)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -312,5 +313,6 @@ DEPENDENCIES
   sinatra
   spinach (~> 0.8.3)
   spinach-rails
+  spring
   terminal-notifier-guard
   uglifier (>= 1.0.3)
