@@ -43,6 +43,10 @@ QA::Application.routes.draw do
 
   get '/tags', to: 'tags#index'
 
+  constraints AdminConstraint.new do
+    get '/admin', to: 'admin#index'
+  end
+
   # development routes
   if Rails.env.development?
     get '/dev/login', to: 'dev#login'
