@@ -12,7 +12,7 @@ module QA
     end
 
     def self.badges_for(event)
-      badges.select { |defn| defn.check_on == event }
+      badges.select { |klass| klass.check_on == event }
     end
   end
 end

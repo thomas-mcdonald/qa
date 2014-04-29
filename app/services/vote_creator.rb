@@ -28,6 +28,7 @@ class VoteCreator
       update_post_vote_count
       create_reputation_events
     end
+    queue_processing
 
     @vote
   end
@@ -50,5 +51,12 @@ class VoteCreator
   def create_reputation_events
     ReputationEvent.create_on_receive_vote(@vote)
     ReputationEvent.create_on_give_vote(@vote)
+  end
+
+  # process the vote for badges
+  def queue_processing
+    if @vote_params[:post_type] == 'Answer'
+      Jobs::Badges::AnswerVote.perform_async(@vote_params[:post_id])
+    end
   end
 end

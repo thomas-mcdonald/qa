@@ -1,7 +1,13 @@
 module QA
   module BadgeDefinition
     class Base
-      attr_reader :check_on
+      def self.check_on
+        @check_on
+      end
+
+      def self.name
+        @name
+      end
     end
   end
 end
