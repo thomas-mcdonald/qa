@@ -9,7 +9,6 @@ module QA
         @dir = dir
         @posts = []
         output_intro
-        patch_classes
         @user_ids = create_users
         create_posts
         create_votes
@@ -38,25 +37,6 @@ module QA
         end
         @conn.put_copy_end
         user_ids
-      end
-
-      def patch_classes
-        ReputationEvent.instance_eval %(
-          def create_on_receive_vote(vote)
-            event = vote.post.user.reputation_events.create(
-              action: vote,
-              event_type: ReputationEvent.const_get(%(receive_\#{vote.event_type}).upcase)
-            )
-            event
-          end
-          def self.create_on_give_vote(vote)
-            event = vote.user.reputation_events.create(
-              action: vote,
-              event_type: ReputationEvent.const_get(%(give_\#{vote.event_type}).upcase)
-            )
-            event
-          end
-        )
       end
 
       def create_posts
