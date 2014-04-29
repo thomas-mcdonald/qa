@@ -156,10 +156,8 @@ module QA
           # we can't handle anonymous users right now
           next unless @user_ids.include? originator[:user_id].to_i
 
-          qu.assign_attributes(originator.simple_hash)
-          qu.user_id = originator[:user_id].to_i
-          qu.last_active_user_id = originator[:user_id].to_i
-          qu.save
+          qc = QuestionCreator.new(User.find(originator[:user_id]), originator.simple_hash)
+          qu = qc.create
           @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
       end
