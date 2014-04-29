@@ -90,31 +90,26 @@ module QA
         puts " Creating votes"
 
         size = User.count
-        users = User.all
+        user_ids = User.pluck(:id)
         votes = []
         bar = progress_bar('Votes', voterow.count)
+        @conn.exec('COPY votes (user_id, post_id, post_type, vote_type, created_at, updated_at) FROM STDIN WITH CSV')
+
         voterow.each do |row|
           bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
           next if @posts[row['PostId'].to_i].blank?
-          vote = Vote.new
+          vote = OpenStruct.new
           vote.post_id = @posts[row['PostId'].to_i][:id]
           vote.post_type = @posts[row['PostId'].to_i][:type]
-          vote.vote_type = 'upvote' if row['VoteTypeId'].to_i == 2
-          vote.vote_type = 'downvote' if row['VoteTypeId'].to_i == 3
-          vote.user = users[(rand*size).floor]
+          vote.vote_type = Vote.vote_types['upvote'] if row['VoteTypeId'].to_i == 2
+          vote.vote_type = Vote.vote_types['downvote'] if row['VoteTypeId'].to_i == 3
+          vote.user_id = user_ids.sample
           vote.created_at = DateTime.parse row['CreationDate']
           vote.updated_at = DateTime.parse row['CreationDate']
-          votes << vote
+          @conn.put_copy_data(%(#{vote.user_id},#{vote.post_id},"#{vote.post_type}",#{vote.vote_type},#{vote.created_at},#{vote.updated_at}\n))
         end
-        # Not much point in validating this data... it doesn't matter *that*
-        # much if someone upvotes themselves or multiple posts, but it does
-        # create fuck loads of select queries.
-        #
-        # I guess if a user has already voted on a post we should removed them
-        # from possible selection, which would essentially do the validation
-        # there instead.
-        Vote.import(votes, validate: false)
+        @conn.put_copy_end
       end
 
       def create_reputation
