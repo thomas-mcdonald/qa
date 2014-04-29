@@ -7,10 +7,20 @@ class AnswerPolicy
   end
 
   def edit?
-    user && user.reputation >= ReputationRequirements.answer.edit
+    logged_in && edit_reputation
   end
 
   def update?
     edit?
+  end
+
+  private
+
+  def logged_in
+    user
+  end
+
+  def edit_reputation
+    user.reputation >= ReputationRequirements.answer.edit
   end
 end

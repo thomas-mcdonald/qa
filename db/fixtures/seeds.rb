@@ -1,6 +1,8 @@
 User.seed(:id,
   { id: 1, name: 'Thomas McDonald', email: 'example@example.com', admin: true },
-  { id: 2, name: 'John Doe', email: 'example2@example.com' }
+  { id: 2, name: 'John Doe', email: 'example2@example.com' },
+  { id: 3, name: 'Jane Doe', email: 'example3@example.com' },
+  { id: 4, name: 'Richard Roe', email: 'example4@example.com' }
 )
 
 Question.seed(:id,
@@ -19,6 +21,7 @@ Answer.seed(:id,
 
 Vote.seed(:id,
   { id: 1, user_id: 2, post_type: 'Answer', post_id: 1, vote_type: 'upvote' }
+  { id: 2, user_id: 3, post_type: 'Answer', post_id: 1, vote_type: 'upvote' }
 )
 
 # Update the vote count on the seeded answers

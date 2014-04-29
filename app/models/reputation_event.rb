@@ -26,7 +26,7 @@ class ReputationEvent < ActiveRecord::Base
 
   # Returns the reputation value for a given event type
   def self.reputation_for(key)
-    ReputationValues[key]
+    SiteSettings.reputation[key]
   end
 
   def self.create_on_accept_answer(question, answer)

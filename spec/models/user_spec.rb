@@ -16,7 +16,7 @@ describe User do
         user: user
       )
       user.calculate_reputation!
-      user.reputation.should == ReputationValues['receive_question_upvote']
+      user.reputation.should == SiteSettings.reputation['receive_question_upvote']
     end
   end
 
