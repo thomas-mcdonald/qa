@@ -28,11 +28,12 @@ module QA
         puts " Creating Users"
         bar = progress_bar('Users', users_doc.length)
         user_ids = []
-        @conn.exec('COPY users (id, name, email) FROM STDIN WITH CSV')
+        @conn.exec('COPY users (id, name, email, created_at, updated_at) FROM STDIN WITH CSV')
         users_doc.each do |u|
           bar.increment
           next if u["Id"].to_i < 0
-          @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}"\n))
+          time = DateTime.now
+          @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
           user_ids << u["Id"].to_i
         end
         @conn.put_copy_end
