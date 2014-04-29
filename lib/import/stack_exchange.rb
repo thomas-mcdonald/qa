@@ -79,15 +79,15 @@ module QA
           bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
           next if @posts[row['PostId'].to_i].blank?
-          vote = OpenStruct.new
-          vote.post_id = @posts[row['PostId'].to_i][:id]
-          vote.post_type = @posts[row['PostId'].to_i][:type]
-          vote.vote_type = Vote.vote_types['upvote'] if row['VoteTypeId'].to_i == 2
-          vote.vote_type = Vote.vote_types['downvote'] if row['VoteTypeId'].to_i == 3
-          vote.user_id = user_ids.sample
-          vote.created_at = DateTime.parse row['CreationDate']
-          vote.updated_at = DateTime.parse row['CreationDate']
-          @conn.put_copy_data(%(#{vote.user_id},#{vote.post_id},"#{vote.post_type}",#{vote.vote_type},#{vote.created_at},#{vote.updated_at}\n))
+
+          post_id = @posts[row['PostId'].to_i][:id]
+          post_type = @posts[row['PostId'].to_i][:type]
+          vote_type = Vote.vote_types['upvote'] if row['VoteTypeId'].to_i == 2
+          vote_type = Vote.vote_types['downvote'] if row['VoteTypeId'].to_i == 3
+          user_id = user_ids.sample
+          created_at = DateTime.parse row['CreationDate']
+          updated_at = DateTime.parse row['CreationDate']
+          @conn.put_copy_data(%(#{user_id},#{post_id},"#{post_type}",#{vote_type},#{created_at},#{updated_at}\n))
         end
         @conn.put_copy_end
       end
