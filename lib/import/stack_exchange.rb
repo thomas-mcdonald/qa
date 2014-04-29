@@ -5,15 +5,16 @@ module QA
   module Import
     class StackExchange
       def initialize(dir)
+        @conn = ActiveRecord::Base.connection.raw_connection
         @dir = dir
         @posts = []
         output_intro
-        patch_classes
-        @users = create_users
+        @user_ids = create_users
         create_posts
         create_votes
         create_reputation
         update_counters
+        ActiveRecord::Base.clear_active_connections!
       end
 
       def output_intro
@@ -25,33 +26,17 @@ module QA
         users_doc = Nokogiri::XML::Document.parse(File.read("#{@dir}/users.xml")).css('users row')
         puts " Creating Users"
         bar = progress_bar('Users', users_doc.length)
-        users = []
+        user_ids = []
+        @conn.exec('COPY users (id, name, email, created_at, updated_at) FROM STDIN WITH CSV')
         users_doc.each do |u|
           bar.increment
           next if u["Id"].to_i < 0
-          users << User.new(name: u["DisplayName"], email: FactoryGirl.generate(:email), id: u["Id"])
+          time = DateTime.now
+          @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
+          user_ids << u["Id"].to_i
         end
-        puts " Importing Users"
-        import_users(users)
-      end
-
-      def patch_classes
-        ReputationEvent.instance_eval %(
-          def create_on_receive_vote(vote)
-            event = vote.post.user.reputation_events.create(
-              action: vote,
-              event_type: ReputationEvent.const_get(%(receive_\#{vote.event_type}).upcase)
-            )
-            event
-          end
-          def self.create_on_give_vote(vote)
-            event = vote.user.reputation_events.create(
-              action: vote,
-              event_type: ReputationEvent.const_get(%(give_\#{vote.event_type}).upcase)
-            )
-            event
-          end
-        )
+        @conn.put_copy_end
+        user_ids
       end
 
       def create_posts
@@ -64,6 +49,7 @@ module QA
         post_histories = nil
         posts = nil
 
+        # create posts
         create_questions(questions, grouped_edits)
         create_answers(answers, grouped_edits)
 
@@ -84,31 +70,26 @@ module QA
         puts " Creating votes"
 
         size = User.count
-        users = User.all
+        user_ids = User.pluck(:id)
         votes = []
         bar = progress_bar('Votes', voterow.count)
+        @conn.exec('COPY votes (user_id, post_id, post_type, vote_type, created_at, updated_at) FROM STDIN WITH CSV')
+
         voterow.each do |row|
           bar.increment
           next unless [2, 3].include? row['VoteTypeId'].to_i
           next if @posts[row['PostId'].to_i].blank?
-          vote = Vote.new
-          vote.post_id = @posts[row['PostId'].to_i][:id]
-          vote.post_type = @posts[row['PostId'].to_i][:type]
-          vote.vote_type = 'upvote' if row['VoteTypeId'].to_i == 2
-          vote.vote_type = 'downvote' if row['VoteTypeId'].to_i == 3
-          vote.user = users[(rand*size).floor]
-          vote.created_at = DateTime.parse row['CreationDate']
-          vote.updated_at = DateTime.parse row['CreationDate']
-          votes << vote
+
+          post_id = @posts[row['PostId'].to_i][:id]
+          post_type = @posts[row['PostId'].to_i][:type]
+          vote_type = Vote.vote_types['upvote'] if row['VoteTypeId'].to_i == 2
+          vote_type = Vote.vote_types['downvote'] if row['VoteTypeId'].to_i == 3
+          user_id = user_ids.sample
+          created_at = DateTime.parse row['CreationDate']
+          updated_at = DateTime.parse row['CreationDate']
+          @conn.put_copy_data(%(#{user_id},#{post_id},"#{post_type}",#{vote_type},#{created_at},#{updated_at}\n))
         end
-        # Not much point in validating this data... it doesn't matter *that*
-        # much if someone upvotes themselves or multiple posts, but it does
-        # create fuck loads of select queries.
-        #
-        # I guess if a user has already voted on a post we should removed them
-        # from possible selection, which would essentially do the validation
-        # there instead.
-        Vote.import(votes, validate: false)
+        @conn.put_copy_end
       end
 
       def create_reputation
@@ -158,16 +139,6 @@ module QA
         groupededits
       end
 
-      # import_users takes an array of ActiveRecord user models and imports
-      # them to the database, after which we return a hash which maps user IDs
-      # to the AR objects
-      def import_users(users)
-        User.import users
-        uhash = {}
-        users.each { |u| uhash[u.id] = u }
-        uhash
-      end
-
       def progress_bar(title, length)
         ProgressBar.create(title: title, total: length, format: '%t: |%B| %E')
       end
@@ -181,11 +152,13 @@ module QA
           edits = grouped_edits[q['Id']]
           originator = (edits.select { |v| v[:new_record] == true })[0]
           edits.delete originator
-          next unless @users[originator[:user_id].to_i] # we can't handle anonymous users right now
+
+          # we can't handle anonymous users right now
+          next unless @user_ids.include? originator[:user_id].to_i
 
           qu.assign_attributes(originator.simple_hash)
-          qu.user_id = @users[originator[:user_id].to_i].id
-          qu.last_active_user_id = @users[originator[:user_id].to_i].id
+          qu.user_id = originator[:user_id].to_i
+          qu.last_active_user_id = originator[:user_id].to_i
           qu.save
           @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
         end
@@ -201,11 +174,11 @@ module QA
           edits = grouped_edits[a['Id']]
           originator = (edits.select { |v| v[:new_record] == true })[0]
           edits.delete originator
-          next unless @users[originator[:user_id].to_i]
+          next unless @user_ids.include? originator[:user_id].to_i
 
           an.question_id = @posts[a['ParentId'].to_i][:id]
           an.body = originator[:body]
-          an.user_id = @users[originator[:user_id].to_i].id
+          an.user_id = originator[:user_id].to_i
           an.created_at = DateTime.parse(originator[:created_at])
           next unless an.save
           @posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
