@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.1'
 
-gem 'activerecord-import', '~> 0.5.0'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.15.0'
 gem 'pg', '~> 0.17.0'

@@ -41,8 +41,8 @@ RSpec.configure do |config|
     ActiveRecord::Migration.maintain_test_schema!
 
     # set up database cleaner
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
     Sidekiq::Testing.fake!
   end
 

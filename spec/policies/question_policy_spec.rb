@@ -4,6 +4,11 @@ describe QuestionPolicy do
   subject { QuestionPolicy }
 
   permissions :edit? do
+    it 'requires a user' do
+      question = FactoryGirl.create(:question)
+      should_not permit(nil, question)
+    end
+
     it 'denies if the user does not have the required reputation' do
       user = FactoryGirl.create(:user, reputation: 0)
       question = FactoryGirl.create(:question)

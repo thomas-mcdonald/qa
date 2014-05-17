@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>QA</title>
+    <title><%= SiteSettings.name %></title>
     <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :application %>
     <%= csrf_meta_tags %>
@@ -17,7 +17,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to 'QA', '/', class: 'navbar-brand' %>
+          <%= link_to SiteSettings.name, '/', class: 'navbar-brand' %>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
