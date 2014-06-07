@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
   include QA::Voteable
 
   has_many :answers
+  has_many :comments, as: :post
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :timeline_events, as: :post

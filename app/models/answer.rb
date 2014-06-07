@@ -5,6 +5,7 @@ class Answer < ActiveRecord::Base
   include QA::Timeline
   include QA::Voteable
 
+  has_many :comments, as: :post
   belongs_to :question
   has_many :timeline_events, as: :post
   belongs_to :user
