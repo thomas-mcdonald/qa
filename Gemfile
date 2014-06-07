@@ -53,7 +53,7 @@ group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
-  gem 'rspec', '~> 2.13'
+  gem 'rspec', '~> 2.13' # pundit spec blocks upgrade to 3
   gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'
 end

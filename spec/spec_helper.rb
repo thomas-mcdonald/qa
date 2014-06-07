@@ -14,7 +14,6 @@ require 'sidekiq/testing'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'shoulda/matchers'
 require 'pundit/rspec' # require *after* shoulda-matchers to override pundit
 
