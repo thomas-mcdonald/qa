@@ -36,6 +36,7 @@ group :development do
   gem 'guard', '~> 2.6.0'
   gem 'guard-rspec', '~> 4.2.0'
   gem 'guard-spinach', github: 'thomas-mcdonald/guard-spinach'
+  gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'spring'
   gem 'terminal-notifier-guard'

@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/paulwittmann/rails-erd.git
+  revision: 9ccb094fa29b095d5549271f48c65af8bb53f749
+  branch: mavericks
+  specs:
+    rails-erd (1.1.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
+
+GIT
   remote: git://github.com/thomas-mcdonald/guard-spinach.git
   revision: 6102d37cdc4ef7c0f82b84846d66506673f44d25
   specs:
@@ -47,6 +58,7 @@ GEM
       xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    choice (0.1.6)
     cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -193,6 +205,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-graphviz (1.0.9)
     ruby-openid (2.5.0)
     ruby-progressbar (1.5.1)
     sass (3.2.19)
@@ -289,6 +302,7 @@ DEPENDENCIES
   pundit (~> 0.2.1)
   quiet_assets
   rails (= 4.1.1)
+  rails-erd!
   rb-fsevent (~> 0.9.1)
   redcarpet (~> 3.1.0)
   redis (~> 3.0.4)
