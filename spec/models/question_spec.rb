@@ -44,7 +44,7 @@ describe Question do
 
     before { question.update_last_activity(user) }
 
-    pending 'look into Timecop for testing time updates'
+    skip 'implement time based tests with Rails travel_to'
   end
 
   context 'votes_on_self_and_answers_by_user' do

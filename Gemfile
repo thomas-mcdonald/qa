@@ -30,7 +30,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 
 group :development do
-  gem 'foreman'
   gem 'quiet_assets'
   # Guard for autorunning tests
   gem 'guard', '~> 2.6.0'
@@ -50,7 +49,7 @@ end
 group :test do
   gem 'minitest'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.2.0'
+  gem 'database_cleaner', '~> 1.3.0'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
