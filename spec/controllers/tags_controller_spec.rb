@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe TagsController do
+describe TagsController, :type => :controller do
   describe 'index' do
     it 'works' do
       get :index
-      response.status.should == 200
+      expect(response.status).to eq(200)
     end
   end
 end

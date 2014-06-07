@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'controllers/shared/timeline_action'
 
-describe AnswersController do
+describe AnswersController, :type => :controller do
   it_behaves_like 'TimelineAction'
 
   describe 'create' do
-    it { -> { post :create }.should require_login }
+    it { expect { post :create }.to require_login }
 
     context 'when logged in' do
       let(:question) { FactoryGirl.create(:question) }
@@ -15,8 +15,8 @@ describe AnswersController do
 
       it 'creates answer with valid parameters' do
         post :create, answer: answer.merge(question_id: question.id)
-        Answer.last.body.should == answer[:body]
-        Answer.all.length.should == 1
+        expect(Answer.last.body).to eq(answer[:body])
+        expect(Answer.all.length).to eq(1)
       end
     end
   end
@@ -24,11 +24,11 @@ describe AnswersController do
   describe 'edit' do
     let(:answer) { FactoryGirl.create(:answer) }
 
-    it { -> { get :edit, id: answer.id }.should require_login }
+    it { expect { get :edit, id: answer.id }.to require_login }
 
     it 'requires permissions' do
       sign_in(FactoryGirl.create(:user, reputation: 0))
-      -> { get :edit, id: answer.id }.should raise_error(Pundit::NotAuthorizedError)
+      expect { get :edit, id: answer.id }.to raise_error(Pundit::NotAuthorizedError)
     end
 
     context 'when logged in' do
@@ -36,7 +36,7 @@ describe AnswersController do
 
       it 'is success' do
         get :edit, id: answer.id
-        response.status.should == 200
+        expect(response.status).to eq(200)
       end
     end
   end
@@ -44,7 +44,7 @@ describe AnswersController do
   describe 'update' do
     let(:answer) { FactoryGirl.create(:answer) }
 
-    it { -> { post :update, id: answer.id }.should require_login }
+    it { expect { post :update, id: answer.id }.to require_login }
 
     context 'when logged in' do
       before { sign_in(a_k) }
