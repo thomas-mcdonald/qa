@@ -4,15 +4,15 @@ def tag_finder(name)
   Tag.where(name: name).first
 end
 
-describe Tag do
-  it { should have_many(:taggings) }
-  it { should have_many(:questions) }
+describe Tag, :type => :model do
+  it { is_expected.to have_many(:taggings) }
+  it { is_expected.to have_many(:questions) }
 
   describe '.popularity' do
     it 'orders tags by their usage count' do
       FactoryGirl.create(:question, tag_list: 'foo, bar')
       FactoryGirl.create(:question, tag_list: 'foo')
-      Tag.by_popularity.should == [tag_finder('foo'), tag_finder('bar')]
+      expect(Tag.by_popularity).to eq([tag_finder('foo'), tag_finder('bar')])
     end
   end
 
@@ -20,7 +20,7 @@ describe Tag do
     let(:tag) { FactoryGirl.create(:tag) }
 
     it 'returns the tag named as parameter' do
-      tag.should == Tag.named(tag.name)
+      expect(tag).to eq(Tag.named(tag.name))
     end
   end
 
@@ -29,11 +29,11 @@ describe Tag do
       q1 = FactoryGirl.create(:question, tag_list: 'cat, join-tag')
       q2 = FactoryGirl.create(:question, tag_list: 'dog, join-tag')
       related = tag_finder('join-tag').related_tags
-      related.should include(tag_finder('dog'))
-      related.should include(tag_finder('cat'))
+      expect(related).to include(tag_finder('dog'))
+      expect(related).to include(tag_finder('cat'))
       crelated = tag_finder('cat').related_tags
-      crelated.should include(tag_finder('join-tag'))
-      crelated.should_not include(tag_finder('dog'))
+      expect(crelated).to include(tag_finder('join-tag'))
+      expect(crelated).not_to include(tag_finder('dog'))
     end
   end
 end

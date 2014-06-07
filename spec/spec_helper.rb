@@ -14,7 +14,6 @@ require 'sidekiq/testing'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'shoulda/matchers'
 require 'pundit/rspec' # require *after* shoulda-matchers to override pundit
 
@@ -35,14 +34,17 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 
+  # decide what spec type to use based on file location
+  config.infer_spec_type_from_file_location!
+
   config.include UserSupport, type: :controller
 
   config.before(:suite) do
     ActiveRecord::Migration.maintain_test_schema!
 
     # set up database cleaner
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
     Sidekiq::Testing.fake!
   end
 

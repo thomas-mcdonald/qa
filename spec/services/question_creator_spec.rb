@@ -9,13 +9,13 @@ describe QuestionCreator do
   }
 
   it 'does not accept nil user' do
-    -> { QuestionCreator.new(nil, {}) }.should raise_error(ArgumentError)
+    expect { QuestionCreator.new(nil, {}) }.to raise_error(ArgumentError)
   end
 
   it 'creates a valid question' do
     creator = QuestionCreator.new(user, mock_data)
     question = creator.create
-    question.should be_valid
+    expect(question).to be_valid
   end
 
   it 'creates the timeline events' do

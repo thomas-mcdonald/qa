@@ -1,6 +1,7 @@
 .bundle
 coverage/*
 db/*.sqlite3
+erd.pdf
 lib/import/data
 log/*.log
 .sass-cache/

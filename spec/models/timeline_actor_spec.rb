@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe TimelineActor do
+describe TimelineActor, :type => :model do
   context 'associations' do
-    it { should belong_to(:timeline_event) }
-    it { should belong_to(:user) }
+    it { is_expected.to belong_to(:timeline_event) }
+    it { is_expected.to belong_to(:user) }
   end
 end

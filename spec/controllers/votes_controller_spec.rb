@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe VotesController do
+describe VotesController, :type => :controller do
   let(:question) { FactoryGirl.create(:question) }
   let(:vote) { FactoryGirl.attributes_for(:upvote) }
 
   describe 'create' do
     it 'requires login' do
       post :create
-      response.status.should == 401
+      expect(response.status).to eq(401)
     end
 
     context 'logged in' do
@@ -17,13 +17,13 @@ describe VotesController do
 
       it 'creates a vote with valid parameters' do
         post :create, vote: vote_params
-        Vote.all.length.should == 1
+        expect(Vote.all.length).to eq(1)
       end
 
       it 'does not create two upvotes' do
         post :create, vote: vote_params
         post :create, vote: vote_params
-        response.status.should == 422
+        expect(response.status).to eq(422)
       end
     end
   end

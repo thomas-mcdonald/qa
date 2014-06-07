@@ -2,6 +2,8 @@ require 'rspec/expectations'
 
 RSpec::Matchers.define :require_login do
   match do |lambda|
-    lambda.should raise_error(QA::NotLoggedIn)
+    expect(lambda).to raise_error(QA::NotLoggedIn)
   end
+
+  supports_block_expectations
 end

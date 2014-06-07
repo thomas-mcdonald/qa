@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.1'
 
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.15.0'
@@ -30,12 +30,12 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 
 group :development do
-  gem 'foreman'
   gem 'quiet_assets'
   # Guard for autorunning tests
   gem 'guard', '~> 2.6.0'
   gem 'guard-rspec', '~> 4.2.0'
   gem 'guard-spinach', github: 'thomas-mcdonald/guard-spinach'
+  gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'spring'
   gem 'terminal-notifier-guard'
@@ -49,11 +49,11 @@ end
 group :test do
   gem 'minitest'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.2.0'
+  gem 'database_cleaner', '~> 1.3.0'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
-  gem 'rspec', '~> 2.13'
+  gem 'rspec', '~> 2.13' # pundit spec blocks upgrade to 3
   gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'
 end

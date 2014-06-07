@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Authorization do
+describe Authorization, :type => :model do
   context 'associations' do
-    it { should belong_to(:user) }
+    it { is_expected.to belong_to(:user) }
   end
 end

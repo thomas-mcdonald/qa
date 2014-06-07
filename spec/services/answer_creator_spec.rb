@@ -8,23 +8,23 @@ describe AnswerCreator do
   }
 
   it 'does not accept nil question' do
-    -> { AnswerCreator.new(nil, User.new, {}) }.should raise_error(ArgumentError)
+    expect { AnswerCreator.new(nil, User.new, {}) }.to raise_error(ArgumentError)
   end
 
   it 'does not accept nil user' do
-    -> { AnswerCreator.new(Question.new, nil, {}) }.should raise_error(ArgumentError)
+    expect { AnswerCreator.new(Question.new, nil, {}) }.to raise_error(ArgumentError)
   end
 
   it 'creates a valid answer' do
     creator = AnswerCreator.new(question, user, mock_data)
     answer = creator.create
-    answer.should be_valid
+    expect(answer).to be_valid
   end
 
   it 'sets the user' do
     creator = AnswerCreator.new(question, user, mock_data.merge(user_id: 99999))
     answer = creator.create
-    answer.user_id.should == user.id
+    expect(answer.user_id).to eq(user.id)
   end
 
   it 'creates the timeline events' do

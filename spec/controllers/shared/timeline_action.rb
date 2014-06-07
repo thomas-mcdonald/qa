@@ -6,7 +6,7 @@ shared_examples_for 'TimelineAction' do
 
   context 'GET timeline' do
     before { get :timeline, id: post.id }
-    it { should respond_with(:success) }
-    it { should render_template('posts/timeline')}
+    it { is_expected.to respond_with(:success) }
+    it { is_expected.to render_template('posts/timeline')}
   end
 end

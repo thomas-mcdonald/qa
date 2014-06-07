@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'question url mapping' do
+describe 'question url mapping', :type => :request do
   context 'show' do
     let(:question) { FactoryGirl.create(:question) }
 
@@ -12,7 +12,7 @@ describe 'question url mapping' do
   end
 end
 
-describe 'user url mapping' do
+describe 'user url mapping', :type => :request do
   context 'show' do
     let(:user) { FactoryGirl.create(:user) }
 

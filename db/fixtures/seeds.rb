@@ -20,7 +20,7 @@ Answer.seed(:id,
 )
 
 Vote.seed(:id,
-  { id: 1, user_id: 2, post_type: 'Answer', post_id: 1, vote_type: 'upvote' }
+  { id: 1, user_id: 2, post_type: 'Answer', post_id: 1, vote_type: 'upvote' },
   { id: 2, user_id: 3, post_type: 'Answer', post_id: 1, vote_type: 'upvote' }
 )
 
