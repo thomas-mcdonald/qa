@@ -1,4 +1,7 @@
-<div class="page-header"><h1>Admin Dashboard <small><%= link_to 'Sidekiq Monitoring', '/admin/sidekiq' %></small></h1></div>
+<div class="page-header admin-header">
+  <h1>Admin Dashboard</h1>
+  <p class="sidekiq-right"><%= link_to 'Sidekiq Dashboard', '/admin/sidekiq' %></small></h1>
+</div>
 
 <% @problems.each do |alert| %>
   <div class="alert alert-danger"><%= alert %></div>

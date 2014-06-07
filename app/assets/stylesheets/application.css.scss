@@ -10,6 +10,7 @@ $screen-lg: 99999px; // essentially disable large media queries
 @import "flash";
 @import "navbar";
 
+@import "admin";
 @import "answers";
 @import "posts";
 @import "questions";

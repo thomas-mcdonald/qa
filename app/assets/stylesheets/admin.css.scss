@@ -1,0 +1,11 @@
+// modifications to .page-header to allow for the small sidekiq monitoring link
+.admin-header {
+  @include clearfix();
+  h1 { float: left; }
+}
+
+.sidekiq-right {
+  float: right;
+  font-size: $font-size-base * 1.3;
+  margin-top: 30px;
+}
