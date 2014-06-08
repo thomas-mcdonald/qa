@@ -11,8 +11,9 @@ describe Question, :type => :model do
     it { is_expected.to belong_to(:user) }
   end
 
-  it { is_expected.to validate_presence_of(:title) }
-  it { is_expected.to validate_presence_of(:body) }
+  [:body, :last_active_user_id, :last_active_at, :title].each do |attr|
+    it { is_expected.to validate_presence_of(attr) }
+  end
   it { is_expected.to ensure_length_of(:title).is_at_least(10).is_at_most(150) }
   it { is_expected.to ensure_length_of(:body).is_at_least(10).is_at_most(30000) }
 
