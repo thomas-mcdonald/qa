@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     render_json_partial('comments/form', {
-      comment: @comment
+      comment: @comment,
+      post_id: params[:post_id],
+      post_type: params[:post_type]
     })
   end
 

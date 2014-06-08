@@ -34,7 +34,9 @@
           </div>
         </div>
         <div class="comments">
-          <%= link_to 'add comment', new_comment_url, remote: true, class: 'add-comment' %>
+          <% if logged_in? %>
+            <%= link_to 'add comment', new_post_comment_url(@question), remote: true, class: 'add-comment' %>
+          <% end %>
         </div>
       </div>
     </div>
