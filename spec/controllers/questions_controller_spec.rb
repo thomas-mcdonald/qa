@@ -138,7 +138,8 @@ describe QuestionsController, :type => :controller do
     context 'when logged in as a different user' do
       it 'raises unauthorised' do
         sign_in(bob)
-        expect { post :accept_answer, id: question.id }.to raise_error(QA::NotAuthorised)
+        post :accept_answer, id: question.id
+        expect(response).to be_forbidden
       end
     end
   end
