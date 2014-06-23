@@ -5,7 +5,8 @@ gem 'rails', '4.1.1'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.15.0'
 gem 'pg', '~> 0.17.0'
-gem 'pundit', '~> 0.2.1'
+# waiting for rspec 3 fix to hit master
+gem 'pundit', github: 'stgeneral/pundit', branch: 'rspec3-deprecations' #'~> 0.2.1'
 gem 'redcarpet', '~> 3.1.0'
 gem 'redis', '~> 3.0.4'
 gem 'redis-namespace', '~> 1.4.1'
@@ -42,7 +43,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14'
+  gem 'rspec-rails', '~> 3.0'
   gem 'spinach-rails'
 end
 
@@ -53,7 +54,7 @@ group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
-  gem 'rspec', '~> 2.13' # pundit spec blocks upgrade to 3
+  gem 'rspec', '~> 3.0'
   gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'
 end
