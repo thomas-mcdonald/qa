@@ -56,9 +56,8 @@ class QuestionsController < ApplicationController
   def accept_answer
     # TODO: this method requires refactoring
     # TODO: reputation events need destroying on new accepted answers
-    # TODO: require correct user
     @question = Question.find(params[:id])
-    require_user(@question.user)
+    head :forbidden and return unless is_user(@question.user)
     head :bad_request and return if missing_accept_params
     if params[:answer_id].present? # setting new accept
       @answer = Answer.find(params[:answer_id])
