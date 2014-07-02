@@ -44,6 +44,16 @@ Some of these are currently in embedded TODOs. Most are not.
 * The 'questions tagged' view should allow scoping of questions by more than
   one tag.
 
+## Import
+### Stack Exchange
+
+* Accepting answers does not create the reputation events
+
+### Shapado
+
+* Support
+
+
 ## Misc
 
 * Add some sort of rubocop (sp?) to the project
