@@ -15,8 +15,12 @@ class ApplicationController < ActionController::Base
     raise QA::NotLoggedIn unless current_user.present?
   end
 
+  def is_user(user)
+    current_user.id == user.id
+  end
+
   def require_user(user)
-    raise QA::NotAuthorised unless current_user.id == user.id
+    raise QA::NotAuthorised unless is_user(id)
   end
 
   def login(user)
