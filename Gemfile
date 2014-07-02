@@ -20,7 +20,7 @@ gem 'omniauth', '~> 1.2.0'
 gem 'omniauth-openid', '1.0.1'
 
 # Jobs & web interface
-gem 'sidekiq', '~> 3.0.0'
+gem 'sidekiq', '~> 3.1.0'
 gem 'sinatra'
 
 # Asset gems
