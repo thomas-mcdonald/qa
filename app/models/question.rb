@@ -9,6 +9,7 @@ class Question < ActiveRecord::Base
   include QA::Timeline
   include QA::Voteable
 
+  belongs_to :accepted_answer, class: Answer
   has_many :answers
   has_many :taggings
   has_many :tags, through: :taggings
