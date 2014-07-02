@@ -6,6 +6,7 @@ module QA
     class StackExchange
       def initialize(dir)
         @conn = ActiveRecord::Base.connection.raw_connection
+        Rails.logger.level = Logger::WARN
         @dir = dir
         @posts = []
         output_intro
