@@ -17,7 +17,6 @@ QA::Application.routes.draw do
   get '/ask', to: 'questions#new', as: 'new_question'
   get '/questions/new' => redirect('/ask')
   get '/questions/tagged/:tag', to: 'questions#tagged', as: 'questions_tagged'
-  get '/questions/:id/:slug', to: 'questions#show'
   resources :questions, only: [:create, :show]
 
   # Shorter URLs where slugs don't matter
@@ -31,7 +30,6 @@ QA::Application.routes.draw do
   resources :votes, only: [:create, :destroy]
 
   get '/user/edit', to: 'users#edit', as: 'edit_user'
-  get '/users/:id/:slug', to: 'users#show'
   resources :users, only: [:create, :show, :update]
   get '/login', to: 'sessions#new', as: 'login'
   post '/logout', to: 'sessions#destroy'

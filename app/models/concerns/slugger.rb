@@ -9,7 +9,18 @@ module QA
     end
 
     def to_param
-      "#{id}/#{slug}"
+      "#{id}#{slug_separator}#{slug}"
+    end
+
+    def valid_slug?(url)
+      false unless url
+      url.split(slug_separator).drop(1).join(slug_separator) == slug
+    end
+
+    private
+
+    def slug_separator
+      "-"
     end
 
     module ClassMethods

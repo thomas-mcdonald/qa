@@ -11,7 +11,7 @@ describe QuestionsController, :type => :controller do
 
   describe 'show' do
     let(:question) { FactoryGirl.create(:question) }
-    before { get :show, id: question.id, slug: question.slug }
+    before { get :show, id: question.to_param }
     it { is_expected.to respond_with(:success) }
   end
 

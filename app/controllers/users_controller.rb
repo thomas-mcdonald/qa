@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def load_and_verify_slug
     @user = User.find(params[:id])
-    if params[:slug] != @user.slug
+    if !@user.valid_slug?(params[:id])
       redirect_to @user
     end
   end

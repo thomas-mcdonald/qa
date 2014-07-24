@@ -25,7 +25,7 @@ describe QA::Slugger do
     it 'is a combination of id and slug' do
       e = Example.new
       e.attr1 = 'test'
-      expect(e.to_param).to eq('stub/test')
+      expect(e.to_param).to eq('stub-test')
     end
   end
 end
