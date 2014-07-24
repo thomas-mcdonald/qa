@@ -1,4 +1,6 @@
 class AnswerPolicy
+  include SharedPolicy
+
   attr_reader :user, :answer
 
   def initialize(user, answer)
@@ -7,7 +9,7 @@ class AnswerPolicy
   end
 
   def edit?
-    logged_in && edit_reputation
+    logged_in && (edit_reputation || staff)
   end
 
   def update?
