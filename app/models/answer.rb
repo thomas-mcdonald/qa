@@ -1,9 +1,6 @@
-require_dependency 'timeline'
-require_dependency 'voteable'
-
 class Answer < ActiveRecord::Base
-  include QA::Timeline
-  include QA::Voteable
+  include Timeline
+  include Voteable
 
   belongs_to :question
   has_many :timeline_events, as: :post

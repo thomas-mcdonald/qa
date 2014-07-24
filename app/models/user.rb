@@ -1,7 +1,5 @@
-require_dependency 'slugger'
-
 class User < ActiveRecord::Base
-  include QA::Slugger
+  include Slugger
 
   has_many :answers
   has_many :authorizations
