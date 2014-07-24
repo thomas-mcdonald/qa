@@ -59,4 +59,8 @@ class User < ActiveRecord::Base
   def rendered_about_me
     Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, no_styles: true, safe_links_only: true)).render(self.about_me).html_safe
   end
+
+  def staff?
+    admin? || moderator?
+  end
 end
