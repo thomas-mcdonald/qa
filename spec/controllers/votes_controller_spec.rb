@@ -27,4 +27,27 @@ describe VotesController, :type => :controller do
       end
     end
   end
+
+  describe 'destroy' do
+    it 'requires login' do
+      delete :destroy, id: 1
+      expect(response.status).to eq(401)
+    end
+
+    context 'logged_in' do
+      before { sign_in(alice) }
+
+      it 'destroys the vote if it is the same user' do
+        Vote.any_instance.expects(:destroy).returns(true)
+        vote = FactoryGirl.create(:upvote, user: alice)
+        delete :destroy, id: vote.id
+      end
+
+      it 'returns unauthorized if it is a different user' do
+        vote = FactoryGirl.create(:upvote)
+        delete :destroy, id: vote.id
+        expect(response.status).to eq(403)
+      end
+    end
+  end
 end
