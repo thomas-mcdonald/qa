@@ -1,25 +1,4 @@
-class AnswerPolicy
-  attr_reader :user, :answer
-
-  def initialize(user, answer)
-    @user = user
-    @answer = answer
-  end
-
-  def edit?
-    logged_in && edit_reputation
-  end
-
-  def update?
-    edit?
-  end
-
-  private
-
-  def logged_in
-    user
-  end
-
+class AnswerPolicy < PostPolicy
   def edit_reputation
     user.reputation >= ReputationRequirements.answer.edit
   end
