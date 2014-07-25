@@ -15,6 +15,12 @@ describe QuestionPolicy do
       is_expected.to permit(user, question)
     end
 
+    it 'allows users to edit their own posts' do
+      user = FactoryGirl.create(:user)
+      question = FactoryGirl.create(:question, user: user)
+      is_expected.to permit(user, question)
+    end
+
     it 'denies if the user does not have the required reputation' do
       user = FactoryGirl.create(:user, reputation: 0)
       question = FactoryGirl.create(:question)
