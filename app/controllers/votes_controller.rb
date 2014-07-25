@@ -16,11 +16,15 @@ class VotesController < ApplicationController
   def destroy
     @vote = Vote.find(params[:id])
     json_unauthorised! and return if !is_user(@vote.user)
-    @vote.destroy
-    render_json_partial('votes/create', {
-      post: @vote.post,
-      vote_type: @vote.vote_type
-    }, count: @vote.post.vote_count)
+    if @vote.locked?
+      render json: { errors: 'You may no longer change your vote on this post' }, status: 403
+    else
+      @vote.destroy
+      render_json_partial('votes/create', {
+        post: @vote.post,
+        vote_type: @vote.vote_type
+      }, count: @vote.post.vote_count)
+    end
   end
 
   private
