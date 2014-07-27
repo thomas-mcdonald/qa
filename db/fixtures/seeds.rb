@@ -1,7 +1,7 @@
 User.seed(:id,
   { id: 1, name: 'Thomas McDonald', email: 'example@example.com', admin: true },
   { id: 2, name: 'John Doe', email: 'example2@example.com' },
-  { id: 3, name: 'Jane Doe', email: 'example3@example.com' },
+  { id: 3, name: 'Jane Doe', email: 'example3@example.com', moderator: true },
   { id: 4, name: 'Richard Roe', email: 'example4@example.com' }
 )
 

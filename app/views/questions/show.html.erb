@@ -44,9 +44,10 @@
     <div class="answers">
       <% if !@answers.empty? %>
         <div class="page-header">
-          <h3><%= pluralize @answers.size, "Answer" %></h3>
+          <h3><%= pluralize @answer_count, "Answer" %></h3>
         </div>
         <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
+        <%= paginate @answers %>
       <% end %>
     </div>
 

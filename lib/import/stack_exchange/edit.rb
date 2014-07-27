@@ -28,6 +28,10 @@ module QA
           end
         end
 
+        def new_record
+          @result[:new_record]
+        end
+
         def post_id
           @result[:post_id]
         end

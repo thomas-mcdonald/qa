@@ -4,13 +4,13 @@ require 'slugger'
 class Example
   attr_accessor :attr1
 
-  include QA::Slugger
+  include Slugger
   is_slugged :attr1
 
   def id; 'stub'; end
 end
 
-describe QA::Slugger do
+describe Slugger do
   context 'is slugged' do
     it 'sets slug_attr' do
       expect(Example.slug_attr).to eq(:attr1)
@@ -25,7 +25,7 @@ describe QA::Slugger do
     it 'is a combination of id and slug' do
       e = Example.new
       e.attr1 = 'test'
-      expect(e.to_param).to eq('stub/test')
+      expect(e.to_param).to eq('stub-test')
     end
   end
 end

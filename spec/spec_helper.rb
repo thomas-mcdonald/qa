@@ -37,6 +37,7 @@ RSpec.configure do |config|
   # decide what spec type to use based on file location
   config.infer_spec_type_from_file_location!
 
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include UserSupport, type: :controller
 
   config.before(:suite) do

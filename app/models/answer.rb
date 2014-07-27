@@ -1,9 +1,6 @@
-require_dependency 'timeline'
-require_dependency 'voteable'
-
 class Answer < ActiveRecord::Base
-  include QA::Timeline
-  include QA::Voteable
+  include Timeline
+  include Voteable
 
   has_many :comments, as: :post
   belongs_to :question

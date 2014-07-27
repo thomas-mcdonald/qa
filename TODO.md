@@ -1,17 +1,15 @@
 # TODO!
 
-A list of features and functionality that need adding.
-Vary both in size and scope.
-Some of these are currently in embedded TODOs. Most are not.
+This has been (mostly) deprecated in favour of using Pivotal Tracker to manage plans for new releases
 
 ## Global
 * Rate limiting
 
+## Administration
+* Admin stats page - counts of answer/questions/users/percentage of answered/percentage of asked
+
 ## Posts (both question & answers)
 
-* Staff can edit any post (not reputation based)
-* Users can edit their own posts
-* Votes should be locked after a certain amount of time.
 * Clicking on a vote score should display the up/down split
 * Site configuration of an array of 'banned URLs' (e.g URL shorteners) which
   will cause a validation error.
@@ -21,6 +19,7 @@ Some of these are currently in embedded TODOs. Most are not.
 
 * Limit the length of titles used for the slug
 * Add sorting options for questions
+* Use HyperLogLog for storing view counts
 
 ## Answers
 
@@ -43,6 +42,16 @@ Some of these are currently in embedded TODOs. Most are not.
 
 * The 'questions tagged' view should allow scoping of questions by more than
   one tag.
+
+## Import
+### Stack Exchange
+
+* Accepting answers does not create the reputation events
+
+### Shapado
+
+* Support
+
 
 ## Misc
 
