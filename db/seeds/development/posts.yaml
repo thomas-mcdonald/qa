@@ -1,0 +1,12 @@
+questions:
+  - title: Is QA installed properly?
+    body: Is my instance of QA correctly installed and configured?
+    tag_list: faq
+    score: 4
+    answers:
+      - body: If you can see this, then yes!
+        user: 1
+        score: 7
+        accepted: true
+      - body: I'm not sure how I got here
+        score: -1
