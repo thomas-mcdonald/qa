@@ -1,4 +1,4 @@
-require_dependency 'jobs'
+require 'jobs'
 
 module QA
   class NotAuthorised < Exception; end
