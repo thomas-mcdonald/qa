@@ -39,7 +39,6 @@ end
 after 'development:users' do
   user_ids = User.where('admin = ?', false).pluck(:id)
   questions = YAML.load_file("#{Rails.root}/db/seeds/development/posts.yaml")['questions']
-  pp questions
   questions.each do |q|
     question = create_question(q, user_ids)
     q['answers'].each do |a|
