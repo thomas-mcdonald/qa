@@ -48,6 +48,12 @@
 
     <% if logged_in? %>
       <div class="page-header"><h3>Answer Question</h3></div>
+      <% if current_user.has_answered?(@question) %>
+        <div class="alert alert-info alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          You have already answered this question. Are you sure you wish to answer again?
+        </div>
+      <% end %>
       <%= simple_form_for @answer, html: { class: 'form-vertical'}, remote: true do |f| %>
         <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
         <%= f.input :body, label: false %>
