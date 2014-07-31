@@ -1,3 +1,18 @@
 #new_comment {
   .controls { width: 80%; }
 }
+
+$comment-border: 1px solid rgba(0,0,0,0.1);
+$comment-space: 6px;
+
+.comments {
+  border-top: $comment-border;
+  margin-top: $comment-space * 2;
+  padding-top: $comment-space;
+}
+
+.comment {
+  border-bottom: $comment-border;
+  margin-bottom: $comment-space;
+  padding-bottom: $comment-space;
+}
