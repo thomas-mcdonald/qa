@@ -84,7 +84,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_and_verify_slug
-    @question = Question.includes(:votes).find(params[:id])
+    @question = Question.includes(:comments, :votes, :user).find(params[:id])
     if !@question.valid_slug?(params[:id])
       redirect_to @question
     end
