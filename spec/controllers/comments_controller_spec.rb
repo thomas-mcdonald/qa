@@ -12,4 +12,20 @@ describe CommentsController do
       end
     end
   end
+
+  describe '#create' do
+    it { expect { post :create }.to require_login }
+
+    context 'when logged in' do
+      before { sign_in(alice) }
+
+      it 'creates a comment on a question given valid parameters' do
+        question = FactoryGirl.create(:question)
+        post :create, comment: {
+          post_type: 'Question', post_id: question.id, body: 'Hi this is a test comment'
+        }
+        expect(question.comments.size).to eq(1)
+      end
+    end
+  end
 end
