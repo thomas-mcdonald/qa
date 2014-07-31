@@ -5,4 +5,4 @@ $(document).ready ->
   # This link fetches a new comment box form
   $('.post').on 'ajax:success', '.add-comment', (event, xhr, status) ->
     $(this).hide();
-    $(this).parent().prepend(xhr.content)
+    $(this).parent().append(xhr.content)
