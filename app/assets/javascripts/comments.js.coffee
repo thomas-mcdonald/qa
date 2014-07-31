@@ -3,6 +3,14 @@ $(document).ready ->
     settings.setRequestHeader('accept', '*/*;q=0.5,application/json')
 
   # This link fetches a new comment box form
+  # TODO: handle not being allowed to add new comments
   $('.post').on 'ajax:success', '.add-comment', (event, xhr, status) ->
-    $(this).hide();
+    $(this).hide()
     $(this).parent().append(xhr.content)
+
+  $('.post').on 'ajax:success', '#new_comment', (event, xhr, status) ->
+    parent = $(this).hide().parent()
+    parent.append(xhr.content)
+    addQuestion = parent.find('.add-comment')
+    parent.append(addQuestion.show())
+    $(this).remove()

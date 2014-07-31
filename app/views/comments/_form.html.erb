@@ -1,4 +1,4 @@
-<%= simple_form_for comment do |f| %>
+<%= simple_form_for comment, remote: true do |f| %>
   <%= f.hidden_field :post_id, value: post_id %>
   <%= f.hidden_field :post_type, value: post_type %>
   <%= f.input :body, label: false, placeholder: 'Type your comment here.' %>
