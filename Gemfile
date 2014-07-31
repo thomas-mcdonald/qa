@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
 
+gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.16.0'
 gem 'pg', '~> 0.17.0'
@@ -11,7 +12,7 @@ gem 'redcarpet', '~> 3.1.0'
 gem 'redis', '~> 3.1.0'
 gem 'redis-namespace', '~> 1.5.0'
 gem 'ruby-progressbar'
-gem 'seed-fu', '~> 2.3.1'
+gem 'seedbank', '~> 0.3.0'
 gem 'settingslogic', '~> 2.0.9'
 gem 'simple_form', '~> 3.0.2'
 

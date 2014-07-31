@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(email.strip.downcase)
   end
 
+  def has_answered?(question)
+    question.answers.pluck(:user_id).include?(self.id)
+  end
+
   def gravatar(size = 32)
     "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
   end
