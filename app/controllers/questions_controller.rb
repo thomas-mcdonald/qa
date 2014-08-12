@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
   def show
     @question.viewed_by(request.remote_ip)
     @answer_count = @question.answers.count
-    @answers = @question.answers.includes(:user).question_view_ordering(@question).page(params[:page]).per(5)
+    @answers = @question.answers.includes(:comments, :user).question_view_ordering(@question).page(params[:page]).per(5)
     @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
