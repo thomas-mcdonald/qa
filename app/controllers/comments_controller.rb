@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    authorize(@comment)
     render_json_partial('comments/form', {
       comment: @comment,
       post_id: params[:post_id],
@@ -12,6 +13,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.new(comment_params)
+    authorize(@comment)
     if @comment.save
       render_json_partial('comments/comment', {
         comment: @comment
