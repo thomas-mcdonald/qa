@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ReputationEvent, :type => :model do
+describe ReputationEvent, type: :model do
   context '.create_on_receive_vote' do
     it 'has the correct event_type and user id' do
       vote = FactoryGirl.build(:upvote)
