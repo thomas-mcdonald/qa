@@ -1,16 +1,12 @@
-require_dependency 'last_activity'
-require_dependency 'slugger'
-require_dependency 'timeline'
-require_dependency 'voteable'
-
 class Question < ActiveRecord::Base
-  include QA::LastActivity
-  include QA::Slugger
-  include QA::Timeline
-  include QA::Voteable
+  include LastActivity
+  include Slugger
+  include Timeline
+  include Voteable
 
   belongs_to :accepted_answer, class: Answer
   has_many :answers
+  has_many :comments, -> { order('created_at ASC') }, as: :post
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :timeline_events, as: :post

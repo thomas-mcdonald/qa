@@ -6,7 +6,7 @@ describe UsersController, :type => :controller do
 
     context 'with slug' do
       before do
-        get :show, id: user.id, slug: user.slug
+        get :show, id: user.to_param
       end
 
       it { is_expected.to respond_with(:success) }

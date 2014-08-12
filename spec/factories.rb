@@ -42,4 +42,10 @@ FactoryGirl.define do
     user
     vote_type 'downvote'
   end
+
+  factory :comment do
+    association :post, factory: :question
+    user
+    body 'This is an example comment'
+  end
 end

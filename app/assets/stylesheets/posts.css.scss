@@ -71,6 +71,7 @@
   }
 
   .body { margin-bottom: 15px; }
+  .meta { @include clearfix(); }
   .links { float: left; }
   .righto { float: right; }
 

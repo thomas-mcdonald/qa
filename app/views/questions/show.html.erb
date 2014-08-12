@@ -33,20 +33,33 @@
             </div>
           </div>
         </div>
+        <div class="comments">
+          <%= render partial: 'comments/comment', collection: @question.comments %>
+          <% if policy(Comment.new).create? %>
+            <%= link_to 'add comment', new_post_comment_url(@question), remote: true, class: 'add-comment' %>
+          <% end %>
+        </div>
       </div>
     </div>
 
     <div class="answers">
       <% if !@answers.empty? %>
         <div class="page-header">
-          <h3><%= pluralize @answers.size, "Answer" %></h3>
+          <h3><%= pluralize @answer_count, "Answer" %></h3>
         </div>
         <%= render partial: 'answers/answer', collection: @answers, locals: { question: @question } %>
+        <%= paginate @answers %>
       <% end %>
     </div>
 
     <% if logged_in? %>
       <div class="page-header"><h3>Answer Question</h3></div>
+      <% if current_user.has_answered?(@question) %>
+        <div class="alert alert-info alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          You have already answered this question. Are you sure you wish to answer again?
+        </div>
+      <% end %>
       <%= simple_form_for @answer, html: { class: 'form-vertical'}, remote: true do |f| %>
         <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
         <%= f.input :body, label: false %>

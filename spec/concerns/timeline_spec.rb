@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'timeline'
 
-describe QA::Timeline do
+describe Timeline do
   let(:user) { FactoryGirl.create(:user) }
 
   describe '#create_timeline_event!' do

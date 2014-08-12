@@ -59,4 +59,18 @@ describe User, :type => :model do
       expect(@user.email_hash).to eq(@user2.email_hash)
     end
   end
+
+  describe '.has_answered?' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'is true if the user has answered the question' do
+      answer = FactoryGirl.create(:answer, user: user)
+      expect(user.has_answered?(answer.question)).to be(true)
+    end
+
+    it 'is false if the user has not answered the question' do
+      question = FactoryGirl.create(:question)
+      expect(user.has_answered?(question)).to be(false)
+    end
+  end
 end
