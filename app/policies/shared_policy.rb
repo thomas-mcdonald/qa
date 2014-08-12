@@ -1,5 +1,9 @@
 module SharedPolicy
-  def staff
+  def logged_in?
+    user
+  end
+
+  def staff?
     user.staff?
   end
 end

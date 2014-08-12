@@ -35,7 +35,7 @@
         </div>
         <div class="comments">
           <%= render partial: 'comments/comment', collection: @question.comments %>
-          <% if logged_in? %>
+          <% if policy(Comment.new).create? %>
             <%= link_to 'add comment', new_post_comment_url(@question), remote: true, class: 'add-comment' %>
           <% end %>
         </div>
