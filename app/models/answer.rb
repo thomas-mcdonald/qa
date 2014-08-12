@@ -2,6 +2,7 @@ class Answer < ActiveRecord::Base
   include Timeline
   include Voteable
 
+  has_many :comments, -> { order('created_at ASC') }, as: :post
   belongs_to :question
   has_many :timeline_events, as: :post
   belongs_to :user

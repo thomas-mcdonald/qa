@@ -9,7 +9,7 @@ class PostPolicy
   end
 
   def edit?
-    logged_in && (edit_reputation || staff || is_users)
+    logged_in? && (edit_reputation || staff? || is_users)
   end
 
   def update?
@@ -20,9 +20,5 @@ class PostPolicy
 
   def is_users
     post.user_id == user.id
-  end
-
-  def logged_in
-    user
   end
 end
