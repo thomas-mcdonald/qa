@@ -45,6 +45,7 @@ QA::Application.routes.draw do
 
   constraints AdminConstraint.new do
     get '/admin', to: 'admin#index'
+    mount PgHero::Engine, at: '/admin/pghero'
   end
 
   # development routes

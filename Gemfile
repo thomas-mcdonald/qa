@@ -6,6 +6,7 @@ gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.16.0'
 gem 'pg', '~> 0.17.0'
+gem 'pghero', '~> 0.1.0'
 # waiting for rspec 3 fix to hit rubygems
 gem 'pundit', github: 'elabs/pundit' #'~> 0.3.0'
 gem 'redcarpet', '~> 3.1.0'
