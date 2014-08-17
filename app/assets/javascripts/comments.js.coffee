@@ -14,3 +14,13 @@ $(document).ready ->
     addQuestion = parent.find('.add-comment')
     parent.append(addQuestion.show())
     $(this).remove()
+  .on 'ajax:error', '#new_comment', (event, xhr, status) ->
+    $t = $(this)
+    json = JSON.parse(xhr.responseText)
+    $t.popover
+      content: json.errors
+      placement: 'bottom'
+      trigger: 'manual'
+    .popover('show')
+    $(document).one 'click', ->
+      $t.popover('destroy')
