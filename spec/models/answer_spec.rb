@@ -1,14 +1,25 @@
 require 'spec_helper'
 require 'concerns/voteable_examples'
 
-describe Answer, :type => :model do
+describe Answer, type: :model do
   it_should_behave_like 'voteable'
 
-  context 'associations' do
+  describe 'associations' do
+    it { is_expected.to have_many(:comments) }
+    it { is_expected.to belong_to(:question) }
     it { is_expected.to have_many(:timeline_events) }
+    it { is_expected.to belong_to(:user) }
   end
 
-  context '#question_view_ordering' do
+  describe 'validations' do
+    [:body, :question_id, :user_id].each do |attr|
+      it { is_expected.to validate_presence_of(attr) }
+    end
+    it { is_expected.to ensure_length_of(:body).is_at_least(10).is_at_most(30000) }
+
+  end
+
+  describe '#question_view_ordering' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil) }
     let(:a1) { FactoryGirl.create(:answer, question: question) }
     let(:a2) { FactoryGirl.create(:answer, question: question) }
