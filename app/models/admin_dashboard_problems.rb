@@ -3,6 +3,10 @@ class AdminDashboardProblems
     [sidekiq].compact
   end
 
+  def problems?
+    problems.length > 0
+  end
+
   private
 
   def sidekiq
