@@ -1,16 +1,15 @@
 require 'spec_helper'
-require_dependency 'badge_manager'
+require 'badge_manager'
+require 'badge_definitions/base'
 
-class TestBase
-  def self.check_on; @check_on; end
-end
+TestBase = QA::BadgeDefinition::Base
 
 module BadgeSingle
-  class One; end;
+  class One < TestBase; end;
 end
 
 module BadgeDouble
-  class One < TestBase; @check_on = :one; end;
+  class One < TestBase; @check_on = :one; @name = :test_badge; end;
   class Two < TestBase; @check_on = :two; end;
 end
 
@@ -44,6 +43,13 @@ describe QA::BadgeManager do
     it 'selects badges corresponding to that event' do
       setup_badge_manager(BadgeDouble)
       expect(subject.badges_for(:one)).to eq([BadgeDouble::One])
+    end
+  end
+
+  describe '[]' do
+    it 'selects the correct badge' do
+      setup_badge_manager(BadgeDouble)
+      expect(subject[:test_badge]).to eq(BadgeDouble::One)
     end
   end
 end

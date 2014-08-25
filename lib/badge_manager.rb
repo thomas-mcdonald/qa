@@ -14,5 +14,9 @@ module QA
     def self.badges_for(event)
       badges.select { |klass| klass.check_on == event }
     end
+
+    def self.[](sym)
+      badges.select { |klass| klass.name == sym }.first
+    end
   end
 end
