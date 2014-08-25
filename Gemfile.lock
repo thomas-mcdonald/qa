@@ -101,6 +101,8 @@ GEM
       sass-rails (>= 3.1.1)
     formatador (0.2.5)
     gherkin-ruby (0.3.2)
+    globalid (0.2.3)
+      activesupport (>= 4.1.0)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -293,6 +295,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4.1)
   faker (~> 1.4.2)
   font-awesome-sass-rails
+  globalid (~> 0.2.3)
   guard (~> 2.6.0)
   guard-rspec (~> 4.3.0)
   guard-spinach!

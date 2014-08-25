@@ -5,6 +5,7 @@ gem 'rails', '4.1.5'
 gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.16.0'
+gem 'globalid', '~> 0.2.3'
 gem 'pg', '~> 0.17.0'
 # waiting for rspec 3 fix to hit rubygems
 gem 'pundit', github: 'elabs/pundit' #'~> 0.3.0'

@@ -24,15 +24,15 @@ describe VoteCreator do
   it 'queues answer_vote processing if needed' do
     expect {
       VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'upvote').create
-    }.to change(Jobs::Badges::AnswerVote.jobs, :size).by(1)
+    }.to change(Jobs::Badge.jobs, :size).by(1)
 
     expect {
       VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'downvote').create
-    }.to change(Jobs::Badges::AnswerVote.jobs, :size).by(1)
+    }.to change(Jobs::Badge.jobs, :size).by(1)
 
     expect {
       VoteCreator.new(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote').create
-    }.to_not change(Jobs::Badges::AnswerVote.jobs, :size)
+    }.to_not change(Jobs::Badge.jobs, :size)
   end
 
   describe '#create_reputation_events' do
