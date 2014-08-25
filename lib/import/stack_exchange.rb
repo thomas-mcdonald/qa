@@ -6,6 +6,7 @@ module QA
     class StackExchange
       def initialize(dir)
         @conn = ActiveRecord::Base.connection.raw_connection
+        Rails.logger.level = Logger::WARN
         @dir = dir
         @posts = []
         output_intro
@@ -150,7 +151,7 @@ module QA
           bar.increment
           qu = Question.new
           edits = grouped_edits[q['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
+          originator = (edits.select { |v| v.new_record })[0]
           edits.delete originator
 
           # we can't handle anonymous users right now
@@ -170,7 +171,7 @@ module QA
           next if @posts[a['ParentId'].to_i].blank?
           an = Answer.new
           edits = grouped_edits[a['Id']]
-          originator = (edits.select { |v| v[:new_record] == true })[0]
+          originator = (edits.select { |v| v.new_record })[0]
           edits.delete originator
           next unless @user_ids.include? originator[:user_id].to_i
 

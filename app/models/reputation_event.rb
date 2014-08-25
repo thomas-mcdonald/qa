@@ -30,32 +30,26 @@ class ReputationEvent < ActiveRecord::Base
   end
 
   def self.create_on_accept_answer(question, answer)
-    question.user.reputation_events.create(
-      action: question,
-      event_type: :accept_answer
-    )
-    answer.user.reputation_events.create(
-      action: answer,
-      event_type: :accepted_answer
-    )
+    create_for_user(question.user, question, :accept_answer)
+    create_for_user(answer.user, answer, :accepted_answer)
   end
 
   # Given a vote, create a reputation event on the user who created the post
   # and recalculate his reputation.
   def self.create_on_receive_vote(vote)
-    event = vote.post.user.reputation_events.create(
-      action: vote,
-      event_type: %(receive_#{vote.event_type})
-    )
-    event
+    create_for_user(vote.post.user, vote, %(receive_#{vote.event_type}))
   end
 
   # Given a vote, create a reputation event on the user who created the vote
   # and recalculate his reputation
   def self.create_on_give_vote(vote)
-    event = vote.user.reputation_events.create(
-      action: vote,
-      event_type: %(give_#{vote.event_type})
+    create_for_user(vote.user, vote, %(give_#{vote.event_type}))
+  end
+
+  def self.create_for_user(user, action, type)
+    event = user.reputation_events.create(
+      action: action,
+      event_type: type
     )
     event
   end

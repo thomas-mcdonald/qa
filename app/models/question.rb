@@ -1,15 +1,12 @@
-require_dependency 'last_activity'
-require_dependency 'slugger'
-require_dependency 'timeline'
-require_dependency 'voteable'
-
 class Question < ActiveRecord::Base
-  include QA::LastActivity
-  include QA::Slugger
-  include QA::Timeline
-  include QA::Voteable
+  include LastActivity
+  include Slugger
+  include Timeline
+  include Voteable
 
+  belongs_to :accepted_answer, class: Answer
   has_many :answers
+  has_many :comments, -> { order('created_at ASC') }, as: :post
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :timeline_events, as: :post
@@ -17,10 +14,9 @@ class Question < ActiveRecord::Base
 
   default_scope { order('questions.last_active_at DESC') }
 
-  validates_length_of :title, within: 10..150
-  # TODO: make this a config setting
-  validates_length_of :body, within: 10..30000
-  validates_presence_of :body, :title, :last_active_user_id, :last_active_at
+  validates :title, length: { in: 10..150 }, presence: true
+  validates :body, length: { in: 10..30000 }, presence: true
+  validates_presence_of :last_active_user_id, :last_active_at
   validate :accepted_is_on_question, :tags_exist
 
   is_slugged :title

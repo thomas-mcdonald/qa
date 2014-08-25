@@ -14,11 +14,17 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    @vote = current_user.votes.find(params[:id]).destroy
-    render_json_partial('votes/create', {
-      post: @vote.post,
-      vote_type: @vote.vote_type
-    }, count: @vote.post.vote_count)
+    @vote = Vote.find(params[:id])
+    json_unauthorised! and return if !is_user(@vote.user)
+    if @vote.locked?
+      render json: { errors: 'You may no longer change your vote on this post' }, status: 403
+    else
+      @vote.destroy
+      render_json_partial('votes/create', {
+        post: @vote.post,
+        vote_type: @vote.vote_type
+      }, count: @vote.post.vote_count)
+    end
   end
 
   private
@@ -27,6 +33,10 @@ class VotesController < ApplicationController
     if !logged_in?
       render json: { errors: 'You must be logged in to vote' }, status: 401 and return
     end
+  end
+
+  def json_unauthorised!
+    render json: { errors: 'You are not authorised to do that'}, status: 403
   end
 
   def vote_params

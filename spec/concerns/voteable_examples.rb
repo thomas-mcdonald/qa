@@ -13,13 +13,13 @@ shared_examples_for 'voteable' do
     it 'counts upvotes as 1' do
       create_vote(:upvote, item)
       item.reload
-      item.vote_count.should == 1
+      expect(item.vote_count).to eq(1)
     end
 
     it 'counts downvotes as -1' do
       create_vote(:downvote, item)
       item.reload
-      item.vote_count.should == -1
+      expect(item.vote_count).to eq(-1)
     end
 
     it 'handles a series of votes' do
@@ -27,16 +27,16 @@ shared_examples_for 'voteable' do
       create_vote(:downvote, item)
       create_vote(:upvote, item)
       item.reload
-      item.vote_count.should == 1
+      expect(item.vote_count).to eq(1)
     end
 
     it 'updates after vote destroy' do
       vote = create_vote(:upvote, item)
       item.reload
-      item.vote_count.should == 1
+      expect(item.vote_count).to eq(1)
       vote.destroy
       item.reload
-      item.vote_count.should == 0
+      expect(item.vote_count).to eq(0)
     end
   end
 
@@ -44,12 +44,12 @@ shared_examples_for 'voteable' do
     let(:user) { FactoryGirl.create(:user) }
 
     it 'does not have a vote by default' do
-      item.has_vote_by_user(user, 1).should == false
+      expect(item.has_vote_by_user(user, 1)).to eq(false)
     end
 
     it 'has a vote if there has been one created' do
       item.votes << FactoryGirl.build(:upvote, user: user)
-      item.has_vote_by_user(user, 1).should == true
+      expect(item.has_vote_by_user(user, 1)).to eq(true)
     end
   end
 end

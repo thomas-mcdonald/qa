@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
   context 'associations' do
-    it { should have_many(:authorizations) }
-    it { should have_many(:reputation_events) }
+    it { is_expected.to have_many(:authorizations) }
+    it { is_expected.to have_many(:reputation_events) }
   end
 
   describe 'calculate_reputation!' do
@@ -16,7 +16,7 @@ describe User do
         user: user
       )
       user.calculate_reputation!
-      user.reputation.should == SiteSettings.reputation['receive_question_upvote']
+      expect(user.reputation).to eq(SiteSettings.reputation['receive_question_upvote'])
     end
   end
 
@@ -29,8 +29,8 @@ describe User do
 
     it 'appends a ♦ for admins' do
       user.admin = true
-      user.display_name.should include(user.name)
-      user.display_name.should include('♦')
+      expect(user.display_name).to include(user.name)
+      expect(user.display_name).to include('♦')
     end
   end
 
@@ -40,7 +40,7 @@ describe User do
     end
 
     it 'should have a sane email hash' do
-      @user.email_hash.should =~ /^[0-9a-f]{32}$/
+      expect(@user.email_hash).to match(/^[0-9a-f]{32}$/)
     end
 
     it 'should use downcase email' do
@@ -48,7 +48,7 @@ describe User do
       @user2 = FactoryGirl.build(:user)
       @user2.email = "ExAmPlE@eXaMpLe.com"
 
-      @user.email_hash.should == @user2.email_hash
+      expect(@user.email_hash).to eq(@user2.email_hash)
     end
 
     it 'should trim whitespace before hashing' do
@@ -56,7 +56,21 @@ describe User do
       @user2 = FactoryGirl.build(:user)
       @user2.email = " example@example.com "
 
-      @user.email_hash.should == @user2.email_hash
+      expect(@user.email_hash).to eq(@user2.email_hash)
+    end
+  end
+
+  describe '.has_answered?' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'is true if the user has answered the question' do
+      answer = FactoryGirl.create(:answer, user: user)
+      expect(user.has_answered?(answer.question)).to be(true)
+    end
+
+    it 'is false if the user has not answered the question' do
+      question = FactoryGirl.create(:question)
+      expect(user.has_answered?(question)).to be(false)
     end
   end
 end

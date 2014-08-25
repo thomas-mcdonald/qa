@@ -24,6 +24,10 @@ class Vote < ActiveRecord::Base
     str
   end
 
+  def locked?
+    (post.last_active_at < 2.days.ago) && (post.last_active_at < created_at)
+  end
+
   def update_post_vote_count
     self.post.update_vote_count!
   end

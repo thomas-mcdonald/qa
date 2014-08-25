@@ -19,7 +19,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question.viewed_by(request.remote_ip)
-    @answers = @question.answers.includes(:user).question_view_ordering(@question)
+    @answer_count = @question.answers.count
+    @answers = @question.answers.includes(:comments, :user).question_view_ordering(@question).page(params[:page]).per(5)
     @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
@@ -56,9 +57,8 @@ class QuestionsController < ApplicationController
   def accept_answer
     # TODO: this method requires refactoring
     # TODO: reputation events need destroying on new accepted answers
-    # TODO: require correct user
     @question = Question.find(params[:id])
-    require_user(@question.user)
+    head :forbidden and return unless is_user(@question.user)
     head :bad_request and return if missing_accept_params
     if params[:answer_id].present? # setting new accept
       @answer = Answer.find(params[:answer_id])
@@ -84,8 +84,8 @@ class QuestionsController < ApplicationController
   end
 
   def load_and_verify_slug
-    @question = Question.includes(:votes).find(params[:id])
-    if params[:slug] != @question.slug
+    @question = Question.includes(:comments, :votes, :user).find(params[:id])
+    if !@question.valid_slug?(params[:id])
       redirect_to @question
     end
   end

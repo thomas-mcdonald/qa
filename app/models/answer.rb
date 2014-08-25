@@ -1,10 +1,8 @@
-require_dependency 'timeline'
-require_dependency 'voteable'
-
 class Answer < ActiveRecord::Base
-  include QA::Timeline
-  include QA::Voteable
+  include Timeline
+  include Voteable
 
+  has_many :comments, -> { order('created_at ASC') }, as: :post
   belongs_to :question
   has_many :timeline_events, as: :post
   belongs_to :user

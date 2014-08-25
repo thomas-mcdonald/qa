@@ -1,11 +1,10 @@
-require_dependency 'slugger'
-
 class User < ActiveRecord::Base
-  include QA::Slugger
+  include Slugger
 
   has_many :answers
   has_many :authorizations
   has_many :badges
+  has_many :comments
   has_many :questions
   has_many :reputation_events
   has_many :votes
@@ -55,11 +54,19 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(email.strip.downcase)
   end
 
+  def has_answered?(question)
+    question.answers.pluck(:user_id).include?(self.id)
+  end
+
   def gravatar(size = 32)
     "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
   end
 
   def rendered_about_me
     Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, no_styles: true, safe_links_only: true)).render(self.about_me).html_safe
+  end
+
+  def staff?
+    admin? || moderator?
   end
 end

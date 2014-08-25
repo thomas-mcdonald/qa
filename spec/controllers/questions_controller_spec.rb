@@ -1,18 +1,18 @@
 require 'spec_helper'
 require 'controllers/shared/timeline_action'
 
-describe QuestionsController do
+describe QuestionsController, :type => :controller do
   it_behaves_like 'TimelineAction'
 
   describe 'index' do
     before { get :index }
-    it { should respond_with(:success) }
+    it { is_expected.to respond_with(:success) }
   end
 
   describe 'show' do
     let(:question) { FactoryGirl.create(:question) }
-    before { get :show, id: question.id, slug: question.slug }
-    it { should respond_with(:success) }
+    before { get :show, id: question.to_param }
+    it { is_expected.to respond_with(:success) }
   end
 
   describe 'tagged' do
@@ -20,24 +20,24 @@ describe QuestionsController do
       FactoryGirl.create(:question, tag_list: 'tag')
       get :tagged, tag: 'tag'
     end
-    it { should respond_with(:success) }
+    it { is_expected.to respond_with(:success) }
   end
 
   describe 'ask' do
-    it { -> { get :new }.should require_login }
+    it { expect { get :new }.to require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }
 
       it 'returns success' do
         get :new
-        response.should be_success
+        expect(response).to be_success
       end
     end
   end
 
   describe 'create' do
-    it { -> { post :create }.should require_login }
+    it { expect { post :create }.to require_login }
 
     context 'when logged in' do
       before { sign_in(alice) }
@@ -45,7 +45,7 @@ describe QuestionsController do
       it 'creates a question if passed a valid question' do
         question = FactoryGirl.attributes_for(:question)
         post :create, question: question
-        Question.last.body.should == question[:body]
+        expect(Question.last.body).to eq(question[:body])
       end
     end
   end
@@ -53,11 +53,11 @@ describe QuestionsController do
   describe 'edit' do
     let(:question) { FactoryGirl.create(:question) }
 
-    it { -> { get :edit, id: question.id }.should require_login }
+    it { expect { get :edit, id: question.id }.to require_login }
 
     it 'raises without permissions' do
       sign_in(FactoryGirl.create(:user, reputation: 0))
-      -> { get :edit, id: question.id }.should raise_error(Pundit::NotAuthorizedError)
+      expect { get :edit, id: question.id }.to raise_error(Pundit::NotAuthorizedError)
     end
 
     context 'when logged in with permission' do
@@ -65,7 +65,7 @@ describe QuestionsController do
 
       it 'returns success' do
         get :edit, id: question.id
-        response.should be_success
+        expect(response).to be_success
       end
     end
   end
@@ -73,11 +73,11 @@ describe QuestionsController do
   describe 'update' do
     let(:question) { FactoryGirl.create(:question) }
 
-    it { -> { put :update, id: question.id }.should require_login }
+    it { expect { put :update, id: question.id }.to require_login }
 
     it 'raises without permissions' do
       sign_in(FactoryGirl.create(:user, reputation: 0))
-      -> { put :update, id: question.id }.should raise_error(Pundit::NotAuthorizedError)
+      expect { put :update, id: question.id }.to raise_error(Pundit::NotAuthorizedError)
     end
 
     context 'when logged in with permissions' do
@@ -93,19 +93,19 @@ describe QuestionsController do
 
       it 'updated the information' do
         req
-        Question.find(question.id).title.should == 'validlengthtitle'
+        expect(Question.find(question.id).title).to eq('validlengthtitle')
       end
 
       it 'redirects back to the question' do
         req
-        response.should be_redirect
+        expect(response).to be_redirect
       end
     end
   end
 
   describe 'accept_answer' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
-    it { -> { post :accept_answer, id: question.id }.should require_login }
+    it { expect { post :accept_answer, id: question.id }.to require_login }
 
     context 'when logged in as the question asker' do
       before { sign_in(alice) }
@@ -113,32 +113,33 @@ describe QuestionsController do
 
       it 'returns bad request if neither accepted answer in question or param' do
         post :accept_answer, id: question.id
-        response.status.should == 400
+        expect(response.status).to eq(400)
       end
 
       it 'updates the accepted answer id if it is valid' do
         post :accept_answer, id: question.id, answer_id: answer.id
-        Question.find(question.id).accepted_answer_id.should == answer.id
+        expect(Question.find(question.id).accepted_answer_id).to eq(answer.id)
       end
 
       it 'does not update the accepted answer id if it is not an answer on the question' do
         FactoryGirl.create(:answer, id: 999)
         post :accept_answer, id: question.id, answer_id: 999
-        Question.find(question.id).accepted_answer_id.should == nil
+        expect(Question.find(question.id).accepted_answer_id).to eq(nil)
       end
 
       it 'removes the accepted answer if there is no answer_id' do
         question.accepted_answer_id = answer.id
         question.save
         post :accept_answer, id: question.id
-        Question.find(question.id).accepted_answer_id.should == nil
+        expect(Question.find(question.id).accepted_answer_id).to eq(nil)
       end
     end
 
     context 'when logged in as a different user' do
       it 'raises unauthorised' do
         sign_in(bob)
-        -> { post :accept_answer, id: question.id }.should raise_error(QA::NotAuthorised)
+        post :accept_answer, id: question.id
+        expect(response).to be_forbidden
       end
     end
   end

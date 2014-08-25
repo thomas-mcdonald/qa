@@ -1,10 +1,13 @@
 class QuestionCreator
   attr_reader :errors
 
-  # TODO: allow the user parameter to be either a user object or ID
   def initialize(user, params)
     raise ArgumentError unless user
-    @user = user
+    if user.is_a? Integer
+      @user = User.find(user)
+    else
+      @user = user
+    end
     @params = params
   end
 
