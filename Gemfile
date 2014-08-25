@@ -22,7 +22,7 @@ gem 'omniauth-openid', '1.0.1'
 
 # Jobs & web interface
 gem 'sidekiq', '~> 3.2.0'
-gem 'sinatra'
+gem 'sinatra', require: false
 
 # Asset gems
 gem 'bootstrap-sass', '~> 3.2.0'
