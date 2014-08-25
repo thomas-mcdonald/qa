@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_filter :load_and_verify_slug, only: [:show]
-  before_filter :require_login, except: [:show, :new, :create]
+  before_filter :require_login, except: [:index, :show, :new, :create]
+
+  def index
+    @users = User.order('reputation DESC').all
+  end
 
   def show
     @user = User.find(params[:id])
