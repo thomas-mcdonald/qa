@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   include Voteable
 
   has_many :comments, -> { order('created_at ASC') }, as: :post
-  belongs_to :question
+  belongs_to :question, counter_cache: true
   has_many :timeline_events, as: :post
   belongs_to :user
 
