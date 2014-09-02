@@ -1,9 +1,7 @@
+require_dependency 'redcarpet_filter'
+
 module QuestionsHelper
   def format(text)
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML, {
-      autolink: true,
-      fenced_code_blocks: true,
-      superscript: true
-    }).render(text).html_safe
+    HTML::Pipeline.new([RedcarpetFilter], {}).call(text)[:output].html_safe
   end
 end

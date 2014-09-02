@@ -4,6 +4,7 @@ gem 'rails', '4.1.5'
 
 gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
+gem 'html-pipeline', '~> 1.9.0'
 gem 'kaminari', '~> 0.16.0'
 gem 'pg', '~> 0.17.0'
 # waiting for rspec 3 fix to hit rubygems

@@ -112,6 +112,9 @@ GEM
       rspec (>= 2.14, < 4.0)
     hashie (3.2.0)
     hike (1.2.3)
+    html-pipeline (1.9.0)
+      activesupport (>= 2)
+      nokogiri (~> 1.4)
     i18n (0.6.11)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
@@ -296,6 +299,7 @@ DEPENDENCIES
   guard (~> 2.6.0)
   guard-rspec (~> 4.3.0)
   guard-spinach!
+  html-pipeline (~> 1.9.0)
   jquery-rails
   kaminari (~> 0.16.0)
   minitest
