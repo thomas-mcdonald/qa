@@ -2,6 +2,9 @@ require_dependency 'redcarpet_filter'
 
 module QuestionsHelper
   def format(text)
-    HTML::Pipeline.new([RedcarpetFilter], {}).call(text)[:output].html_safe
+    HTML::Pipeline.new([
+      RedcarpetFilter,
+      HTML::Pipeline::SanitizationFilter
+    ], {}).call(text)[:output].to_s.html_safe
   end
 end
