@@ -7,6 +7,14 @@
     <img src="<%= @user.gravatar(128) %>" class="gravatar">
     <p><span class="reputation"><%= @user.reputation %></span> reputation</p>
   </div>
+  <div>
+    <dl class="user-info">
+      <% if is_user(@user) || current_user.staff? %>
+        <dt>email:</dt>
+        <dd><%= @user.email %></dd>
+      <% end %>
+    </dl>
+  </div>
   <div class="about-me">
     <%= @user.rendered_about_me %>
   </div>
