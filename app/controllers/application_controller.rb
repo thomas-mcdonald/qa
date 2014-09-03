@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   def is_user(user)
     current_user.id == user.id
   end
+  helper_method :is_user
 
   def require_user(user)
     raise QA::NotAuthorised unless is_user(id)

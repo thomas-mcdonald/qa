@@ -9,7 +9,7 @@ phantomjs.
 
 #### OS X - Homebrew
 
-PostgreSQL, phantomjs and Redis can be installed with `brew install postgresql phantomjs`
+PostgreSQL, phantomjs and Redis can be installed with `brew install postgresql phantomjs redis`
 
 ## Setup
 
