@@ -56,7 +56,13 @@ class VoteCreator
   # process the vote for badges
   def queue_processing
     if @vote_params[:post_type] == 'Answer'
-      Jobs::Badge.perform_async(:answer_vote, @vote.post.global_id)
+      queue_badge_job(:answer_vote)
+    elsif @vote_params[:post_type] == 'Question'
+      queue_badge_job(:question_vote)
     end
+  end
+
+  def queue_badge_job(badge_type)
+    Jobs::Badge.perform_async(badge_type, @vote.post.global_id)
   end
 end

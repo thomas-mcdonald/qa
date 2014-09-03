@@ -32,7 +32,7 @@ describe VoteCreator do
 
     expect {
       VoteCreator.new(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote').create
-    }.to_not change(Jobs::Badge.jobs, :size)
+    }.to change(Jobs::Badge.jobs, :size).by(1)
   end
 
   describe '#create_reputation_events' do
