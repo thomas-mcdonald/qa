@@ -27,8 +27,8 @@ class VoteCreator
       create_vote
       update_post_vote_count
       create_reputation_events
+      queue_processing
     end
-    queue_processing
 
     @vote
   end

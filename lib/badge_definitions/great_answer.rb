@@ -7,7 +7,7 @@ module QA
       @name = :great_answer
 
       def check(answer)
-        answer.vote_count >= 25
+        answer.vote_count >= 100
       end
     end
   end

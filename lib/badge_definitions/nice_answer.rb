@@ -2,12 +2,12 @@ require 'badge_definitions/base'
 
 module QA
   module BadgeDefinition
-    class GoodAnswer < Base
+    class NiceAnswer < Base
       @check_on = :answer_vote
-      @name = :good_answer
+      @name = :nice_answer
 
-      def check(answer)
-        answer.vote_count >= 25
+      def check(question)
+        question.vote_count >= 10
       end
     end
   end

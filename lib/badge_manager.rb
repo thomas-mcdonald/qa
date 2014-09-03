@@ -1,4 +1,7 @@
-require_relative 'badge_definitions/good_answer'
+['good_answer', 'good_question', 'great_answer', 'great_question',
+  'nice_answer', 'nice_question'].each do |f|
+  require_relative "badge_definitions/#{f}"
+end
 
 module QA
   module BadgeManager
