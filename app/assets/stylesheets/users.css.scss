@@ -64,6 +64,10 @@
     }
   }
 
+  .user-info {
+    @include make-md-column(4);
+  }
+
   .about-me {
     @include make-md-column(6);
     background: #efefef;
