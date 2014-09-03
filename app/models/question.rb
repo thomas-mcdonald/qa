@@ -63,11 +63,11 @@ class Question < ActiveRecord::Base
   end
 
   def viewed_by(key)
-    $view.sadd("question-#{self.id}", key)
+    $view.pfadd("question-#{self.id}", key)
   end
 
   def view_count
-    $view.scard("question-#{self.id}")
+    $view.pfcount("question-#{self.id}")
   end
 
   def votes_on_self_and_answers_by_user(user)
