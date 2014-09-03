@@ -62,10 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def rendered_about_me
-    HTML::Pipeline.new([
-      RedcarpetFilter,
-      HTML::Pipeline::SanitizationFilter
-    ], {}).call(self.about_me)[:output].to_s.html_safe
+    Pipeline.generic_render(about_me)
   end
 
   def staff?
