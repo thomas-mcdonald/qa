@@ -5,6 +5,7 @@ module QA
     class NiceQuestion < Base
       @check_on = :question_vote
       @name = :nice_question
+      @type = :bronze
 
       def check(question)
         question.vote_count >= 10

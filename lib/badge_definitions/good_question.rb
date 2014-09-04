@@ -5,6 +5,7 @@ module QA
     class GoodQuestion < Base
       @check_on = :question_vote
       @name = :good_question
+      @type = :silver
 
       def check(question)
         question.vote_count >= 25

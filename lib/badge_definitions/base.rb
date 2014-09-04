@@ -8,6 +8,10 @@ module QA
       def self.name
         @name
       end
+
+      def self.type
+        @type
+      end
     end
   end
 end

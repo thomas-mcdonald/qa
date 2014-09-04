@@ -5,6 +5,7 @@ module QA
     class GreatQuestion < Base
       @check_on = :question_vote
       @name = :great_question
+      @type = :gold
 
       def check(question)
         question.vote_count >= 100
