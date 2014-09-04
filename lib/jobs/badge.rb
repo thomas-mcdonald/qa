@@ -13,12 +13,14 @@ module Jobs
 
       # Iterate through the badges for the event and check if they should be
       # awarded
+      update_badge_count = false
       badges.each do |badge|
         if badge.new.check(object)
           # The user has satisfied the badge criteria
           awarded = user.badges.where(name: badge.name).exists?
           if !awarded
             logger.info "Awarding badge #{badge.name} to user ##{user.id}"
+            update_badge_count = true
             user.badges.create(
               subject: object,
               name: badge.name
@@ -26,6 +28,7 @@ module Jobs
           end
         end
       end
+      Jobs::UpdateUserBadgeCount.perform_async(user.id)
     end
   end
 end
