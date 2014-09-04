@@ -1,13 +1,15 @@
-<div id="body">
-  <div class="question-list">
-    <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
+<div id="page-wrap">
+  <div id="body">
+    <div class="question-list">
+      <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
+    </div>
+    <%= paginate @questions %>
   </div>
-  <%= paginate @questions %>
-</div>
 
-<div id="sidebar">
-  <h5>Recent badges</h5>
-  <% @recent_badges.each do |badge| %>
-    <span class="badge <%= badge.badge_type %>"><%= badge.name %></span> - <%= badge.user.display_name%>
-  <% end %>
+  <div id="sidebar">
+    <h5>Recent badges</h5>
+    <% @recent_badges.each do |badge| %>
+      <span class="badge <%= badge.badge_type %>"><%= badge.name %></span> - <%= badge.user.display_name%>
+    <% end %>
+  </div>
 </div>
