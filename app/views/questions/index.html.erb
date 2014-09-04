@@ -7,9 +7,13 @@
   </div>
 
   <div id="sidebar">
-    <h5>Recent badges</h5>
-    <% @recent_badges.each do |badge| %>
-      <span class="badge <%= badge.badge_type %>"><%= badge.name %></span> - <%= badge.user.display_name%>
-    <% end %>
+    <div class="recent-badges">
+      <h5>Recent badges</h5>
+      <ul>
+        <% @recent_badges.each do |badge| %>
+          <li><span class="badge <%= badge.badge_type %>"><%= badge.name %></span>&nbsp;<span class="user-info">- <%= link_to badge.user.display_name, badge.user %></span></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>

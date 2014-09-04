@@ -46,3 +46,15 @@
 .badge.bronze:before { color: #c96; }
 .badge.silver:before { color: #c5c5c5; }
 .badge.gold:before { color: #fc0; }
+
+
+.recent-badges {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .user-info a {
+    color: #565656;
+  }
+}
