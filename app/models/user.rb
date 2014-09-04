@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def rendered_about_me
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, no_styles: true, safe_links_only: true)).render(self.about_me).html_safe
+    Pipeline.generic_render(about_me)
   end
 
   def staff?

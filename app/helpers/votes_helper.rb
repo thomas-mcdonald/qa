@@ -7,8 +7,8 @@ module VotesHelper
   def vote_controls(post, user_votes)
     user_votes ||= []
     ret = ""
-    upvote = find_vote(user_votes, post, Vote.types[:upvote])
-    downvote = find_vote(user_votes, post, Vote.types[:downvote])
+    upvote = find_vote(user_votes, post, 'upvote')
+    downvote = find_vote(user_votes, post, 'downvote')
     ret << select_partial(upvote, post, 'upvote')
     ret << %(<p class="vote-count">#{ post.vote_count }</p>)
     ret << select_partial(downvote, post, 'downvote')
