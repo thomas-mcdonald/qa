@@ -104,3 +104,28 @@
     }
   }
 }
+
+#user-list {
+  @include make-row();
+  list-style-type: none;
+
+  li {
+    @include make-sm-column(3);
+    float: left;
+    margin-bottom: 10px;
+  }
+
+  img, span {
+    float: left;
+  }
+
+  img {
+    height: 48px;
+    margin-right: 5px;
+    width: 48px;
+  }
+
+  .user-link {
+    margin-top: 2px;
+  }
+}
