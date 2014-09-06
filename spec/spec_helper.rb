@@ -51,6 +51,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    Sidekiq::Worker.clear_all
   end
 
   config.after(:each) do

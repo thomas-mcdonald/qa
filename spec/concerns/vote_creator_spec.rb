@@ -3,6 +3,7 @@ require 'vote_creator'
 
 describe VoteCreator do
   let(:post) { FactoryGirl.create(:question) }
+  let(:answer) { FactoryGirl.create(:answer) }
   let(:user) { FactoryGirl.create(:user) }
 
   it 'requires a non-nil user object' do
@@ -20,7 +21,21 @@ describe VoteCreator do
     expect(vote.create).to be_a(Vote)
   end
 
-  context '#create_reputation_events' do
+  it 'queues answer_vote processing if needed' do
+    expect {
+      VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'upvote').create
+    }.to change(Jobs::Badge.jobs, :size).by(1)
+
+    expect {
+      VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'downvote').create
+    }.to change(Jobs::Badge.jobs, :size).by(1)
+
+    expect {
+      VoteCreator.new(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote').create
+    }.to change(Jobs::Badge.jobs, :size).by(1)
+  end
+
+  describe '#create_reputation_events' do
     context 'on a question vote' do
       it 'creates a reputation event with the correct type' do
         vote = VoteCreator.create(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote')

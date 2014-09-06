@@ -2,4 +2,14 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  badges:
+    recent_badges: Recent Badges
+    names:
+      good_answer: Good Answer
+      great_answer: Great Answer
+      nice_answer: Nice Answer
+
+      good_question: Good Question
+      great_question: Great Question
+      nice_question: Nice Question
   hello: "Hello world"

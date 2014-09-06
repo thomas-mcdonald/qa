@@ -1,4 +1,5 @@
 require 'jobs'
+require 'pipeline'
 
 module QA
   class NotAuthorised < Exception; end

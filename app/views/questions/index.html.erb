@@ -1,5 +1,19 @@
-<div class="question-list">
-  <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
-</div>
+<div id="page-wrap">
+  <div id="body">
+    <div class="question-list">
+      <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
+    </div>
+    <%= paginate @questions %>
+  </div>
 
-<%= paginate @questions %>
+  <div id="sidebar">
+    <div class="recent-badges">
+      <h5><%=t 'badges.recent_badges' %></h5>
+      <ul>
+        <% @recent_badges.each do |badge| %>
+          <li><span class="badge <%= badge.badge_type %>"><%=t badge.name %></span>&nbsp;<span class="user-info">- <%= link_to badge.user.display_name, badge.user %></span></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

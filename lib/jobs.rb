@@ -1,1 +1,1 @@
-Dir["#{Rails.root}/lib/jobs/*"].each {|file| require file }
+Dir["#{Rails.root}/lib/jobs/**/*.rb"].each {|file| require file }

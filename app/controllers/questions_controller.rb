@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.includes(:last_active_user, :tags).page(params[:page]).load
+    @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
   end
 
   def tagged

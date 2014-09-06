@@ -16,4 +16,7 @@
 //= require bootstrap/dropdown
 //= require bootstrap/tooltip
 //= require bootstrap/popover
-//= require_tree .
+//= require_tree ./components
+//= require answers
+//= require comments
+//= require votes
