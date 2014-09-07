@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_login, except: [:index, :show, :new, :create]
 
   def index
-    @users = User.order('reputation DESC').all
+    @users = User.order('reputation DESC').page(params[:page]).per(20)
   end
 
   def show
