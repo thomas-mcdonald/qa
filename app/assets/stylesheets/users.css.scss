@@ -114,12 +114,12 @@
   list-style-type: none;
 
   li {
-    @include make-sm-column(3);
+    @include make-xs-column(3);
     float: left;
     margin-bottom: 10px;
   }
 
-  img, span {
+  img, .user-info {
     float: left;
   }
 
@@ -129,7 +129,16 @@
     width: 48px;
   }
 
-  .user-link {
+  .user-info {
+    margin-top: 2px;
+  }
+
+  .user-info span {
+    display: block;
+  }
+
+  .reputation {
+    font-weight: bold;
     margin-top: 2px;
   }
 }
