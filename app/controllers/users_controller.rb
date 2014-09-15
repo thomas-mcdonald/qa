@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def update
     # TODO: allow invalid updates, rerender edit
-    raise QA::NotAuthorised if params[:id].to_i != current_user.id
+    require_user(User.find(params[:id]))
     current_user.update_attributes!(update_params)
     current_user.save
     redirect_to current_user
