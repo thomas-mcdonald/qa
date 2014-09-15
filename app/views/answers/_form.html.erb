@@ -1,0 +1,9 @@
+<%= simple_form_for answer, html: { class: 'form-vertical'}, remote: true do |f| %>
+  <% if question_id %>
+    <%= f.input :question_id, as: :hidden, input_html: { value: question_id } %>
+  <% end %>
+  <%= f.input :body, label: false %>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-default' %>
+  </div>
+<% end %>
