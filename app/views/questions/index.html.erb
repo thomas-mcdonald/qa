@@ -8,10 +8,10 @@
 
   <div id="sidebar">
     <div class="recent-badges">
-      <h5>Recent badges</h5>
+      <h5><%=t 'badges.recent_badges' %></h5>
       <ul>
         <% @recent_badges.each do |badge| %>
-          <li><span class="badge <%= badge.badge_type %>"><%= badge.name %></span>&nbsp;<span class="user-info">- <%= link_to badge.user.display_name, badge.user %></span></li>
+          <li><span class="badge <%= badge.badge_type %>"><%=t badge.name %></span>&nbsp;<span class="user-info">- <%= link_to badge.user.display_name, badge.user %></span></li>
         <% end %>
       </ul>
     </div>
