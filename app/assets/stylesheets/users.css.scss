@@ -118,7 +118,7 @@ $user-list-gravatar-size: 48px;
   li {
     @include make-xs-column(3);
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   img {
@@ -129,7 +129,7 @@ $user-list-gravatar-size: 48px;
   }
 
   .user-info {
-    margin-left: $user-list-gravatar-size + 2px;
+    margin-left: $user-list-gravatar-size + 8px;
     margin-top: 2px;
   }
 
