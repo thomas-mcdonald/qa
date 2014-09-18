@@ -1,6 +1,13 @@
 require 'spec_helper'
 
-describe UsersController, :type => :controller do
+describe UsersController, type: :controller do
+  describe 'index' do
+    it 'loads successfully' do
+      get :index
+      expect(response).to be_success
+    end
+  end
+
   describe 'show' do
     let(:user) { FactoryGirl.create(:user) }
 
