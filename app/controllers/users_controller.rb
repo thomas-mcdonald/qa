@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_filter :load_and_verify_slug, only: [:show]
-  before_filter :require_login, except: [:show, :new, :create]
+  before_filter :require_login, except: [:index, :show, :new, :create]
+
+  def index
+    @users = User.order('reputation DESC').page(params[:page]).per(20)
+  end
 
   def show
     @user = User.find(params[:id])
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
     # TODO: allow invalid updates, rerender edit
-    raise QA::NotAuthorised if params[:id].to_i != current_user.id
+    require_user(User.find(params[:id]))
     current_user.update_attributes!(update_params)
     current_user.save
     redirect_to current_user

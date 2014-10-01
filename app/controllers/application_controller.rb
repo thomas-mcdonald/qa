@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_user
 
   def require_user(user)
-    raise QA::NotAuthorised unless is_user(id)
+    raise QA::NotAuthorised unless is_user(user)
   end
 
   def login(user)
