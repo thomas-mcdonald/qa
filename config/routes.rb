@@ -42,6 +42,7 @@ QA::Application.routes.draw do
   post '/auth/:provider/callback', to: 'authorizations#callback'
 
   get '/tags', to: 'tags#index'
+  get '/tags/search', to: 'tags#search'
 
   # development routes
   if Rails.env.development?
