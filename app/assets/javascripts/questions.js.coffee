@@ -1,6 +1,5 @@
 $(document).ready ->
-  # Would be nice to not have to remove this class here but it's easy enough
-  $("#question_tag_list").removeClass('form-control').selectize
+  $("#question_tag_list").selectize
     delimiter: ','
     persist: false
     create: (input) ->
