@@ -8,4 +8,5 @@
 //= require_tree ./components
 //= require answers
 //= require comments
+//= require questions
 //= require votes
