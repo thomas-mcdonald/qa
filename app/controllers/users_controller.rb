@@ -33,6 +33,10 @@ class UsersController < ApplicationController
     redirect_to current_user
   end
 
+  def reputation
+    @reputation_events = ReputationEvent.where(user_id: params[:user_id])
+  end
+
   private
 
   def load_and_verify_slug
