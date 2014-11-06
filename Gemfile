@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.6'
+ruby '2.1.4'
+
+gem 'rails', '4.1.7'
 
 gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
