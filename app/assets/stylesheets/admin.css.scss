@@ -1,5 +1,8 @@
-// modifications to .page-header to allow for the small sidekiq monitoring link
-.admin-header {
-  @include clearfix();
-  h1 { float: left; }
+.management-pages {
+  h3 { margin-top: 0; }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
 }
