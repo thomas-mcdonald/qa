@@ -14,3 +14,6 @@ $(document).ready ->
     addQuestion = parent.find('.add-comment')
     parent.append(addQuestion.show())
     $(this).remove()
+  .on 'ajax:error', '#new_comment', (event, xhr, status) ->
+    json = JSON.parse(xhr.responseText)
+    $(this).qaPopover(json.errors)

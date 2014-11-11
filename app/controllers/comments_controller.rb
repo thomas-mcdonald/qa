@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
         comment: @comment
       })
     else
-      # TODO: handle errors
+      render json: { errors: @comment.errors.full_messages }, status: 403
     end
   end
 
