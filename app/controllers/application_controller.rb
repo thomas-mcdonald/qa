@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_user(user)
-    current_user.id == user.id
+    logged_in? && current_user.id == user.id
   end
   helper_method :is_user
 
