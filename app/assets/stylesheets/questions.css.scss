@@ -144,11 +144,12 @@
   }
 }
 
-#sidebar {
+.sidebar-tags {
   h5 {
     margin: 0 0 6px 25px;
   }
-  .sidebar-tags {
+
+  ul {
     list-style-type: none;
 
     li { margin-bottom: 6px; }
@@ -157,12 +158,12 @@
       font-size: 12px;
     }
   }
+}
 
-  .summary {
-    list-style-type: none;
+.sidebar-question-stats {
+  list-style-type: none;
 
-    li span {
-      font-weight: 600;
-    }
+  li span {
+    font-weight: 600;
   }
 }
