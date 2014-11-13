@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.6'
+ruby '2.1.4'
+
+gem 'rails', '4.1.7'
 
 gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
 gem 'html-pipeline', '~> 1.9.0'
 gem 'kaminari', '~> 0.16.0'
+gem 'globalid', '~> 0.2.3'
 gem 'pg', '~> 0.17.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.1.0'
