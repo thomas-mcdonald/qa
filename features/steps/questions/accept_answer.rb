@@ -13,13 +13,29 @@ class Spinach::Features::AcceptAnswer < Spinach::FeatureSteps
     @answer = create(:answer, question: @question)
   end
 
+  step 'I asked a question with an accepted answer' do
+    @question = create(:question, user: current_user)
+    @answer = create(:answer, question: @question)
+    @question.accept_answer(@answer); @question.save
+  end
+
   step 'I click on the accept answer button' do
-    find(%(#{answer_css} .accept-answer button)).click
+    find(accept_answer_button).click
+  end
+
+  step 'I click on the unaccept answer button' do
+    find(unaccept_answer_button).click
   end
 
   step 'I should see it become active' do
-    within(%(#{answer_css} .accept-answer button)) do
+    within(unaccept_answer_button) do
       should have_css '.icon-ok.active'
+    end
+  end
+
+  step 'I should see it become inactive' do
+    within(accept_answer_button) do
+      should have_css '.icon-ok.inactive'
     end
   end
 
@@ -32,6 +48,14 @@ class Spinach::Features::AcceptAnswer < Spinach::FeatureSteps
   end
 
   private
+
+  def accept_answer_button
+    %(#{answer_css} .accept-answer button)
+  end
+
+  def unaccept_answer_button
+    %(#{answer_css} .unaccept-answer button)
+  end
 
   # The CSS selector we can use to return the answer
   def answer_css

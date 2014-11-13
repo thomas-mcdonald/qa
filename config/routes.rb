@@ -24,6 +24,7 @@ QA::Application.routes.draw do
   get '/q/:id/edit', to: 'questions#edit', as: 'edit_question'
   get '/q/:id/timeline', to: 'questions#timeline', as: 'question_timeline'
   post '/q/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
+  post '/q/:id/unaccept', to: 'questions#unaccept_answer', as: 'unaccept_answer'
 
   resources :answers, only: [:create, :edit, :update]
   get '/a/:id/timeline', to: 'answers#timeline', as: 'answer_timeline'
