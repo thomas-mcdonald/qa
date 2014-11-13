@@ -9,7 +9,7 @@
   </div>
   <div>
     <dl class="user-info">
-      <% if is_user(@user) || current_user.staff? %>
+      <% if can_view_users_email?(@user) %>
         <dt>email:</dt>
         <dd><%= @user.email %></dd>
       <% end %>
