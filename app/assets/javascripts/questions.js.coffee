@@ -5,9 +5,7 @@ $(document).ready ->
     valueField: 'name'
     delimiter: ','
     persist: false
-    create: (input) ->
-        value: input
-        text: input
+    create: true
     load: (query, callback) ->
       if query.length < 3
         return callback()
