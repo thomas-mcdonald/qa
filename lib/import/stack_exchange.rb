@@ -29,14 +29,17 @@ module QA
         bar = progress_bar('Users', users_doc.length)
         user_ids = []
         @conn.exec('COPY users (id, name, email, created_at, updated_at) FROM STDIN WITH CSV')
-        users_doc.each do |u|
-          bar.increment
-          next if u["Id"].to_i < 0
-          time = DateTime.now
-          @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
-          user_ids << u["Id"].to_i
+        begin
+          users_doc.each do |u|
+            bar.increment
+            next if u["Id"].to_i < 0
+            time = DateTime.now
+            @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
+            user_ids << u["Id"].to_i
+          end
+        ensure
+          @conn.put_copy_end
         end
-        @conn.put_copy_end
         user_ids
       end
 
