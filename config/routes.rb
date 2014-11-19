@@ -40,6 +40,7 @@ QA::Application.routes.draw do
   post '/auth/:provider/callback', to: 'authorizations#callback'
 
   get '/tags', to: 'tags#index'
+  get '/tags/search', to: 'tags#search'
 
   constraints AdminConstraint.new do
     get '/admin', to: 'admin#index'
