@@ -2,6 +2,8 @@ class Tag < ActiveRecord::Base
   has_many :taggings
   has_many :questions, through: :taggings
 
+  scope :search, -> (term) { where('name LIKE ?', %(#{term}%)) }
+
   def self.by_popularity
     select('tags.*, count(*) as count').joins(:taggings).order('count(*) DESC, name ASC').group('tags.id')
   end
