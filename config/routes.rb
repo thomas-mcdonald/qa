@@ -32,7 +32,7 @@ QA::Application.routes.draw do
   resources :votes, only: [:create, :destroy]
 
   get '/user/edit', to: 'users#edit', as: 'edit_user'
-  resources :users, only: [:create, :show, :update]
+  resources :users, only: [:index, :show, :create, :update]
   get '/login', to: 'sessions#new', as: 'login'
   post '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
@@ -42,6 +42,7 @@ QA::Application.routes.draw do
   post '/auth/:provider/callback', to: 'authorizations#callback'
 
   get '/tags', to: 'tags#index'
+  get '/tags/search', to: 'tags#search'
 
   # development routes
   if Rails.env.development?

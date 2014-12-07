@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   def is_user(user)
-    current_user.id == user.id
+    logged_in? && current_user.id == user.id
   end
   helper_method :is_user
 
   def require_user(user)
-    raise QA::NotAuthorised unless is_user(id)
+    raise QA::NotAuthorised unless is_user(user)
   end
 
   def login(user)

@@ -108,3 +108,42 @@
     }
   }
 }
+
+$user-list-gravatar-size: 48px;
+
+#user-list {
+  @include make-row();
+  list-style-type: none;
+
+  li {
+    @include make-xs-column(3);
+    float: left;
+    margin-bottom: 20px;
+  }
+
+  img {
+    float: left;
+    height: $user-list-gravatar-size;
+    margin-right: 5px;
+    width: $user-list-gravatar-size;
+  }
+
+  .user-info {
+    margin-left: $user-list-gravatar-size + 8px;
+    margin-top: 2px;
+  }
+
+  .user-info span {
+    display: block;
+  }
+
+  .user-link {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .reputation {
+    font-weight: bold;
+    margin-top: 2px;
+  }
+}
