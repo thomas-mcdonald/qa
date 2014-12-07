@@ -9,7 +9,7 @@ class Answer < ActiveRecord::Base
 
   validates :question_id, presence: true
   validates :user_id, presence: true
-  validates :body, length: { in: 10..30000 }, presence: true
+  validates :body, length: { in: 10..30000 }
 
   def self.question_view_ordering(question)
     if aaid = question.accepted_answer_id

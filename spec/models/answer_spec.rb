@@ -12,7 +12,7 @@ describe Answer, type: :model do
   end
 
   describe 'validations' do
-    [:body, :question_id, :user_id].each do |attr|
+    [:question_id, :user_id].each do |attr|
       it { is_expected.to validate_presence_of(attr) }
     end
     it { is_expected.to ensure_length_of(:body).is_at_least(10).is_at_most(30000) }
