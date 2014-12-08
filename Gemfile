@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.8'
 
+gem 'dalli', '~> 2.7.2'
 gem 'faker', '~> 1.4.2'
 gem 'html-pipeline', '~> 1.9.0'
 gem 'kaminari', '~> 0.16.0'

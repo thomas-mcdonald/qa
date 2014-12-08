@@ -4,7 +4,7 @@
     <%= render partial: 'answers/accept_answer', locals: { question: question, answer: answer } %>
   </div>
   <div class="main">
-    <div class="body"><%=format answer.body%></div>
+    <div class="body"><%=format_body answer %></div>
     <div class="meta">
       <div class="links">
         <% if policy(answer).edit? %>

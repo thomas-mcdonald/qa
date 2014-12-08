@@ -9,7 +9,7 @@
         <div class="vote-controls"><%= vote_controls(@question, @user_votes) %></div>
       </div>
       <div class="main">
-        <div class="body"><%=format @question.body %></div>
+        <div class="body"><%=format_body @question %></div>
         <ul class="tags">
           <% @question.tags.each do |tag| %>
             <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
