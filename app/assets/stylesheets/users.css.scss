@@ -79,39 +79,51 @@
   }
 }
 
-.user-answer-list, .user-question-list {
+.user-box {
   @include make-md-column(6);
 
-  h3 {
-    margin-top: 0;
+  .header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 7px;
   }
 
   ul {
+    @include make-row();
     padding-left: 0;
     list-style-type: none;
   }
 
   li {
-    @include make-row();
+    @include make-xs-column(12);
     @include clearfix();
     height: 25px;
+    margin-bottom: 7px;
     clear: both;
 
     .vote-count {
       @include clearfix();
-      @include make-md-column(.5);
+      @include make-xs-column(.75);
       background-color: rgba(125, 125, 125, .1);
-      height: $font-size-base + 6;
-      padding: 1px 0 0; // this removes some of the padding given by md-column, needed for centered counts
+      height: $font-size-base + 13;
+      padding: 4px 7px 4px; // this removes some of the padding given by md-column, needed for centered counts
       text-align: center;
     }
 
     > a {
-      @include make-md-column(11.5);
+      @include make-xs-column(11.25);
+      margin-top: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
+  }
+
+  h3 {
+    margin-top: 0;
   }
 }
 
+// /users
 $user-list-gravatar-size: 48px;
 
 #user-list {
