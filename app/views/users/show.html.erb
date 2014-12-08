@@ -34,8 +34,10 @@
 </div>
 
 <div class="row">
-<div class="user-question-list">
-  <h3>Questions</h3>
+<div class="user-box user-question-list">
+  <div class="header">
+    <h3>Questions</h3>
+  </div>
   <ul>
     <% @questions.each do |question| %>
       <li>
@@ -46,8 +48,10 @@
   </ul>
 </div>
 
-<div class="user-answer-list">
-  <h3>Answers</h3>
+<div class="user-box user-answer-list">
+  <div class="header">
+    <h3>Answers</h3>
+  </div>
   <ul>
     <% @answers.each do |answer| %>
       <li>
