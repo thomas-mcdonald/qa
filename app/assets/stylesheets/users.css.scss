@@ -66,6 +66,9 @@
 
   .user-info {
     @include make-md-column(4);
+    font-size: $font-size-base - 1;
+
+    td { padding-bottom: 6px; }
   }
 
   .about-me {

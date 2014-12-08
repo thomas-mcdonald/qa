@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724214624) do
+ActiveRecord::Schema.define(version: 20141208134739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(version: 20140724214624) do
     t.integer  "reputation", default: 0,     null: false
     t.text     "about_me",   default: "",    null: false
     t.boolean  "moderator",  default: false, null: false
+    t.string   "location",   default: "",    null: false
+    t.string   "website",    default: "",    null: false
   end
 
   create_table "votes", force: true do |t|
