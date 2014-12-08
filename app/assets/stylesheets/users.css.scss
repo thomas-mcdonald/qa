@@ -42,6 +42,7 @@
 // user#show pages
 .user-misc {
   @include make-row();
+  margin-bottom: 15px;
 
   .identity {
     @include make-md-column(2);
@@ -79,6 +80,18 @@
   }
 }
 
+@mixin vote-box($col-size) {
+  .vote-count {
+    @include clearfix();
+    @include make-xs-column($col-size);
+    background-color: rgba(125, 125, 125, .1);
+    font-size: 12px;
+    height: $font-size-base + 13;
+    padding: 4px 4px 4px; // this removes some of the padding given by md-column, needed for centered counts
+    text-align: center;
+  }
+}
+
 .user-box {
   @include make-md-column(6);
 
@@ -96,18 +109,10 @@
   li {
     @include make-xs-column(12);
     @include clearfix();
+    @include vote-box(.75);
     height: 25px;
     margin-bottom: 7px;
     clear: both;
-
-    .vote-count {
-      @include clearfix();
-      @include make-xs-column(.75);
-      background-color: rgba(125, 125, 125, .1);
-      height: $font-size-base + 13;
-      padding: 4px 7px 4px; // this removes some of the padding given by md-column, needed for centered counts
-      text-align: center;
-    }
 
     > a {
       @include make-xs-column(11.25);
@@ -120,6 +125,40 @@
 
   h3 {
     margin-top: 0;
+    a:hover, a:focus { text-decoration: none; }
+
+    a span {
+      color: $gray;
+      font-weight: normal;
+    }
+  }
+}
+
+// /users/#{id}/answers
+.answer-list {
+  @include vote-box(.33);
+  list-style-type: none;
+
+  li {
+    @include clearfix();
+    @include make-row();
+    border-bottom: 1px solid $gray-lighter;
+    height: 32px;
+    margin-bottom: 4px;
+    &:last-child { border-bottom: 0; }
+
+    a {
+      @include make-xs-column(9.66);
+      margin-top: 4px;
+    }
+
+    .date {
+      @include make-xs-column(2);
+      color: $gray-light;
+      font-size: 12px;
+      margin-top: 5px;
+      text-align: right;
+    }
   }
 }
 

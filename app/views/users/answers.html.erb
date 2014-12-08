@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h1><%= @user.name %></h1>
+</div>
+
+<%= render partial: 'info', locals: { user: @user } %>
+
+<div class="page-header">
+  <h2><%= pluralize @user.answer_count, 'Answer', 'Answers' %></h2>
+</div>
+
+<ul class="answer-list">
+  <% @answers.each do |answer| %>
+    <li>
+      <span class="vote-count"><%= answer.vote_count %></span>
+      <%= link_to answer.question.title, answer.question %>
+      <span class="date"><%= answer.created_at.strftime("%b %e '%y at %k:%M") %></span>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @answers %>

@@ -25,6 +25,24 @@ describe UsersController, type: :controller do
     end
   end
 
+  describe 'answers' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'is successful' do
+      get :answers, id: user.to_param
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe 'questions' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'is successful' do
+      get :questions, id: user.to_param
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe 'edit' do
     before { sign_in(alice) }
     it 'loads successfully' do
