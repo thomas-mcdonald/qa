@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def answer_count
+    answers.count
+  end
+
   def calculate_reputation!
     rep = reputation_events.inject(0) do |sum, event|
       sum + ReputationEvent.reputation_for(event.event_type)
@@ -60,6 +64,10 @@ class User < ActiveRecord::Base
 
   def gravatar(size = 32)
     "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
+  end
+
+  def question_count
+    questions.count
   end
 
   def rendered_about_me
