@@ -2,27 +2,13 @@
   <h1><%= @user.name %></h1>
 </div>
 
-<div class="user-misc">
-  <div class="identity">
-    <img src="<%= @user.gravatar(128) %>" class="gravatar">
-    <p><span class="reputation"><%= @user.reputation %></span> reputation</p>
-  </div>
-  <div>
-    <dl class="user-info">
-      <% if can_view_users_email?(@user) %>
-        <dt>email:</dt>
-        <dd><%= @user.email %></dd>
-      <% end %>
-    </dl>
-  </div>
-  <div class="about-me">
-    <%= @user.rendered_about_me %>
-  </div>
-</div>
+<%= render partial: 'info', locals: { user: @user } %>
 
 <div class="row">
-<div class="user-question-list">
-  <h3>Questions</h3>
+<div class="user-box user-question-list">
+  <div class="header">
+    <h3><%= link_to header_pluralize(@user.question_count, 'Question', 'Questions'), questions_user_path(@user) %></h3>
+  </div>
   <ul>
     <% @questions.each do |question| %>
       <li>
@@ -33,8 +19,10 @@
   </ul>
 </div>
 
-<div class="user-answer-list">
-  <h3>Answers</h3>
+<div class="user-box user-answer-list">
+  <div class="header">
+    <h3><%= link_to header_pluralize(@user.answer_count, 'Answer', 'Answers'), answers_user_path(@user) %></h3>
+  </div>
   <ul>
     <% @answers.each do |answer| %>
       <li>

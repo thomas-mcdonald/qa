@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :load_and_verify_slug, only: [:show]
-  before_filter :require_login, except: [:index, :show, :new, :create]
+  before_filter :load_and_verify_slug, only: [:show, :answers, :questions]
+  before_filter :require_login, except: [:index, :show, :answers, :questions, :new, :create]
 
   def index
     @users = User.order('reputation DESC').page(params[:page]).per(20)
@@ -10,6 +10,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.limit(5)
     @answers = @user.answers.includes(:question).limit(5)
+  end
+
+  def answers
+    @user = User.find(params[:id])
+    @answers = @user.answers.includes(:question).order('vote_count DESC').page(params[:page]).per(25)
+  end
+
+  def questions
+    @user = User.find(params[:id])
+    @questions = @user.questions.includes(:tags, :last_active_user).order('vote_count DESC').page(params[:page]).per(15)
   end
 
   def new
