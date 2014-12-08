@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904122836) do
+ActiveRecord::Schema.define(version: 20141208134739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(version: 20140904122836) do
     t.integer  "bronze_count", default: 0,     null: false
     t.integer  "silver_count", default: 0,     null: false
     t.integer  "gold_count",   default: 0,     null: false
+    t.string   "location",     default: "",    null: false
+    t.string   "website",      default: "",    null: false
   end
 
   create_table "votes", force: true do |t|
