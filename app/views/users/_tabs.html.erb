@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs user-tabs">
+  <%= active_tab(action: 'show') do %>
+    <% link_to 'profile', user_path(user) %>
+  <% end %>
+  <%= active_tab(action: 'questions') do %>
+    <% link_to 'questions', questions_user_path(user) %>
+  <% end %>
+  <%= active_tab(action: 'answers') do %>
+    <% link_to 'answers', answers_user_path(user) %>
+  <% end %>
+</ul>
