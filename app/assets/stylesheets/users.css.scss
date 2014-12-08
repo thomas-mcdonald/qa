@@ -80,6 +80,8 @@
   }
 }
 
+.user-tabs { margin-bottom: 25px; }
+
 @mixin vote-box($col-size) {
   .vote-count {
     @include clearfix();
