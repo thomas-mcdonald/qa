@@ -1,0 +1,30 @@
+<div class="user-misc">
+  <div class="identity">
+    <img src="<%= user.gravatar(128) %>" class="gravatar">
+    <p><span class="reputation"><%= user.reputation %></span> reputation</p>
+  </div>
+  <div>
+    <table class="user-info">
+      <tr>
+        <td>member for</td>
+        <td><%= time_ago_in_words user.created_at %></td>
+      <tr>
+        <td>location</td>
+        <td><%= user.location %></td>
+      </tr>
+      <tr>
+        <td>website</td>
+        <td><%= user.website%></td>
+      </tr>
+      <% if can_view_users_email?(user) %>
+        <tr>
+          <td>email</td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="about-me">
+    <%= user.rendered_about_me %>
+  </div>
+</div>
