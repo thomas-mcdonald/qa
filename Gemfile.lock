@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/codegram/guard-spinach.git
+  revision: 2aa6277e178bf4b16e2e4c37e002a4673c9d980d
+  specs:
+    guard-spinach (0.0.3)
+      guard (>= 1.1)
+      spinach
+
+GIT
   remote: git://github.com/paulwittmann/rails-erd.git
   revision: 9ccb094fa29b095d5549271f48c65af8bb53f749
   branch: mavericks
@@ -8,14 +16,6 @@ GIT
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
-
-GIT
-  remote: git://github.com/thomas-mcdonald/guard-spinach.git
-  revision: 6102d37cdc4ef7c0f82b84846d66506673f44d25
-  specs:
-    guard-spinach (0.0.2)
-      guard (>= 1.1)
-      spinach
 
 GEM
   remote: https://rubygems.org/
@@ -95,19 +95,21 @@ GEM
       sass-rails (>= 3.1.1)
     formatador (0.2.5)
     gherkin-ruby (0.3.2)
-    guard (2.6.1)
+    guard (2.10.2)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
-    guard-rspec (4.3.1)
+    guard-compat (0.3.0)
+    guard-rspec (4.4.2)
       guard (~> 2.1)
-      rspec (>= 2.14, < 4.0)
+      guard-compat (~> 0.1)
+      rspec (>= 2.99.0, < 4.0)
     hashie (3.3.2)
     hike (1.2.3)
     hitimes (1.2.2)
-    html-pipeline (1.9.0)
+    html-pipeline (1.11.0)
       activesupport (>= 2)
       nokogiri (~> 1.4)
     i18n (0.6.11)
@@ -295,10 +297,10 @@ DEPENDENCIES
   factory_girl_rails (~> 4.4.1)
   faker (~> 1.4.2)
   font-awesome-sass-rails
-  guard (~> 2.6.0)
-  guard-rspec (~> 4.3.0)
+  guard (~> 2.10.0)
+  guard-rspec (~> 4.4.0)
   guard-spinach!
-  html-pipeline (~> 1.9.0)
+  html-pipeline (~> 1.11.0)
   jquery-rails (~> 3.1.2)
   kaminari (~> 0.16.0)
   minitest
