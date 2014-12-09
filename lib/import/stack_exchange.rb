@@ -114,9 +114,15 @@ module QA
       end
 
       def update_counters
-        print " Queueing updates to cache column counters"
-        Question.all.each { |q| Jobs::QuestionStats.perform_async(q.id) }
-        Answer.all.each { |a| Jobs::AnswerStats.perform_async(a.id) }
+        print " Updating cache counters & creating background jobs for badges"
+        Question.all.each do |q|
+          Jobs::QuestionStats.new.perform(q.id)
+          Jobs::Badge.perform_async(:question_vote, q.global_id)
+        end
+        Answer.all.each do |a|
+          Jobs::AnswerStats.new.perform(a.id)
+          Jobs::Badge.perform_async(:answer_vote, a.global_id)
+        end
         puts " - done!"
       end
 
