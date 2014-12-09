@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     answers.count
   end
 
+  def badge_count
+    badges.count
+  end
+
   def calculate_reputation!
     rep = reputation_events.inject(0) do |sum, event|
       sum + ReputationEvent.reputation_for(event.event_type)

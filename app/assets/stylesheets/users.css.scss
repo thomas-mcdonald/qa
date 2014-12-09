@@ -110,11 +110,9 @@
 
   li {
     @include make-xs-column(12);
-    @include clearfix();
     @include vote-box(.75);
     height: 25px;
     margin-bottom: 7px;
-    clear: both;
 
     > a {
       @include make-xs-column(11.25);
@@ -135,6 +133,9 @@
     }
   }
 }
+
+// two columns in the badge box
+.badge-list li { @include make-xs-column(6); }
 
 // /users/#{id}/answers
 .answer-list {

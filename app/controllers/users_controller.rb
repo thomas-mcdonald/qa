@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.limit(5)
     @answers = @user.answers.includes(:question).limit(5)
+    @badges = @user.badges.limit(10)
   end
 
   def answers
