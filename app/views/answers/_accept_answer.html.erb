@@ -1,20 +1,23 @@
 <% if current_user == question.user %>
-  <div class="accept-answer">
-    <%= form_tag accept_answer_url(id: question.id), remote: true, class: 'accept-form' do %>
-      <% if question.accepted_answer_id == answer.id %>
-        <%= hidden_field_tag :answer_id, nil %>
+  <% if answer.accepted? %>
+    <div class="unaccept-answer">
+      <%= form_tag unaccept_answer_url(id: question.id), remote: true, class: 'accept-form' do %>
         <button type="submit">
           <i class="icon-ok active"></i>
         </button>
-      <% else %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="accept-answer">
+      <%= form_tag accept_answer_url(id: question.id), remote: true, class: 'accept-form' do %>
         <%= hidden_field_tag :answer_id, answer.id %>
         <button type="submit">
           <i class="icon-ok inactive"></i>
         </button>
       <% end %>
-    <% end %>
-  </div>
-<% elsif question.accepted_answer_id == answer.id %>
+    </div>
+  <% end %>
+<% elsif answer.accepted? %>
   <div class="accept-answer">
     <i class="icon-ok active accepted-standalone"></i>
   </div>

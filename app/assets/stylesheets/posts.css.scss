@@ -48,7 +48,7 @@
     }
   }
 
-  .accept-answer {
+  .accept-answer, .unaccept-answer {
     @extend %control-container;
     margin-top: 5px;
 
