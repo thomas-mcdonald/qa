@@ -10,6 +10,6 @@ class AdminDashboardProblems
   private
 
   def sidekiq
-    'No Sidekiq workers appear to be available. Is Sidekiq running?' if Sidekiq::Workers.new.size == 0
+    'No Sidekiq workers appear to be available. Is Sidekiq running?' if Sidekiq::ProcessSet.new.size == 0
   end
 end
