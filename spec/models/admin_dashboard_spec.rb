@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe AdminDashboardProblems do
-  subject { AdminDashboardProblems.new }
+describe AdminDashboard do
+  subject { AdminDashboard.new }
 
   context 'sidekiq errors' do
     it 'detects if sidekiq workers are not running' do

@@ -1,4 +1,4 @@
-class AdminDashboardProblems
+class AdminDashboard
   def problems
     [sidekiq].compact
   end
