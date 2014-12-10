@@ -9,8 +9,6 @@ class AdminConstraint
 end
 
 QA::Application.routes.draw do
-  mount Sidekiq::Web => '/admin/sidekiq', constraints: AdminConstraint.new
-
   root to: 'questions#index'
 
   # Question URLs
@@ -48,6 +46,14 @@ QA::Application.routes.draw do
 
   get '/tags', to: 'tags#index'
   get '/tags/search', to: 'tags#search'
+
+  constraints AdminConstraint.new do
+    get '/admin', to: 'admin#index'
+    get '/admin/health', to: 'admin#health'
+
+    mount PgHero::Engine, at: '/admin/pghero'
+    mount Sidekiq::Web, at: '/admin/sidekiq'
+  end
 
   # development routes
   if Rails.env.development?

@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.8'
 
+gem 'by_star', github: 'radar/by_star'
 gem 'faker', '~> 1.4.2'
 gem 'html-pipeline', '~> 1.11.0'
 gem 'kaminari', '~> 0.16.0'
 gem 'pg', '~> 0.17.0'
+gem 'pghero', '~> 0.1.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.2.0'
 gem 'redis', '~> 3.1.0'
