@@ -6,6 +6,33 @@
   <% if @issues %>
     <div class="alert alert-danger">Some problems have been found with your installation. Check the <%= link_to 'health page', admin_health_url %> for more information.</div>
   <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>questions</th>
+        <th>answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>week</td>
+        <td><%= @stats[:questions][:week] %></td>
+        <td><%= @stats[:answers][:week] %></td>
+      </tr>
+      <tr>
+        <td>month</td>
+        <td><%= @stats[:questions][:month] %></td>
+        <td><%= @stats[:answers][:month] %></td>
+      </tr>
+      <tr>
+        <td>year</td>
+        <td><%= @stats[:questions][:year] %></td>
+        <td><%= @stats[:answers][:year] %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div id="sidebar">

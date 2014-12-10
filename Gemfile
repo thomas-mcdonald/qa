@@ -4,6 +4,7 @@ ruby '2.1.4'
 
 gem 'rails', '4.1.7'
 
+gem 'by_star', github: 'radar/by_star'
 gem 'faker', '~> 1.4.2'
 gem 'jquery-rails'
 gem 'html-pipeline', '~> 1.9.0'

@@ -2,7 +2,9 @@ class AdminController < ApplicationController
   before_filter :require_login
 
   def index
-    @issues = AdminDashboard.new.problems?
+    db = AdminDashboard.new
+    @issues = db.problems?
+    @stats = db.stats
   end
 
   def health
