@@ -10,7 +10,7 @@ gem 'pg', '~> 0.17.0'
 gem 'pghero', '~> 0.1.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.2.0'
-gem 'redis', '~> 3.1.0'
+gem 'redis', '~> 3.2.0'
 gem 'redis-namespace', '~> 1.5.0'
 gem 'ruby-progressbar'
 gem 'sanitize', '~> 3.0.0'
@@ -27,7 +27,7 @@ gem 'sidekiq', '~> 3.3.0'
 gem 'sinatra', require: false
 
 # Asset gems
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.3.0'
 gem 'font-awesome-sass-rails'
 gem 'jquery-rails', '~> 3.1.2'
 gem 'sass-rails',   '~> 4.0.0'
