@@ -1,6 +1,24 @@
+%badge-button {
+  &.bronze, &.silver, &.gold {
+    padding-left: 18px;
+    &:before {
+      position: absolute;
+      content: '\2022';
+      font-size: 22px;
+      left: 6px;
+      line-height: 16px;
+    }
+  }
+
+  &.bronze:before { color: #c96; }
+  &.silver:before { color: #c5c5c5; }
+  &.gold:before { color: #fc0; }
+}
+
 // Base badge
 .badge {
   @include gradient-vertical(#555, #333);
+  @extend %badge-button;
   border-bottom: 1px solid #020202;
   border-left: 1px solid #242424;
   border-right: 1px solid #242424;
@@ -30,22 +48,13 @@
     border: 1px solid #000;
     @include box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.5));
   }
-  &.bronze, &.silver, &.gold {
-    padding-left: 18px;
-    &:before {
-      position: absolute;
-      content: '\2022';
-      font-size: 22px;
-      left: 6px;
-      line-height: 16px;
-    }
-  }
 }
 
-// Set color of ranks
-.badge.bronze:before { color: #c96; }
-.badge.silver:before { color: #c5c5c5; }
-.badge.gold:before { color: #fc0; }
+.badge-count {
+  @extend %badge-button;
+  @include navbar-vertical-align($line-height-computed);
+  float: left;
+}
 
 
 .recent-badges {

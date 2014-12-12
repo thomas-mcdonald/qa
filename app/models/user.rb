@@ -66,6 +66,18 @@ class User < ActiveRecord::Base
     question.answers.pluck(:user_id).include?(self.id)
   end
 
+  def has_bronze_badges?
+    bronze_count > 0
+  end
+
+  def has_silver_badges?
+    silver_count > 0
+  end
+
+  def has_gold_badges?
+    gold_count > 0
+  end
+
   def gravatar(size = 32)
     "https://www.gravatar.com/avatar/#{email_hash}.png?s=#{size}&r=pg&d=identicon"
   end
