@@ -25,14 +25,6 @@ describe VoteCreator do
     expect {
       VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'upvote').create
     }.to change(Jobs::Badge.jobs, :size).by(1)
-
-    expect {
-      VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'downvote').create
-    }.to change(Jobs::Badge.jobs, :size).by(1)
-
-    expect {
-      VoteCreator.new(user, post_id: post.id, post_type: 'Question', vote_type: 'upvote').create
-    }.to change(Jobs::Badge.jobs, :size).by(1)
   end
 
   describe '#create_reputation_events' do
