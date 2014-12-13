@@ -145,18 +145,17 @@
 }
 
 .sidebar-tags {
+  list-style-type: none;
+  padding-left: 0;
+
   h5 {
     margin: 0 0 6px 25px;
   }
 
-  ul {
-    list-style-type: none;
-
-    li { margin-bottom: 6px; }
-    span {
-      color: #b1b1b1;
-      font-size: 12px;
-    }
+  li { margin-bottom: 6px; }
+  span {
+    color: #b1b1b1;
+    font-size: 12px;
   }
 }
 

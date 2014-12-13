@@ -1,4 +1,8 @@
 module UserSupport
+  def admin
+    @admin ||= FactoryGirl.create(:user, name: 'admin', admin: true)
+  end
+
   def a_k
     # a user with 1000 reputation
     @a_k ||= FactoryGirl.create(:user, name: 'AK', reputation: 1000)

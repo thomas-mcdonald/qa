@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   include TimelineAction
 
   before_filter :require_login, except: [:index, :show, :tagged, :timeline]
+  before_filter :ensure_valid_accept_modifier, only: [:accept_answer, :unaccept_answer]
   before_filter :load_and_verify_slug, only: [:show]
 
   def index
@@ -56,18 +57,11 @@ class QuestionsController < ApplicationController
   end
 
   def accept_answer
-    # TODO: this method requires refactoring
     # TODO: reputation events need destroying on new accepted answers
-    @question = Question.find(params[:id])
-    head :forbidden and return unless is_user(@question.user)
-    head :bad_request and return if missing_accept_params
-    if params[:answer_id].present? # setting new accept
-      @answer = Answer.find(params[:answer_id])
-      @question.accept_answer(@answer)
-    else
-      @answer = Answer.find(@question.accepted_answer_id)
-      @question.unaccept_answer
-    end
+    head :bad_request and return if params[:answer_id].blank?
+    @question.unaccept_answer
+    @answer = Answer.find(params[:answer_id])
+    @question.accept_answer(@answer)
     if @question.save
       render_json_partial('answers/accept_answer', {
         question: @question,
@@ -78,7 +72,22 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def unaccept_answer
+    @answer = @question.accepted_answer
+    @question.unaccept_answer
+    @question.save
+    render_json_partial('answers/accept_answer', {
+      answer: @answer,
+      question: @question
+    })
+  end
+
   private
+
+  def ensure_valid_accept_modifier
+    @question = Question.find(params[:id])
+    head :forbidden unless is_user(@question.user)
+  end
 
   def load_timeline_post
     @post = Question.find(params[:id])
@@ -93,10 +102,5 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:body, :tag_list, :title)
-  end
-
-  # check to ensure we have required parameters for accept_answer
-  def missing_accept_params
-    params[:answer_id].blank? and @question.accepted_answer_id.blank?
   end
 end

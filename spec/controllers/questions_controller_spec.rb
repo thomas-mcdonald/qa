@@ -105,11 +105,11 @@ describe QuestionsController, :type => :controller do
 
   describe 'accept_answer' do
     let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
+    let(:answer) { FactoryGirl.create(:answer, question: question) }
     it { expect { post :accept_answer, id: question.id }.to require_login }
 
     context 'when logged in as the question asker' do
       before { sign_in(alice) }
-      let(:answer) { FactoryGirl.create(:answer, question: question) }
 
       it 'returns bad request if neither accepted answer in question or param' do
         post :accept_answer, id: question.id
@@ -126,13 +126,6 @@ describe QuestionsController, :type => :controller do
         post :accept_answer, id: question.id, answer_id: 999
         expect(Question.find(question.id).accepted_answer_id).to eq(nil)
       end
-
-      it 'removes the accepted answer if there is no answer_id' do
-        question.accepted_answer_id = answer.id
-        question.save
-        post :accept_answer, id: question.id
-        expect(Question.find(question.id).accepted_answer_id).to eq(nil)
-      end
     end
 
     context 'when logged in as a different user' do
@@ -140,6 +133,32 @@ describe QuestionsController, :type => :controller do
         sign_in(bob)
         post :accept_answer, id: question.id
         expect(response).to be_forbidden
+      end
+    end
+  end
+
+  describe 'unaccept_answer' do
+    let(:question) { FactoryGirl.create(:question, accepted_answer_id: nil, user: alice) }
+    let(:answer) { FactoryGirl.create(:answer, question: question) }
+    before { question.accept_answer(answer); question.save }
+
+    it { expect { post :unaccept_answer, id: question.id }.to require_login }
+
+    context 'when logged in as the question asker' do
+      before { sign_in(alice) }
+
+      it 'removes the accepted answer if there is no answer_id' do
+        post :unaccept_answer, id: question.id
+        expect(Question.find(question.id).accepted_answer_id).to eq(nil)
+      end
+    end
+
+    context 'when logged in as a different user' do
+      it 'raises unauthorised' do
+        sign_in(bob)
+        post :unaccept_answer, id: question.id
+        expect(response).to be_forbidden
+        expect(question.accepted_answer).to eq(answer)
       end
     end
   end
