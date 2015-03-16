@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answers", force: true do |t|
+  create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "user_id"
     t.text     "body"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
-  create_table "authorizations", force: true do |t|
+  create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.text     "uid"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
+  create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["post_id", "post_type"], name: "index_comments_on_post_id_and_post_type", using: :btree
+  add_index "comments", ["post_type", "post_id"], name: "index_comments_on_post_type_and_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "questions", force: true do |t|
+  create_table "questions", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
     t.text     "body"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.integer  "accepted_answer_id"
   end
 
-  create_table "reputation_events", force: true do |t|
+  create_table "reputation_events", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_type"
     t.string   "action_type"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
 
   add_index "reputation_events", ["user_id"], name: "index_reputation_events_on_user_id", using: :btree
 
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "question_id"
     t.datetime "created_at"
@@ -82,13 +82,13 @@ ActiveRecord::Schema.define(version: 20141208134739) do
   add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "timeline_actors", force: true do |t|
+  create_table "timeline_actors", force: :cascade do |t|
     t.integer  "timeline_event_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
   add_index "timeline_actors", ["timeline_event_id"], name: "index_timeline_actors_on_timeline_event_id", using: :btree
   add_index "timeline_actors", ["user_id"], name: "index_timeline_actors_on_user_id", using: :btree
 
-  create_table "timeline_events", force: true do |t|
+  create_table "timeline_events", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "post_type"
     t.integer  "action"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.string   "website",    default: "",    null: false
   end
 
-  create_table "votes", force: true do |t|
+  create_table "votes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.integer  "vote_type"
