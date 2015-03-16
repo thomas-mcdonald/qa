@@ -21,6 +21,7 @@ gem 'simple_form', '~> 3.1.0'
 # Authentication
 gem 'omniauth', '~> 1.2.0'
 gem 'omniauth-openid', '1.0.1'
+gem 'omniauth-google-oauth2', '~> 0.2.6'
 
 # Jobs & web interface
 gem 'sidekiq', '~> 3.3.0'
@@ -47,6 +48,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'spinach-rails'
 end
