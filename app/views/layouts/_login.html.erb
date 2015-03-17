@@ -11,6 +11,9 @@
         <% if SiteSettings.authentication.google %>
           <a class="btn btn-success" href="/auth/google" id="google-login-button">login with Google</a>
         <% end %>
+        <% if SiteSettings.authentication.twitter %>
+          <a class="btn btn-info" href="/auth/twitter" id="twitter-login-button">login with Twitter</a>
+        <% end %>
       </div>
     </div>
   </div>

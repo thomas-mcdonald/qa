@@ -5,7 +5,7 @@ name: QA
 # At least one must be selected for QA to boot.
 authentication:
   google: true
-
+  twitter: true
 
 reputation:
   # Reputation values for QA.
