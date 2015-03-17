@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :check_for_orphaned_authorization, only: [:create]
   before_filter :load_and_verify_slug, only: [:show, :answers, :questions]
   before_filter :require_login, except: [:index, :show, :answers, :questions, :new, :create]
 
@@ -23,7 +24,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
+    @user.authorizations << Authorization.find(session[:auth_id])
+    @user.save! # TODO: handle validation errors - email?
+    session[:auth_id] = nil
     session[:user_id] = @user.id
     redirect_to "/"
   end

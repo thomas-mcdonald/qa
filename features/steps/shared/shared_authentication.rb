@@ -20,6 +20,7 @@ module SharedAuthentication
 
   def create_user
     @user = User.new_from_hash(omniauth_hash)
+    @user.authorizations << Authorization.create_from_hash(omniauth_hash)
     @user.save
     @user
   end

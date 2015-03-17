@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Slugger
 
   has_many :answers
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
   has_many :comments
   has_many :questions
   has_many :reputation_events
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   is_slugged :name
 
   def self.find_by_hash(auth_hash)
-    if auth = Authorization.where('uid = ?', auth_hash[:uid]).where('provider = ?', auth_hash[:provider]).first
+    if auth = Authorization.find_by_hash(auth_hash)
       auth.user
     else
       nil
@@ -21,16 +21,10 @@ class User < ActiveRecord::Base
   end
 
   def self.new_from_hash(auth_hash)
-    user = User.new(
+    new(
       email: auth_hash[:info][:email],
       name: auth_hash[:info][:name]
     )
-    user.authorizations.new(
-      email: auth_hash[:info][:email],
-      provider: auth_hash[:provider],
-      uid: auth_hash[:uid]
-    )
-    user
   end
 
   def answer_count
