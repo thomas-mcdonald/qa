@@ -1,6 +1,7 @@
 class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedPaths
+  include SharedTagInterface
 
   step 'I submit the form with a valid question' do
     fill_in_form
@@ -15,8 +16,7 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
 
   step 'I submit the form with question data but without any tags' do
     fill_in_form
-    # remove tag
-    find('.selectize-control input').native.send_key(:Backspace)
+    remove_tag
     find(:xpath, '//input[@name="commit"]').click
   end
 
@@ -34,9 +34,6 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
     @data = FactoryGirl.attributes_for(:question)
     fill_in 'question_title', with: @data[:title]
     fill_in 'question_body', with: @data[:body]
-    find('.selectize-control input').set(@data[:tag_list])
-    within '.selectize-dropdown' do
-      find('.create').click
-    end
+    input_and_add_tags(@data[:tag_list])
   end
 end

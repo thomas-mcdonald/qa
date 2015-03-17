@@ -2,6 +2,7 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedPaths
   include SharedQuestion
+  include SharedTagInterface
 
   step 'I am logged in and cannot edit questions' do
     QuestionPolicy.any_instance.stubs(:edit?).returns(false)
@@ -28,10 +29,7 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   step 'I edit and submit the question data' do
     fill_in 'question_body', with: 'this is an edited question body'
     fill_in 'question_title', with: 'new question title'
-    find('.selectize-control input').set('new-list, tags')
-    within '.selectize-dropdown' do
-      find('.create').click
-    end
+    input_and_add_tags('new-list, tags')
     find(:xpath, '//input[@name="commit"]').click
   end
 
