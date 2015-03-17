@@ -52,7 +52,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from QA::NotLoggedIn do |e|
     handle_env(e)
+    # TODO: display inside opened login modal
     flash[:notice] = "You must be logged in to perform that action"
-    redirect_to login_url
+    redirect_to '/'
   end
 end

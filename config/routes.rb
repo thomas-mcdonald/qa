@@ -37,9 +37,7 @@ QA::Application.routes.draw do
       get 'questions'
     end
   end
-  get '/login', to: 'sessions#new', as: 'login'
   post '/logout', to: 'sessions#destroy'
-  get '/signup', to: 'users#new'
 
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'

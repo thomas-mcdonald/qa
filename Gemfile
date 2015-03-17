@@ -22,6 +22,7 @@ gem 'simple_form', '~> 3.1.0'
 gem 'omniauth', '~> 1.2.0'
 gem 'omniauth-openid', '1.0.1'
 gem 'omniauth-google-oauth2', '~> 0.2.6'
+gem 'omniauth-twitter', '~> 1.1.0'
 
 # Jobs & web interface
 gem 'sidekiq', '~> 3.3.0'

@@ -4,13 +4,13 @@ Feature: Signup
   I want to be able to sign up for the application
 
   Scenario: Selecting a login provider
-    When I visit the signup page
+    When I open the login modal
     And I click on the Google provider
     Then I should be returned to the confirmation page
     And I should see a form for user details filled in
 
   Scenario: Confirming user details
-    When I visit the signup page
+    When I open the login modal
     And I click on the Google provider
     And I submit the user details form
     Then I should have a user created with those details

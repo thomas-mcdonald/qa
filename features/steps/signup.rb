@@ -1,8 +1,13 @@
 class Spinach::Features::Signup < Spinach::FeatureSteps
   include SharedPaths
 
+  step 'I open the login modal' do
+    visit '/'
+    click_link 'login-link'
+  end
+
   step 'I click on the Google provider' do
-    click_link_or_button('google-login')
+    click_link_or_button 'google-login-button'
   end
 
   step 'I should be returned to the confirmation page' do

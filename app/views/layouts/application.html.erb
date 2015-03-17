@@ -41,7 +41,7 @@
                 </ul>
               </li>
             <% else %>
-              <li><%= link_to 'Login', login_path %></li>
+              <li><a id="login-link" href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
             <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
@@ -53,5 +53,8 @@
       <% end %>
       <%= yield %>
     </div>
+    <% unless logged_in? %>
+      <%= render partial: 'layouts/login' %>
+    <% end %>
   </body>
 </html>

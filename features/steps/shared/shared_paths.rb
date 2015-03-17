@@ -1,14 +1,6 @@
 module SharedPaths
   include Spinach::DSL
 
-  step 'I visit the login page' do
-    visit '/login'
-  end
-
-  step 'I visit the signup page' do
-    visit '/login'
-  end
-
   step 'I visit the new question page' do
     visit new_question_path
   end
