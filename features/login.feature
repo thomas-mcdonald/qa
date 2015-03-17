@@ -10,7 +10,6 @@ Feature: Login
     Then I should be returned to the homepage
     And I should be logged in
 
-  @javascript
   Scenario: Logging out
     Given I am logged in
     When I click on the logout button

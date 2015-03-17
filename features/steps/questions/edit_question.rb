@@ -28,7 +28,10 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   step 'I edit and submit the question data' do
     fill_in 'question_body', with: 'this is an edited question body'
     fill_in 'question_title', with: 'new question title'
-    fill_in 'question_tag_list', with: 'new-list, tags'
+    find('.selectize-control input').set('new-list, tags')
+    within '.selectize-dropdown' do
+      find('.create').click
+    end
     find(:xpath, '//input[@name="commit"]').click
   end
 
