@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+ENV['BUNDLE_GEMFILE'] ||= (Pathname(__FILE__).realpath + '../../Gemfile').to_s
+
+require 'rubygems'
+require 'bundler/setup'
+
+while !system(Gem.bin_path('guard', 'guard')) && $?.exitstatus == 2
+  puts('Restarting guard...')
+end
+exit($?.exitstatus)
