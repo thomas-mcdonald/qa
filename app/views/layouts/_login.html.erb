@@ -8,7 +8,9 @@
         <h4 class="modal-title">Login</h4>
       </div>
       <div class="modal-body">
-        <a class="btn btn-success" href="/auth/google" id="google-login-button">login with Google</a>
+        <% if SiteSettings.authentication.google %>
+          <a class="btn btn-success" href="/auth/google" id="google-login-button">login with Google</a>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,6 +1,12 @@
 # The site name. Displayed in the header
 name: QA
 
+# Configure the available authentication providers.
+# At least one must be selected for QA to boot.
+authentication:
+  google: true
+
+
 reputation:
   # Reputation values for QA.
   # Receive values are awarded to the user who wrote the post when it is upvoted
