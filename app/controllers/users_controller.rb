@@ -22,9 +22,6 @@ class UsersController < ApplicationController
     @questions = @user.questions.includes(:tags, :last_active_user).order('vote_count DESC').page(params[:page]).per(15)
   end
 
-  def new
-  end
-
   def create
     @user = User.create(user_params)
     session[:user_id] = @user.id
