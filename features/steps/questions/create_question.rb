@@ -15,7 +15,8 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
 
   step 'I submit the form with question data but without any tags' do
     fill_in_form
-    fill_in 'question_tag_list', with: ''
+    # remove tag
+    find('.selectize-control input').native.send_key(:Backspace)
     find(:xpath, '//input[@name="commit"]').click
   end
 
@@ -33,6 +34,9 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
     @data = FactoryGirl.attributes_for(:question)
     fill_in 'question_title', with: @data[:title]
     fill_in 'question_body', with: @data[:body]
-    fill_in 'question_tag_list', with: @data[:tag_list]
+    find('.selectize-control input').set(@data[:tag_list])
+    within '.selectize-dropdown' do
+      find('.create').click
+    end
   end
 end

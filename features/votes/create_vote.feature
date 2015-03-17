@@ -3,14 +3,12 @@ Feature: Create vote
   As a user of the site
   I want to be able to interact with the voting system
 
-  @javascript
   Scenario: Users must be logged in to vote
     Given there exists a question
     When I visit the question page
     And I click on the upvote question button
     Then I am told I have to log in
 
-  @javascript
   Scenario: User can upvote
     Given I am logged in
     And there exists a question
@@ -19,7 +17,6 @@ Feature: Create vote
     Then I see an active upvote
     And I see an updated vote count
 
-  @javascript
   Scenario: User cannot upvote own post
     Given I am logged in
     And I have asked a question
