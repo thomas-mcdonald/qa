@@ -3,7 +3,6 @@ Feature: Create comment
   As a user
   I want to be able to create commetns
 
-  @javascript
   Scenario: Create comment on question
   Given I am logged in
   And I can create comments

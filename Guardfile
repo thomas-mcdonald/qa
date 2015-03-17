@@ -1,7 +1,7 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard :rspec, all_on_start: true, cmd: 'bundle exec rspec' do
+guard :rspec, cmd: 'bundle exec rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/factories.rb')    { "spec" }
@@ -14,7 +14,7 @@ guard :rspec, all_on_start: true, cmd: 'bundle exec rspec' do
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 end
 
-guard 'spinach', all_on_start: true do
+guard 'spinach' do
   watch(%r|^features/(.*)\.feature|)
   watch(%r|^features/steps/(.*)([^/]+)\.rb|) do |m|
     "features/#{m[1]}#{m[2]}.feature"

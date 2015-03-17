@@ -8,7 +8,6 @@ Feature: Accept answer
     When I visit the question page
     Then I see an indication of the accepted answer
 
-  @javascript
   Scenario: Accepting an answer
     Given I am logged in
     And I asked a question with an answer
@@ -16,7 +15,6 @@ Feature: Accept answer
     And I click on the accept answer button
     Then I should see it become active
 
-  @javascript
   Scenario: Unaccepting an answer
     Given I am logged in
     And I asked a question with an accepted answer
