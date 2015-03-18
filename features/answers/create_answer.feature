@@ -9,3 +9,10 @@ Feature: Create answer
     And I visit the question page
     When I submit the answer form with a valid answer
     Then I should see the answer
+
+  Scenario: Asking an invalid answer
+    Given I am logged in
+    And there exists a question
+    And I visit the question page
+    When I submit the answer form with an invalid answer
+    Then I should see an error message

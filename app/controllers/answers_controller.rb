@@ -10,22 +10,11 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:answer][:question_id])
     creator = AnswerCreator.new(@question, current_user, answer_params)
     @answer = creator.create
-    respond_to do |format|
-      format.html do
-        if creator.errors
-          # TODO: handle html errors
-        else
-          redirect_to @answer.question
-        end
-      end
-      format.json do
-        if creator.errors
-          render json: { errors: creator.errors }, status: 422
-        else
-          render_json_partial('answers/answer',
-                  { answer: @answer, question: @question })
-        end
-      end
+    if creator.errors
+      render json: { errors: creator.errors }, status: 422
+    else
+      render_json_partial('answers/answer',
+                  { answer: @answer, question: @question } )
     end
   end
 
