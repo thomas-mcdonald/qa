@@ -60,13 +60,7 @@
           You have already answered this question. Are you sure you wish to answer again?
         </div>
       <% end %>
-      <%= simple_form_for @answer, html: { class: 'form-vertical'}, remote: true do |f| %>
-        <%= f.input :question_id, as: :hidden, input_html: { value: @question.id } %>
-        <%= f.input :body, label: false %>
-        <div class="form-actions">
-          <%= f.button :submit, class: 'btn btn-default' %>
-        </div>
-      <% end %>
+      <%= render partial: 'answers/form', locals: { answer: @answer, question_id: @question.id } %>
     <% else %>
       <h3><%= login_link 'Login' %></h3>
     <% end %>

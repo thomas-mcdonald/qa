@@ -12,6 +12,13 @@ $(document).ready ->
     # TODO: get a fresh form from the controllers
     $(xhr.content).hide().appendTo('.answers').fadeIn()
   .on 'ajax:error', '#new_answer', (xhr, status, error) ->
-    console.log xhr
-    console.log status
-    console.log error
+    errors = status.responseJSON.errors
+
+    if errors.body
+      group = $('#answer_body').parent().parent().addClass('has-error')
+      label = group.find('label')
+      text = label.text()
+      # append error only if not currently visible
+      if text.indexOf(errors.body[0]) is -1
+        label.text("#{text} - #{errors.body[0]}")
+      label.flash()
