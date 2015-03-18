@@ -47,6 +47,9 @@
         </div><!-- /.navbar-collapse -->
       </div>
     </nav>
+    <% if @admin_page_warning %>
+     <%= render partial: 'admin/warning' %>
+    <% end %>
     <div class="container">
       <% flash.each do |name, msg| %>
         <div class="flash-<%= name %>"><%= msg %></div>

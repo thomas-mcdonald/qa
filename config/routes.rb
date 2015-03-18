@@ -47,6 +47,10 @@ QA::Application.routes.draw do
   get '/tags/search', to: 'tags#search'
 
   constraints AdminConstraint.new do
+    namespace :admin do
+      resources :users, only: [:edit, :update]
+    end
+
     get '/admin', to: 'admin#index'
     get '/admin/health', to: 'admin#health'
 

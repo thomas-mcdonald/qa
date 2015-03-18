@@ -6,3 +6,11 @@
     padding-left: 0;
   }
 }
+
+.admin-warning-bar {
+  background-color: red;
+  border-bottom: 3px solid lighten(red, 40%);
+  height: 10px;
+  margin-top: -19px;
+  width: 100%;
+}

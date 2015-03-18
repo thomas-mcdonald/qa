@@ -2,14 +2,30 @@ FactoryGirl.define do
   sequence(:email) { |n| "person#{n}@example.com" }
 
   factory :authorization do
-    provider  'faux'
-    uid       '12345'
+    provider  'google'
+    uid       'https://www.google.com/accounts/o8/id?id=fakeuid'
     email     # Uses email sequence
+
+    trait :admin do
+      uid 'https://www.google.com/accounts/o8/id?id=adminuid'
+    end
+
+    # used in the Spinach tests
+    factory :admin_authorization, traits: [:admin]
   end
 
   factory :user do
     name  'John Smith'
     email # Uses email sequence
+
+    trait :admin do
+      admin true
+      after :build do |factory,_|
+        factory.authorizations << FactoryGirl.build(:admin_authorization)
+      end
+    end
+
+    factory :admin, traits: [:admin]
   end
 
   factory :question do

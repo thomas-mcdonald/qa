@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     raise QA::NotAuthorised unless is_user(user)
   end
 
+  def require_admin
+    raise QA::NotAuthorised unless current_user.try(:admin)
+  end
+
   def login(user)
     session[:user_id] = user.id
   end
