@@ -19,4 +19,8 @@ class Answer < ActiveRecord::Base
       order('vote_count DESC')
     end
   end
+
+  def accepted?
+    id == question.accepted_answer_id
+  end
 end

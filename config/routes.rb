@@ -9,8 +9,6 @@ class AdminConstraint
 end
 
 QA::Application.routes.draw do
-  mount Sidekiq::Web => '/admin/sidekiq', constraints: AdminConstraint.new
-
   root to: 'questions#index'
 
   # Question URLs
@@ -24,6 +22,7 @@ QA::Application.routes.draw do
   get '/q/:id/edit', to: 'questions#edit', as: 'edit_question'
   get '/q/:id/timeline', to: 'questions#timeline', as: 'question_timeline'
   post '/q/:id/accept', to: 'questions#accept_answer', as: 'accept_answer'
+  post '/q/:id/unaccept', to: 'questions#unaccept_answer', as: 'unaccept_answer'
 
   resources :answers, only: [:create, :edit, :update]
   get '/a/:id/timeline', to: 'answers#timeline', as: 'answer_timeline'
@@ -32,10 +31,13 @@ QA::Application.routes.draw do
   resources :votes, only: [:create, :destroy]
 
   get '/user/edit', to: 'users#edit', as: 'edit_user'
-  resources :users, only: [:index, :show, :create, :update]
-  get '/login', to: 'sessions#new', as: 'login'
+  resources :users, only: [:index, :show, :create, :update] do
+    member do
+      get 'answers'
+      get 'questions'
+    end
+  end
   post '/logout', to: 'sessions#destroy'
-  get '/signup', to: 'users#new'
 
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
@@ -43,6 +45,14 @@ QA::Application.routes.draw do
 
   get '/tags', to: 'tags#index'
   get '/tags/search', to: 'tags#search'
+
+  constraints AdminConstraint.new do
+    get '/admin', to: 'admin#index'
+    get '/admin/health', to: 'admin#health'
+
+    mount PgHero::Engine, at: '/admin/pghero'
+    mount Sidekiq::Web, at: '/admin/sidekiq'
+  end
 
   # development routes
   if Rails.env.development?

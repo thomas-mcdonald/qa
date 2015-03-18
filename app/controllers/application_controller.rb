@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
+  before_action :check_for_orphaned_authorization
+
   private
 
   def current_user
@@ -33,6 +35,21 @@ class ApplicationController < ActionController::Base
   end
   helper_method :logged_in?
 
+  # If session[:auth_id] is set outside of the user creation pages, the the
+  # visitor has abandoned the user creation process and so we clean up the
+  # authorization so it may be used at a later date.
+  def check_for_orphaned_authorization
+    if session[:auth_id]
+      Rails.logger.info "Cleaning up abandoned signup with ID ##{session[:auth_id]}"
+      if auth = Authorization.find_by_id(session[:auth_id])
+        auth.destroy
+      else
+        Rails.logger.warn "Tried to delete authorization ##{session[:auth_id]} but it was not found"
+      end
+      session[:auth_id] = nil
+    end
+  end
+
   def render_json_partial(name, locals, extras = {})
     render json: {
       content: render_to_string(partial: name, formats: [:html], layout: false, locals: locals)
@@ -52,7 +69,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from QA::NotLoggedIn do |e|
     handle_env(e)
+    # TODO: display inside opened login modal
     flash[:notice] = "You must be logged in to perform that action"
-    redirect_to login_url
+    redirect_to '/'
   end
 end

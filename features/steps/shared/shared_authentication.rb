@@ -6,10 +6,10 @@ module SharedAuthentication
   end
 
   def login
-    # ensure there is a user in the database
     create_user unless User.first
-    visit '/login'
-    click_link_or_button 'google-login'
+    visit '/' # ensure we are on a page - login may be first action called
+    click_link 'login-link'
+    click_link_or_button 'google-login-button'
   end
 
   def current_user
@@ -20,6 +20,7 @@ module SharedAuthentication
 
   def create_user
     @user = User.new_from_hash(omniauth_hash)
+    @user.authorizations << Authorization.create_from_hash(omniauth_hash)
     @user.save
     @user
   end

@@ -1,8 +1,7 @@
 # code for accepting an answer
 $(document).ready ->
-  $('.controls').on 'ajax:success', '.accept-form', (event, xhr, status) ->
+  $('.controls').on 'ajax:success', '.accept-form, .unaccept-form', (event, xhr, status) ->
     $(this).parent().replaceWith(xhr.content)
-  # TODO: handle error... needs tidying up with controller though.
 
   # submitting answer inline
   $('#body').on 'ajax:beforeSend', '#new_answer', (xhr, settings) ->

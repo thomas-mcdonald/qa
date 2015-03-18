@@ -97,14 +97,36 @@ module QA
       end
 
       def create_reputation
-        vc = VoteCreator.new(User.new, post_id: 0, post_type: '', vote_type: 0)
-        puts "Creating reputation events"
+        puts "Building reputation events"
+        re = []
         bar = ProgressBar.create(title: 'Reputation', total: Vote.count, format: '%t: |%B| %E')
         Vote.all.each do |v|
+          re << ReputationEvent.new(
+            action: v,
+            event_type: %(give_#{v.event_type}),
+            user: v.user
+          )
+          re << ReputationEvent.new(
+            action: v,
+            event_type: %(receive_#{v.event_type}),
+            user: v.post.user
+          )
           bar.increment
-          vc.instance_variable_set(:@vote, v)
-          vc.send(:create_reputation_events)
         end
+
+        puts "Inserting reputation events"
+        @conn.exec('COPY reputation_events (user_id, event_type, action_type, action_id, created_at, updated_at) FROM STDIN WITH CSV')
+        bar = progress_bar('RepEvents', re.count)
+        re.each do |r|
+          event_id = ReputationEvent.event_types[r.event_type]
+          puts r && next if event_id == nil
+          @conn.put_copy_data(
+            %(#{r.user_id},#{event_id},"#{r.action_type}",#{r.action_id},#{r.created_at},#{r.updated_at}\n)
+          )
+          bar.increment
+        end
+        @conn.put_copy_end
+
         puts "Calculating reputation"
         bar = ProgressBar.create(title: 'Recounting', total: User.count, format: '%t: |%B| %E')
         User.all.each do |u|
@@ -154,7 +176,7 @@ module QA
           bar.increment
           qu = Question.new
           edits = grouped_edits[q['Id']]
-          originator = (edits.select { |v| v.new_record })[0]
+          originator = edits.select(&:new_record)[0]
           edits.delete originator
 
           # we can't handle anonymous users right now
@@ -174,7 +196,7 @@ module QA
           next if @posts[a['ParentId'].to_i].blank?
           an = Answer.new
           edits = grouped_edits[a['Id']]
-          originator = (edits.select { |v| v.new_record })[0]
+          originator = edits.select(&:new_record)[0]
           edits.delete originator
           next unless @user_ids.include? originator[:user_id].to_i
 

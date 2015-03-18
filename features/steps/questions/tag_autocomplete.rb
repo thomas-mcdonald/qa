@@ -1,17 +1,18 @@
 class Spinach::Features::TagAutocomplete < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedPaths
+  include SharedTagInterface
 
   step 'there exists some tags' do
     FactoryGirl.create(:question, tag_list: 'tag1, tag2, tag3, test')
   end
 
   step 'I type the beginning of a tag' do
-    find('.selectize-control input').set('tag')
+    input_tags('tag')
   end
 
   step 'I type a new tag' do
-    find('.selectize-control input').set('not-even-close')
+    input_tags('not-even-close')
   end
 
   step 'I should see the tag suggested in a dropdown' do

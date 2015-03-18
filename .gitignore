@@ -1,6 +1,7 @@
 .bundle
 coverage/*
 db/*.sqlite3
+.env
 erd.pdf
 lib/import/data
 log/*.log

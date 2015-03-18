@@ -47,6 +47,16 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.strategy = :transaction
     Sidekiq::Testing.fake!
+
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
+      info: {
+        email: 'example@google.com',
+        name: 'John Doe'
+      },
+      provider: 'google',
+      uid: 'https://www.google.com/accounts/o8/id?id=fakeuid'
+    })
   end
 
   config.before(:each) do

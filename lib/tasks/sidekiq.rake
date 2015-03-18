@@ -1,3 +1,5 @@
+require 'sidekiq/api'
+
 def deduplicate_queue(queue)
   seen = []
   struct_job = Struct.new(:klass, :args) unless defined?(SJob)
@@ -14,7 +16,6 @@ end
 namespace :sidekiq do
   desc 'Remove duplicate jobs in the queue'
   task :deduplicate do
-    require 'sidekiq/api'
     deduplicate_queue(Sidekiq::Queue.new)
     deduplicate_queue(Sidekiq::ScheduledSet.new)
   end

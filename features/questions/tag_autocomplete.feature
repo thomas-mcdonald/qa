@@ -3,7 +3,6 @@ Feature: Tag autocomplete
   As a question asker
   I want to be able to see tag suggestions
 
-  @javascript
   Scenario: Existing tags are loaded in and suggested
     Given I am logged in
     And I visit the new question page
@@ -11,7 +10,6 @@ Feature: Tag autocomplete
     When I type the beginning of a tag
     Then I should see the tag suggested in a dropdown
 
-  @javascript
   Scenario: Adding new tags
     Given I am logged in
     And I visit the new question page
