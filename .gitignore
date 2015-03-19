@@ -1,5 +1,6 @@
 .bundle
 coverage/*
+doc/_site
 db/*.sqlite3
 .env
 erd.pdf

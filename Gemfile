@@ -46,6 +46,9 @@ group :development do
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'spring'
   gem 'terminal-notifier-guard'
+
+  # Documentation
+  gem 'jekyll'
 end
 
 group :development, :test do

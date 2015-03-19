@@ -1,17 +1,18 @@
-# Development Setup
-
-## Prerequisites
-
-QA requires Ruby 2.0.0+, PostgreSQL and Redis to be installed. Running the test suite also requires
-phantomjs.
-
-### Installation
-
-#### OS X - Homebrew
-
-PostgreSQL, phantomjs and Redis can be installed with `brew install postgresql phantomjs redis`
+---
+layout: page
+title: "Development"
+category: dev
+date: 2015-03-19 10:17:15
+---
 
 ## Setup
+
+### Prerequisites
+
+QA requires Ruby 2.2.0+, PostgreSQL and Redis to be installed. Running the test suite also requires
+phantomjs.
+
+### Steps
 
 0. Make sure you have the prerequisites above installed
 1. Clone the repository - `git clone git://github.com/thomas-mcdonald/qa.git`
@@ -19,10 +20,10 @@ PostgreSQL, phantomjs and Redis can be installed with `brew install postgresql p
 3. Install some seed data - `rake db:seed_fu`
 4. Start the webserver and background processing - `bundle exec foreman start`
 
-## Import sample data
+### Import sample data
 
-QA will import Stack Exchange data dumps. Drop the un7zed files into
-`lib/import/data` and run `rake import:se`.
+QA will import Stack Exchange data dumps to provide some sample data.
+Drop an uncompressed site into `lib/import/data` and run `rake import:se`.
 
 ## Login
 
@@ -32,7 +33,7 @@ not having any OpenID related keys.
 Hit `/dev/login?as=#{id}` to login as a specific user.
 
 
-# Testing
+## Testing
 
 We use RSpec and Spinach to run tests. You can run all tests, and iteratively
 run them during development by calling `bundle exec guard`.
