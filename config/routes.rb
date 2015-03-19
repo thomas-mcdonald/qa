@@ -49,10 +49,9 @@ QA::Application.routes.draw do
   constraints AdminConstraint.new do
     namespace :admin do
       resources :users, only: [:edit, :update]
+      get '/', to: 'dashboard#index'
+      get '/health', to: 'dashboard#health'
     end
-
-    get '/admin', to: 'admin#index'
-    get '/admin/health', to: 'admin#health'
 
     mount PgHero::Engine, at: '/admin/pghero'
     mount Sidekiq::Web, at: '/admin/sidekiq'
