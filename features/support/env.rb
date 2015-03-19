@@ -29,14 +29,17 @@ def omniauth_hash
   }
 end
 OmniAuth.config.test_mode = true
-OmniAuth.config.add_mock(:google, omniauth_hash)
+OmniAuth.config.mock_auth[:google] = omniauth_hash
 
 # DBCleaner
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 Spinach.hooks.before_scenario { DatabaseCleaner.clean }
-Spinach.hooks.after_scenario { Mocha::Mockery.teardown }
+Spinach.hooks.after_scenario do
+  Mocha::Mockery.teardown
+  OmniAuth.config.mock_auth[:google] = omniauth_hash # reset any admin trickery
+end
 
 # factorygirl niceness
 Spinach.hooks.before_run do

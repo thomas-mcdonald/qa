@@ -5,6 +5,12 @@ module SharedAuthentication
     login
   end
 
+  step 'I am logged in as an admin' do
+    FactoryGirl.create(:admin)
+    OmniAuth.config.mock_auth[:google] = admin_omniauth_hash
+    login
+  end
+
   def login
     create_user unless User.first
     visit '/' # ensure we are on a page - login may be first action called
@@ -14,6 +20,17 @@ module SharedAuthentication
 
   def current_user
     @user ||= create_user
+  end
+
+  def admin_omniauth_hash
+    {
+      info: {
+        email: 'example@google.com',
+        name: 'John Doe'
+      },
+      provider: 'google',
+      uid: 'https://www.google.com/accounts/o8/id?id=adminuid'
+    }
   end
 
   private
