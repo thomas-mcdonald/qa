@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   has_many :reputation_events
   has_many :votes
 
-  accepts_nested_attributes_for :authorizations, allow_destroy: false, reject_if: proc { |obj| obj.blank? }
-
   is_slugged :name
 
   def self.find_by_hash(auth_hash)
