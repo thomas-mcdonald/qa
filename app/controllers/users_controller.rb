@@ -24,16 +24,6 @@ class UsersController < ApplicationController
     @questions = @user.questions.includes(:tags, :last_active_user).order('vote_count DESC').page(params[:page]).per(15)
   end
 
-  def answers
-    @user = User.find(params[:id])
-    @answers = @user.answers.includes(:question).order('vote_count DESC').page(params[:page]).per(25)
-  end
-
-  def questions
-    @user = User.find(params[:id])
-    @questions = @user.questions.includes(:tags, :last_active_user).order('vote_count DESC').page(params[:page]).per(15)
-  end
-
   def create
     @user = User.new(user_params)
     @user.authorizations << Authorization.find(session[:auth_id])

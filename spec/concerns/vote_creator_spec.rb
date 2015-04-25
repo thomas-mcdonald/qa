@@ -22,9 +22,9 @@ describe VoteCreator do
   end
 
   it 'queues answer_vote processing if needed' do
-    expect {
+    expect do
       VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'upvote').create
-    }.to change(Jobs::Badge.jobs, :size).by(1)
+    end.to change(Jobs::Badge.jobs, :size).by(1)
   end
 
   describe '#create_reputation_events' do

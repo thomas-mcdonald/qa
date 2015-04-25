@@ -1,5 +1,5 @@
-['good_answer', 'good_question', 'great_answer', 'great_question',
-  'nice_answer', 'nice_question'].each do |f|
+%w(good_answer good_question great_answer
+   great_question nice_answer nice_question).each do |f|
   require_relative "badge_definitions/#{f}"
 end
 
@@ -9,9 +9,9 @@ module QA
 
     # returns an array of all badges
     def self.badges
-      @badges ||= @namespace.constants.select { |sym|
+      @badges ||= @namespace.constants.select do |sym|
         sym != :Base
-      }.map(&@namespace.method(:const_get))
+      end.map(&@namespace.method(:const_get))
     end
 
     def self.badges_for(event)
@@ -19,7 +19,7 @@ module QA
     end
 
     def self.[](sym)
-      badges.select { |klass| klass.name == sym }.first
+      badges.find { |klass| klass.name == sym }
     end
   end
 end
