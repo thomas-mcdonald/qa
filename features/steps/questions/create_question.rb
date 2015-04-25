@@ -9,7 +9,7 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
   end
 
   step 'I should see the question' do
-    current_path.should == question_path(Question.last)
+    assert_equal(current_path, question_path(Question.last))
     should have_content(@data[:title])
     should have_content(@data[:body]) # etc
   end

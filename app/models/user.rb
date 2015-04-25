@@ -11,11 +11,7 @@ class User < ActiveRecord::Base
   is_slugged :name
 
   def self.find_by_hash(auth_hash)
-    if auth = Authorization.find_by_hash(auth_hash)
-      auth.user
-    else
-      nil
-    end
+    Authorization.find_by_hash(auth_hash).try(:user)
   end
 
   def self.new_from_hash(auth_hash)

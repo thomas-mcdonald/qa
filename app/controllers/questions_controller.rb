@@ -4,9 +4,9 @@ require_dependency 'timeline_action'
 class QuestionsController < ApplicationController
   include TimelineAction
 
-  before_filter :require_login, except: [:index, :show, :tagged, :timeline]
-  before_filter :ensure_valid_accept_modifier, only: [:accept_answer, :unaccept_answer]
-  before_filter :load_and_verify_slug, only: [:show]
+  before_action :require_login, except: [:index, :show, :tagged, :timeline]
+  before_action :ensure_valid_accept_modifier, only: [:accept_answer, :unaccept_answer]
+  before_action :load_and_verify_slug, only: [:show]
 
   def index
     @questions = Question.includes(:last_active_user, :tags).page(params[:page]).load

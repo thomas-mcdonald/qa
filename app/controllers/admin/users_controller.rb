@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_filter :set_content_warning
-  before_filter :require_admin
+  before_action :set_content_warning
+  before_action :require_admin
 
   def edit
     @user = User.find(params[:id])

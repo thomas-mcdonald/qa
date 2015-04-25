@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :require_login
+  before_action :require_login
 
   def new
     @comment = Comment.new

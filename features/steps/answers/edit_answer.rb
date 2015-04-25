@@ -27,7 +27,7 @@ class Spinach::Features::EditAnswer < Spinach::FeatureSteps
   end
 
   step 'I can see the updated answer' do
-    current_path.should == question_path(current_question)
+    assert_equal(current_path, question_path(current_question))
     should have_content 'Actually, I believe the answer should be more like this'
   end
 

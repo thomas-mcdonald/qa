@@ -50,7 +50,6 @@ module QA
         answers = posts.select { |p| p["PostTypeId"] == "2" }
 
         grouped_edits = build_edits(post_histories)
-        post_histories = nil
         posts = nil
 
         # create posts
@@ -73,9 +72,7 @@ module QA
         voterow = Nokogiri::XML::Document.parse(File.read("#{@dir}/votes.xml")).css('votes row')
         puts " Creating votes"
 
-        size = User.count
         user_ids = User.pluck(:id)
-        votes = []
         bar = progress_bar('Votes', voterow.count)
         @conn.exec('COPY votes (user_id, post_id, post_type, vote_type, created_at, updated_at) FROM STDIN WITH CSV')
 
@@ -157,7 +154,7 @@ module QA
         puts " Grouping GUIDs into single edits"
         bar = progress_bar('Grouping', guidgroups.length)
         groupededits = Hash.new { |hash, key| hash[key] = [] }
-        guidgroups.each do |key, edit|
+        guidgroups.each do |_, edit|
           eobj = StackExchange::Edit.new(edit)
           bar.increment
           groupededits[eobj.post_id] << eobj
@@ -174,7 +171,6 @@ module QA
         bar = progress_bar('Questions', questions.length)
         questions.each do |q|
           bar.increment
-          qu = Question.new
           edits = grouped_edits[q['Id']]
           originator = edits.select(&:new_record)[0]
           edits.delete originator

@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   def check_for_orphaned_authorization
     if session[:auth_id]
       Rails.logger.info "Cleaning up abandoned signup with ID ##{session[:auth_id]}"
-      if auth = Authorization.find_by_id(session[:auth_id])
+      if (auth = Authorization.find_by_id(session[:auth_id]))
         auth.destroy
       else
         Rails.logger.warn "Tried to delete authorization ##{session[:auth_id]} but it was not found"
