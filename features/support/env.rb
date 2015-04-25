@@ -45,3 +45,12 @@ end
 Spinach.hooks.before_run do
   include FactoryGirl::Syntax::Methods
 end
+
+class Spinach::FeatureSteps
+  attr_accessor :assertions
+
+  def initialize
+    super
+    @assertions = 0
+  end
+end

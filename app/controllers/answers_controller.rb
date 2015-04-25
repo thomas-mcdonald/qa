@@ -4,7 +4,7 @@ require_dependency 'timeline_action'
 class AnswersController < ApplicationController
   include TimelineAction
 
-  before_filter :require_login, except: [:timeline]
+  before_action :require_login, except: [:timeline]
 
   def create
     @question = Question.find(params[:answer][:question_id])

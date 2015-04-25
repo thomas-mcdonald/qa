@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :check_for_orphaned_authorization, only: [:create]
-  before_filter :load_and_verify_slug, only: [:show, :answers, :questions]
-  before_filter :require_login, except: [:index, :show, :answers, :questions, :new, :create]
+  before_action :load_and_verify_slug, only: [:show, :answers, :questions]
+  before_action :require_login, except: [:index, :show, :answers, :questions, :new, :create]
 
   def index
     @users = User.order('reputation DESC').page(params[:page]).per(20)
