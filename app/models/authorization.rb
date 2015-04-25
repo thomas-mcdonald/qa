@@ -14,6 +14,6 @@ class Authorization < ActiveRecord::Base
   end
 
   def self.find_by_hash(auth_hash)
-    where('uid = ?', auth_hash[:uid]).where('provider = ?', auth_hash[:provider]).first
+    where('uid = ?', auth_hash[:uid]).find_by(provider: auth_hash[:provider])
   end
 end

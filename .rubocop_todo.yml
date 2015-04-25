@@ -28,12 +28,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 34
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: Include.
-Rails/FindBy:
-  Enabled: false
-
 # Offense count: 16
 # Configuration parameters: Include.
 Rails/Output:
