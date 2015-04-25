@@ -1,0 +1,13 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  RunRailsCops: true
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/spring'
+    - 'db/**/*'
+    - 'doc/bin/*'

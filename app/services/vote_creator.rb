@@ -63,6 +63,6 @@ class VoteCreator
   end
 
   def queue_badge_job(badge_type)
-    Jobs::Badge.perform_async(badge_type, @vote.post.global_id)
+    Jobs::Badge.perform_async(badge_type, @vote.post.to_global_id)
   end
 end

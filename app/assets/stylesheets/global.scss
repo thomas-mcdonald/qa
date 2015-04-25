@@ -26,6 +26,7 @@ img { max-width: 100%; }
 #body {
   @include make-sm-column(8);
   @include make-md-column(9);
+  margin-bottom: 25px;
 }
 #sidebar {
   // TODO: make the sidebar work nicely on small mobile devices

@@ -1,6 +1,7 @@
 class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedPaths
+  include SharedTagInterface
 
   step 'I submit the form with a valid question' do
     fill_in_form
@@ -8,23 +9,23 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
   end
 
   step 'I should see the question' do
-    current_path.should == question_path(Question.last)
-    should have_content(@data[:title])
-    should have_content(@data[:body]) # etc
+    assert_path question_path(Question.last)
+    assert_text @data[:title]
+    assert_text @data[:body] # etc
   end
 
   step 'I submit the form with question data but without any tags' do
     fill_in_form
-    fill_in 'question_tag_list', with: ''
+    remove_tag
     find(:xpath, '//input[@name="commit"]').click
   end
 
   step 'I am on the new question page' do
-    should have_content 'Ask Question'
+    assert_text 'Ask Question'
   end
 
   step 'I should see that there is an error with the tags' do
-    should have_content('Question must be tagged')
+    assert_text 'Question must be tagged'
   end
 
   private
@@ -33,6 +34,6 @@ class Spinach::Features::CreateQuestion < Spinach::FeatureSteps
     @data = FactoryGirl.attributes_for(:question)
     fill_in 'question_title', with: @data[:title]
     fill_in 'question_body', with: @data[:body]
-    fill_in 'question_tag_list', with: @data[:tag_list]
+    input_and_add_tags(@data[:tag_list])
   end
 end

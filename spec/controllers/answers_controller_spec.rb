@@ -9,14 +9,32 @@ describe AnswersController, :type => :controller do
 
     context 'when logged in' do
       let(:question) { FactoryGirl.create(:question) }
-      let(:answer) { FactoryGirl.attributes_for(:answer) }
+      let(:answer) { FactoryGirl.attributes_for(:answer, question_id: question.id) }
 
       before { sign_in(alice) }
 
-      it 'creates answer with valid parameters' do
-        post :create, answer: answer.merge(question_id: question.id)
-        expect(Answer.last.body).to eq(answer[:body])
-        expect(Answer.all.length).to eq(1)
+      context 'JSON' do
+        it 'creates answer with valid parameters' do
+          post :create, answer: answer, format: :json
+          expect(Answer.last.body).to eq(answer[:body])
+          expect(Answer.all.length).to eq(1)
+        end
+
+        it 'returns errors if the answer is not valid' do
+          post :create, answer: answer.merge(body: 'a'), format: :json
+          expect(Answer.all.length).to eq(0)
+          expect(response.status).to eq(422)
+          res = JSON.parse(response.body)
+          expect(res['errors']).to_not be_empty
+        end
+      end
+
+      context 'HTML' do
+        it 'creates answer with valid parameters' do
+          post :create, answer: answer
+          expect(Answer.last.body).to eq(answer[:body])
+          expect(Answer.all.length).to eq(1)
+        end
       end
     end
   end

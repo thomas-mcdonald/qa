@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
 
   validates :title, length: { in: 10..150 }, presence: true
   validates :body, length: { in: 10..30000 }, presence: true
-  validates_presence_of :last_active_user_id, :last_active_at
+  validates :last_active_user_id, :last_active_at, presence: true
   validate :accepted_is_on_question, :tags_exist
 
   is_slugged :title

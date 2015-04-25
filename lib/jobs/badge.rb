@@ -5,8 +5,8 @@ module Jobs
     include Sidekiq::Worker
 
     # TODO: work out how to test this
-    def perform(badge_event, globalid)
-      object = GlobalID::Locator.locate(globalid)
+    def perform(badge_event, global_id)
+      object = GlobalID::Locator.locate(global_id)
       user = object.user
       badges = QA::BadgeManager.badges_for(badge_event.to_sym)
       logger.info "Checking badge #{badge_event} for user ##{user.id}"

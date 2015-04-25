@@ -50,17 +50,23 @@
                 </ul>
               </li>
             <% else %>
-              <li><%= link_to 'Login', login_path %></li>
+              <li><a id="login-link" href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
             <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>
     </nav>
+    <% if @admin_page_warning %>
+     <%= render partial: 'admin/warning' %>
+    <% end %>
     <div class="container">
       <% flash.each do |name, msg| %>
         <div class="flash-<%= name %>"><%= msg %></div>
       <% end %>
       <%= yield %>
     </div>
+    <% unless logged_in? %>
+      <%= render partial: 'layouts/login' %>
+    <% end %>
   </body>
 </html>

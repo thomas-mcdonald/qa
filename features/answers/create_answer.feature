@@ -3,17 +3,16 @@ Feature: Create answer
   As a user
   I want to be able to create answers
 
-  Scenario: Create question as logged in user
+  Scenario: Create answer as logged in user
     Given I am logged in
     And there exists a question
     And I visit the question page
     When I submit the answer form with a valid answer
     Then I should see the answer
 
-  @javascript
-  Scenario: Create question as logged in user with javascript
+  Scenario: Asking an invalid answer
     Given I am logged in
     And there exists a question
     And I visit the question page
-    When I submit the answer form with a valid answer
-    Then I should see the answer
+    When I submit the answer form with an invalid answer
+    Then I should see an error message

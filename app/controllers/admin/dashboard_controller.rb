@@ -1,5 +1,5 @@
-class AdminController < ApplicationController
-  before_filter :require_login
+class Admin::DashboardController < ApplicationController
+  before_action :require_admin
 
   def index
     db = AdminDashboard.new

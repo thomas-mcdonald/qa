@@ -1,9 +1,7 @@
 module SharedPolicy
+  delegate :staff?, to: :user
+
   def logged_in?
     user
-  end
-
-  def staff?
-    user.staff?
   end
 end

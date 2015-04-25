@@ -4,4 +4,5 @@
 //= require bootstrap/dropdown
 //= require bootstrap/tooltip
 //= require bootstrap/popover
+//= require bootstrap/modal
 //= require selectize

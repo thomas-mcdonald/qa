@@ -1,18 +1,23 @@
 class Spinach::Features::Signup < Spinach::FeatureSteps
   include SharedPaths
 
+  step 'I open the login modal' do
+    visit '/'
+    click_link 'login-link'
+  end
+
   step 'I click on the Google provider' do
-    click_link_or_button('google-login')
+    click_link_or_button 'google-login-button'
   end
 
   step 'I should be returned to the confirmation page' do
-    current_path.should == '/auth/google/callback'
+    assert_path '/auth/google/callback'
   end
 
   step 'I should see a form for user details filled in' do
     within('#new_user') do
-      should have_field('Name', with: omniauth_hash[:info][:name])
-      should have_field('Email', with: omniauth_hash[:info][:email])
+      assert have_field('Name', with: omniauth_hash[:info][:name])
+      assert have_field('Email', with: omniauth_hash[:info][:email])
     end
   end
 
@@ -22,11 +27,11 @@ class Spinach::Features::Signup < Spinach::FeatureSteps
 
   step 'I should have a user created with those details' do
     user =  User.where('name = ?', omniauth_hash[:info][:name]).where('email = ?', omniauth_hash[:info][:email]).first
-    user.should_not be_nil
-    user.authorizations.length.should == 1
+    refute_nil user
+    assert_equal user.authorizations.length, 1
   end
 
   step 'I should be logged in' do
-    should_not have_content('Login')
+    refute_text 'Login'
   end
 end

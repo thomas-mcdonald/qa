@@ -4,17 +4,17 @@ require_dependency 'timeline_action'
 class AnswersController < ApplicationController
   include TimelineAction
 
-  before_filter :require_login, except: [:timeline]
+  before_action :require_login, except: [:timeline]
 
   def create
     @question = Question.find(params[:answer][:question_id])
     creator = AnswerCreator.new(@question, current_user, answer_params)
     @answer = creator.create
-    # TODO: handle errors here
-    respond_to do |format|
-      format.html { redirect_to @answer.question }
-      format.json { render_json_partial('answers/answer',
-        { answer: @answer, question: @question }) }
+    if creator.errors
+      render json: { errors: creator.errors }, status: 422
+    else
+      render_json_partial('answers/answer',
+                  answer: @answer, question: @question)
     end
   end
 

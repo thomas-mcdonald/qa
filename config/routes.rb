@@ -37,9 +37,7 @@ QA::Application.routes.draw do
       get 'questions'
     end
   end
-  get '/login', to: 'sessions#new', as: 'login'
   post '/logout', to: 'sessions#destroy'
-  get '/signup', to: 'users#new'
 
   # omniauth callbacks
   get '/auth/:provider/callback', to: 'authorizations#callback'
@@ -49,8 +47,11 @@ QA::Application.routes.draw do
   get '/tags/search', to: 'tags#search'
 
   constraints AdminConstraint.new do
-    get '/admin', to: 'admin#index'
-    get '/admin/health', to: 'admin#health'
+    namespace :admin do
+      resources :users, only: [:edit, :update]
+      get '/', to: 'dashboard#index'
+      get '/health', to: 'dashboard#health'
+    end
 
     mount PgHero::Engine, at: '/admin/pghero'
     mount Sidekiq::Web, at: '/admin/sidekiq'

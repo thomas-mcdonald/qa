@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.0'
 
 gem 'by_star', github: 'radar/by_star'
 gem 'faker', '~> 1.4.2'
@@ -22,6 +22,8 @@ gem 'simple_form', '~> 3.1.0'
 # Authentication
 gem 'omniauth', '~> 1.2.0'
 gem 'omniauth-openid', '1.0.1'
+gem 'omniauth-google-oauth2', '~> 0.2.6'
+gem 'omniauth-twitter', '~> 1.1.0'
 
 # Jobs & web interface
 gem 'sidekiq', '~> 3.3.0'
@@ -31,7 +33,7 @@ gem 'sinatra', require: false
 gem 'bootstrap-sass', '~> 3.3.0'
 gem 'font-awesome-sass-rails'
 gem 'jquery-rails', '~> 3.1.2'
-gem 'sass-rails',   '~> 4.0.0'
+gem 'sass-rails',   '~> 5.0.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.0.3'
 
@@ -43,11 +45,16 @@ group :development do
   gem 'guard-spinach', github: 'codegram/guard-spinach'
   gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rubocop'
   gem 'spring'
   gem 'terminal-notifier-guard'
+
+  # Documentation
+  gem 'jekyll'
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'spinach-rails'
 end
@@ -56,7 +63,7 @@ group :test do
   gem 'minitest'
   gem 'coveralls', require: false
   gem 'database_cleaner', '~> 1.3.0'
-  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.5.0'
   gem 'rspec', '~> 3.0'

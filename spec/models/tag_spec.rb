@@ -26,8 +26,8 @@ describe Tag, :type => :model do
 
   describe '#related' do
     it 'find related tags by checking questions with that tag' do
-      q1 = FactoryGirl.create(:question, tag_list: 'cat, join-tag')
-      q2 = FactoryGirl.create(:question, tag_list: 'dog, join-tag')
+      FactoryGirl.create(:question, tag_list: 'cat, join-tag')
+      FactoryGirl.create(:question, tag_list: 'dog, join-tag')
       related = tag_finder('join-tag').related_tags
       expect(related).to include(tag_finder('dog'))
       expect(related).to include(tag_finder('cat'))

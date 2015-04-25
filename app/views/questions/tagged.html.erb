@@ -7,11 +7,13 @@
   </div>
   <div id="sidebar">
     <h4><%= @count %> questions tagged <a class="btn btn-default tag"><%= params[:tag] %></a></h4>
-    <h5>related tags</h5>
-    <ul class="sidebar-tags">
-      <% @related_tags.each do |tag| %>
-        <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
-      <% end %>
-    </ul>
+    <div class="sidebar-tags">
+      <h5>related tags</h5>
+      <ul class="sidebar-tags">
+        <% @related_tags.each do |tag| %>
+          <li><%= link_to tag.name, questions_tagged_url(tag: tag.name), class: 'btn btn-default tag' %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>

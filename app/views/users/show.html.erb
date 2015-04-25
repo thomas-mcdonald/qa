@@ -1,5 +1,10 @@
 <div class="page-header">
-  <h1><%= @user.name %></h1>
+  <h1>
+    <%= @user.display_name %>
+    <% if current_admin? %>
+      <small><%= link_to 'admin', edit_admin_user_path(@user) %></small>
+    <% end %>
+  </h1>
 </div>
 
 <%= render partial: 'info', locals: { user: @user } %>
@@ -18,7 +23,7 @@
       <% end %>
     </ul>
   </div>
-  
+
   <div class="user-box user-answer-list">
     <div class="header">
       <h3><%= link_to header_pluralize(@user.answer_count, 'Answer', 'Answers'), answers_user_path(@user) %></h3>
@@ -44,4 +49,5 @@
       <% end %>
     </ul>
   </div>
+</div>
 </div>

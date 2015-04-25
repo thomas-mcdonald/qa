@@ -145,11 +145,11 @@
 }
 
 .sidebar-tags {
-  list-style-type: none;
-  padding-left: 0;
+  h5 { margin: 0 0 6px 0; }
 
-  h5 {
-    margin: 0 0 6px 25px;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
   }
 
   li { margin-bottom: 6px; }
@@ -161,6 +161,7 @@
 
 .sidebar-question-stats {
   list-style-type: none;
+  padding-left: 0;
 
   li span {
     font-weight: 600;

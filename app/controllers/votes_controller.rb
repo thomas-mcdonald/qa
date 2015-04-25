@@ -1,7 +1,7 @@
 require_dependency 'vote_creator'
 
 class VotesController < ApplicationController
-  before_filter :json_require_login
+  before_action :json_require_login
 
   def create
     creator = VoteCreator.new(current_user, vote_params)

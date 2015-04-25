@@ -5,12 +5,11 @@ Feature: Login
 
   Scenario: Logging in
     Given I have already signed up
-    When I visit the login page
+    When I open the login modal
     And I click on the Google provider
     Then I should be returned to the homepage
     And I should be logged in
 
-  @javascript
   Scenario: Logging out
     Given I am logged in
     When I click on the logout button

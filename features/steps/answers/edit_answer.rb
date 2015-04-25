@@ -14,11 +14,11 @@ class Spinach::Features::EditAnswer < Spinach::FeatureSteps
   end
 
   step 'I cannot see a link to edit the answer' do
-    within('.answer .links') { should_not have_content('edit') }
+    within('.answer .links') { refute_text('edit') }
   end
 
   step 'I can see a link to edit the answer' do
-    within('.answer .links') { should have_content('edit') }
+    within('.answer .links') { assert_text('edit') }
   end
 
   step 'I submit the form with updated answer information' do
@@ -27,8 +27,8 @@ class Spinach::Features::EditAnswer < Spinach::FeatureSteps
   end
 
   step 'I can see the updated answer' do
-    current_path.should == question_path(current_question)
-    should have_content 'Actually, I believe the answer should be more like this'
+    assert_path question_path(current_question)
+    assert_text 'Actually, I believe the answer should be more like this'
   end
 
   def current_answer
