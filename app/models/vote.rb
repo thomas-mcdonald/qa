@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
 
   enum vote_type: { upvote: 1, downvote: 2 }
 
-  validates_presence_of :post_type, :post_id, :user_id, :vote_type
+  validates :post_type, :post_id, :user_id, :vote_type, presence: true
   validate :validate_one_updown_vote
   validate :validate_not_own_post
 

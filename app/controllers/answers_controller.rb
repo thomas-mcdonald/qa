@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
       render json: { errors: creator.errors }, status: 422
     else
       render_json_partial('answers/answer',
-                  { answer: @answer, question: @question } )
+                  answer: @answer, question: @question)
     end
   end
 
