@@ -16,11 +16,11 @@ class Spinach::Features::Login < Spinach::FeatureSteps
   end
 
   step 'I should be returned to the homepage' do
-    current_path.should == '/'
+    assert_path '/'
   end
 
   step 'I should be logged in' do
-    should_not have_content('Login')
+    refute_text 'Login'
   end
 
   step 'I click on the logout button' do
@@ -29,6 +29,6 @@ class Spinach::Features::Login < Spinach::FeatureSteps
   end
 
   step 'I should be logged out' do
-    should have_content('Login')
+    assert_text 'Login'
   end
 end

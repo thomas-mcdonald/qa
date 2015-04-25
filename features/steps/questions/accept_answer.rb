@@ -29,18 +29,20 @@ class Spinach::Features::AcceptAnswer < Spinach::FeatureSteps
 
   step 'I should see it become active' do
     within(unaccept_answer_button) do
-      should have_css '.icon-ok.active'
+      assert has_css?('.icon-ok.active')
     end
   end
 
   step 'I should see it become inactive' do
     within(accept_answer_button) do
-      should have_css '.icon-ok.inactive'
+      assert has_css?('.icon-ok.inactive')
     end
   end
 
   step 'I see an indication of the accepted answer' do
-    within(answer_css) { should have_css('.icon-ok.active') }
+    within(answer_css) do
+      assert has_css?('.icon-ok.active')
+    end
   end
 
   def current_question

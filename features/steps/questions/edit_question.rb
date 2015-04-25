@@ -15,11 +15,11 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   end
 
   step 'I cannot see a link to edit the question' do
-    should_not have_link('edit', href: edit_question_path(current_question.id))
+    refute has_link?('edit', href: edit_question_path(current_question.id))
   end
 
   step 'I can see a link to edit the question' do
-    should have_link('edit', href: edit_question_path(current_question.id))
+    assert has_link?('edit', href: edit_question_path(current_question.id))
   end
 
   step 'I visit the question edit page' do
@@ -34,11 +34,11 @@ class Spinach::Features::EditQuestion < Spinach::FeatureSteps
   end
 
   step 'I am on the question page' do
-    current_path.should == question_path(Question.first)
+    assert_path question_path(Question.first)
   end
 
   step 'I should see the updated question' do
-    should have_content 'this is an edited question body'
-    should have_content 'new question title'
+    assert_text 'this is an edited question body'
+    assert_text 'new question title'
   end
 end

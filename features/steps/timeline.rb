@@ -3,6 +3,6 @@ class Spinach::Features::PostTimelines < Spinach::FeatureSteps
   include SharedQuestion
 
   step 'I see the created timeline event' do
-    should have_content "created this"
+    assert_text "created this"
   end
 end

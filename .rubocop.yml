@@ -10,3 +10,4 @@ AllCops:
     - 'bin/rake'
     - 'bin/spring'
     - 'db/**/*'
+    - 'doc/bin/*'

@@ -12,12 +12,12 @@ class Spinach::Features::CreateAnswer < Spinach::FeatureSteps
   end
 
   step 'I should see the answer' do
-    assert_equal(current_path, question_path(current_question))
-    should have_content 'This is my answer to the question'
+    assert_path question_path(current_question)
+    assert_text 'This is my answer to the question'
   end
 
   step 'I should see an error message' do
-    should have_content 'Your answer - is too short'
+    assert_text 'Your answer - is too short'
   end
 
   def fill_in_form(text)

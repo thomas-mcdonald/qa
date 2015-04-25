@@ -6,7 +6,6 @@ end
 ENV['RAILS_ENV'] = 'test'
 require './config/environment'
 
-require 'rspec/expectations'
 require 'mocha/setup'
 
 # Require all shared step files

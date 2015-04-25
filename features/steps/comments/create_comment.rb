@@ -19,7 +19,7 @@ class Spinach::Features::CreateComment < Spinach::FeatureSteps
   end
 
   step 'I should see the comment' do
-    assert_equal(current_path, question_path(current_question))
-    should have_content(COMMENT_BODY)
+    assert_path question_path(current_question)
+    assert_text COMMENT_BODY
   end
 end

@@ -15,7 +15,7 @@ class Spinach::Features::AdminUsers < Spinach::FeatureSteps
   end
 
   step 'I should be redirected to the users page' do
-    assert_equal(current_path, user_path(@path_user))
+    assert_path user_path(@path_user)
   end
 
   step 'I should see that they are an admin' do
