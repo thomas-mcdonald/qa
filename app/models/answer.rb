@@ -12,7 +12,7 @@ class Answer < ActiveRecord::Base
   validates :body, length: { in: 10..30000 }
 
   def self.question_view_ordering(question)
-    if aaid = question.accepted_answer_id
+    if (aaid = question.accepted_answer_id)
       sql = 'CASE id WHEN ? THEN 1 ELSE 2 END, vote_count DESC'
       order(sanitize_sql_array([sql, aaid]))
     else
