@@ -16,7 +16,6 @@ describe Answer, type: :model do
       it { is_expected.to validate_presence_of(attr) }
     end
     it { is_expected.to ensure_length_of(:body).is_at_least(10).is_at_most(30000) }
-
   end
 
   describe '#question_view_ordering' do

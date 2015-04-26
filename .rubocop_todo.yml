@@ -86,23 +86,6 @@ Style/EmptyLines:
   Enabled: false
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundAccessModifier:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Enabled: false
-
-# Offense count: 1
 # Configuration parameters: Exclude.
 Style/FileName:
   Enabled: false
@@ -129,11 +112,6 @@ Style/HashSyntax:
 Style/IfUnlessModifier:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/IndentArray:
-  Enabled: false
-
 # Offense count: 14
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -143,11 +121,6 @@ Style/IndentHash:
 # Offense count: 9
 # Cop supports --auto-correct.
 Style/NegatedIf:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/NilComparison:
   Enabled: false
 
 # Offense count: 20
