@@ -87,9 +87,13 @@
 
   h3 {
     font-size: 18px;
-    font-weight: normal;
+    font-weight: 600;
     line-height: 32px;
     margin: 0 0 5px 0;
+
+    a:hover {
+      text-decoration: none;
+    }
   }
 
   .tags {
