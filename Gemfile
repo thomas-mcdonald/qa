@@ -41,7 +41,7 @@ group :development do
   # Guard for autorunning tests
   gem 'guard', '~> 2.10.0'
   gem 'guard-rspec', '~> 4.4.0'
-  gem 'guard-spinach', github: 'codegram/guard-spinach'
+  gem 'guard-spinach', '~> 0.2.0'
   gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rubocop'
@@ -64,7 +64,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
-  gem 'poltergeist', '~> 1.5.0'
+  gem 'poltergeist', '~> 1.6.0', require: false
   gem 'rspec', '~> 3.0'
   gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'
