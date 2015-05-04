@@ -23,11 +23,6 @@
         </div>
       </div>
     </div>
-    <div class="comments">
-      <%= render partial: 'comments/comment', collection: answer.comments %>
-      <% if policy(Comment.new).create? %>
-        <%= link_to 'add comment', new_post_comment_url(answer), remote: true, class: 'add-comment' %>
-      <% end %>
-    </div>
+    <%= render partial: 'comments/comments', locals: { comments: answer.comments, post: answer } %>
   </div>
 </div>
