@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   end
 
   def self.named(name)
-    where(name: name).first
+    find_by(name: name)
   end
 
   def frequency

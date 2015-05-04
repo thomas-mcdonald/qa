@@ -116,7 +116,7 @@ module QA
         bar = progress_bar('RepEvents', re.count)
         re.each do |r|
           event_id = ReputationEvent.event_types[r.event_type]
-          puts r && next if event_id == nil
+          puts r && next if event_id.nil?
           @conn.put_copy_data(
             %(#{r.user_id},#{event_id},"#{r.action_type}",#{r.action_id},#{r.created_at},#{r.updated_at}\n)
           )
@@ -145,8 +145,6 @@ module QA
         puts " - done!"
       end
 
-      # Although all the methods above should probably be private, these are only
-      # used internally in the ones above.
       private
 
       def build_edits(post_histories)

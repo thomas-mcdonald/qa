@@ -1,6 +1,5 @@
 # Responsible for creating votes
 class VoteCreator
-
   attr_reader :errors
 
   def self.create(user, opts = {})

@@ -1,7 +1,9 @@
 <ul id="user-list">
   <% @users.each do |user| %>
     <li>
-      <img src="<%= user.gravatar(48) %>">
+      <%= link_to user do %>
+        <img src="<%= user.gravatar(48) %>">
+      <% end %>
       <div class="user-info">
         <span class="user-link"><%= link_to user.name, user %></span>
         <span class="reputation"><%= user.reputation %></span>

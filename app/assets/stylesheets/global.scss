@@ -1,4 +1,7 @@
 // This file includes Bootstrap fixes and other 'global' customisation
+body {
+  font-family: 'Open Sans','Helvetica Neue', Helvetica, Arial, sans !important;
+}
 
 // Hidden form fields should have no height or etc
 html .control-group.hidden { margin-bottom: 0; }
@@ -7,6 +10,10 @@ html .control-group.hidden { margin-bottom: 0; }
 .page-header {
   padding-bottom: 0;
   margin-bottom: 20px;
+
+  h1 {
+    font-weight: 700;
+  }
 }
 .container > .page-header { margin-top: 0; } // no margin on initial header
 

@@ -17,6 +17,6 @@ module Voteable
   end
 
   def vote_by_user(user, vote_type)
-    self.votes.where(user_id: user.id, vote_type: vote_type).first
+    self.votes.find_by(user_id: user.id, vote_type: vote_type)
   end
 end

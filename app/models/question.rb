@@ -71,7 +71,7 @@ class Question < ActiveRecord::Base
   end
 
   def votes_on_self_and_answers_by_user(user)
-    return [] if user == nil
+    return [] if user.nil?
     votes = self.votes.where(user_id: user.id)
     self.answers.includes(:votes).where('votes.user_id = ?', user.id).references(:votes).each do |answer|
       votes += answer.votes
