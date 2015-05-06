@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= SiteSettings.name %></title>
+    <% if content_for?(:title) %>
+      <title><%= %(#{yield(:title)} · #{SiteSettings.name}) %></title>
+    <% else %>
+      <title><%= SiteSettings.name %></title>
+    <% end %>
     <%= stylesheet_link_tag :application %>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag :application %>
