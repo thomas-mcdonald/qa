@@ -1,1 +1,0 @@
-/Users/tom/code/qa/doc/_posts/2015-03-19-authentication-providers.md
