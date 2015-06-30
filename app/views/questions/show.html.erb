@@ -27,6 +27,16 @@
             <% end%>
           </div>
           <div class="righto">
+            <% if @question.has_been_edited? %>
+              <div class="user-info">
+                <p class="asked">edited <%= time_ago_in_words @question.last_active_at %> ago</p>
+                <img class="gravatar" src="<%= @question.user.gravatar %>" />
+                <div class="user-details">
+                  <%= link_to @question.last_active_user.display_name, @question.last_active_user %>
+                  <span><%= @question.last_active_user.reputation %></span>
+                </div>
+              </div>
+            <% end %>
             <div class="user-info">
               <p class="asked">asked <%= time_ago_in_words @question.created_at %> ago</p>
               <img class="gravatar" src="<%= @question.user.gravatar %>" />

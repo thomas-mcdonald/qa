@@ -76,7 +76,9 @@
   .righto { float: right; }
 
   .user-info {
-    width: 180px;
+    width: 160px;
+    float: left;
+    @include clearfix();
 
     .asked { margin-bottom: 2px; }
     .gravatar {
