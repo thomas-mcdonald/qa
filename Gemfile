@@ -39,17 +39,14 @@ gem 'uglifier', '>= 1.0.3'
 group :development do
   gem 'quiet_assets'
   # Guard for autorunning tests
-  gem 'guard', '~> 2.10.0'
-  gem 'guard-rspec', '~> 4.4.0'
+  gem 'guard', '~> 2.12.0'
+  gem 'guard-rspec', '~> 4.6.0'
   gem 'guard-spinach', '~> 0.2.0'
   gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rubocop'
   gem 'spring'
   gem 'terminal-notifier-guard'
-
-  # Documentation
-  gem 'jekyll'
 end
 
 group :development, :test do
@@ -61,7 +58,7 @@ end
 group :test do
   gem 'minitest'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'database_cleaner', '~> 1.4.0'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.6.0', require: false
