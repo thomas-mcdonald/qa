@@ -44,7 +44,7 @@ group :development do
   gem 'guard-spinach', '~> 0.2.0'
   gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'rb-fsevent', '~> 0.9.1'
-  gem 'rubocop'
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'terminal-notifier-guard'
 end

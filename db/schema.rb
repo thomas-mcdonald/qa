@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20141208134739) do
 
   create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "provider"
+    t.string   "provider",   limit: 255
     t.text     "uid"
-    t.string   "email"
+    t.string   "email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,31 +40,31 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.text     "body"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.string   "post_type"
+    t.string   "post_type",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["post_type", "post_id"], name: "index_comments_on_post_type_and_post_id", using: :btree
+  add_index "comments", ["post_id", "post_type"], name: "index_comments_on_post_id_and_post_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title"
+    t.string   "title",               limit: 255
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "vote_count",          default: 0, null: false
+    t.integer  "vote_count",                      default: 0, null: false
     t.integer  "last_active_user_id"
     t.datetime "last_active_at"
-    t.integer  "answers_count",       default: 0, null: false
+    t.integer  "answers_count",                   default: 0, null: false
     t.integer  "accepted_answer_id"
   end
 
   create_table "reputation_events", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_type"
-    t.string   "action_type"
+    t.string   "action_type", limit: 255
     t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,23 +100,26 @@ ActiveRecord::Schema.define(version: 20141208134739) do
 
   create_table "timeline_events", force: :cascade do |t|
     t.integer  "post_id"
-    t.string   "post_type"
+    t.string   "post_type",  limit: 255
     t.integer  "action"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "name",         limit: 255
+    t.string   "email",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",      default: false, null: false
-    t.integer  "reputation", default: 0,     null: false
-    t.text     "about_me",   default: "",    null: false
-    t.boolean  "moderator",  default: false, null: false
-    t.string   "location",   default: "",    null: false
-    t.string   "website",    default: "",    null: false
+    t.boolean  "admin",                    default: false, null: false
+    t.integer  "reputation",               default: 0,     null: false
+    t.text     "about_me",                 default: "",    null: false
+    t.boolean  "moderator",                default: false, null: false
+    t.integer  "bronze_count",             default: 0,     null: false
+    t.integer  "silver_count",             default: 0,     null: false
+    t.integer  "gold_count",               default: 0,     null: false
+    t.string   "location",                 default: "",    null: false
+    t.string   "website",                  default: "",    null: false
   end
 
   create_table "votes", force: :cascade do |t|
@@ -125,7 +128,7 @@ ActiveRecord::Schema.define(version: 20141208134739) do
     t.integer  "vote_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "post_type"
+    t.string   "post_type",  limit: 255
   end
 
   add_index "votes", ["post_type", "post_id"], name: "index_votes_on_post_type_and_post_id", using: :btree
