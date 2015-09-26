@@ -11,3 +11,9 @@ AllCops:
     - 'bin/spring'
     - 'db/**/*'
     - 'doc/bin/*'
+
+Style/GuardClause:
+  MinBodyLength: 3
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true

@@ -10,7 +10,7 @@ module VotesHelper
     upvote = find_vote(user_votes, post, 'upvote')
     downvote = find_vote(user_votes, post, 'downvote')
     ret << select_partial(upvote, post, 'upvote')
-    ret << %(<p class="vote-count">#{ post.vote_count }</p>)
+    ret << %(<p class="vote-count">#{post.vote_count}</p>)
     ret << select_partial(downvote, post, 'downvote')
     ret.html_safe
   end

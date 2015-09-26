@@ -6,7 +6,7 @@ module UsersHelper
   # Pluralizes the string based off count.
   # Wraps the count in a span to style it differently
   def header_pluralize(count, singular, plural)
-    word = if count == 1 then singular else plural end
+    word = count == 1 ? singular : plural
     "<span>#{count}</span> #{word}".html_safe
   end
 end

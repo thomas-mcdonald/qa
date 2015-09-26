@@ -11,7 +11,6 @@ ENV["RSPEC"] = 'true'
 require 'sidekiq'
 require 'sidekiq/testing'
 
-
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'shoulda/matchers'

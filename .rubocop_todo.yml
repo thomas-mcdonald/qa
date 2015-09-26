@@ -70,34 +70,13 @@ Style/CommentAnnotation:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/DotPosition:
-  Enabled: false
-
 # Offense count: 2
 Style/DoubleNegation:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Enabled: false
-
-# Offense count: 1
-# Configuration parameters: Exclude.
-Style/FileName:
   Enabled: false
 
 # Offense count: 5
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
-  Enabled: false
-
-# Offense count: 10
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
   Enabled: false
 
 # Offense count: 16
@@ -128,10 +107,6 @@ Style/NegatedIf:
 Style/NumericLiterals:
   MinDigits: 8
 
-# Offense count: 1
-Style/OneLineConditional:
-  Enabled: false
-
 # Offense count: 5
 # Configuration parameters: NamePrefix, NamePrefixBlacklist.
 Style/PredicateName:
@@ -140,12 +115,6 @@ Style/PredicateName:
 # Offense count: 25
 # Cop supports --auto-correct.
 Style/RedundantSelf:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAsExpressionSeparator.
-Style/Semicolon:
   Enabled: false
 
 # Offense count: 12

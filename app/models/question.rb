@@ -22,11 +22,11 @@ class Question < ActiveRecord::Base
   is_slugged :title
 
   def accepted_is_on_question
-    if accepted_answer_id.present?
-      answer_ids = self.answers.pluck(:id)
-      if !answer_ids.include? accepted_answer_id.to_i
-        self.errors.add(:accepted_answer_id, 'Answer ID must be valid')
-      end
+    return if accepted_answer_id.nil?
+
+    answer_ids = self.answers.pluck(:id)
+    if !answer_ids.include? accepted_answer_id.to_i
+      self.errors.add(:accepted_answer_id, 'Answer ID must be valid')
     end
   end
 
@@ -39,8 +39,8 @@ class Question < ActiveRecord::Base
   end
 
   def self.tag_counts
-    Tag.select("tags.*, count(taggings.tag_id) as count").
-      joins(:taggings).group("taggings.tag_id")
+    Tag.select("tags.*, count(taggings.tag_id) as count")
+      .joins(:taggings).group("taggings.tag_id")
   end
 
   def tag_list
