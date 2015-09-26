@@ -20,6 +20,7 @@ class AnswerCreator
 
   def create_answer
     @answer = @question.answers.new(@params)
+    @answer.update_last_activity(@user)
     @answer.user = @user
     if !@answer.save
       @errors = @answer.errors

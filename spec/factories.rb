@@ -38,7 +38,9 @@ FactoryGirl.define do
   end
 
   factory :answer do
+    association :last_active_user, factory: :user
     body 'answer on how to do it'
+    last_active_at DateTime.current
     question
     user
   end

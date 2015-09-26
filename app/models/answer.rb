@@ -1,4 +1,5 @@
 class Answer < ActiveRecord::Base
+  include LastActivity
   include Timeline
   include Voteable
 
@@ -9,6 +10,7 @@ class Answer < ActiveRecord::Base
 
   validates :question_id, presence: true
   validates :user_id, presence: true
+  validates :last_active_user_id, :last_active_at, presence: true
   validates :body, length: { in: 10..30000 }
 
   def self.question_view_ordering(question)
