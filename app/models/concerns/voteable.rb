@@ -8,7 +8,7 @@ module Voteable
   end
 
   def update_vote_count!
-    self.vote_count = self.votes.where(vote_type: [1,2]).inject(0) { |sum, v| v.upvote? ? sum + 1 : sum - 1 }
+    self.vote_count = self.votes.where(vote_type: [1, 2]).inject(0) { |a, e| e.upvote? ? a + 1 : a - 1 }
     save
   end
 

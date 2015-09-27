@@ -124,24 +124,9 @@ Style/SignalException:
   Enabled: false
 
 # Offense count: 1
-# Configuration parameters: Methods.
-Style/SingleLineBlockParams:
-  Enabled: false
-
-# Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: AllowIfMethodIsEmpty.
 Style/SingleLineMethods:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
   Enabled: false
 
 # Offense count: 8
@@ -154,11 +139,6 @@ Style/SpaceInsideBlockBraces:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
   Enabled: false
 
 # Offense count: 2
@@ -182,12 +162,6 @@ Style/StringLiteralsInInterpolation:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/TrailingBlankLines:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
-Style/TrailingComma:
   Enabled: false
 
 # Offense count: 2

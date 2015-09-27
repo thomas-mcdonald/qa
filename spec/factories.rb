@@ -2,9 +2,9 @@ FactoryGirl.define do
   sequence(:email) { |n| "person#{n}@example.com" }
 
   factory :authorization do
-    provider  'google'
-    uid       'https://www.google.com/accounts/o8/id?id=fakeuid'
-    email     # Uses email sequence
+    provider 'google'
+    uid 'https://www.google.com/accounts/o8/id?id=fakeuid'
+    email # Uses email sequence
 
     trait :admin do
       uid 'https://www.google.com/accounts/o8/id?id=adminuid'
@@ -15,12 +15,12 @@ FactoryGirl.define do
   end
 
   factory :user do
-    name  'John Smith'
+    name 'John Smith'
     email # Uses email sequence
 
     trait :admin do
       admin true
-      after :build do |factory,_|
+      after :build do |factory, _|
         factory.authorizations << FactoryGirl.build(:admin_authorization)
       end
     end

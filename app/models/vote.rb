@@ -33,7 +33,7 @@ class Vote < ActiveRecord::Base
   end
 
   def validate_one_updown_vote
-    if self.post.votes.where(user_id: self.user.id, vote_type: [1,2]).length > 0
+    if self.post.votes.where(user_id: self.user.id, vote_type: [1, 2]).length > 0
       self.errors[:base] << 'Can only vote once on a post'
     end
   end
