@@ -15,6 +15,7 @@ html .control-group.hidden { margin-bottom: 0; }
     font-weight: 700;
   }
 }
+
 .container > .page-header { margin-top: 0; } // no margin on initial header
 
 // input that should use font-awesome
@@ -35,6 +36,7 @@ img { max-width: 100%; }
   @include make-md-column(9);
   margin-bottom: 25px;
 }
+
 #sidebar {
   // TODO: make the sidebar work nicely on small mobile devices
   @extend .hidden-xs;

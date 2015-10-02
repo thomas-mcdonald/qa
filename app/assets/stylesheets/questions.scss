@@ -89,7 +89,7 @@
     font-size: 18px;
     font-weight: 600;
     line-height: 32px;
-    margin: 0 0 5px 0;
+    margin: 0 0 5px;
 
     a:hover {
       text-decoration: none;
@@ -109,7 +109,8 @@
     float: right;
     font-size: 12px;
 
-    span, a {
+    span,
+    a {
       margin-left: 1px;
     }
 
@@ -149,7 +150,7 @@
 }
 
 .sidebar-tags {
-  h5 { margin: 0 0 6px 0; }
+  h5 { margin: 0 0 6px; }
 
   ul {
     list-style-type: none;
