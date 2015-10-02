@@ -11,6 +11,7 @@ AllCops:
     - 'bin/spring'
     - 'db/**/*'
     - 'doc/bin/*'
+    - 'vendor/bundle'
 
 Style/GuardClause:
   MinBodyLength: 3
