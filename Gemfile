@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 
 gem 'by_star', github: 'radar/by_star'
 gem 'faker', '~> 1.4.2'
@@ -38,7 +38,6 @@ gem 'uglifier', '>= 1.0.3'
 
 group :development do
   gem 'quiet_assets'
-  # Guard for autorunning tests
   gem 'guard', '~> 2.12.0'
   gem 'guard-rspec', '~> 4.6.0'
   gem 'guard-spinach', '~> 0.2.0'
