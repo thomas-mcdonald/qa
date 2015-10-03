@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   has_many :timeline_events, as: :post
   belongs_to :user
 
-  scope :sort_by, -> (kind) {
+  scope :sort_by, lambda { |kind|
     case kind.to_sym
     when :activity
       order('questions.last_active_at DESC')
