@@ -9,11 +9,11 @@ class QuestionsController < ApplicationController
   before_action :load_and_verify_slug, only: [:show]
 
   def index
-    @questions = Question.includes(:last_active_user, :tags).page(params[:page]).load
+    @questions = Question.sort_by(:activity).includes(:last_active_user, :tags).page(params[:page]).load
   end
 
   def tagged
-    @questions = Question.tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
+    @questions = Question.sort_by(:activity).tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
     @count = Question.tagged_with(params[:tag]).count
     @related_tags = Tag.named(params[:tag]).related_tags
   end

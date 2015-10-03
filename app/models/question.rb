@@ -12,7 +12,14 @@ class Question < ActiveRecord::Base
   has_many :timeline_events, as: :post
   belongs_to :user
 
-  default_scope { order('questions.last_active_at DESC') }
+  scope :sort_by, -> (kind) {
+    case kind.to_sym
+    when :activity
+      order('questions.last_active_at DESC')
+    else
+      raise ArgumentError
+    end
+  }
 
   validates :title, length: { in: 10..150 }, presence: true
   validates :body, length: { in: 10..30000 }, presence: true
