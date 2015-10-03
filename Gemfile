@@ -41,7 +41,7 @@ group :development do
   gem 'guard', '~> 2.12.0'
   gem 'guard-rspec', '~> 4.6.0'
   gem 'guard-spinach', '~> 0.2.0'
-  gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
+  gem 'rails-erd', '~> 1.4.0'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rubocop', require: false
   gem 'spring'
