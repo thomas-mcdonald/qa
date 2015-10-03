@@ -188,17 +188,16 @@ module QA
         answers.each do |a|
           bar.increment
           next if @posts[a['ParentId'].to_i].blank?
-          an = Answer.new
           edits = grouped_edits[a['Id']]
           originator = edits.select(&:new_record)[0]
           edits.delete originator
           next unless @user_ids.include? originator[:user_id].to_i
 
-          an.question_id = @posts[a['ParentId'].to_i][:id]
-          an.body = originator[:body]
-          an.user_id = originator[:user_id].to_i
-          an.created_at = DateTime.parse(originator[:created_at])
-          next unless an.save
+          question = Question.find_by(id: a['ParentId'].to_i)
+          next if question.nil?
+          ac = AnswerCreator.new(question, User.find(originator[:user_id]), originator.simple_hash)
+          an = ac.create
+
           @posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
       end
