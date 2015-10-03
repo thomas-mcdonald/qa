@@ -11,17 +11,17 @@
 
 1. Ensure you have both PostgreSQL 9.3+ and Redis 2.8.9+ installed
 2. Install Ruby 2.2.x
-3. git clone git://github.com/thomas-mcdonald/qa.git && cd qa
-4. bundle install
-5. Check settings in config/database.yml and config/redis.yml
-6. Copy .env.sample to .env and fill in environment settings as required
-7. bundle exec rake db:create db:schema:load
+3. `git clone git://github.com/thomas-mcdonald/qa.git && cd qa`
+4. `bundle install`
+5. Check settings in `config/database.yml` and `config/redis.yml`
+6. Copy `.env.sample` to `.env` and fill in environment settings as required
+7. `bundle exec rake db:create db:schema:load`
 
 ### Seed Data
 
 There are a couple of options for seed data:
 
-* bundle exec rake db:seed:development will give you a few example questions
+* `bundle exec rake db:seed:development` will give you a few example questions
 * You can import a Stack Exchange data dump for development purposes. Download a dump from [here](https://archive.org/download/stackexchange) and extract to lib/import/data. `rake import:se` will import this data.
 
 *The SE import process is memory-intensive and will take some time - even for smaller Stack Exchange sites. The importer queues a significant number of background jobs which will take time to process - so initial performance may be slower.*
