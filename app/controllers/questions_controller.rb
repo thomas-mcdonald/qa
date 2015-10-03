@@ -9,7 +9,9 @@ class QuestionsController < ApplicationController
   before_action :load_and_verify_slug, only: [:show]
 
   def index
-    @questions = Question.sort_by(:activity).includes(:last_active_user, :tags).page(params[:page]).load
+    render_404 unless params[:sort].nil? or Question::VALID_SORT_KEYS.include?(params[:sort].to_sym)
+    @active_tab = (params[:sort] || :activity).to_sym
+    @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
   end
 
   def tagged

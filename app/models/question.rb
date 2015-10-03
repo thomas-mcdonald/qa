@@ -13,11 +13,13 @@ class Question < ActiveRecord::Base
   belongs_to :user
 
   scope :sort_by, lambda { |kind|
+    kind = :activity if kind.nil?
+
     case kind.to_sym
     when :activity
       order('questions.last_active_at DESC')
-    else
-      raise ArgumentError
+    when :votes
+      order('questions.vote_count DESC')
     end
   }
 
@@ -25,6 +27,8 @@ class Question < ActiveRecord::Base
   validates :body, length: { in: 10..30000 }, presence: true
   validates :last_active_user_id, :last_active_at, presence: true
   validate :accepted_is_on_question, :tags_exist
+
+  VALID_SORT_KEYS = [:activity, :votes]
 
   is_slugged :title
 

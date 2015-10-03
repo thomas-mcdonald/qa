@@ -1,5 +1,13 @@
-<div class="page-header">
+<div class="tabbed-header">
   <h1>Recent Questions</h1>
+  <ul class="nav nav-tabs pull-right">
+    <%= tab_tag :activity do %>
+      <%= link_to "activity", root_url %>
+    <% end %>
+    <%= tab_tag :votes do %>
+      <%= link_to "votes", sort: 'votes' %>
+    <% end %>
+  </ul>
 </div>
 
 <div class="question-list">
