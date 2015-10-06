@@ -16,6 +16,10 @@ module LastActivity
     belongs_to :last_active_user, class_name: 'User', foreign_key: 'last_active_user_id'
   end
 
+  def has_been_edited?
+    self.timeline_events.count > 1
+  end
+
   def update_last_activity(user)
     self.last_active_user = user
     self.last_active_at = DateTime.current

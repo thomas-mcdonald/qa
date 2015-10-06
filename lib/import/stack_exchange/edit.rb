@@ -2,16 +2,18 @@ module QA
   module Import
     class StackExchange
       class Edit
+        attr_reader :new_record, :post_id
+
         def initialize(edit)
+          @post_id = edit.first['PostId']
           @result = {
-            post_id: edit[0]['PostId'],
             comment: edit[0]['Comment'],
             user_id: edit[0]['UserId'],
             created_at: edit[0]['CreationDate']
           }
 
           edit.each do |attr|
-            @result[:new_record] = true if [1, 2, 3].include? attr['PostHistoryTypeId'].to_i
+            @new_record = true if [1, 2, 3].include? attr['PostHistoryTypeId'].to_i
             case attr['PostHistoryTypeId']
             when "1", "4", "7"
               @result[:title] = attr["Text"]
@@ -26,14 +28,6 @@ module QA
               end
             end
           end
-        end
-
-        def new_record
-          @result[:new_record]
-        end
-
-        def post_id
-          @result[:post_id]
         end
 
         def [](sym)

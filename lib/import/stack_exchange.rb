@@ -1,3 +1,4 @@
+require 'import/stack_exchange/comment'
 require 'import/stack_exchange/edit'
 require 'vote_creator'
 
@@ -12,6 +13,7 @@ module QA
         output_intro
         @user_ids = create_users
         create_posts
+        create_comments
         create_votes
         create_reputation
         update_counters
@@ -34,7 +36,7 @@ module QA
             bar.increment
             next if u["Id"].to_i < 0
             time = DateTime.now
-            @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
+            @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{Faker::Internet.safe_email}", #{time}, #{time}\n))
             user_ids << u["Id"].to_i
           end
         ensure
@@ -66,6 +68,20 @@ module QA
           Question.update(info[:id], accepted_answer_id: answer_info[:id])
         end
         posts
+      end
+
+      def create_comments
+        comments = Nokogiri::XML::Document.parse(File.read("#{@dir}/comments.xml")).css('comments row')
+        puts " Creating Comments"
+        bar = progress_bar('Comments', comments.length)
+        comments.each do |row|
+          bar.increment
+          se_comment = StackExchange::Comment.new(row)
+          info = @posts[se_comment.post_id]
+          next unless info
+          comment = se_comment.build_object(info)
+          comment.save
+        end
       end
 
       def create_votes
@@ -194,17 +210,16 @@ module QA
         answers.each do |a|
           bar.increment
           next if @posts[a['ParentId'].to_i].blank?
-          an = Answer.new
           edits = grouped_edits[a['Id']]
           originator = edits.select(&:new_record)[0]
           edits.delete originator
           next unless @user_ids.include? originator[:user_id].to_i
 
-          an.question_id = @posts[a['ParentId'].to_i][:id]
-          an.body = originator[:body]
-          an.user_id = originator[:user_id].to_i
-          an.created_at = DateTime.parse(originator[:created_at])
-          next unless an.save
+          question = Question.find_by(id: @posts[a['ParentId'].to_i][:id])
+          next if question.nil?
+          ac = AnswerCreator.new(question, User.find(originator[:user_id]), originator.simple_hash)
+          an = ac.create
+
           @posts[a['Id'].to_i] = { id: an.id, type: 'Answer' } unless an.new_record?
         end
       end

@@ -9,12 +9,14 @@ class QuestionsController < ApplicationController
   before_action :load_and_verify_slug, only: [:show]
 
   def index
-    @questions = Question.includes(:last_active_user, :tags).page(params[:page]).load
+    render_404 unless params[:sort].nil? or Question::VALID_SORT_KEYS.include?(params[:sort].to_sym)
+    @active_tab = (params[:sort] || :activity).to_sym
+    @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
     @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
   end
 
   def tagged
-    @questions = Question.tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
+    @questions = Question.sort_by(:activity).tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
     @count = Question.tagged_with(params[:tag]).count
     @related_tags = Tag.named(params[:tag]).related_tags
   end
@@ -22,7 +24,7 @@ class QuestionsController < ApplicationController
   def show
     @question.viewed_by(request.remote_ip)
     @answer_count = @question.answers.count
-    @answers = @question.answers.includes(:comments, :user).question_view_ordering(@question).page(params[:page]).per(5)
+    @answers = @question.answers.includes(:user, comments: :user).question_view_ordering(@question).page(params[:page]).per(5)
     @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
@@ -94,7 +96,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_and_verify_slug
-    @question = Question.includes(:comments, :votes, :user).find(params[:id])
+    @question = Question.includes(:votes, :user, comments: :user).find(params[:id])
     if !@question.valid_slug?(params[:id])
       redirect_to @question
     end

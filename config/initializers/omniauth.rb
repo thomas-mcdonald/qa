@@ -1,5 +1,5 @@
 # fatal error if no providers enabled
-if !SiteSettings['authentication'].any? { |_,v| v }
+if !SiteSettings['authentication'].any? { |_, v| v }
   puts <<END
     You must enable at least one authentication provider in site_settings.yml.
 

@@ -1,7 +1,7 @@
 class RedcarpetFilter < HTML::Pipeline::TextFilter
   def initialize(text, context = nil, result = nil)
     super(text, context, result)
-    @text = @text.gsub("\r", '')
+    @text = @text.delete("\r")
   end
 
   def call

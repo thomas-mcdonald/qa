@@ -8,9 +8,10 @@
     margin: 0 0 0 5px;
     width: 30px;
 
-    button, input[type="submit"] {
+    button,
+    input[type="submit"] {
       background: none;
-      border: none;
+      border: 0;
     }
   }
 }
@@ -44,11 +45,12 @@
     }
 
     .vote-active {
-      color: green;
+      color: $vote-active;
     }
   }
 
-  .accept-answer, .unaccept-answer {
+  .accept-answer,
+  .unaccept-answer {
     @extend %control-container;
     margin-top: 5px;
 
@@ -62,7 +64,10 @@
     }
 
     .inactive.icon-ok { color: #eee; }
-    .active.icon-ok { color: green; text-shadow: 0 0 1px #000; }
+    .active.icon-ok {
+      color: $vote-active;
+      text-shadow: 0 0 1px #000;
+    }
   }
 
   .main {
@@ -76,7 +81,9 @@
   .righto { float: right; }
 
   .user-info {
-    width: 180px;
+    width: 160px;
+    float: left;
+    @include clearfix();
 
     .asked { margin-bottom: 2px; }
     .gravatar {
@@ -85,12 +92,15 @@
       margin-right: 6px;
       width: 32px;
     }
+
     .user-details {
       float: left;
+
       a {
         display: block;
         line-height: 14px;
       }
+
       span { font-weight: bold; }
     }
   }

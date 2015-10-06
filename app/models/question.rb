@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   include Timeline
   include Voteable
 
-  belongs_to :accepted_answer, class: Answer
+  belongs_to :accepted_answer, class_name: Answer
   has_many :answers
   has_many :comments, -> { order('created_at ASC') }, as: :post
   has_many :taggings
@@ -12,21 +12,32 @@ class Question < ActiveRecord::Base
   has_many :timeline_events, as: :post
   belongs_to :user
 
-  default_scope { order('questions.last_active_at DESC') }
+  scope :sort_by, lambda { |kind|
+    kind = :activity if kind.nil?
+
+    case kind.to_sym
+    when :activity
+      order('questions.last_active_at DESC')
+    when :votes
+      order('questions.vote_count DESC')
+    end
+  }
 
   validates :title, length: { in: 10..150 }, presence: true
   validates :body, length: { in: 10..30000 }, presence: true
   validates :last_active_user_id, :last_active_at, presence: true
   validate :accepted_is_on_question, :tags_exist
 
+  VALID_SORT_KEYS = [:activity, :votes]
+
   is_slugged :title
 
   def accepted_is_on_question
-    if accepted_answer_id.present?
-      answer_ids = self.answers.pluck(:id)
-      if !answer_ids.include? accepted_answer_id.to_i
-        self.errors.add(:accepted_answer_id, 'Answer ID must be valid')
-      end
+    return if accepted_answer_id.nil?
+
+    answer_ids = self.answers.pluck(:id)
+    if !answer_ids.include? accepted_answer_id.to_i
+      self.errors.add(:accepted_answer_id, 'Answer ID must be valid')
     end
   end
 
@@ -39,8 +50,8 @@ class Question < ActiveRecord::Base
   end
 
   def self.tag_counts
-    Tag.select("tags.*, count(taggings.tag_id) as count").
-      joins(:taggings).group("taggings.tag_id")
+    Tag.select("tags.*, count(taggings.tag_id) as count")
+      .joins(:taggings).group("taggings.tag_id")
   end
 
   def tag_list

@@ -1,0 +1,17 @@
+$tabbed-header-height: 58px;
+
+.tabbed-header {
+  @include clearfix();
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  border-bottom: 1px solid #eee;
+
+  h1 {
+    float: left;
+    font-size: 28px;
+  }
+
+  .nav-tabs {
+    padding: $tabbed-header-height - 39px 0 0;
+  }
+}

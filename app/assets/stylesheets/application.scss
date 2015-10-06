@@ -6,6 +6,10 @@ $screen-lg: 99999px; // essentially disable large media queries
 @import "font-awesome";
 @import "selectize";
 
+@import "variables";
+
+@import "components/tabbed-header";
+
 @import "global";
 
 @import "badges";

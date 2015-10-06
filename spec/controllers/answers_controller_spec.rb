@@ -71,6 +71,14 @@ describe AnswersController, :type => :controller do
         Answer.any_instance.expects(:edit_timeline_event!)
         post :update, id: answer.id, answer: { body: 'this is a new body' }
       end
+
+      it 'updates the last activity on the post' do
+        last_active = answer.last_active_at
+        post :update, id: answer.id, answer: { body: 'this is a new body' }
+        answer.reload
+        expect(answer.last_active_at).to_not eq(last_active)
+        expect(answer.last_active_user_id).to eq(a_k.id)
+      end
     end
   end
 end

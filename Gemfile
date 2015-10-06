@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.4'
 
 gem 'by_star', github: 'radar/by_star'
 gem 'faker', '~> 1.4.2'
@@ -8,7 +8,7 @@ gem 'html-pipeline', '~> 1.11.0'
 gem 'kaminari', '~> 0.16.0'
 gem 'globalid', '~> 0.2.3'
 gem 'pg', '~> 0.17.0'
-gem 'pghero', '~> 0.1.0'
+gem 'pghero', '~> 1.1.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.2.0'
 gem 'redis', '~> 3.2.0'
@@ -39,30 +39,28 @@ gem 'uglifier', '>= 1.0.3'
 
 group :development do
   gem 'quiet_assets'
-  # Guard for autorunning tests
-  gem 'guard', '~> 2.10.0'
-  gem 'guard-rspec', '~> 4.4.0'
+  gem 'guard', '~> 2.12.0'
+  gem 'guard-rspec', '~> 4.6.0'
   gem 'guard-spinach', '~> 0.2.0'
-  gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
+  gem 'rails-erd', '~> 1.4.0'
   gem 'rb-fsevent', '~> 0.9.1'
-  gem 'rubocop'
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'terminal-notifier-guard'
-
-  # Documentation
-  gem 'jekyll'
 end
 
 group :development, :test do
+  gem 'better_errors', '~> 2.1.1'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.0'
+  gem 'scss-lint', require: false
   gem 'spinach-rails'
 end
 
 group :test do
   gem 'minitest'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'database_cleaner', '~> 1.4.0'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.6.0', require: false

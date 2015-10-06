@@ -24,10 +24,13 @@ class AnswersController < ApplicationController
   end
 
   def update
+    # TODO: return something sensible on errors!
     @answer = Answer.find(params[:id])
     authorize(@answer)
     @answer.update_attributes(answer_params)
+    @answer.update_last_activity(current_user)
     @answer.edit_timeline_event!(current_user)
+    @answer.save
     redirect_to @answer.question
   end
 
