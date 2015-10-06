@@ -17,3 +17,8 @@ $(document).ready ->
   .on 'ajax:error', '#new_comment', (event, xhr, status) ->
     json = JSON.parse(xhr.responseText)
     $(this).qaPopover(json.errors)
+
+  $('.post').on 'click', '.comment-cancel', (e) ->
+    e.preventDefault()
+    $(this).parents('.comments').find('.add-comment').show()
+    $(this).parents('form').remove()
