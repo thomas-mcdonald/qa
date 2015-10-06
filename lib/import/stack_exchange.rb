@@ -1,3 +1,4 @@
+require 'import/stack_exchange/comment'
 require 'import/stack_exchange/edit'
 require 'vote_creator'
 
@@ -12,6 +13,7 @@ module QA
         output_intro
         @user_ids = create_users
         create_posts
+        create_comments
         create_votes
         create_reputation
         update_counters
@@ -66,6 +68,20 @@ module QA
           Question.update(info[:id], accepted_answer_id: answer_info[:id])
         end
         posts
+      end
+
+      def create_comments
+        comments = Nokogiri::XML::Document.parse(File.read("#{@dir}/comments.xml")).css('comments row')
+        puts " Creating Comments"
+        bar = progress_bar('Comments', comments.length)
+        comments.each do |row|
+          bar.increment
+          se_comment = StackExchange::Comment.new(row)
+          info = @posts[se_comment.post_id]
+          next unless info
+          comment = se_comment.build_object(info)
+          comment.save
+        end
       end
 
       def create_votes
