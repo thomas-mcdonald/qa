@@ -36,7 +36,7 @@ module QA
             bar.increment
             next if u["Id"].to_i < 0
             time = DateTime.now
-            @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{FactoryGirl.generate(:email)}", #{time}, #{time}\n))
+            @conn.put_copy_data(%(#{u["Id"]},"#{u["DisplayName"]}","#{Faker::Internet.safe_email}", #{time}, #{time}\n))
             user_ids << u["Id"].to_i
           end
         ensure
@@ -209,7 +209,7 @@ module QA
           edits.delete originator
           next unless @user_ids.include? originator[:user_id].to_i
 
-          question = Question.find_by(id: a['ParentId'].to_i)
+          question = Question.find_by(id: @posts[a['ParentId'].to_i][:id])
           next if question.nil?
           ac = AnswerCreator.new(question, User.find(originator[:user_id]), originator.simple_hash)
           an = ac.create
