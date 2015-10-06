@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   def show
     @question.viewed_by(request.remote_ip)
     @answer_count = @question.answers.count
-    @answers = @question.answers.includes(:comments, :user).question_view_ordering(@question).page(params[:page]).per(5)
+    @answers = @question.answers.includes(:user, comments: :user).question_view_ordering(@question).page(params[:page]).per(5)
     @user_votes = @question.votes_on_self_and_answers_by_user(current_user)
     @answer = Answer.new
   end
@@ -95,7 +95,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_and_verify_slug
-    @question = Question.includes(:comments, :votes, :user).find(params[:id])
+    @question = Question.includes(:votes, :user, comments: :user).find(params[:id])
     if !@question.valid_slug?(params[:id])
       redirect_to @question
     end
