@@ -6,6 +6,29 @@ describe User, :type => :model do
     it { is_expected.to have_many(:reputation_events) }
   end
 
+  describe '.new_from_hash' do
+    let(:data) do
+      {
+        info: {
+          email: 'test@example.com',
+          name: 'John Doe'
+        }
+      }
+    end
+
+    it 'assigns based on email and name fields' do
+      user = User.new_from_hash(data)
+      expect(user.name).to eq(data[:info][:name])
+      expect(user.email).to eq(data[:info][:email])
+    end
+
+    it 'does not assign other attributes' do
+      data[:info][:admin] = true
+      user = User.new_from_hash(data)
+      expect(user.admin).to eq(false)
+    end
+  end
+
   describe 'calculate_reputation!' do
     let(:user) { FactoryGirl.create(:user) }
 
