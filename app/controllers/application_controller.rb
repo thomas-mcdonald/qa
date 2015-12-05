@@ -65,6 +65,11 @@ class ApplicationController < ActionController::Base
     }.merge(extras)
   end
 
+  # Renders out a 404 page without hitting the rails exception stack
+  def render_404
+    render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  end
+
   # This feels a bit hacky
   def handle_env(e)
     raise e if ENV['RSPEC']
