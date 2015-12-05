@@ -4,6 +4,8 @@ class Badge < ActiveRecord::Base
 
   validates :name, presence: true
 
+  scope :for, -> (name) { where(name: name) }
+
   def badge_definition
     QA::BadgeManager[self.name]
   end

@@ -1,0 +1,8 @@
+<div class="user-info">
+  <p class="asked"><%= string %> <%= time_ago_in_words time %> ago</p>
+  <img class="gravatar" src="<%= user.gravatar %>" />
+  <div class="user-details">
+    <%= link_to user.display_name, user %>
+    <span><%= user.reputation %></span>
+  </div>
+</div>

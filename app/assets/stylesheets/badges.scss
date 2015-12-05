@@ -66,3 +66,13 @@
     color: #565656;
   }
 }
+
+.badge-award-list {
+  @include make-row();
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    @include make-md-column(6);
+  }
+}

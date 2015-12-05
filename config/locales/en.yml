@@ -4,12 +4,17 @@
 en:
   badges:
     recent_badges: Recent Badges
-    names:
-      good_answer: Good Answer
-      great_answer: Great Answer
-      nice_answer: Nice Answer
+    good_answer:
+      name: Good Answer
+    great_answer:
+      name: Great Answer
+    nice_answer:
+      name: Nice Answer
+      description: Awarded for having a question upvoted ten times.
 
-      good_question: Good Question
-      great_question: Great Question
-      nice_question: Nice Question
-  hello: "Hello world"
+    good_question:
+      name: Good Question
+    great_question:
+      name: Great Question
+    nice_question:
+      name: Nice Question
