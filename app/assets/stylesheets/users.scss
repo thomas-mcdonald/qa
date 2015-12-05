@@ -210,3 +210,31 @@ $user-list-gravatar-size: 48px;
     font-weight: bold;
   }
 }
+
+// user infobox
+// the small gravatar/reputation combobox
+// now used in posts & badge rendering, so extracted here
+.user-info {
+  width: 160px;
+  float: left;
+  @include clearfix();
+
+  .asked { margin-bottom: 2px; }
+  .gravatar {
+    float: left;
+    height: 32px;
+    margin-right: 6px;
+    width: 32px;
+  }
+
+  .user-details {
+    float: left;
+
+    a {
+      display: block;
+      line-height: 14px;
+    }
+
+    span { font-weight: bold; }
+  }
+}
