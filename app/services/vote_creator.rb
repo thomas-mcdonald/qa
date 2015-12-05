@@ -54,9 +54,9 @@ class VoteCreator
 
   # process the vote for badges
   def queue_processing
-    if @vote_params[:post_type] == 'Answer'
+    if @vote.post_type == 'Answer'
       queue_badge_job(:answer_vote)
-    elsif @vote_params[:post_type] == 'Question'
+    elsif @vote.post_type == 'Question'
       queue_badge_job(:question_vote)
     end
   end

@@ -25,6 +25,7 @@ describe VoteCreator do
     expect do
       VoteCreator.new(user, post_id: answer.id, post_type: 'Answer', vote_type: 'upvote').create
     end.to change(Jobs::Badge.jobs, :size).by(1)
+    expect(Jobs::Badge.jobs.first["args"].first).to eq('answer_vote')
   end
 
   describe '#create_reputation_events' do
