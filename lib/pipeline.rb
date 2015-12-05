@@ -1,8 +1,8 @@
-require 'redcarpet_filter'
+require 'qa/pipeline/redcarpet_filter'
 
 module Pipeline
   GENERIC_PIPELINE = HTML::Pipeline.new([
-    RedcarpetFilter,
+    QA::Pipeline::RedcarpetFilter,
     HTML::Pipeline::SanitizationFilter
   ], {})
 

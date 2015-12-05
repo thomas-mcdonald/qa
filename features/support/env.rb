@@ -14,7 +14,7 @@ Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}
 # Setup Javascript tags
 require 'capybara/poltergeist'
 Capybara.default_driver = :poltergeist
-Capybara.default_wait_time = 10
+Capybara.default_max_wait_time = 10
 
 # Setup Omniauth mock
 def omniauth_hash
