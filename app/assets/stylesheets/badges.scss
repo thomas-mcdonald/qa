@@ -73,6 +73,6 @@
   padding-left: 0;
 
   li {
-    @include make-md-column(6);
+    @include make-md-column(4);
   }
 }
