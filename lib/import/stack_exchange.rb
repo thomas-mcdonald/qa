@@ -194,7 +194,14 @@ module QA
 
           qc = QuestionCreator.new(User.find(originator[:user_id]), originator.simple_hash)
           qu = qc.create
-          @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' } unless qu.new_record?
+          # if the record saved
+          if !qu.new_record?
+            @posts[q['Id'].to_i] = { id: qu.id, type: 'Question' }
+
+            # add dummy view count data
+            redis_values = (1..q['ViewCount'].to_i).to_a
+            $view.pfadd("question-#{qu.id}", redis_values)
+          end
         end
       end
 
