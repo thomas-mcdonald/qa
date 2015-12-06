@@ -6,6 +6,7 @@ module QA
       @check_on = :question_vote
       @name = :good_question
       @type = :silver
+      @unqiue = false
 
       def check(question)
         question.vote_count >= 25

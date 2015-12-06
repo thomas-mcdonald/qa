@@ -6,6 +6,7 @@ module BadgeFixtures
     @check_on = :award_test
     @name = :easy
     @type = :bronze
+    @unique = false
 
     def check(object)
       true
@@ -36,6 +37,7 @@ end
 describe Jobs::Badge do
   QA::BadgeManager.instance_variable_set(:@namespace, BadgeFixtures)
   let(:question) { FactoryGirl.create(:question, user: user) }
+  let(:other_question) { FactoryGirl.create(:question, user: user) }
   let(:user) { FactoryGirl.create(:user) }
 
   it 'awards badges that meet the criteria' do
@@ -56,5 +58,19 @@ describe Jobs::Badge do
     expect do
       Jobs::Badge.new.perform('unique_test', question.to_global_id)
     end.to_not change { user.badges.count }
+  end
+
+  it 'awards non-unique badges on different objects' do
+    expect do
+      Jobs::Badge.new.perform('award_test', question.to_global_id)
+      Jobs::Badge.new.perform('award_test', other_question.to_global_id)
+    end.to change { user.badges.count }.by(2)
+  end
+
+  it 'enforces object uniqueness on non-unique badges' do
+    expect do
+      Jobs::Badge.new.perform('award_test', question.to_global_id)
+      Jobs::Badge.new.perform('award_test', question.to_global_id)
+    end.to change { user.badges.count }.by(1)
   end
 end

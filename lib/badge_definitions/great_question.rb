@@ -6,6 +6,7 @@ module QA
       @check_on = :question_vote
       @name = :great_question
       @type = :gold
+      @unique = false
 
       def check(question)
         question.vote_count >= 100

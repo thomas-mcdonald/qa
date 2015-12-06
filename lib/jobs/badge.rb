@@ -18,7 +18,11 @@ module Jobs
         # skip if criteria not satisfied
         next unless badge.new.check(object)
         # skip if already awarded
-        next if user.badges.where(name: badge.name).exists?
+        if badge.unique?
+          next if user.badges.where(name: badge.name).exists?
+        else
+          next if user.badges.where(name: badge.name, subject: object).exists?
+        end
 
         logger.info "Awarding badge #{badge.name} to user ##{user.id}"
         update_badge_count = true

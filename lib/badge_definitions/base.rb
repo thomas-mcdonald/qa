@@ -12,6 +12,15 @@ module QA
         def translation_base_key
           "badges.#{name}"
         end
+
+        # Unique defaults to true, only overriding value should be false, hence this strange construction
+        def unique?
+          if defined?(@unique)
+            @unique
+          else
+            true
+          end
+        end
       end
     end
   end
