@@ -18,7 +18,7 @@
       <% @questions.each do |question| %>
         <li>
           <span class="vote-count"><%= question.vote_count %></span>
-          <%= link_to question.title, question %>
+          <%= link_to question.title, question, class: 'full-width' %>
         </li>
       <% end %>
     </ul>
@@ -32,7 +32,7 @@
       <% @answers.each do |answer| %>
         <li>
           <span class="vote-count"><%= answer.vote_count %></span>
-          <%= link_to answer.question.title, answer.question %>
+          <%= link_to answer.question.title, answer.question, class: 'full-width' %>
         </li>
       <% end %>
     </ul>
@@ -45,7 +45,11 @@
 
     <ul class="badge-list">
       <% @badges.each do |badge| %>
-        <li><span class="badge <%= badge.badge_type %>"><%=t badge.name %></span></li>
+        <% if badge.count > 1 %>
+          <li><%= badge_link(badge) %>&nbsp;<span class="badge-count-info">- x<%= badge.count %></li>
+        <% else %>
+          <li><%= badge_link(badge) %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

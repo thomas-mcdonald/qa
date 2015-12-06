@@ -120,13 +120,15 @@
     height: 25px;
     margin-bottom: 7px;
 
-    > a {
+    > a.full-width {
       @include make-xs-column(11.25);
       margin-top: 5px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    .badge-count-info { color: #7d7d7d; }
   }
 
   h3 {
