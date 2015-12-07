@@ -9,6 +9,6 @@ class BadgesController < ApplicationController
   private
 
   def param_to_sym
-    params[:id].gsub('-', '_').to_sym
+    params[:id].tr('-', '_').to_sym
   end
 end

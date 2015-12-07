@@ -8,7 +8,7 @@ module BadgeFixtures
     @type = :bronze
     @unique = false
 
-    def check(object)
+    def check(_)
       true
     end
   end
@@ -18,7 +18,7 @@ module BadgeFixtures
     @name = :impossible
     @type = :bronze
 
-    def check(object)
+    def check(_)
       false
     end
   end
@@ -28,7 +28,7 @@ module BadgeFixtures
     @name = :unique
     @type = :bronze
 
-    def check(object)
+    def check(_)
       true
     end
   end

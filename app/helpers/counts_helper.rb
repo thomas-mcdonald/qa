@@ -11,13 +11,13 @@ module CountsHelper
     when 0..999
       count.to_s
     when 1000..9999
-      number_to_human(count, options.merge(precision: 1) )
+      number_to_human(count, options.merge(precision: 1))
     when 10000..99999
-      number_to_human(count, options.merge(precision: 2) )
+      number_to_human(count, options.merge(precision: 2))
     when 100_000..999_999
-      number_to_human(count, options.merge(precision: 3) )
+      number_to_human(count, options.merge(precision: 3))
     when 1_000_000..9_999_999
-      number_to_human(count, options.merge(precision: 1) )
+      number_to_human(count, options.merge(precision: 1))
     else
       # TODO: might as well work on cases up to ridiculous numbers I guess
       # 'k' version should be easy to adapt up to 1m.. might not even need changing

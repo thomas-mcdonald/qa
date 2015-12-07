@@ -1,6 +1,6 @@
 module UrlHelper
   def badge_link(badge)
-    name = badge.name.to_s.gsub('_', '-')
+    name = badge.name.to_s.tr('_', '-')
     link_to t(badge.badge_definition.translate_key('name')), badge_url(id: name), class: "badge #{badge.badge_type}"
   end
 
