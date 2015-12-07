@@ -45,15 +45,21 @@ describe CountsHelper, :type => :helper do
       expect(views_formatted(999)).to eq("999")
     end
 
-    it 'changes numbers between 1000 and 1749 as 1k' do
+    it 'formats numbers in a human readable way' do
       expect(views_formatted(1000)).to eq("1k")
-      expect(views_formatted(1749)).to eq("1k")
-    end
-
-    it 'changes numbers between (x-1)750 and x749 as xk' do
-      expect(views_formatted(1750)).to eq("2k")
+      expect(views_formatted(1499)).to eq("1k")
+      expect(views_formatted(1999)).to eq("2k")
+      expect(views_formatted(1500)).to eq("2k")
       expect(views_formatted(2000)).to eq("2k")
-      expect(views_formatted(9745)).to eq("9k")
+      expect(views_formatted(9499)).to eq("9k")
+      expect(views_formatted(9998)).to eq("10k")
+      expect(views_formatted(19999)).to eq("20k")
+      expect(views_formatted(99999)).to eq("100k")
+      expect(views_formatted(199999)).to eq("200k")
+      # numbers sub 1m don't get rounded up to 1m. we think this is okay.
+      expect(views_formatted(999999)).to eq("1000k")
+      expect(views_formatted(1000000)).to eq("1m")
+      expect(views_formatted(1999500)).to eq("2m")
     end
   end
 end

@@ -5,13 +5,19 @@ module CountsHelper
   end
 
   def views_formatted(count)
+    units = { thousand: 'k', million: 'm', billion: 'b' }
+    options = { format: '%n%u', units: units }
     case count
     when 0..999
       count.to_s
-    when 1000..1749
-      "1k"
-    when 1750..9749
-      (count + 250).to_s.first + "k"
+    when 1000..9999
+      number_to_human(count, options.merge(precision: 1) )
+    when 10000..99999
+      number_to_human(count, options.merge(precision: 2) )
+    when 100_000..999_999
+      number_to_human(count, options.merge(precision: 3) )
+    when 1_000_000..9_999_999
+      number_to_human(count, options.merge(precision: 1) )
     else
       # TODO: might as well work on cases up to ridiculous numbers I guess
       # 'k' version should be easy to adapt up to 1m.. might not even need changing
