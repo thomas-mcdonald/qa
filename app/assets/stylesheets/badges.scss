@@ -1,0 +1,78 @@
+%badge-button {
+  &.bronze, &.silver, &.gold {
+    padding-left: 18px;
+    &:before {
+      position: absolute;
+      content: '\2022';
+      font-size: 22px;
+      left: 6px;
+      line-height: 15px;
+    }
+  }
+
+  &.bronze:before { color: #c96; }
+  &.silver:before { color: #c5c5c5; }
+  &.gold:before { color: #fc0; }
+}
+
+// Base badge
+.badge {
+  background-color: #3d3d3d;
+  @extend %badge-button;
+  border-bottom: 1px solid #020202;
+  border-left: 1px solid #242424;
+  border-right: 1px solid #242424;
+  border-top: 1px solid #424242;
+  @include border-radius(3px);
+  color: #fff;
+  display: inline-block;
+  font-size: 11px;
+  outline: none;
+  padding: 3px 6px;
+  position: relative;
+  text-decoration: none;
+  &:hover, &:focus {
+    background-color: #666;
+    color: #fff;
+    text-decoration: none;
+  }
+  &:hover {
+    border: 1px solid #020202;
+  }
+  &:focus {
+    border: 1px solid #000;
+    @include box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.badge-count {
+  @extend %badge-button;
+  @include navbar-vertical-align($line-height-computed);
+  float: left;
+}
+
+
+.recent-badges {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  .badge-user-info a {
+    color: #565656;
+  }
+}
+
+.badge-award-list {
+  @include make-row();
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    @include make-md-column(4);
+  }
+}

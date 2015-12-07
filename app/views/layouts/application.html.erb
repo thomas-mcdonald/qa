@@ -34,6 +34,15 @@
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
               <li><p class="navbar-reputation"><%= current_user.reputation %></p></li>
+              <% if current_user.has_gold_badges? %>
+                <li><span class="badge-count gold"><%= current_user.gold_count %></span><li>
+              <% end %>
+              <% if current_user.has_silver_badges? %>
+                <li><span class="badge-count silver"><%= current_user.silver_count %></span><li>
+              <% end %>
+              <% if current_user.has_bronze_badges? %>
+                <li><span class="badge-count bronze"><%= current_user.bronze_count %></span><li>
+              <% end %>
               <% if current_user.admin? %>
                 <li><%= link_to 'Admin', '/admin' %></li>
               <% end %>

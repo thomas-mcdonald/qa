@@ -27,6 +27,7 @@ QA::Application.routes.draw do
   resources :answers, only: [:create, :edit, :update]
   get '/a/:id/timeline', to: 'answers#timeline', as: 'answer_timeline'
 
+  resources :badges, only: [:show]
   resources :comments, only: [:new, :create]
   resources :votes, only: [:create, :destroy]
 

@@ -2,4 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  badges:
+    recent_badges: Recent Badges
+    good_answer:
+      name: Good Answer
+    great_answer:
+      name: Great Answer
+    nice_answer:
+      name: Nice Answer
+      description: Awarded for having a question upvoted ten times.
+
+    good_question:
+      name: Good Question
+    great_question:
+      name: Great Question
+    nice_question:
+      name: Nice Question
+
+    popular_question:
+      name: Popular Question
+      description: Awarded for asking a question viewed 1,000 times.
+    notable_question:
+      name: Notable Question
+      description: Awarded for asking a question viewed 2,500 times.
+    famous_question:
+      name: Famous Question
+      description: Awarded for asking a question viewed 10,000 times.

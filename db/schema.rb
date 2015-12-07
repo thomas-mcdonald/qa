@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 20150630191818) do
     t.datetime "updated_at"
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "subject_id"
+    t.integer  "subject_type"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "badges", ["user_id"], name: "index_badges_on_user_id", using: :btree
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"

@@ -119,15 +119,16 @@
     @include vote-box(0.75);
     height: 25px;
     margin-bottom: 7px;
-    clear: both;
 
-    > a {
+    > a.full-width {
       @include make-xs-column(11.25);
       margin-top: 5px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    .badge-count-info { color: #7d7d7d; }
   }
 
   h3 {
@@ -142,6 +143,9 @@
     }
   }
 }
+
+// two columns in the badge box
+.badge-list li { @include make-xs-column(6); }
 
 // /users/#{id}/answers
 .answer-list {
@@ -206,5 +210,33 @@ $user-list-gravatar-size: 48px;
   .reputation {
     margin-top: 2px;
     font-weight: bold;
+  }
+}
+
+// user infobox
+// the small gravatar/reputation combobox
+// now used in posts & badge rendering, so extracted here
+.user-info {
+  width: 160px;
+  float: left;
+  @include clearfix();
+
+  .asked { margin-bottom: 2px; }
+  .gravatar {
+    float: left;
+    height: 32px;
+    margin-right: 6px;
+    width: 32px;
+  }
+
+  .user-details {
+    float: left;
+
+    a {
+      display: block;
+      line-height: 14px;
+    }
+
+    span { font-weight: bold; }
   }
 }

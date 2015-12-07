@@ -39,6 +39,7 @@
 
   .mini-count {
     float: left;
+    font-weight: 300;
     text-align: center;
     width: $normal-width;
     .num { font-size: 16px; }
@@ -86,8 +87,8 @@
   @include make-md-column(9.5); // leave wide for now
 
   h3 {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 32px;
     margin: 0 0 5px;
 
@@ -115,7 +116,7 @@
     }
 
     .rep {
-      font-weight: 500;
+      font-weight: 600;
     }
   }
 }

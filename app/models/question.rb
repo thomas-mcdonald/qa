@@ -74,7 +74,8 @@ class Question < ActiveRecord::Base
   end
 
   def viewed_by(key)
-    $view.pfadd("question-#{self.id}", key)
+    result = $view.pfadd("question-#{self.id}", key)
+    Jobs::Badge.perform_async(:question_view, self.to_global_id) if result
   end
 
   def view_count

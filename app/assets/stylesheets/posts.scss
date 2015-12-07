@@ -79,29 +79,4 @@
   .meta { @include clearfix(); }
   .links { float: left; }
   .righto { float: right; }
-
-  .user-info {
-    width: 160px;
-    float: left;
-    @include clearfix();
-
-    .asked { margin-bottom: 2px; }
-    .gravatar {
-      float: left;
-      height: 32px;
-      margin-right: 6px;
-      width: 32px;
-    }
-
-    .user-details {
-      float: left;
-
-      a {
-        display: block;
-        line-height: 14px;
-      }
-
-      span { font-weight: bold; }
-    }
-  }
 }

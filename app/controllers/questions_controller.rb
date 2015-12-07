@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
     render_404 unless params[:sort].nil? or Question::VALID_SORT_KEYS.include?(params[:sort].to_sym)
     @active_tab = (params[:sort] || :activity).to_sym
     @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
+    @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
   end
 
   def tagged

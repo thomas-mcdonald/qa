@@ -10,31 +10,48 @@
 <%= render partial: 'info', locals: { user: @user } %>
 
 <div class="row">
-<div class="user-box user-question-list">
-  <div class="header">
-    <h3><%= link_to header_pluralize(@user.question_count, 'Question', 'Questions'), questions_user_path(@user) %></h3>
+  <div class="user-box user-question-list">
+    <div class="header">
+      <h3><%= link_to header_pluralize(@user.question_count, 'Question', 'Questions'), questions_user_path(@user) %></h3>
+    </div>
+    <ul>
+      <% @questions.each do |question| %>
+        <li>
+          <span class="vote-count"><%= question.vote_count %></span>
+          <%= link_to question.title, question, class: 'full-width' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <ul>
-    <% @questions.each do |question| %>
-      <li>
-        <span class="vote-count"><%= question.vote_count %></span>
-        <%= link_to question.title, question %>
-      </li>
-    <% end %>
-  </ul>
-</div>
 
-<div class="user-box user-answer-list">
-  <div class="header">
-    <h3><%= link_to header_pluralize(@user.answer_count, 'Answer', 'Answers'), answers_user_path(@user) %></h3>
+  <div class="user-box user-answer-list">
+    <div class="header">
+      <h3><%= link_to header_pluralize(@user.answer_count, 'Answer', 'Answers'), answers_user_path(@user) %></h3>
+    </div>
+    <ul>
+      <% @answers.each do |answer| %>
+        <li>
+          <span class="vote-count"><%= answer.vote_count %></span>
+          <%= link_to answer.question.title, answer.question, class: 'full-width' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <ul>
-    <% @answers.each do |answer| %>
-      <li>
-        <span class="vote-count"><%= answer.vote_count %></span>
-        <%= link_to answer.question.title, answer.question %>
-      </li>
-    <% end %>
-  </ul>
+
+  <div class="user-box">
+    <div class="header">
+      <h3><%= header_pluralize(@user.badge_count, 'Badge', 'Badges') %></h3>
+    </div>
+
+    <ul class="badge-list">
+      <% @badges.each do |badge| %>
+        <% if badge.count > 1 %>
+          <li><%= badge_link(badge) %>&nbsp;<span class="badge-count-info">- x<%= badge.count %></li>
+        <% else %>
+          <li><%= badge_link(badge) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
 </div>
 </div>

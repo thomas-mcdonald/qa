@@ -13,14 +13,7 @@
         <%= link_to 'timeline', answer_timeline_path(answer) %>
       </div>
       <div class="righto">
-        <div class="user-info">
-          <p class="asked">answered <%= time_ago_in_words answer.created_at %> ago</p>
-          <img class="gravatar" src="<%= answer.user.gravatar %>" />
-          <div class="user-details">
-            <%= link_to answer.user.display_name, answer.user %>
-            <span><%= answer.user.reputation %></span>
-          </div>
-        </div>
+        <%= render partial: 'users/infobox', locals: { string: 'answered', time: answer.created_at, user: answer.user } %>
       </div>
     </div>
     <%= render partial: 'comments/comments', locals: { comments: answer.comments, post: answer } %>

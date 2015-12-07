@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :answers
   has_many :authorizations, dependent: :destroy
+  has_many :badges
   has_many :comments
   has_many :questions
   has_many :reputation_events
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
 
   def answer_count
     answers.count
+  end
+
+  def badge_count
+    badges.count
   end
 
   def calculate_reputation!
@@ -47,6 +52,18 @@ class User < ActiveRecord::Base
 
   def has_answered?(question)
     question.answers.pluck(:user_id).include?(self.id)
+  end
+
+  def has_bronze_badges?
+    bronze_count > 0
+  end
+
+  def has_silver_badges?
+    silver_count > 0
+  end
+
+  def has_gold_badges?
+    gold_count > 0
   end
 
   def gravatar(size = 32)

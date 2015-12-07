@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions.limit(5)
     @answers = @user.answers.includes(:question).limit(5)
+    @badges = @user.badges.select('name, count(id) as count, max(created_at) as created_at').order('created_at DESC').group(:name).limit(10)
   end
 
   def answers
