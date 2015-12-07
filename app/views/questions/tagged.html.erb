@@ -1,5 +1,19 @@
 <div id="page-wrap">
   <div id="body">
+    <div class="tabbed-header">
+      <h1>Tagged Questions</h1>
+      <ul class="nav nav-tabs pull-right">
+        <%= tab_tag :newest do %>
+          <%= link_to "newest", questions_tagged_url(tag: @tag.name, sort: :newest) %>
+        <% end %>
+        <%= tab_tag :activity do %>
+          <%= link_to "activity", questions_tagged_url(tag: @tag.name) %>
+        <% end %>
+        <%= tab_tag :votes do %>
+          <%= link_to "votes", questions_tagged_url(tag: @tag.name, sort: :votes) %>
+        <% end %>
+      </ul>
+    </div>
     <div class="question-list">
       <%= render partial: 'question-summary', collection: @questions, as: 'question' %>
     </div>

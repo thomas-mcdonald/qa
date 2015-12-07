@@ -7,16 +7,18 @@ class QuestionsController < ApplicationController
   before_action :require_login, except: [:index, :show, :tagged, :timeline]
   before_action :ensure_valid_accept_modifier, only: [:accept_answer, :unaccept_answer]
   before_action :load_and_verify_slug, only: [:show]
+  before_action :set_active_tab, only: [:index, :tagged]
 
   def index
-    render_404 unless params[:sort].nil? or Question::VALID_SORT_KEYS.include?(params[:sort].to_sym)
-    @active_tab = (params[:sort] || :activity).to_sym
+    return render_404 unless valid_sort_param
     @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
     @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
   end
 
   def tagged
-    @questions = Question.sort_by(:activity).tagged_with(params[:tag]).includes(:last_active_user, :tags).page(params[:page])
+    return render_404 unless valid_sort_param
+    @tag = Tag.find_by(name: params[:tag])
+    @questions = Question.tagged_with(params[:tag]).sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page])
     @count = Question.tagged_with(params[:tag]).count
     @related_tags = Tag.named(params[:tag]).related_tags
   end
@@ -104,5 +106,13 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:body, :tag_list, :title)
+  end
+
+  def set_active_tab
+    @active_tab = (params[:sort] || :activity).to_sym
+  end
+
+  def valid_sort_param
+    params[:sort].nil? or Question::VALID_SORT_KEYS.include?(params[:sort].to_sym)
   end
 end

@@ -18,6 +18,8 @@ class Question < ActiveRecord::Base
     case kind.to_sym
     when :activity
       order('questions.last_active_at DESC')
+    when :newest
+      order('questions.created_at DESC')
     when :votes
       order('questions.vote_count DESC')
     end
@@ -28,7 +30,7 @@ class Question < ActiveRecord::Base
   validates :last_active_user_id, :last_active_at, presence: true
   validate :accepted_is_on_question, :tags_exist
 
-  VALID_SORT_KEYS = [:activity, :votes]
+  VALID_SORT_KEYS = [:activity, :newest, :votes]
 
   is_slugged :title
 
