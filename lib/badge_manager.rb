@@ -1,5 +1,6 @@
 %w(good_answer good_question great_answer
-   great_question nice_answer nice_question).each do |f|
+   great_question nice_answer nice_question
+   notable_question popular_question famous_question).each do |f|
   require_relative "badge_definitions/#{f}"
 end
 

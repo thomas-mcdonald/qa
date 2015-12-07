@@ -153,6 +153,7 @@ module QA
         Question.all.each do |q|
           Jobs::QuestionStats.new.perform(q.id)
           Jobs::Badge.perform_async(:question_vote, q.to_global_id)
+          Jobs::Badge.perform_async(:question_view, q.to_global_id)
         end
         Answer.all.each do |a|
           Jobs::AnswerStats.new.perform(a.id)

@@ -31,7 +31,7 @@ module Jobs
           name: badge.name
         )
       end
-      Jobs::UpdateUserBadgeCount.perform_async(user.id)
+      Jobs::UpdateUserBadgeCount.perform_async(user.id) if update_badge_count
     end
   end
 end
