@@ -35,7 +35,9 @@ module BadgeFixtures
 end
 
 describe Jobs::Badge do
-  QA::BadgeManager.instance_variable_set(:@namespace, BadgeFixtures)
+  before do
+    QA::BadgeManager.namespace = BadgeFixtures
+  end
   let(:question) { FactoryGirl.create(:question, user: user) }
   let(:other_question) { FactoryGirl.create(:question, user: user) }
   let(:user) { FactoryGirl.create(:user) }

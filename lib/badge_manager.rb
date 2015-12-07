@@ -22,5 +22,10 @@ module QA
     def self.[](sym)
       badges.find { |klass| klass.name == sym }
     end
+
+    def self.namespace=(ns)
+      @namespace = ns
+      @badges = nil
+    end
   end
 end
