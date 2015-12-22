@@ -10,4 +10,8 @@ module Timeline
   def edit_timeline_event!(user)
     TimelineEvent.on_post_edit(self, user)
   end
+
+  def history_keys
+    raise NotImplementedError, "Classes importing Timeline should declare a list of keys for saving"
+  end
 end

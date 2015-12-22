@@ -14,7 +14,6 @@ class QuestionCreator
   def create
     Question.transaction do
       create_question
-      create_timeline_events
     end
 
     @question
@@ -24,14 +23,11 @@ class QuestionCreator
     @question = Question.new(@params)
     @question.user = @user
     @question.update_last_activity(@user)
+    @question.create_timeline_event!
 
     if !@question.save
       @errors = @question.errors
       raise ActiveRecord::Rollback
     end
-  end
-
-  def create_timeline_events
-    @question.create_timeline_event!
   end
 end

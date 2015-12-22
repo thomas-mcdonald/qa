@@ -2,6 +2,6 @@
   <h1>Timeline for <%= @post.class.to_s.downcase %></h1>
 </div>
 
-<% @post.timeline_events.each do |event| %>
+<% @timeline_events.each do |event| %>
   <%= render partial: %(posts/timeline/#{event.action}), locals: { event: event } %>
 <% end %>

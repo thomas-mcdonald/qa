@@ -66,6 +66,10 @@ class Question < ActiveRecord::Base
     end
   end
 
+  def history_keys
+    %i(body title tag_list)
+  end
+
   def accept_answer(answer)
     self.accepted_answer_id = answer.id
     ReputationEvent.create_on_accept_answer(self, answer)

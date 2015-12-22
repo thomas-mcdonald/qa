@@ -25,4 +25,8 @@ class Answer < ActiveRecord::Base
   def accepted?
     id == question.accepted_answer_id
   end
+
+  def history_keys
+    %i(body)
+  end
 end

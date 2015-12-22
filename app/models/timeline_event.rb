@@ -1,5 +1,6 @@
 class TimelineEvent < ActiveRecord::Base
   belongs_to :post, polymorphic: true
+  has_one :post_history
   has_many :timeline_actors
   has_many :users, through: :timeline_actors
 
@@ -7,6 +8,18 @@ class TimelineEvent < ActiveRecord::Base
     post_create: 1,
     post_edit: 2
   }
+
+  after_save :track_history, if: :should_track_history?
+
+  def track_history
+    keys = post.history_keys
+    history = keys.inject({}) { |acc, k| acc[k] = post.send(k); acc }
+    PostHistory.create(history.merge(timeline_event: self))
+  end
+
+  def should_track_history?
+    %w(post_create post_edit).include? action
+  end
 
   def self.on_post_create(post, user)
     event = TimelineEvent.new(post: post)
