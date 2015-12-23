@@ -27,5 +27,14 @@ module QA
         Differ.diff_by_word(post_history.title, previous.post_history.title).to_s.html_safe
       end
     end
+
+    def body_diff
+      if previous.nil?
+        post_history.render_body
+      else
+        diff = Differ.diff_by_word(post_history.body, previous.post_history.body).to_s.html_safe
+        %(<pre class="post-diff">#{diff}</pre>).html_safe
+      end
+    end
   end
 end
