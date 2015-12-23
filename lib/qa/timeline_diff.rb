@@ -8,11 +8,10 @@ module QA
     # TODO: when we start tracking events with no post diff this will need updating
     def self.generate(timeline_events)
       previous = timeline_events.to_a.dup.unshift(nil)
-      puts previous
       timeline_events.zip(previous).map do |tuple|
         # tuple is (current_event, previous_event)
         TimelineDiff.new(tuple.first, tuple.second)
-      end      
+      end
     end
 
     def initialize(event, previous)

@@ -13,7 +13,7 @@ class TimelineEvent < ActiveRecord::Base
 
   def track_history
     keys = post.history_keys
-    history = keys.inject({}) { |acc, k| acc[k] = post.send(k); acc }
+    history = keys.each_with_object({}) { |key, acc| acc[key] = post.send(key) }
     PostHistory.create(history.merge(timeline_event: self))
   end
 

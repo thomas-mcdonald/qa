@@ -5,19 +5,19 @@ module QA
       class << self
         def format(change)
           (change.change? && as_change(change)) ||
-          (change.delete? && as_delete(change)) ||
-          (change.insert? && as_insert(change)) ||
-          ''
+            (change.delete? && as_delete(change)) ||
+            (change.insert? && as_insert(change)) ||
+            ''
         end
 
         private
 
         def as_insert(change)
-          %Q{<span class="ins">#{change.insert}</span>}
+          %(<span class="ins">#{change.insert}</span>)
         end
 
         def as_delete(change)
-          %Q{<span class="del">#{change.delete}</span>}
+          %(<span class="del">#{change.delete}</span>)
         end
 
         def as_change(change)

@@ -12,6 +12,6 @@ module Timeline
   end
 
   def history_keys
-    raise NotImplementedError, "Classes importing Timeline should declare a list of keys for saving"
+    fail NotImplementedError, "Classes importing Timeline should declare a list of keys for saving"
   end
 end
