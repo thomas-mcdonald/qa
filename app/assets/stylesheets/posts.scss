@@ -97,3 +97,17 @@ $diff-del-colour: #a82400;
     color: $diff-del-colour;
   }
 }
+
+.event-info {
+  @include make-row();
+
+  .revision-id {
+    @include make-md-column(1);
+    font-size: 32px;
+  }
+
+  .user-info {
+    float: right;
+    margin-right: 40px;
+  }
+}
