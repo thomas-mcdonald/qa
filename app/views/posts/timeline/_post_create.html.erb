@@ -3,8 +3,7 @@
     <p><%= link_to event.users.first.display_name, event.users.first %> created this <%= time_ago_in_words event.created_at%> ago</p>
 
     <% if event.post.class == Question %>
-      <%= event.post_history.title %>
-      // render question
+      <h2 class="post-diff"><%= event.title_diff %></h2>
     <% elsif event.post.class == Answer %>
       // render answer
     <% end %>

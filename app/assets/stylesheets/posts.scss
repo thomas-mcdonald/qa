@@ -80,3 +80,20 @@
   .links { float: left; }
   .righto { float: right; }
 }
+
+$diff-ins-background: #d1e1ad;
+$diff-ins-colour: #405a04;
+$diff-del-background: #e5bdb2;
+$diff-del-colour: #a82400;
+
+.post-diff {
+  .ins {
+    background-color: $diff-ins-background;
+    color: $diff-ins-colour;
+  }
+  .del {
+    text-decoration: line-through;
+    background-color: $diff-del-background;
+    color: $diff-del-colour;
+  }
+}

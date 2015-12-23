@@ -103,6 +103,7 @@ GEM
     crass (0.2.1)
     database_cleaner (1.4.1)
     diff-lcs (1.2.5)
+    differ (0.1.2)
     docile (1.1.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
@@ -403,11 +404,11 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   coveralls
   database_cleaner (~> 1.4.0)
+  differ (= 0.1.2)
   dotenv-rails
   factory_girl_rails (~> 4.5.0)
   faker (~> 1.4.2)
   font-awesome-sass-rails
-  globalid (~> 0.2.3)
   guard (~> 2.12.0)
   guard-rspec (~> 4.6.0)
   guard-spinach (~> 0.2.0)
@@ -449,3 +450,6 @@ DEPENDENCIES
   spring
   terminal-notifier-guard
   uglifier (>= 1.0.3)
+
+BUNDLED WITH
+   1.11.2
