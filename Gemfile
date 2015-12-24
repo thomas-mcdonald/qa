@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 
 gem 'by_star', github: 'radar/by_star'
+gem 'diff-lcs', '~> 1.2.5'
 gem 'differ', '0.1.2'
 gem 'faker', '~> 1.4.2'
 gem 'html-pipeline', '~> 1.11.0'

@@ -404,6 +404,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   coveralls
   database_cleaner (~> 1.4.0)
+  diff-lcs (~> 1.2.5)
   differ (= 0.1.2)
   dotenv-rails
   factory_girl_rails (~> 4.5.0)

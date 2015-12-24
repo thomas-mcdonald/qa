@@ -1,3 +1,5 @@
+require 'diff/lcs'
+
 module QA
   # TimelineDiff is to assist with creating the list of TimelineEvent objects.
   # Only some TimelineEvent objects have associated PostHistory objects, and these must be zipped together so they have access to previous one for diffing.
@@ -39,6 +41,36 @@ module QA
         diff = Differ.diff_by_word(post_history.body, previous.post_history.body).to_s.html_safe
         %(<pre class="post-diff">#{diff}</pre>).html_safe
       end
+    end
+
+    def tags_diff
+      if previous.nil?
+        post_history.tag_list.split(',')
+      else
+        current_tags = post_history.tag_list.split(',').map(&:strip)
+        previous_tags = previous.post_history.tag_list.split(',').map(&:strip)
+        sdiff = ::Diff::LCS.sdiff(previous_tags, current_tags)
+        tags = []
+        sdiff.each do |tag|
+          case tag.action
+          when "="
+            tags << tag_html(tag.old_element)
+          when "+"
+            tags << tag_html(tag.new_element, 'tag-ins')
+          when "-"
+            tags << tag_html(tag.old_element, 'tag-del')
+          else
+            fail ArgumentError, "Unexpected diff output"
+          end
+        end
+        tags.join(' ').html_safe
+      end
+    end
+
+    private
+
+    def tag_html(name, html_class = '')
+      %(<span class="btn btn-default tag #{html_class}">#{name}</span>)
     end
   end
 end

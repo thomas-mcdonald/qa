@@ -96,6 +96,14 @@ $diff-del-colour: #a82400;
     background-color: $diff-del-background;
     color: $diff-del-colour;
   }
+
+  .tag-ins {
+    background-color: $diff-ins-background;
+  }
+
+  .tag-del {
+    background-color: $diff-del-background;
+  }
 }
 
 .event-info {
