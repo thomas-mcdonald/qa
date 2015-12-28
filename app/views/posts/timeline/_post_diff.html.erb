@@ -1,11 +1,11 @@
 <div class="post-diff">
-  <% if event.post.class == Question %>
+  <% if event.question? %>
     <h2><%= event.title_diff %></h2>
   <% end %>
 
   <%= event.body_diff %>
 
-  <% if event.post.class == Question %>
+  <% if event.question? %>
     <%= event.tags_diff %>
   <% end %>
 </div>

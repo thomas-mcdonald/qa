@@ -66,4 +66,14 @@ FactoryGirl.define do
     user
     body 'This is an example comment'
   end
+
+  factory :timeline_event do
+    trait :with_question do
+      association :post, factory: :question
+    end
+
+    trait :with_answer do
+      association :post, factory: :answer
+    end
+  end
 end

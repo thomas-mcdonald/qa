@@ -26,6 +26,10 @@ module QA
       @previous = previous
     end
 
+    def question?
+      event.post.class == Question
+    end
+
     def title_diff
       if previous.nil?
         post_history.title
