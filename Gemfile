@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
+gem 'rails', '5.0.0'
+gem 'pg', '~> 0.19.0'
 
 gem 'by_star', github: 'radar/by_star'
 gem 'diff-lcs', '~> 1.2.5'
@@ -8,7 +9,6 @@ gem 'differ', '0.1.2'
 gem 'faker', '~> 1.4.2'
 gem 'html-pipeline', '~> 1.11.0'
 gem 'kaminari', '~> 0.16.0'
-gem 'pg', '~> 0.17.0'
 gem 'pghero', '~> 1.1.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.2.0'
@@ -18,28 +18,27 @@ gem 'ruby-progressbar'
 gem 'sanitize', '~> 3.0.0'
 gem 'seedbank', '~> 0.3.0'
 gem 'settingslogic', '~> 2.0.9'
-gem 'simple_form', '~> 3.1.0'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
 
 # Authentication
-gem 'omniauth', '~> 1.2.0'
+gem 'omniauth', '~> 1.2'
 gem 'omniauth-openid', '1.0.1'
 gem 'omniauth-google-oauth2', '~> 0.2.6'
 gem 'omniauth-twitter', '~> 1.1.0'
 
 # Jobs & web interface
-gem 'sidekiq', '~> 3.3.0'
-gem 'sinatra', require: false
+gem 'sidekiq', '~> 4.1', '>= 4.1.4'
+gem 'sinatra', github: 'sinatra/sinatra', require: false
 
 # Asset gems
 gem 'bootstrap-sass', '~> 3.3.0'
 gem 'font-awesome-sass-rails'
-gem 'jquery-rails', '~> 3.1.2'
-gem 'sass-rails',   '~> 5.0.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'jquery-rails', '~> 4.0'
+gem 'sass-rails',   '~> 5.0'
+gem 'coffee-rails', '~> 4.1', '>= 4.1.1'
 gem 'uglifier', '>= 1.0.3'
 
 group :development do
-  gem 'quiet_assets'
   gem 'guard', '~> 2.12.0'
   gem 'guard-rspec', '~> 4.6.0'
   gem 'guard-spinach', '~> 0.2.0'
@@ -52,7 +51,7 @@ end
 
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '~> 2.0', '>= 2.1.0'
   gem 'rspec-rails', '~> 3.0'
   gem 'scss-lint', require: false
   gem 'spinach-rails'
