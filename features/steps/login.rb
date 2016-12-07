@@ -24,6 +24,7 @@ class Spinach::Features::Login < Spinach::FeatureSteps
   end
 
   step 'I click on the logout button' do
+    visit '/'
     find('.user-dropdown').click
     click_link_or_button('logout')
   end
