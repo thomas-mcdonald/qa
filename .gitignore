@@ -6,5 +6,6 @@ db/*.sqlite3
 erd.pdf
 lib/import/data
 log/*.log
+node_modules/
 .sass-cache/
 tmp/
