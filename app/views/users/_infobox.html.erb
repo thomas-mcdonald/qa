@@ -1,8 +1,6 @@
-<div class="user-info">
-  <p class="asked"><%= string %> <%= time_ago_in_words time %> ago</p>
-  <img class="gravatar" src="<%= user.gravatar %>" />
-  <div class="user-details">
-    <%= link_to user.display_name, user %>
-    <span><%= user.reputation %></span>
-  </div>
-</div>
+<div class="react-user-info"
+  data-asked="<%= string %> <%= time_ago_in_words time %> ago"
+  data-display-name="<%= user.display_name %>"
+  data-gravatar="<%= user.gravatar %>"
+  data-reputation="<%= user.reputation %>"
+  data-user-link="/users/<%= user.to_param %>"></div>
