@@ -1,4 +1,5 @@
 .bundle
+app/assets/javascripts/build.js
 coverage/*
 doc/_site
 db/*.sqlite3
