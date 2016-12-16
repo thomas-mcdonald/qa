@@ -24,6 +24,8 @@ module QA
     # Autoload from lib
     config.autoload_paths << Rails.root.join('lib')
 
+    config.assets.paths << Rails.root.join('node_modules')
+
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 

@@ -7,6 +7,7 @@ import './polyfills'
 
 import App from './App'
 import Infobox from './Infobox'
+import UserDropdown from './navbar/UserDropdown'
 
 // NOP for now
 let store = createStore(() => {})
@@ -40,4 +41,14 @@ $(document).ready(() => {
       reputation={reputation}
       user_link={user_link} />, elem)
   })
+
+  const userDropdownRoot = document.getElementById('react-user-dropdown')
+  if (userDropdownRoot != undefined) {
+    const csrf = userDropdownRoot.getAttribute('data-csrf')
+    const display_name = userDropdownRoot.getAttribute('data-display-name')
+    const edit_link = userDropdownRoot.getAttribute('data-edit-link')
+    const logout_button = userDropdownRoot.getAttribute('data-logout-button')
+    const profile_link = userDropdownRoot.getAttribute('data-profile-link')
+    ReactDOM.render(<UserDropdown csrf={csrf} display_name={display_name} edit_link={edit_link} logout_button={logout_button} profile_link={profile_link} />, userDropdownRoot);
+  }
 })

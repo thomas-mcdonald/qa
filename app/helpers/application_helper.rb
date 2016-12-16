@@ -6,4 +6,8 @@ module ApplicationHelper
       %(<li>#{capture(&block)}</li>).html_safe
     end
   end
+
+  def navbar_link(text, link)
+    link_to(text, link, class: 'pt-button pt-minimal')
+  end
 end
