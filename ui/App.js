@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import './polyfills'
+
 import Infobox from './Infobox'
 
 window.ReactDOM = ReactDOM
