@@ -9,7 +9,6 @@
     <%= stylesheet_link_tag :application %>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag :application %>
-    <%= javascript_include_tag :build %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -74,5 +73,7 @@
     <% unless logged_in? %>
       <%= render partial: 'layouts/login' %>
     <% end %>
+
+    <%= javascript_include_tag :build %>
   </body>
 </html>
