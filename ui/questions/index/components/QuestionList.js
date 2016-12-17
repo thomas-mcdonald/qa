@@ -1,4 +1,4 @@
-import React, { Component } from 'React'
+import React, { Component } from 'react'
 
 const QuestionCount = ({number, name}) =>
   <div className="qa-question-list-count">{number} <span>{name}</span></div>
