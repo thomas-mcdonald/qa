@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import { getQuestions } from '../../queries'
-
 const QuestionCount = ({number, name}) =>
   <div className="qa-question-list-count">{number} <span>{name}</span></div>
 
@@ -32,10 +30,6 @@ const Question = ({title}) => (
 )
 
 class QuestionList extends Component {
-  componentDidMount() {
-    getQuestions()
-  }
-
   render() {
     return (
       <div>

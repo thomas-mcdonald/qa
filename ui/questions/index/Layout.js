@@ -5,6 +5,11 @@ import { Tab, Tabs, TabList, TabPanel } from '@blueprintjs/core'
 import QuestionList from './components/QuestionList'
 
 class Layout extends Component {
+  constructor(props) {
+    super(props)
+    this.props.onLoad();
+  }
+
   render() {
     let questions = [{title: 'What a question'}, {title: 'How do I'}]
     return (
@@ -17,7 +22,7 @@ class Layout extends Component {
               <Tab>activity</Tab>
               <Tab>votes</Tab>
             </TabList>
-            <TabPanel><QuestionList questions={questions} /></TabPanel>
+            <TabPanel><QuestionList questions={this.props.questions} /></TabPanel>
             <TabPanel>activity</TabPanel>
             <TabPanel>votes</TabPanel>
           </Tabs>
