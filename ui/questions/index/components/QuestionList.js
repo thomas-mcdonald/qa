@@ -6,12 +6,12 @@ const QuestionCount = ({number, name}) =>
 const QuestionTag = ({children}) =>
   <span className="qa-question-list-tag pt-tag pt-minimal">{children}</span>
 
-const Question = ({title}) => (
+const Question = ({answers_count, title, view_count, vote_count}) => (
   <div className="pt-card qa-question-list-card">
     <div className="qa-question-list-counts">
-      <QuestionCount number="8" name="votes" />
-      <QuestionCount number="0" name="answers" />
-      <QuestionCount number="80" name="views" />
+      <QuestionCount number={vote_count} name="votes" />
+      <QuestionCount number={answers_count} name="answers" />
+      <QuestionCount number={view_count} name="views" />
     </div>
     <div className="qa-question-list-summary">
       <h3 className="qa-question-list-title">
