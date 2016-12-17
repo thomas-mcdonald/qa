@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { getQuestions } from '../../queries'
+
 const QuestionCount = ({number, name}) =>
   <div className="qa-question-list-count">{number} <span>{name}</span></div>
 
@@ -23,13 +25,17 @@ const Question = ({title}) => (
         <QuestionTag>not-a-tag</QuestionTag>
       </div>
       <div className="qa-question-list-recent">
-        answered by <a>Thomas McDonald</a> three hours ago
+        answered three hours ago <a>Thomas McDonald</a> <strong>4,123</strong>
       </div>
     </div>
   </div>
 )
 
 class QuestionList extends Component {
+  componentDidMount() {
+    getQuestions()
+  }
+
   render() {
     return (
       <div>

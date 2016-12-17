@@ -8,9 +8,11 @@ import './polyfills'
 import App from './App'
 import Infobox from './Infobox'
 import UserDropdown from './navbar/UserDropdown'
+import reducer from './questions/reducer'
+
 
 // NOP for now
-let store = createStore(() => {})
+let store = createStore(reducer)
 
 let rootApp = (
   <Provider store={store}>
@@ -20,7 +22,7 @@ let rootApp = (
 let target = document.getElementById('root')
 
 if (target != undefined) {
-  ReactDOM.render(<App />, target);
+  ReactDOM.render(rootApp, target);
 }
 
 // TODO: eventually remove all the below:
