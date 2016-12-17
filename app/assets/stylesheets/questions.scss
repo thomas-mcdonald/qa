@@ -173,3 +173,45 @@
     font-weight: 600;
   }
 }
+
+.qa-question-list-card {
+  display: flex;
+  padding: 15px 10px;
+  margin-bottom: 10px;
+  @include clearfix();
+}
+
+.qa-question-list-title {
+  margin: 0 0 12px;
+}
+
+.qa-question-list-counts {
+  @include clearfix();
+}
+
+.qa-question-list-count {
+  float: left;
+  text-align: center;
+  width: 55px;
+
+  span {
+    display: block;
+  }
+}
+
+.qa-question-list-tags {
+  float: left;
+
+  .qa-question-list-tag {
+    margin-right: 4px;
+  }
+}
+
+.qa-question-list-summary {
+  flex: 1;
+}
+
+.qa-question-list-recent {
+  float: right;
+  font-size: 12px;
+}
