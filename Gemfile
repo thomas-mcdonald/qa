@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 
+gem 'active_model_serializers', '~> 0.10.3'
 gem 'by_star', github: 'radar/by_star'
 gem 'diff-lcs', '~> 1.2.5'
 gem 'differ', '0.1.2'

@@ -10,6 +10,7 @@ end
 
 QA::Application.routes.draw do
   root to: 'questions#index'
+  get '/questions', to: 'questions#index'
   get '/new_index', to: 'site#index'
 
   # Question URLs
