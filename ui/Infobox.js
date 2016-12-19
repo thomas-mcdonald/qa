@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Infobox = ({asked, display_name, gravatar, reputation, user_link}) => (
   <div className="qa-user-info">
@@ -11,4 +11,4 @@ const Infobox = ({asked, display_name, gravatar, reputation, user_link}) => (
   </div>
 )
 
-export default Infobox;
+export default Infobox

@@ -23,7 +23,7 @@ let rootApp = (
 let target = document.getElementById('root')
 
 if (target != undefined) {
-  ReactDOM.render(rootApp, target);
+  ReactDOM.render(rootApp, target)
 }
 
 // TODO: eventually remove all the below:
@@ -52,6 +52,6 @@ $(document).ready(() => {
     const edit_link = userDropdownRoot.getAttribute('data-edit-link')
     const logout_button = userDropdownRoot.getAttribute('data-logout-button')
     const profile_link = userDropdownRoot.getAttribute('data-profile-link')
-    ReactDOM.render(<UserDropdown csrf={csrf} display_name={display_name} edit_link={edit_link} logout_button={logout_button} profile_link={profile_link} />, userDropdownRoot);
+    ReactDOM.render(<UserDropdown csrf={csrf} display_name={display_name} edit_link={edit_link} logout_button={logout_button} profile_link={profile_link} />, userDropdownRoot)
   }
 })
