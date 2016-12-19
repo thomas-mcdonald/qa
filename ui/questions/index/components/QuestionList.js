@@ -7,12 +7,12 @@ const QuestionCount = ({number, name}) =>
 const QuestionTag = ({name}) =>
   <span className="qa-question-list-tag pt-tag pt-minimal">{name}</span>
 
-const QuestionActivity = ({date, name, reputation}) => {
+const QuestionActivity = ({date, name, profile_link, reputation}) => {
   const time = distanceInWordsToNow(date)
   // TODO: live update relative time, include absolute on hoverover
   return (
     <div className="qa-question-list-recent">
-      answered {time} ago by <a>{name}</a> <strong>{reputation}</strong>
+      {time} ago by <a href={profile_link}>{name}</a> <strong>{reputation}</strong>
     </div>
   )
 }
