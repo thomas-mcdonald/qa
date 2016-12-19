@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
+import Tag from '../../../common/Tag'
+
 const QuestionCount = ({number, name}) =>
   <div className="qa-question-list-count">{number} <span>{name}</span></div>
 
-const QuestionTag = ({name}) =>
-  <span className="qa-question-list-tag pt-tag pt-minimal">{name}</span>
+const QuestionTag = (tag) => <Tag className="qa-question-list-tag" {...tag} />
 
 const QuestionActivity = ({date, name, profile_link, reputation}) => {
   const time = distanceInWordsToNow(date)
