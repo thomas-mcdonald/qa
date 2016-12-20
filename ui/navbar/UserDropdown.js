@@ -28,4 +28,4 @@ class UserDropdown extends Component {
   }
 }
 
-export default UserDropdown;
+export default UserDropdown

@@ -17,7 +17,7 @@
   "scripts": {
     "build": "webpack --config webpack.js",
     "dev": "webpack --watch --config webpack.js",
-    "lint": "eslint ui/*.js"
+    "lint": "eslint ui/**/*.js"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

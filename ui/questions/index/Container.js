@@ -11,4 +11,4 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: () => { dispatch(fetchQuestions()) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

@@ -7,11 +7,10 @@ import QuestionList from './components/QuestionList'
 class Layout extends Component {
   constructor(props) {
     super(props)
-    this.props.onLoad();
+    this.props.onLoad()
   }
 
   render() {
-    let questions = [{title: 'What a question'}, {title: 'How do I'}]
     return (
       <div id="page-wrap">
         <div id="body">
@@ -22,7 +21,10 @@ class Layout extends Component {
               <Tab>activity</Tab>
               <Tab>votes</Tab>
             </TabList>
-            <TabPanel><QuestionList questions={this.props.questions} /></TabPanel>
+            <TabPanel>
+              <QuestionList questions={this.props.questions} />
+              <a href="/questions">view more questions</a>
+            </TabPanel>
             <TabPanel>activity</TabPanel>
             <TabPanel>votes</TabPanel>
           </Tabs>
@@ -32,4 +34,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default Layout
