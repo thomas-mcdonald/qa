@@ -9,7 +9,7 @@ import './polyfills'
 import App from './App'
 import Infobox from './Infobox'
 import UserDropdown from './navbar/UserDropdown'
-import reducer from './questions/reducer'
+import reducer from './reducer'
 
 
 // NOP for now
