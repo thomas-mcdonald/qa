@@ -13,8 +13,18 @@ Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}
 
 # Setup Javascript tags
 require 'capybara/poltergeist'
-Capybara.default_driver = :poltergeist
+
+Capybara.register_driver :debug do |app|
+  Capybara::Poltergeist::Driver.new(app, inspector: true)
+end
+
+Capybara.default_driver = :debug
 Capybara.default_max_wait_time = 10
+
+Rails.application.routes.default_url_options = {
+  host: 'localhost',
+  port: Capybara.current_session.driver.server.port
+}
 
 # Setup Omniauth mock
 def omniauth_hash
