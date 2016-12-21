@@ -23,18 +23,12 @@ class Layout extends Component {
             <TabList>
               {this.tabs.map((tab, index) => <Tab key={index}>{tab}</Tab>)}
             </TabList>
-            <TabPanel>
-              <QuestionList questions={this.props.questions} />
-              <a href="/questions">view more questions</a>
-            </TabPanel>
-            <TabPanel>
-              <QuestionList questions={this.props.questions} />
-              <a href="/questions">view more questions</a>
-            </TabPanel>
-            <TabPanel>
-              <QuestionList questions={this.props.questions} />
-              <a href="/questions">view more questions</a>
-            </TabPanel>
+            {this.tabs.map((tab, index) => (
+              <TabPanel key={index}>
+                <QuestionList questions={this.props.questions} />
+                <a href="/questions">view more questions</a>
+              </TabPanel>
+            ))}
           </Tabs>
         </div>
       </div>
