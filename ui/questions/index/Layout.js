@@ -15,7 +15,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { questions } = this.props
+    const { loading, questions } = this.props
     return (
       <div id="page-wrap">
         <div id="body">
@@ -26,7 +26,7 @@ class Layout extends Component {
             </TabList>
             {this.tabs.map((tab, index) => (
               <TabPanel key={index}>
-               <QuestionsTabPanel questions={questions} />
+               <QuestionsTabPanel loading={loading} questions={questions} />
              </TabPanel>
             ))}
           </Tabs>

@@ -4,7 +4,8 @@ import { fetchQuestions } from '../actions'
 import Layout from './Layout'
 
 const mapStateToProps = (state) => ({
-  questions: state.questions
+  questions: state.questions.store,
+  loading: state.questions.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({
