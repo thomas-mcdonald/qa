@@ -8,3 +8,12 @@ Feature: Index page
     And there exists several questions
     When I visit the new index page
     Then I should see those questions
+
+  Scenario: Clicking on the votes tab loads ordered questions
+    Given I am logged in
+    And there exists several questions
+    And those questions have been voted on
+    When I visit the new index page
+    And I click on the votes tab
+    Then I should see those questions
+    And they should be in vote sorted order

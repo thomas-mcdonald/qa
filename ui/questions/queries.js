@@ -1,5 +1,5 @@
-export const getQuestions = () => {
-  return fetch('/questions.json')
+export const getQuestions = (tab) => {
+  return fetch(`/questions.json?sort=${tab}`)
     .then(response => {
       if (response.ok) {
         return response.json()

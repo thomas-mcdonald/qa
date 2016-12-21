@@ -7,7 +7,11 @@ import QuestionList from './components/QuestionList'
 class Layout extends Component {
   constructor(props) {
     super(props)
-    this.props.onLoad()
+    this.props.onLoad('newest')
+    this.tabs = ['newest', 'activity', 'votes']
+    this.onTabChange = (tabIndex) => {
+      this.props.onLoad(this.tabs[tabIndex])
+    }
   }
 
   render() {
@@ -15,18 +19,22 @@ class Layout extends Component {
       <div id="page-wrap">
         <div id="body">
           <h1>Recent Questions</h1>
-          <Tabs>
+          <Tabs onChange={this.onTabChange}>
             <TabList>
-              <Tab>newest</Tab>
-              <Tab>activity</Tab>
-              <Tab>votes</Tab>
+              {this.tabs.map((tab, index) => <Tab key={index}>{tab}</Tab>)}
             </TabList>
             <TabPanel>
               <QuestionList questions={this.props.questions} />
               <a href="/questions">view more questions</a>
             </TabPanel>
-            <TabPanel>activity</TabPanel>
-            <TabPanel>votes</TabPanel>
+            <TabPanel>
+              <QuestionList questions={this.props.questions} />
+              <a href="/questions">view more questions</a>
+            </TabPanel>
+            <TabPanel>
+              <QuestionList questions={this.props.questions} />
+              <a href="/questions">view more questions</a>
+            </TabPanel>
           </Tabs>
         </div>
       </div>

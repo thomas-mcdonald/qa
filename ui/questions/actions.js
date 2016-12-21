@@ -1,18 +1,24 @@
 import { getQuestions } from './queries'
 
-export const requestQuestions = () => ({
+export const requestQuestions = (tab) => ({
   type: 'REQUEST_QUESTIONS',
-  status: 'IN_PROGRESS'
+  status: 'IN_PROGRESS',
+  meta: {
+    tab: tab
+  }
 })
 
-export const receiveQuestions = (questions) => ({
+export const receiveQuestions = (tab, questions) => ({
   type: 'REQUEST_QUESTIONS',
   status: 'SUCCESS',
-  payload: questions
+  payload: questions,
+  meta: {
+    tab: tab
+  }
 })
 
-export const fetchQuestions = () => (dispatch) => {
-  dispatch(requestQuestions)
-  getQuestions()
-    .then(questions => dispatch(receiveQuestions(questions)))
+export const fetchQuestions = (tab) => (dispatch) => {
+  dispatch(requestQuestions(tab))
+  getQuestions(tab)
+    .then(questions => dispatch(receiveQuestions(tab, questions)))
 }

@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: () => { dispatch(fetchQuestions()) }
+  onLoad: (tab) => { dispatch(fetchQuestions(tab)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)
