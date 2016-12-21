@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { Tab, Tabs, TabList, TabPanel } from '@blueprintjs/core'
 
-import QuestionList from './components/QuestionList'
+import QuestionsTabPanel from './components/QuestionsTabPanel'
 
 class Layout extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class Layout extends Component {
   }
 
   render() {
+    const { questions } = this.props
     return (
       <div id="page-wrap">
         <div id="body">
@@ -25,9 +26,8 @@ class Layout extends Component {
             </TabList>
             {this.tabs.map((tab, index) => (
               <TabPanel key={index}>
-                <QuestionList questions={this.props.questions} />
-                <a href="/questions">view more questions</a>
-              </TabPanel>
+               <QuestionsTabPanel questions={questions} />
+             </TabPanel>
             ))}
           </Tabs>
         </div>
