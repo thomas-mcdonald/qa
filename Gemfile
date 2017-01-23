@@ -68,5 +68,5 @@ group :test do
   gem 'poltergeist', '~> 1.12.0', require: false
   gem 'rspec', '~> 3.0'
   gem 'shoulda-matchers', '~> 2.6.0', require: false
-  gem 'spinach', '~> 0.8.3'
+  gem 'spinach', '~> 0.10.0'
 end
