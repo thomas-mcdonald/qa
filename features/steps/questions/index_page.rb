@@ -2,8 +2,8 @@ class Spinach::Features::IndexPage < Spinach::FeatureSteps
   include SharedAuthentication
   include SharedQuestion
 
-  step 'I visit the new index page' do
-    visit '/new_index'
+  step 'I visit the index page' do
+    visit '/'
   end
 
   step 'those questions have been voted on' do

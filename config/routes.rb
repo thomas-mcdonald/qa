@@ -9,9 +9,8 @@ class AdminConstraint
 end
 
 QA::Application.routes.draw do
-  root to: 'questions#index'
+  root to: 'site#index'
   get '/questions', to: 'questions#index'
-  get '/new_index', to: 'site#index'
 
   # Question URLs
   get '/ask', to: 'questions#new', as: 'new_question'
