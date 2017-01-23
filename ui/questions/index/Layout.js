@@ -7,10 +7,16 @@ import QuestionsTabPanel from './components/QuestionsTabPanel'
 class Layout extends Component {
   constructor(props) {
     super(props)
+
+    this.state = ({
+      openTab: 0
+    })
     this.props.onLoad('newest')
     this.tabs = ['newest', 'activity', 'votes']
     this.onTabChange = (tabIndex) => {
-      this.props.onLoad(this.tabs[tabIndex])
+      const tab = this.tabs[tabIndex]
+      this.props.onLoad(tab)
+      this.setState({ openTab: tabIndex })
     }
   }
 
@@ -20,7 +26,7 @@ class Layout extends Component {
       <div id="page-wrap">
         <div id="body">
           <h1>Recent Questions</h1>
-          <Tabs onChange={this.onTabChange}>
+          <Tabs onChange={this.onTabChange} selectedTabIndex={this.state.openTab}>
             <TabList>
               {this.tabs.map((tab, index) => <Tab key={index}>{tab}</Tab>)}
             </TabList>
