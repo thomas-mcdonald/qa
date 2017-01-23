@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'routing for questions', :type => :routing do
   it 'routes / to questions#index' do
     expect({ get: '/' }).to route_to(controller: 'questions', action: 'index')
-    expect({ get: '/questions' }).not_to be_routable
+    expect({ get: '/questions' }).to route_to(controller: 'questions', action: 'index')
   end
 
   it 'routes /ask to questions#new' do
