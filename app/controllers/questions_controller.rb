@@ -12,11 +12,8 @@ class QuestionsController < ApplicationController
   def index
     return render_404 unless valid_sort_param
     @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
-    @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
-    respond_to do |format|
-      format.html
-      format.json { render json: @questions }
-    end
+
+    render json: @questions
   end
 
   def tagged

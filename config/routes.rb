@@ -10,7 +10,13 @@ end
 
 QA::Application.routes.draw do
   root to: 'site#index'
-  get '/questions', to: 'questions#index'
+
+  # constraints format: :html do
+  # end
+
+  constraints format: :json do
+    get '/questions', to: 'questions#index'
+  end
 
   # Question URLs
   get '/ask', to: 'questions#new', as: 'new_question'
