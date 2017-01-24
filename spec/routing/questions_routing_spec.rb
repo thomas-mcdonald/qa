@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe 'routing for questions', :type => :routing do
-  it 'routes / to questions#index' do
-    expect({ get: '/' }).to route_to(controller: 'questions', action: 'index')
+  it 'routes /questions to questions#index' do
     expect({ get: '/questions' }).to route_to(controller: 'questions', action: 'index')
   end
 
