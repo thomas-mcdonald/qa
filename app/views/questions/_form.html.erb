@@ -1,8 +1,0 @@
-<%= simple_form_for question, url: url, html: { class: 'form-vertical', id: 'question-form' } do |f| %>
-  <%= f.input :title, label: false, placeholder: 'What are you asking?' %>
-  <%= f.input :body, label: false, placeholder: 'and your question...' %>
-  <%= f.input :tag_list, label: false, placeholder: 'list, of-tags' %>
-  <div class='form-actions'>
-    <%= f.button :submit, class: 'btn-primary' %>
-  </div>
-<% end %>

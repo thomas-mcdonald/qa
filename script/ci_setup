@@ -1,2 +1,0 @@
-bundle exec rake db:create --trace
-bundle exec rake db:schema:load --trace

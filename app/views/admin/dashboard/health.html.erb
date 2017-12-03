@@ -1,8 +1,0 @@
-<div class="page-header admin-header">
-  <h1>QA Health Check</h1>
-  <p class="sidekiq-right"><%= link_to 'Sidekiq Dashboard', '/admin/sidekiq' %></small></h1>
-</div>
-
-<% @problems.each do |alert| %>
-  <div class="alert alert-danger"><%= alert %></div>
-<% end %>

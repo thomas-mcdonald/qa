@@ -1,8 +1,0 @@
-<% if comments.present? or policy(Comment.new).create? %>
-  <div class="comments">
-    <%= render partial: 'comments/comment', collection: comments %>
-    <% if policy(Comment.new).create? %>
-      <%= link_to 'add comment', new_post_comment_url(post), remote: true, class: 'add-comment' %>
-    <% end %>
-  </div>
-<% end %>

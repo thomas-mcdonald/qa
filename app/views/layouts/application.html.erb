@@ -1,66 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if content_for?(:title) %>
-      <title><%= %(#{yield(:title)} · #{SiteSettings.name}) %></title>
-    <% else %>
-      <title><%= SiteSettings.name %></title>
-    <% end %>
-    <%= stylesheet_link_tag :application %>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
-    <%= javascript_include_tag :application %>
+    <title>Qa</title>
     <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <nav class="pt-navbar pt-dark app-header">
-      <div class="pt-navbar-group pt-align-left">
-        <div class="pt-navbar-heading">QA</div>
-        <%= navbar_link 'Tags', tags_path %>
-        <%= navbar_link 'Users', users_path %>
-        <%= navbar_link 'Ask Question', new_question_path %>
-      </div>
-      <div class="pt-navbar-group pt-align-right">
-        <% if logged_in? %>
-          <strong><%= current_user.reputation %></strong>
-          <% if current_user.has_gold_badges? %>
-            <span class="badge-count gold"><%= current_user.gold_count %></span>
-          <% end %>
-          <% if current_user.has_silver_badges? %>
-            <span class="badge-count silver"><%= current_user.silver_count %></span>
-          <% end %>
-          <% if current_user.has_bronze_badges? %>
-            <span class="badge-count bronze"><%= current_user.bronze_count %></span>
-          <% end %>
-          <% if current_user.admin? %>
-            <%= navbar_link 'Admin', '/admin' %>
-          <% end %>
-          <div id="react-user-dropdown"
-            data-display-name="<%= current_user.display_name %>"
-            data-profile-link="<%= user_path(current_user) %>"
-            data-edit-link="<%= edit_user_path %>"
-            data-csrf="<%= form_authenticity_token %>"
-            >
-          </div>
-        <% else %>
-          <a id="login-link" class="pt-button pt-minimal" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-        <% end %>
-      </div>
-    </nav>
-    <% if @admin_page_warning %>
-     <%= render partial: 'admin/warning' %>
-    <% end %>
-    <div class="app-container">
-      <div class="container">
-        <% flash.each do |name, msg| %>
-          <div class="flash-<%= name %>"><%= msg %></div>
-        <% end %>
-        <%= yield %>
-      </div>
-      <% unless logged_in? %>
-        <%= render partial: 'layouts/login' %>
-      <% end %>
-    </div>
 
-    <%= javascript_include_tag :build %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
   </body>
 </html>

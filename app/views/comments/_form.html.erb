@@ -1,7 +1,0 @@
-<%= simple_form_for comment, remote: true do |f| %>
-  <%= f.hidden_field :post_id, value: post_id %>
-  <%= f.hidden_field :post_type, value: post_type %>
-  <%= f.input :body, label: false, placeholder: 'Type your comment here.' %>
-  <%= f.button :submit, 'add comment', class: 'btn-primary' %>
-  <a href="#" class="comment-cancel btn">cancel</a>
-<% end %>

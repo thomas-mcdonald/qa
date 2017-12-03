@@ -1,7 +1,0 @@
-<div class="page-header">
-  <h1>Timeline for <%= @post.class.to_s.downcase %></h1>
-</div>
-
-<% @timeline_diffs.each do |diff| %>
-  <%= render partial: %(posts/timeline/#{diff.action}), locals: {event: diff }%>
-<% end %>
