@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '5.0.6'
+gem 'pg', '~> 0.21.0'
 
 gem 'by_star', github: 'radar/by_star'
 gem 'diff-lcs', '~> 1.2.5'
@@ -8,7 +9,6 @@ gem 'differ', '0.1.2'
 gem 'faker', '~> 1.4.2'
 gem 'html-pipeline', '~> 1.11.0'
 gem 'kaminari', '~> 0.16.0'
-gem 'pg', '~> 0.17.0'
 gem 'pghero', '~> 1.1.0'
 gem 'pundit', '~> 0.3.0'
 gem 'redcarpet', '~> 3.2.0'
