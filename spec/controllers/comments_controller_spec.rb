@@ -21,15 +21,15 @@ describe CommentsController do
       before { sign_in(alice) }
 
       it 'requires permissions' do
-        expect(-> { post :create, comment: { body: 'test comment' } }).to raise_error(Pundit::NotAuthorizedError)
+        expect(-> { post :create, params: { comment: { body: 'test comment' }}}).to raise_error(Pundit::NotAuthorizedError)
       end
 
       it 'creates a comment on a question given valid parameters' do
         controller.stubs(:authorize).returns(true)
         question = FactoryGirl.create(:question)
-        post :create, comment: {
+        post :create, params: { comment: {
           post_type: 'Question', post_id: question.id, body: 'Hi this is a test comment'
-        }
+        }}
         expect(question.comments.size).to eq(1)
       end
     end

@@ -11,14 +11,14 @@ class QuestionsController < ApplicationController
 
   def index
     return render_404 unless valid_sort_param
-    @questions = Question.sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
+    @questions = Question.sorted(params[:sort]).includes(:last_active_user, :tags).page(params[:page]).load
     @recent_badges = Badge.order('created_at DESC').includes(:user).limit(10)
   end
 
   def tagged
     return render_404 unless valid_sort_param
     @tag = Tag.find_by(name: params[:tag])
-    @questions = Question.tagged_with(params[:tag]).sort_by(params[:sort]).includes(:last_active_user, :tags).page(params[:page])
+    @questions = Question.tagged_with(params[:tag]).sorted(params[:sort]).includes(:last_active_user, :tags).page(params[:page])
     @count = Question.tagged_with(params[:tag]).count
     @related_tags = Tag.named(params[:tag]).related_tags
   end

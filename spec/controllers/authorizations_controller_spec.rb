@@ -16,25 +16,25 @@ describe AuthorizationsController, type: :controller do
       end
 
       it 'logs the user in if they exist' do
-        post :callback, provider: :google
+        post :callback, params: { provider: :google }
         expect(response).to be_redirect
       end
     end
 
     context 'with new authorization' do
       it 'creates an authorization object' do
-        expect { post :callback, provider: :google }
+        expect { post :callback, params: { provider: :google }}
           .to change { Authorization.count }
           .by(1)
       end
 
       it 'sets the auth id in the session' do
-        post :callback, provider: :google
+        post :callback, params: { provider: :google }
         expect(session[:auth_id]).to_not be_nil
       end
 
       it 'renders the new user page' do
-        post :callback, provider: :google
+        post :callback, params: { provider: :google }
         expect(response).to render_template(:callback)
       end
     end

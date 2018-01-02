@@ -64,6 +64,7 @@ group :test do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.6.0', require: false
+  gem 'rails-controller-testing' # TODO: deprecate and remove
   gem 'rspec', '~> 3.0'
   gem 'shoulda-matchers', '~> 2.6.0', require: false
   gem 'spinach', '~> 0.8.3'

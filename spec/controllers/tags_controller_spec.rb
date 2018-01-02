@@ -10,15 +10,15 @@ describe TagsController, type: :controller do
 
   describe 'search' do
     it 'returns bad request if query length under 3' do
-      xhr :get, :search
+      get :search, xhr: true
       expect(response.status).to eq(400)
 
-      xhr :get, :search, name: 'ab'
+      get :search, params: { name: 'ab' }, xhr: true
       expect(response.status).to eq(400)
     end
 
     it 'returns tags if the query length is over 3' do
-      xhr :get, :search, name: 'test-tag'
+      get :search, params: { name: 'test-tag' }, xhr: true
       expect(response.status).to eq(200)
     end
   end

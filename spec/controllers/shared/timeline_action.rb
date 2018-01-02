@@ -5,7 +5,7 @@ shared_examples_for 'TimelineAction' do
   let(:post) { FactoryGirl.create(described_class.name.gsub('sController', '').downcase) }
 
   context 'GET timeline' do
-    before { get :timeline, id: post.id }
+    before { get :timeline, params: { id: post.id }}
     it { is_expected.to respond_with(:success) }
     it { is_expected.to render_template('posts/timeline')}
   end

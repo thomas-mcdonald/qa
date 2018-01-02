@@ -13,14 +13,14 @@ describe UsersController, type: :controller do
 
     context 'with slug' do
       before do
-        get :show, id: user.to_param
+        get :show, params: { id: user.to_param }
       end
 
       it { is_expected.to respond_with(:success) }
     end
 
     it 'redirect if slug is incorrect or missing' do
-      get :show, id: user.id
+      get :show, params: { id: user.id }
       expect(response.status).to eq(302)
     end
   end
@@ -29,7 +29,7 @@ describe UsersController, type: :controller do
     let(:user) { FactoryGirl.create(:user) }
 
     it 'is successful' do
-      get :answers, id: user.to_param
+      get :answers, params: { id: user.to_param }
       expect(response.status).to eq(200)
     end
   end
@@ -38,7 +38,7 @@ describe UsersController, type: :controller do
     let(:user) { FactoryGirl.create(:user) }
 
     it 'is successful' do
-      get :questions, id: user.to_param
+      get :questions, params: { id: user.to_param }
       expect(response.status).to eq(200)
     end
   end
@@ -55,11 +55,11 @@ describe UsersController, type: :controller do
     before { sign_in(alice)}
 
     it 'rejects updates done by a different user' do
-      expect { patch :update, id: bob.id, user: {name: 'Ed Balls'} }.to raise_error(QA::NotAuthorised)
+      expect { patch :update, params: { id: bob.id, user: { name: 'Ed Balls' }}}.to raise_error(QA::NotAuthorised)
     end
 
     it 'allows and updates if valid user' do
-      patch :update, id: alice.id, user: { name: 'Ed Balls' }
+      patch :update, params: { id: alice.id, user: { name: 'Ed Balls' }}
       expect(alice.reload.name).to eq('Ed Balls')
     end
   end

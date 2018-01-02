@@ -56,8 +56,7 @@ describe CountsHelper, :type => :helper do
       expect(views_formatted(19999)).to eq("20k")
       expect(views_formatted(99999)).to eq("100k")
       expect(views_formatted(199999)).to eq("200k")
-      # numbers sub 1m don't get rounded up to 1m. we think this is okay.
-      expect(views_formatted(999999)).to eq("1000k")
+      expect(views_formatted(999999)).to eq("1m")
       expect(views_formatted(1000000)).to eq("1m")
       expect(views_formatted(1999500)).to eq("2m")
     end

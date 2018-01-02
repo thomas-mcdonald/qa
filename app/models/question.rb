@@ -12,7 +12,16 @@ class Question < ActiveRecord::Base
   has_many :timeline_events, as: :post
   belongs_to :user
 
-  scope :sort_by, lambda { |kind|
+  validates :title, length: { in: 10..150 }, presence: true
+  validates :body, length: { in: 10..30000 }, presence: true
+  validates :last_active_user_id, :last_active_at, presence: true
+  validate :accepted_is_on_question, :tags_exist
+
+  VALID_SORT_KEYS = [:activity, :newest, :votes]
+
+  is_slugged :title
+
+  def self.sorted(kind)
     kind = :activity if kind.nil?
 
     case kind.to_sym
@@ -23,16 +32,7 @@ class Question < ActiveRecord::Base
     when :votes
       order('questions.vote_count DESC')
     end
-  }
-
-  validates :title, length: { in: 10..150 }, presence: true
-  validates :body, length: { in: 10..30000 }, presence: true
-  validates :last_active_user_id, :last_active_at, presence: true
-  validate :accepted_is_on_question, :tags_exist
-
-  VALID_SORT_KEYS = [:activity, :newest, :votes]
-
-  is_slugged :title
+  end
 
   def accepted_is_on_question
     return if accepted_answer_id.nil?

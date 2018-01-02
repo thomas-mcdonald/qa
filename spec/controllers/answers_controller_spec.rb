@@ -15,13 +15,13 @@ describe AnswersController, :type => :controller do
 
       context 'JSON' do
         it 'creates answer with valid parameters' do
-          post :create, answer: answer, format: :json
+          post :create, params: { answer: answer }, format: :json
           expect(Answer.last.body).to eq(answer[:body])
           expect(Answer.all.length).to eq(1)
         end
 
         it 'returns errors if the answer is not valid' do
-          post :create, answer: answer.merge(body: 'a'), format: :json
+          post :create, params: { answer: answer.merge(body: 'a') }, format: :json
           expect(Answer.all.length).to eq(0)
           expect(response.status).to eq(422)
           res = JSON.parse(response.body)
@@ -31,7 +31,7 @@ describe AnswersController, :type => :controller do
 
       context 'HTML' do
         it 'creates answer with valid parameters' do
-          post :create, answer: answer
+          post :create, params: { answer: answer }
           expect(Answer.last.body).to eq(answer[:body])
           expect(Answer.all.length).to eq(1)
         end
@@ -42,18 +42,18 @@ describe AnswersController, :type => :controller do
   describe 'edit' do
     let(:answer) { FactoryGirl.create(:answer) }
 
-    it { expect { get :edit, id: answer.id }.to require_login }
+    it { expect { get :edit, params: { id: answer.id }}.to require_login }
 
     it 'requires permissions' do
       sign_in(FactoryGirl.create(:user, reputation: 0))
-      expect { get :edit, id: answer.id }.to raise_error(Pundit::NotAuthorizedError)
+      expect { get :edit, params: { id: answer.id }}.to raise_error(Pundit::NotAuthorizedError)
     end
 
     context 'when logged in' do
       before { sign_in(a_k) }
 
       it 'is success' do
-        get :edit, id: answer.id
+        get :edit, params: { id: answer.id }
         expect(response.status).to eq(200)
       end
     end
@@ -62,19 +62,19 @@ describe AnswersController, :type => :controller do
   describe 'update' do
     let(:answer) { FactoryGirl.create(:answer) }
 
-    it { expect { post :update, id: answer.id }.to require_login }
+    it { expect { post :update, params: { id: answer.id }}.to require_login }
 
     context 'when logged in' do
       before { sign_in(a_k) }
 
       it 'creates a timeline event' do
         Answer.any_instance.expects(:edit_timeline_event!)
-        post :update, id: answer.id, answer: { body: 'this is a new body' }
+        post :update, params: { id: answer.id, answer: { body: 'this is a new body' }}
       end
 
       it 'updates the last activity on the post' do
         last_active = answer.last_active_at
-        post :update, id: answer.id, answer: { body: 'this is a new body' }
+        post :update, params: { id: answer.id, answer: { body: 'this is a new body' }}
         answer.reload
         expect(answer.last_active_at).to_not eq(last_active)
         expect(answer.last_active_user_id).to eq(a_k.id)
