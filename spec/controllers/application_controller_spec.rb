@@ -3,12 +3,12 @@ require 'spec_helper'
 describe ApplicationController, type: :controller do
   controller do
     def index
-      render nothing: true
+      head :no_content
     end
 
     def admin
       require_admin
-      render nothing: true
+      head :no_content
     end
   end
 

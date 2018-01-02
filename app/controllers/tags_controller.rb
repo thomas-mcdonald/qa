@@ -4,7 +4,7 @@ class TagsController < ApplicationController
   end
 
   def search
-    render nothing: true, status: :bad_request and return if invalid_search_param?
+    head :bad_request and return if invalid_search_param?
     @tags = Tag.by_popularity.search(params[:name]).limit(15)
     render json: @tags
   end
