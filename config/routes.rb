@@ -8,7 +8,7 @@ class AdminConstraint
   end
 end
 
-QA::Application.routes.draw do
+Rails.application.routes.draw do
   root to: 'questions#index'
 
   # Question URLs
