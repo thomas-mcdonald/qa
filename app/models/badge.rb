@@ -1,4 +1,4 @@
-class Badge < ActiveRecord::Base
+class Badge < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :user
 

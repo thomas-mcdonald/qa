@@ -1,4 +1,4 @@
-class ReputationEvent < ActiveRecord::Base
+class ReputationEvent < ApplicationRecord
   belongs_to :action, polymorphic: true
   belongs_to :user
 

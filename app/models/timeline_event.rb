@@ -1,4 +1,4 @@
-class TimelineEvent < ActiveRecord::Base
+class TimelineEvent < ApplicationRecord
   belongs_to :post, polymorphic: true
   has_one :post_history
   has_many :timeline_actors

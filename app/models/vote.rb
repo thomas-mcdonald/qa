@@ -1,4 +1,4 @@
-class Vote < ActiveRecord::Base
+class Vote < ApplicationRecord
   belongs_to :post, polymorphic: true
   has_many :reputation_events, as: :action, dependent: :destroy
   belongs_to :user

@@ -1,4 +1,4 @@
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   include LastActivity
   include Slugger
   include Timeline
