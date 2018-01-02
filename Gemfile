@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 
-gem 'active_model_serializers', '~> 0.10.3'
 gem 'by_star', github: 'radar/by_star'
 gem 'diff-lcs', '~> 1.2.5'
 gem 'differ', '0.1.2'
@@ -65,8 +64,8 @@ group :test do
   gem 'database_cleaner', '~> 1.4.0'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
-  gem 'poltergeist', '~> 1.12.0', require: false
+  gem 'poltergeist', '~> 1.6.0', require: false
   gem 'rspec', '~> 3.0'
   gem 'shoulda-matchers', '~> 2.6.0', require: false
-  gem 'spinach', '~> 0.10.0'
+  gem 'spinach', '~> 0.8.3'
 end

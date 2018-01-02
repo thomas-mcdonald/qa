@@ -9,14 +9,7 @@ class AdminConstraint
 end
 
 QA::Application.routes.draw do
-  root to: 'site#index'
-
-  # constraints format: :html do
-  # end
-
-  constraints format: :json do
-    get '/questions', to: 'questions#index'
-  end
+  root to: 'questions#index'
 
   # Question URLs
   get '/ask', to: 'questions#new', as: 'new_question'

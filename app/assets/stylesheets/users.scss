@@ -216,7 +216,7 @@ $user-list-gravatar-size: 48px;
 // user infobox
 // the small gravatar/reputation combobox
 // now used in posts & badge rendering, so extracted here
-.qa-user-info {
+.user-info {
   width: 160px;
   float: left;
   @include clearfix();

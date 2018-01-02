@@ -6,18 +6,15 @@ $screen-lg: 99999px; // essentially disable large media queries
 @import "font-awesome";
 @import "selectize";
 
-@import "@blueprintjs/core/dist/blueprint";
-@import "@blueprintjs/core/dist/variables";
-
 @import "variables";
 
 @import "components/tabbed-header";
 
 @import "global";
-@import "layout";
 
 @import "badges";
 @import "flash";
+@import "navbar";
 
 @import "admin";
 @import "answers";

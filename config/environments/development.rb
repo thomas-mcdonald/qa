@@ -27,8 +27,3 @@ QA::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
-
-Rails.application.routes.default_url_options = {
-  host: 'localhost',
-  port: 3000
-}

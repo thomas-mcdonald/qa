@@ -1,6 +1,4 @@
 machine:
-  ruby:
-    version: 2.3.3
   services:
     - redis
 
@@ -18,7 +16,3 @@ dependencies:
     - sudo service redis-server start
   cache_directories:
     - ~/redis-3.2.5
-
-test:
-  pre:
-    - npm run build

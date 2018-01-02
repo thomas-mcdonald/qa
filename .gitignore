@@ -1,5 +1,4 @@
 .bundle
-app/assets/javascripts/build.js
 coverage/*
 doc/_site
 db/*.sqlite3
@@ -7,6 +6,5 @@ db/*.sqlite3
 erd.pdf
 lib/import/data
 log/*.log
-node_modules/
 .sass-cache/
 tmp/
