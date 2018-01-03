@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   include Timeline
   include Voteable
 
-  belongs_to :accepted_answer, class_name: Answer
+  belongs_to :accepted_answer, class_name: Answer, optional: true
   has_many :answers
   has_many :comments, -> { order('created_at ASC') }, as: :post
   has_many :taggings
