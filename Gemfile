@@ -60,7 +60,7 @@ end
 group :test do
   gem 'minitest'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '~> 1.4.0'
+  gem 'database_cleaner', '~> 1.6'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'mocha', '~> 1.0.0', require: false
   gem 'poltergeist', '~> 1.6.0', require: false
